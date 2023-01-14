@@ -6,13 +6,16 @@ import { transform as wordpress } from "./transformers/wordpress.ts";
 import { UrlTransformer } from "./types.ts";
 import { ImageCdn } from "./types.ts";
 
-export const transformers: Partial<Record<ImageCdn, UrlTransformer>> = {
+export const transformers: Record<ImageCdn, UrlTransformer> = {
   imgix,
   contentful,
   shopify,
   wordpress,
 };
 
+/**
+ * Returns a transformer function if the given URL is from a known image CDN
+ */
 export const getTransformerForUrl = (
   url: string | URL,
 ): UrlTransformer | undefined => {
@@ -23,11 +26,11 @@ export const getTransformerForUrl = (
   return transformers[cdn];
 };
 
+/**
+ * Transforms an image URL to a new URL with the given options.
+ * If the URL is not from a known image CDN it returns undefined.
+ */
 export const transformUrl: UrlTransformer = (options) => {
   const transformer = getTransformerForUrl(options.url);
   return transformer?.(options);
 };
-
-transformUrl({
-  url: "",
-});

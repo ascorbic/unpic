@@ -51,8 +51,8 @@ export interface UrlParser<TParams = Record<string, string>> {
 }
 
 export type ImageCdn =
-  | "imgix"
   | "contentful"
-  | "cloudinary"
-  | "wordpress"
-  | "shopify";
+  // | "cloudinary" TODO
+  | "imgix"
+  | "shopify"
+  | "wordpress";
