@@ -1,0 +1,9 @@
+{
+  "res.cloudinary.com": "cloudinary",
+  "images.ctfassets.net": "contentful",
+  "images.prismic.io": "imgix",
+  "www.datocms-assets.com": "imgix",
+  "cdn.sanity.io": "imgix",
+  "images.unsplash.com": "imgix",
+  "cdn.shopify.com": "shopify"
+}
