@@ -1,16 +1,34 @@
-import { parse } from "./shopify.ts";
+import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { parse, transform } from "./shopify.ts";
+import examples from "./shopify.fixtures.json" assert { type: "json" };
 
-const urls = [
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_small.jpg",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_medium.jpg",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_large_crop_left.jpg",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_large_crop_left.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_x200_crop_left.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_100x_crop_left.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0561/7470/6753/products/science-beakers-blue-light_100x200_crop_left.jpg.webp",
-];
+const img =
+  "https://cdn.shopify.com/s/files/1/2345/6789/products/myimage_medium_crop_top.webp?v=3";
 
-urls.forEach((url) => {
-  const result = parse(url);
-  console.log(url, result);
+Deno.test("shopify parser", async (t) => {
+  for (const { original, ...example } of examples) {
+    await t.step(original, () => {
+      const { params, ...parsed } = parse(original) as any;
+      // Convert null from JSON into undefined for assertEquals
+      const expected = Object.fromEntries(
+        Object.entries(example).map(([k, v]) => [k, v ?? undefined]),
+      );
+      const { crop, size } = params || {};
+      assertEquals({ crop, size, ...parsed }, expected);
+    });
+  }
+});
+
+Deno.test("shopify transformer", async (t) => {
+  await t.step("transforms a URL", () => {
+    const result = transform({
+      url: img,
+      width: 100,
+      height: 200,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://cdn.shopify.com/s/files/1/2345/6789/products/myimage.webp?v=3&width=100&height=200&crop=top",
+    );
+  });
 });
