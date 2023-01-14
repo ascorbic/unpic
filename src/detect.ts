@@ -5,7 +5,7 @@ import { ImageCdn } from "./types.ts";
 const cdnDomains = new Map(Object.entries(domains));
 const cdnSubdomains = Object.entries(subdomains);
 
-export function getImageCdn(url: string | URL): ImageCdn | false {
+export function getImageCdnForUrl(url: string | URL): ImageCdn | false {
   const { hostname } = new URL(url);
   if (cdnDomains.has(hostname)) {
     return cdnDomains.get(hostname) as ImageCdn;

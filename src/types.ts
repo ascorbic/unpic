@@ -52,7 +52,10 @@ export interface UrlParser<TParams = Record<string, string>> {
 
 export type ImageCdn =
   | "contentful"
-  // | "cloudinary" TODO
+  | "cloudinary"
   | "imgix"
   | "shopify"
   | "wordpress";
+
+// TODO: implement Cloudinary
+export type SupportedImageCdn = Exclude<ImageCdn, "cloudinary">;
