@@ -1,5 +1,5 @@
 import { UrlTransformer } from "../types.ts";
-import { setParamIfDefined } from "../utils.ts";
+import { setParamIfDefined, setParamIfUndefined } from "../utils.ts";
 
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, quality, format },
@@ -8,6 +8,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "w", width, true);
   setParamIfDefined(url, "h", height, true);
   setParamIfDefined(url, "q", quality);
+  setParamIfUndefined(url, "fit", "min");
 
   if (format) {
     url.searchParams.set("fm", format);
