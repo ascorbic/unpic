@@ -27,5 +27,6 @@
     "preact": "^10.1.0",
     "preact-render-to-string": "^5.1.2",
     "unpic": "../npm"
-  }
+  },
+  "preinstall": "cd .. && deno task build:npm"
 }
