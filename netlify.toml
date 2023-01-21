@@ -1,3 +1,0 @@
-[build]
-command = "deno task build:npm 1.0.0 && cd demo && yarn && yarn build"
-publish = "demo/build"
