@@ -1,6 +1,14 @@
 {
   "deno.enable": true,
   "deno.unstable": true,
+  "deno.enablePaths": [
+    "src",
+    "scripts",
+    "mod.ts",
+    "deps.ts",
+    "*/*.json",
+    "example"
+  ],
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
@@ -10,5 +18,14 @@
   },
   "[json]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
 }

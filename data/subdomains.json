@@ -1,4 +1,5 @@
 {
   "imgix.net": "imgix",
-  "files.wordpress.com": "wordpress"
+  "files.wordpress.com": "wordpress",
+  "b-cdn.net": "bunny"
 }

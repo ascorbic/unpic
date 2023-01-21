@@ -7,14 +7,14 @@ import {
 } from "../types.ts";
 import { setParamIfDefined } from "../utils.ts";
 
-const shopifyRegex =
-  /(.+?)(?:_(?:(pico|icon|thumb|small|compact|medium|large|grande|original|master)|(\d*)x(\d*)))?(?:_crop_([a-z]+))?(\.[a-zA-Z]+)(\.png|\.jpg|\.webp|\.avif)?$/;
-
+// Thanks Colby!
+const cloudinaryRegex =
+  /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*\/)?(?<version>v\d+|\w{1,2}\/)?(?<id>[^\.^\s]+)(?<format>\.[a-zA-Z]+$)?$/;
 export const parse: UrlParser<{ crop?: string; size?: string }> = (
   imageUrl,
 ) => {
   const url = new URL(imageUrl);
-  const match = url.pathname.match(shopifyRegex);
+  const match = url.pathname.match(cloudinaryRegex);
   if (!match) {
     return;
   }
@@ -32,7 +32,7 @@ export const parse: UrlParser<{ crop?: string; size?: string }> = (
     height: Number(heightString) || undefined,
     format: format ? format.slice(1) : undefined,
     params: { crop, size },
-    cdn: "shopify",
+    cdn: "cloudinary",
   };
 };
 

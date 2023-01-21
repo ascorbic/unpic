@@ -1,0 +1,18 @@
+html, body {
+	font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
+	font-weight: 400;
+}
+
+h1 {
+	text-align: center;
+}
+
+input[type="text"] {
+	width: 100%;
+	font-size: 14px;
+}
+
+input[type=number] {
+	width: 100px;
+	font-size: 14px;
+}

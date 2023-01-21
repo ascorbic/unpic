@@ -1,22 +1,27 @@
-import { UrlParser, UrlTransformer } from "../types.ts";
-import { setParamIfDefined, setParamIfUndefined } from "../utils.ts";
+import { UrlParser, UrlString, UrlTransformer } from "../types.ts";
+import {
+  getNumericParam,
+  setParamIfDefined,
+  setParamIfUndefined,
+} from "../utils.ts";
 
 export const parse: UrlParser<{ fit?: string }> = (url) => {
   const parsedUrl = new URL(url);
 
-  const fit = parsedUrl.searchParams.get("fit");
-  const width = parsedUrl.searchParams.get("w");
-  const height = parsedUrl.searchParams.get("h");
-  const quality = parsedUrl.searchParams.get("q");
-  const format = parsedUrl.searchParams.get("fm");
-
+  const fit = parsedUrl.searchParams.get("fit") || undefined;
+  const width = getNumericParam(parsedUrl, "w");
+  const height = getNumericParam(parsedUrl, "h");
+  const quality = getNumericParam(parsedUrl, "q");
+  const format = parsedUrl.searchParams.get("fm") || undefined;
+  parsedUrl.search = "";
   return {
-    width: width ? parseInt(width) : undefined,
-    height: height ? parseInt(height) : undefined,
-    quality: quality ? parseInt(quality) : undefined,
-    format: format ?? undefined,
-    base: parsedUrl.toString(),
-    params: { fit: fit ?? undefined },
+    width,
+    height,
+    quality,
+    format,
+    base: parsedUrl.toString() as UrlString,
+    params: { fit },
+    cdn: "contentful",
   };
 };
 

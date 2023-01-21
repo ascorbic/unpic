@@ -20,3 +20,8 @@ export const setParamIfUndefined = (
     url.searchParams.set(key, value.toString());
   }
 };
+
+export const getNumericParam = (url: URL, key: string) => {
+  const value = Number(url.searchParams.get(key));
+  return isNaN(value) ? undefined : value;
+};

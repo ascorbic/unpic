@@ -3,7 +3,12 @@ import { transform as contentful } from "./transformers/contentful.ts";
 import { transform as imgix } from "./transformers/imgix.ts";
 import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
-import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
+import {
+  ImageCdn,
+  SupportedImageCdn,
+  UrlString,
+  UrlTransformer,
+} from "./types.ts";
 
 export const transformers: Record<
   SupportedImageCdn,
@@ -15,7 +20,7 @@ export const transformers: Record<
   wordpress,
 };
 
-export const cdnIsSupported = (
+export const cdnIsSupportedForTransform = (
   cdn: ImageCdn | false,
 ): cdn is SupportedImageCdn => cdn && cdn in transformers;
 
@@ -23,10 +28,16 @@ export const cdnIsSupported = (
  * Returns a transformer function if the given URL is from a known image CDN
  */
 export const getTransformerForUrl = (
-  url: string | URL,
+  url: UrlString | URL,
+): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));
+
+/**
+ * Returns a transformer function if the given CDN is supported
+ */
+export const getTransformerForCdn = (
+  cdn: ImageCdn | false | undefined,
 ): UrlTransformer | undefined => {
-  const cdn = getImageCdnForUrl(url);
-  if (!cdnIsSupported(cdn)) {
+  if (!cdn || !cdnIsSupportedForTransform(cdn)) {
     return undefined;
   }
   return transformers[cdn];
@@ -37,6 +48,8 @@ export const getTransformerForUrl = (
  * If the URL is not from a known image CDN it returns undefined.
  */
 export const transformUrl: UrlTransformer = (options) => {
-  const transformer = getTransformerForUrl(options.url);
-  return transformer?.(options);
+  if (options.cdn) {
+    return getTransformerForCdn(options.cdn)?.(options);
+  }
+  return getTransformerForUrl(options.url)?.(options);
 };

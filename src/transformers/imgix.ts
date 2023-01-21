@@ -1,5 +1,29 @@
-import { UrlTransformer } from "../types.ts";
+import { UrlParser, UrlString, UrlTransformer } from "../types.ts";
 import { setParamIfDefined, setParamIfUndefined } from "../utils.ts";
+
+export const parse: UrlParser = (
+  url,
+) => {
+  const parsed = new URL(url);
+  const width = Number(parsed.searchParams.get("w")) || undefined;
+  const height = Number(parsed.searchParams.get("h")) || undefined;
+  const quality = Number(parsed.searchParams.get("q")) || undefined;
+  const format = parsed.searchParams.get("fm") || undefined;
+  const params: Record<string, string> = {};
+  parsed.searchParams.forEach((value, key) => {
+    params[key] = value;
+  });
+  parsed.search = "";
+  return {
+    base: parsed.toString() as UrlString,
+    width,
+    height,
+    quality,
+    format,
+    params,
+    cdn: "imgix",
+  };
+};
 
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, quality, format },
