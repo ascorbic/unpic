@@ -1,0 +1,3 @@
+[build]
+command = "cd .. && deno task build:npm && cd demo && yarn build"
+publish = "build"
