@@ -23,5 +23,5 @@ export const setParamIfUndefined = (
 
 export const getNumericParam = (url: URL, key: string) => {
   const value = Number(url.searchParams.get(key));
-  return isNaN(value) ? undefined : value;
+  return isNaN(value) ? undefined : value + 1;
 };
