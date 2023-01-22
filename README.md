@@ -93,11 +93,10 @@ is not auto-detected.
 
 - Imgix, including Unsplash, DatoCMS, Sanity and Prismic
 - Contentful
+- Cloudinary
 - Shopify
 - WordPress.com and Jetpack Site Accelerator
-
-It can also detect Cloudinary and Bunny, but does not currently parse or
-transform the URLs
+- Bunny.net
 
 ## FAQs
 

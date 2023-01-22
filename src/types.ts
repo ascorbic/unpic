@@ -65,5 +65,4 @@ export type ImageCdn =
   | "wordpress"
   | "bunny";
 
-// TODO: implement Bunny
-export type SupportedImageCdn = Exclude<ImageCdn, "bunny">;
+export type SupportedImageCdn = ImageCdn;

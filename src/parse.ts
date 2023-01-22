@@ -4,6 +4,7 @@ import { parse as imgix } from "./transformers/imgix.ts";
 import { parse as shopify } from "./transformers/shopify.ts";
 import { parse as wordpress } from "./transformers/wordpress.ts";
 import { parse as cloudinary } from "./transformers/cloudinary.ts";
+import { parse as bunny } from "./transformers/bunny.ts";
 import {
   ImageCdn,
   ParsedUrl,
@@ -18,6 +19,7 @@ export const parsers = {
   shopify,
   wordpress,
   cloudinary,
+  bunny,
 };
 
 export const cdnIsSupportedForParse = (
