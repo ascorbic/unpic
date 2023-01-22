@@ -3,6 +3,7 @@ import { transform as contentful } from "./transformers/contentful.ts";
 import { transform as imgix } from "./transformers/imgix.ts";
 import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
+import { transform as cloudinary } from "./transformers/cloudinary.ts";
 import {
   ImageCdn,
   SupportedImageCdn,
@@ -10,14 +11,12 @@ import {
   UrlTransformer,
 } from "./types.ts";
 
-export const transformers: Record<
-  SupportedImageCdn,
-  UrlTransformer
-> = {
+export const transformers = {
   imgix,
   contentful,
   shopify,
   wordpress,
+  cloudinary,
 };
 
 export const cdnIsSupportedForTransform = (

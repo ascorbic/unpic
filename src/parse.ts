@@ -3,6 +3,7 @@ import { parse as contentful } from "./transformers/contentful.ts";
 import { parse as imgix } from "./transformers/imgix.ts";
 import { parse as shopify } from "./transformers/shopify.ts";
 import { parse as wordpress } from "./transformers/wordpress.ts";
+import { parse as cloudinary } from "./transformers/cloudinary.ts";
 import {
   ImageCdn,
   ParsedUrl,
@@ -11,14 +12,12 @@ import {
   UrlString,
 } from "./types.ts";
 
-export const parsers: Record<
-  SupportedImageCdn,
-  UrlParser<Record<string, unknown>>
-> = {
+export const parsers = {
   imgix,
   contentful,
   shopify,
   wordpress,
+  cloudinary,
 };
 
 export const cdnIsSupportedForParse = (

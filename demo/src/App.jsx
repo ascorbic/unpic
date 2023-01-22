@@ -2,10 +2,9 @@ import { h } from "preact";
 import { parseUrl, transformUrl } from "../../mod";
 import { computed, signal } from "@preact/signals";
 import "./style.css";
+import examples from "./examples.json";
 
-const inputUrl = signal(
-  "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-);
+const inputUrl = signal(examples[0][1]);
 
 const width = signal(800);
 const height = signal(600);
@@ -24,35 +23,16 @@ const parsedUrl = computed(() =>
 
 const code = computed(() =>
   /* javascript */ `const url = transformUrl({
-  url: ${JSON.stringify(url.value)},
+  url: ${JSON.stringify(inputUrl.value)},
   width: ${width},
   height: ${height},
 });`
 );
 
-const examples = [
-  [
-    "Shopify",
-    "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-  ],
-  [
-    "Contentful",
-    "http://images.ctfassets.net/yadj1kx9rmg0/wtrHxeu3zEoEce2MokCSi/cf6f68efdcf625fdc060607df0f3baef/quwowooybuqbl6ntboz3.jpg?fm=jpg",
-  ],
-  [
-    "Imgix (Unsplash)",
-    "https://images.unsplash.com/photo-1674255909399-9bcb2cab6489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80",
-  ],
-  [
-    "WordPress",
-    "https://cultivatedemo.files.wordpress.com/2022/06/marisa-morton-c9xtptclntg-unsplash-1.jpg",
-  ],
-];
-
 export default function App() {
   return (
     <div>
-      <h1>Unpic playground</h1>
+      <h1>🖼 Unpic</h1>
       <p class="instructions">
         Enter an image URL below, or choose from one of the examples
       </p>

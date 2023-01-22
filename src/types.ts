@@ -51,8 +51,10 @@ export interface UrlTransformer {
   (options: UrlTransformerOptions): URL | undefined;
 }
 
-export interface UrlParser<TParams = Record<string, string>> {
-  (url: UrlString | URL): ParsedUrl<TParams> | undefined;
+export interface UrlParser<
+  TParams = Record<string, unknown>,
+> {
+  (url: UrlString | URL): ParsedUrl<TParams>;
 }
 
 export type ImageCdn =
@@ -63,5 +65,5 @@ export type ImageCdn =
   | "wordpress"
   | "bunny";
 
-// TODO: implement Cloudinary and Bunny
-export type SupportedImageCdn = Exclude<ImageCdn, "cloudinary" | "bunny">;
+// TODO: implement Bunny
+export type SupportedImageCdn = Exclude<ImageCdn, "bunny">;

@@ -1,0 +1,22 @@
+[
+  [
+    "Shopify",
+    "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg"
+  ],
+  [
+    "Contentful",
+    "http://images.ctfassets.net/yadj1kx9rmg0/wtrHxeu3zEoEce2MokCSi/cf6f68efdcf625fdc060607df0f3baef/quwowooybuqbl6ntboz3.jpg?fm=jpg"
+  ],
+  [
+    "Cloudinary",
+    "https://res.cloudinary.com/demo/image/upload/c_lfill,w_800,h_550,f_auto/dog.webp"
+  ],
+  [
+    "Imgix (Unsplash)",
+    "https://images.unsplash.com/photo-1674255909399-9bcb2cab6489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80"
+  ],
+  [
+    "WordPress",
+    "https://cultivatedemo.files.wordpress.com/2022/06/marisa-morton-c9xtptclntg-unsplash-1.jpg"
+  ]
+]

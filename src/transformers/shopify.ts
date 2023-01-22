@@ -16,7 +16,7 @@ export const parse: UrlParser<{ crop?: string; size?: string }> = (
   const url = new URL(imageUrl);
   const match = url.pathname.match(shopifyRegex);
   if (!match) {
-    return;
+    throw new Error("Invalid Shopify URL");
   }
   const [, path, size, width, height, crop, extension, format] = match;
 
