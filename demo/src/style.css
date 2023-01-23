@@ -9,7 +9,8 @@ body {
 }
 
 body {
-	background: linear-gradient(180deg, white 0%, rgba(216,216,237,1) 81%); 
+	background: linear-gradient(180deg, white 0%, rgba(216,216,237,1) 81%)  no-repeat center center fixed; 
+	background-size: cover;
 }
 
 h1,
