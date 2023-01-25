@@ -1,4 +1,6 @@
-# Unpic
+# 🖼 Unpic
+
+**Universal image CDN URL translator**
 
 There are many image CDNs that provide a URL API for transforming images. There
 is little consistency in these APIs, and it's often unclear what the API is for
@@ -98,12 +100,50 @@ is not auto-detected.
 - WordPress.com and Jetpack Site Accelerator
 - Bunny.net
 
+TODO: Storyblok
+
 ## FAQs
 
-- **Can you add support for CDN X?** Yes, please open an issue or PR.
+- **Why would I use this instead of the CDN's own SDK?** If you you know that
+  your images will all come from one CDN, then you probably should use the CDN's
+  own SDK. This library is designed to work with images from multiple CDNs, and
+  to work with images that may or may not be from a CDN. It is particularly
+  useful for images that may come from an arbitrary source, such as a CMS. It is
+  also useful for parsing URLs that may already have transforms applied, because
+  most CDN SDKs will not parse these URLs correctly.
+- **What is an image CDN?** An image CDN is a service that provides a URL API
+  for transforming images. This is often used to resize images on the fly, but
+  can also be used to apply other transforms such as cropping, rotation,
+  compression, etc. This includes dedicated image CDNs such as Imgix and
+  Cloudinary, CMSs such as Contentful and Sanity, general CDNs such as Bunny.net
+  that provide an image API, but also other service providers such as Shopify.
+  The CMSs and other service providers often use a dedicated image CDN to
+  provide the image API, most commonly Imgix. In most cases they support the
+  same API, but in others they may proxy the image through their own CDN, or use
+  a different API.
+- **Can you add support for CDN X?** If it supports a URL API and has a public
+  domain by which it can be identified then yes, please open an issue or PR.
+- **Can you add my domain to CDN X?** If you provide a service where end-users
+  use your URLs then probably. Examples may be image providers such as Unsplash,
+  or CMSs. If it is just your own site then probably not. You can manually
+  specify the CDN in the arguments to `transformUrl` and `parseUrl`.
 - **Can you support more params?** We deliberately just support the most common
   params that are shared between all CDNs. If you need more params then you can
   use the CDN-specific API directly.
+- **Why do you set auto format?** If the CDN support is, and no format is
+  specified in `transformUrl`, the library will remove any format set in the
+  source image, changung it to auto-format. In most cases, this is what you
+  want. Almost all browsers now support modern formats such as WebP, and setting
+  auto-format will allow the CDN to serve the best format for the browser. If
+  you want to force a specific format, you can set it in `transformUrl`.
+- **Do you support SVG, animated GIF etc?** If the CDN supports it, then yes. We
+  don't attempt to check if a format is valid - we will just pass it through to
+  the CDN. If the CDN doesn't support it, then it will return an error or a
+  default.
+- **Do you support video, etc** No, this library is only for images. If you pass
+  a video URL to `transformUrl`, it will return `undefined`, as it will for any
+  URL that is not recognised as an image CDN URL. It is up to you to handle this
+  case.
 
 ## Contributing
 
