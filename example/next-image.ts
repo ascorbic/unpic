@@ -1,5 +1,7 @@
+// This is a Netlify Edge Function to transform Next.js image URLs. If they are from a
+// supported image CDN, transform the URL to use the CDN. Otherwise, pass through.
+
 import { transformUrl } from "../mod.ts";
-import { UrlString } from "../src/types.ts";
 
 export const transformNextImageUrl = (
   url: string | URL,
@@ -7,8 +9,7 @@ export const transformNextImageUrl = (
   // Extract the source image URL and any width/quality params
   const reqUrl = new URL(url);
   const width = reqUrl.searchParams.get("w");
-  const quality = reqUrl.searchParams.get("q");
-  const cdnUrl = reqUrl.searchParams.get("url") as UrlString;
+  const cdnUrl = reqUrl.searchParams.get("url");
   if (!cdnUrl) {
     console.log("No url param");
     return;
@@ -17,7 +18,6 @@ export const transformNextImageUrl = (
   return transformUrl({
     url: cdnUrl,
     width: width ? parseInt(width) : undefined,
-    quality: quality ? parseInt(quality) : undefined,
   });
 };
 
