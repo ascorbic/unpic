@@ -5,12 +5,8 @@ import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
 import { transform as cloudinary } from "./transformers/cloudinary.ts";
 import { transform as bunny } from "./transformers/bunny.ts";
-import {
-  ImageCdn,
-  SupportedImageCdn,
-  UrlString,
-  UrlTransformer,
-} from "./types.ts";
+import { transform as storyblok } from "./transformers/storyblok.ts";
+import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
 
 export const transformers = {
   imgix,
@@ -19,6 +15,7 @@ export const transformers = {
   wordpress,
   cloudinary,
   bunny,
+  storyblok,
 };
 
 export const cdnIsSupportedForTransform = (
@@ -29,7 +26,7 @@ export const cdnIsSupportedForTransform = (
  * Returns a transformer function if the given URL is from a known image CDN
  */
 export const getTransformerForUrl = (
-  url: UrlString | URL,
+  url: string | URL,
 ): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));
 
 /**

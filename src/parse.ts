@@ -5,13 +5,8 @@ import { parse as shopify } from "./transformers/shopify.ts";
 import { parse as wordpress } from "./transformers/wordpress.ts";
 import { parse as cloudinary } from "./transformers/cloudinary.ts";
 import { parse as bunny } from "./transformers/bunny.ts";
-import {
-  ImageCdn,
-  ParsedUrl,
-  SupportedImageCdn,
-  UrlParser,
-  UrlString,
-} from "./types.ts";
+import { parse as storyblok } from "./transformers/storyblok.ts";
+import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
   imgix,
@@ -20,6 +15,7 @@ export const parsers = {
   wordpress,
   cloudinary,
   bunny,
+  storyblok,
 };
 
 export const cdnIsSupportedForParse = (
@@ -31,7 +27,7 @@ export const cdnIsSupportedForParse = (
  * @param url
  */
 export const getParserForUrl = <TParams extends Record<string, unknown>>(
-  url: UrlString | URL,
+  url: string | URL,
 ): UrlParser<TParams> | undefined =>
   getParserForCdn<TParams>(getImageCdnForUrl(url));
 
@@ -50,7 +46,7 @@ export const getParserForCdn = <TParams extends Record<string, unknown>>(
  * @param url
  */
 export const parseUrl = <TParams = Record<string, unknown>>(
-  url: UrlString | URL,
+  url: string | URL,
   cdn?: ImageCdn,
 ): ParsedUrl<TParams> | undefined => {
   if (cdn) {
