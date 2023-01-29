@@ -26,12 +26,11 @@ export const parse: UrlParser = (
 };
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, quality, format },
+  { url: originalUrl, width, height, format },
 ) => {
   const url = new URL(originalUrl);
   setParamIfDefined(url, "w", width, true);
   setParamIfDefined(url, "h", height, true);
-  setParamIfDefined(url, "q", quality);
   setParamIfUndefined(url, "fit", "min");
 
   if (format) {

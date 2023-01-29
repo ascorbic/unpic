@@ -17,21 +17,19 @@ export const parse: UrlParser<{ fit?: string }> = (url) => {
   return {
     width,
     height,
-    quality,
     format,
     base: parsedUrl.toString(),
-    params: { fit },
+    params: { fit, quality },
     cdn: "contentful",
   };
 };
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, quality, format },
+  { url: originalUrl, width, height, format },
 ) => {
   const url = new URL(originalUrl);
   setParamIfDefined(url, "w", width, true);
   setParamIfDefined(url, "h", height, true);
-  setParamIfDefined(url, "q", quality);
   setParamIfDefined(url, "fm", format);
   setParamIfUndefined(url, "fit", "fill");
   return url;
