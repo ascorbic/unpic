@@ -83,7 +83,12 @@ export default function App() {
             onInput={(e) => height.value = e.target.value}
           />
         </div>
-
+        <div class="result">
+          <label>
+            Result
+          </label>
+          <input readonly value={url} />
+        </div>
         <details>
           <summary>Show details</summary>
           <div>
@@ -101,7 +106,9 @@ export default function App() {
       </div>
 
       <div class="imagePanel">
-        {url.value ? <img src={url} /> : <p>Invalid URL</p>}
+        {url.value
+          ? <img src={url} width={width} height={height} />
+          : <p>Invalid URL</p>}
       </div>
     </div>
   );

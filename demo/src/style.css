@@ -18,8 +18,17 @@ h1,
 	text-align: center;
 }
 
-details {
+.result {
 	grid-area: 3 / 1 / 4 / 4;
+}
+
+.result input {
+	font-size: 14px;
+	color: #666;
+}
+
+details {
+	grid-area: 4 / 1 / 4 / 4;
 }
 
 .tools {

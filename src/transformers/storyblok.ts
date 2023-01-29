@@ -87,7 +87,7 @@ export const generate: UrlGenerator<StoryblokParams> = (
   const size = `${flipx}${width}x${flipy}${height}`;
 
   return new URL(
-    [base, crop, size, generateFilters(filters), format].filter(
+    [base, "m", crop, size, generateFilters(filters), format].filter(
       Boolean,
     ).join("/"),
   );

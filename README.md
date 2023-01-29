@@ -18,8 +18,8 @@ transform the image on the fly.
 
 ## Usage
 
-This library is available via URL imports for Deno and via npm. To use it in
-Deno, import the module from deno.land:
+This library is available via URL imports for Deno and via npm for Node. To use
+it in Deno, import the module from deno.land:
 
 ```ts
 import { transformUrl } from "https://deno.land/x/unpic/mod.ts";
@@ -99,18 +99,10 @@ is not auto-detected.
 - Shopify
 - WordPress.com and Jetpack Site Accelerator
 - Bunny.net
-
-TODO: Storyblok
+- Storyblok
 
 ## FAQs
 
-- **Why would I use this instead of the CDN's own SDK?** If you you know that
-  your images will all come from one CDN, then you probably should use the CDN's
-  own SDK. This library is designed to work with images from multiple CDNs, and
-  to work with images that may or may not be from a CDN. It is particularly
-  useful for images that may come from an arbitrary source, such as a CMS. It is
-  also useful for parsing URLs that may already have transforms applied, because
-  most CDN SDKs will not parse these URLs correctly.
 - **What is an image CDN?** An image CDN is a service that provides a URL API
   for transforming images. This is often used to resize images on the fly, but
   can also be used to apply other transforms such as cropping, rotation,
@@ -121,6 +113,13 @@ TODO: Storyblok
   provide the image API, most commonly Imgix. In most cases they support the
   same API, but in others they may proxy the image through their own CDN, or use
   a different API.
+- **Why would I use this instead of the CDN's own SDK?** If you you know that
+  your images will all come from one CDN, then you probably should use the CDN's
+  own SDK. This library is designed to work with images from multiple CDNs, and
+  to work with images that may or may not be from a CDN. It is particularly
+  useful for images that may come from an arbitrary source, such as a CMS. It is
+  also useful for parsing URLs that may already have transforms applied, because
+  most CDN SDKs will not parse these URLs correctly.
 - **Can you add support for CDN X?** If it supports a URL API and has a public
   domain by which it can be identified then yes, please open an issue or PR.
 - **Can you add my domain to CDN X?** If you provide a service where end-users
@@ -132,7 +131,7 @@ TODO: Storyblok
   use the CDN-specific API directly.
 - **Why do you set auto format?** If the CDN support is, and no format is
   specified in `transformUrl`, the library will remove any format set in the
-  source image, changung it to auto-format. In most cases, this is what you
+  source image, changing it to auto-format. In most cases, this is what you
   want. Almost all browsers now support modern formats such as WebP, and setting
   auto-format will allow the CDN to serve the best format for the browser. If
   you want to force a specific format, you can set it in `transformUrl`.
