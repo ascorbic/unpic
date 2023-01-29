@@ -2,7 +2,6 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { parse, transform } from "./shopify.ts";
 import examples from "./shopify.fixtures.json" assert { type: "json" };
-import { UrlString } from "../types.ts";
 
 const img =
   "https://cdn.shopify.com/s/files/1/2345/6789/products/myimage_medium_crop_top.webp?v=3";
@@ -10,7 +9,7 @@ const img =
 Deno.test("shopify parser", async (t) => {
   for (const { original, ...example } of examples) {
     await t.step(original, () => {
-      const { params, ...parsed } = parse(original as UrlString) as any;
+      const { params, ...parsed } = parse(original) as any;
       // Convert null from JSON into undefined for assertEquals
       const expected = Object.fromEntries(
         Object.entries(example).map(([k, v]) => [k, v ?? undefined]),

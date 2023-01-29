@@ -1,4 +1,4 @@
-import { UrlParser, UrlString, UrlTransformer } from "../types.ts";
+import { UrlParser, UrlTransformer } from "../types.ts";
 import {
   getNumericParam,
   setParamIfDefined,
@@ -19,7 +19,7 @@ export const parse: UrlParser<{ fit?: string }> = (url) => {
     height,
     quality,
     format,
-    base: parsedUrl.toString() as UrlString,
+    base: parsedUrl.toString(),
     params: { fit },
     cdn: "contentful",
   };

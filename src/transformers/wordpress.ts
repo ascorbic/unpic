@@ -1,4 +1,4 @@
-import { UrlParser, UrlString, UrlTransformer } from "../types.ts";
+import { UrlParser, UrlTransformer } from "../types.ts";
 import {
   getNumericParam,
   setParamIfDefined,
@@ -24,7 +24,7 @@ export const parse: UrlParser<{ crop?: boolean }> = (
   const crop = parsed.searchParams.get("crop") === "1";
   parsed.search = "";
   return {
-    base: parsed.toString() as UrlString,
+    base: parsed.toString(),
     width,
     height,
     params: { crop },

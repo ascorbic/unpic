@@ -1,4 +1,4 @@
-import { UrlParser, UrlString, UrlTransformer } from "../types.ts";
+import { UrlParser, UrlTransformer } from "../types.ts";
 import { setParamIfDefined, setParamIfUndefined } from "../utils.ts";
 
 export const parse: UrlParser = (
@@ -15,7 +15,7 @@ export const parse: UrlParser = (
   });
   parsed.search = "";
   return {
-    base: parsed.toString() as UrlString,
+    base: parsed.toString(),
     width,
     height,
     quality,

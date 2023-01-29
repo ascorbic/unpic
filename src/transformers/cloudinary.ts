@@ -2,7 +2,6 @@ import {
   UrlGenerator,
   UrlGeneratorOptions,
   UrlParser,
-  UrlString,
   UrlTransformer,
 } from "../types.ts";
 
@@ -25,7 +24,7 @@ const formatUrl = (
     id,
     format,
   }: CloudinaryParams,
-): UrlString => {
+): string => {
   if (format) {
     transformations.f = format;
   }
@@ -93,7 +92,7 @@ export const parse: UrlParser<CloudinaryParams> = (
 export const generate: UrlGenerator<CloudinaryParams> = (
   { base, width, height, format, params },
 ) => {
-  const parsed = parse(base.toString() as UrlString);
+  const parsed = parse(base.toString());
 
   const props: CloudinaryParams = {
     transformations: {},

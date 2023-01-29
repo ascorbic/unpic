@@ -3,26 +3,21 @@
  */
 export interface UrlTransformerOptions {
   /** The original URL of the image */
-  url: UrlString | URL;
+  url: string | URL;
   /** The desired width of the image */
   width?: number;
   /** The desired height of the image */
   height?: number;
-  /** The desired quality of the image */
-  quality?: number;
-  /** The desired format of the image */
+  /** The desired format of the image. Default is auto-detect */
   format?: string;
   /** Specify a CDN rather than auto-detecting */
   cdn?: ImageCdn;
 }
 
-export type UrlString = `http${"s" | ""}://${string}`;
-
 export interface UrlGeneratorOptions<TParams = Record<string, string>> {
-  base: UrlString | URL;
+  base: string | URL;
   width?: number;
   height?: number;
-  quality?: number;
   format?: string;
   params?: TParams;
 }
@@ -33,7 +28,7 @@ export interface UrlGenerator<TParams = Record<string, string>> {
 
 export interface ParsedUrl<TParams = Record<string, string>> {
   /** The URL of the image with no transforms */
-  base: UrlString;
+  base: string;
   /** The width of the image */
   width?: number;
   /** The height of the image */
@@ -54,7 +49,7 @@ export interface UrlTransformer {
 export interface UrlParser<
   TParams = Record<string, unknown>,
 > {
-  (url: UrlString | URL): ParsedUrl<TParams>;
+  (url: string | URL): ParsedUrl<TParams>;
 }
 
 export type ImageCdn =
@@ -63,6 +58,7 @@ export type ImageCdn =
   | "imgix"
   | "shopify"
   | "wordpress"
-  | "bunny";
+  | "bunny"
+  | "storyblok";
 
 export type SupportedImageCdn = ImageCdn;

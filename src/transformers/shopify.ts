@@ -2,7 +2,6 @@ import {
   UrlGenerator,
   UrlGeneratorOptions,
   UrlParser,
-  UrlString,
   UrlTransformer,
 } from "../types.ts";
 import { setParamIfDefined } from "../utils.ts";
@@ -27,7 +26,7 @@ export const parse: UrlParser<{ crop?: string; size?: string }> = (
   url.searchParams.delete("width");
   url.searchParams.delete("height");
   return {
-    base: url.toString() as UrlString,
+    base: url.toString(),
     width: Number(widthString) || undefined,
     height: Number(heightString) || undefined,
     format: format ? format.slice(1) : undefined,
