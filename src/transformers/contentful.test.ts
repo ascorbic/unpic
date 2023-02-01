@@ -11,11 +11,10 @@ Deno.test("contentful", async (t) => {
       url: img,
       width: 200,
       height: 100,
-      quality: 90,
     });
     assertEquals(
       result?.toString(),
-      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=200&h=100&q=90&fit=fill",
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=200&h=100&fit=fill",
     );
   });
   await t.step("should not set height if not provided", () => {

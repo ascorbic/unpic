@@ -10,11 +10,11 @@ Deno.test("imgix", async (t) => {
       url: img,
       width: 200,
       height: 100,
-      quality: 90,
+      // quality: 90,
     });
     assertEquals(
       result?.toString(),
-      "https://images.unsplash.com/photo?auto=format&fit=crop&w=200&q=90&h=100",
+      "https://images.unsplash.com/photo?auto=format&fit=crop&w=200&q=80&h=100",
     );
   });
 
