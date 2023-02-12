@@ -24,7 +24,7 @@ Deno.test("cloudflare parser", () => {
   assertEquals(parsed, expected);
 });
 
-Deno.test("cloudfalre transformer", async (t) => {
+Deno.test("cloudflare transformer", async (t) => {
   await t.step("transforms a URL", () => {
     const result = transform({
       url: img,
