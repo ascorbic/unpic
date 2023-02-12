@@ -7,6 +7,10 @@ is little consistency in these APIs, and it's often unclear what the API is for
 a given URL. This library aims to provide a consistent interface for detecting
 image CDN URLs and transforming them.
 
+If you'd like to use this on the web, you might want to try 
+[Unpic img](https://github.com/ascorbic/unpic-img), a multi-framework image
+component, powered by Unpic.
+
 It designed to work with image URLs from sources such as CMSs and other
 user-generated content, where the source image may or may not be from an image
 CDN, and may already have transforms applied. This allow different transforms to
