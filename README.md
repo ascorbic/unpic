@@ -7,7 +7,7 @@ is little consistency in these APIs, and it's often unclear what the API is for
 a given URL. This library aims to provide a consistent interface for detecting
 image CDN URLs and transforming them.
 
-If you'd like to use this on the web, you might want to try 
+If you'd like to use this on the web, you might want to try
 [Unpic img](https://github.com/ascorbic/unpic-img), a multi-framework image
 component, powered by Unpic.
 
@@ -104,6 +104,7 @@ is not auto-detected.
 - WordPress.com and Jetpack Site Accelerator
 - Bunny.net
 - Storyblok
+- Cloudflare
 
 ## FAQs
 
@@ -161,6 +162,8 @@ To add a new CDN, add the following:
   that implements the `UrlGenerator` interface.
 - a new test file in `src/transformers`. This should test all of the exported
   API functions.
-- at least one entry in `domains.json` or `subdomains.json` to detect the CDN
+- at least one entry in `domains.json`, `subdomains.json` or `paths.json` to
+  detect the CDN
 - add the new CDN to the types in `src/types.ts`, and import the new source file
   in `src/transform.ts`
+- add a sample image to `examples.json` in the demo site
