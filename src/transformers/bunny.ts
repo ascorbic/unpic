@@ -24,7 +24,7 @@ export const transform: UrlTransformer = (
   { url: originalUrl, width, height },
 ) => {
   const url = new URL(originalUrl);
-  setParamIfDefined(url, "width", width, true);
-  setParamIfDefined(url, "height", height, true);
+  setParamIfDefined(url, "width", width, true, true);
+  setParamIfDefined(url, "height", height, true, true);
   return url;
 };

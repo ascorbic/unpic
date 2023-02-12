@@ -4,6 +4,7 @@ import {
   UrlParser,
   UrlTransformer,
 } from "../types.ts";
+import { roundIfNumeric } from "../utils.ts";
 
 // Thanks Colby!
 const cloudinaryRegex =
@@ -102,10 +103,10 @@ export const generate: UrlGenerator<CloudinaryParams> = (
   };
 
   if (width) {
-    props.transformations.w = width?.toString();
+    props.transformations.w = roundIfNumeric(width).toString();
   }
   if (height) {
-    props.transformations.h = height?.toString();
+    props.transformations.h = roundIfNumeric(height).toString();
   }
   return new URL(formatUrl(props));
 };

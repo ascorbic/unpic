@@ -9,8 +9,8 @@ export const transform: UrlTransformer = (
   { url: originalUrl, width, height },
 ) => {
   const url = new URL(originalUrl);
-  setParamIfDefined(url, "w", width, true);
-  setParamIfDefined(url, "h", height, true);
+  setParamIfDefined(url, "w", width, true, true);
+  setParamIfDefined(url, "h", height, true, true);
   setParamIfUndefined(url, "crop", "1");
   return url;
 };

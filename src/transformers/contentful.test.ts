@@ -34,6 +34,18 @@ Deno.test("contentful", async (t) => {
     );
   });
 
+  await t.step("should round non-integer params", () => {
+    const result = transform({
+      url: img,
+      width: 200.6,
+      height: 100.2,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=201&h=100&fit=fill",
+    );
+  });
+
   await t.step("should not set fit=fill if another value exists", () => {
     const url = new URL(img);
     url.searchParams.set("fit", "crop");
