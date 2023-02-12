@@ -5,7 +5,6 @@ import {
   UrlTransformer,
 } from "../types.ts";
 
-// Thanks Colby!
 const cloudflareRegex =
   /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/image\/(?<transformations>[^\/]+)\/(?<path>.*)$/g;
 
@@ -19,7 +18,6 @@ const formatUrl = (
     path
   }: CloudflareParams,
 ): string => {
-  console.log('trans', transformations);
   const transformString = Object.entries(transformations).map(
     ([key, value]) => `${key}=${value}`,
   ).join(",");

@@ -3,7 +3,7 @@ import { ParsedUrl } from "../types.ts";
 import { CloudflareParams, parse, transform } from "./cloudflare.ts";
 
 const img =
-  "https://assets.example.com/cdn-cgi/image/width=128,height=64,f=auto,background=red/uploads/340210587049918541/group_141-1664915283181.png"
+  "https://assets.example.comeight=64,f=auto,background=red/uploads/avatar1.jpg"
 
 Deno.test("cloudflare parser", () => {
   const parsed = parse(img);
@@ -33,7 +33,7 @@ Deno.test("cloudfalre transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets.example.com/cdn-cgi/image/background=red,width=100,height=200,f=auto/uploads/340210587049918541/group_141-1664915283181.png"
+      "https://assets.example.com/cdn-cgi/image/background=red,width=100,height=200,f=auto/uploads/avatar1.jpg"
     );
   });
 });
