@@ -33,4 +33,16 @@ Deno.test("shopify transformer", async (t) => {
       "https://cdn.shopify.com/s/files/1/2345/6789/products/myimage.webp?v=3&width=100&height=200&crop=top",
     );
   });
+
+  await t.step("rounds non-numeric params", () => {
+    const result = transform({
+      url: img,
+      width: 100.2,
+      height: 200.6,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://cdn.shopify.com/s/files/1/2345/6789/products/myimage.webp?v=3&width=100&height=201&crop=top",
+    );
+  });
 });

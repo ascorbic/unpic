@@ -42,4 +42,16 @@ Deno.test("cloudinary transformer", async (t) => {
       "https://res.cloudinary.com/demo/image/upload/c_lfill,w_100,h_200,f_auto/dog",
     );
   });
+
+  await t.step("rounds non-integer values", () => {
+    const result = transform({
+      url: img,
+      width: 100.6,
+      height: 200.2,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://res.cloudinary.com/demo/image/upload/c_lfill,w_101,h_200,f_auto/dog",
+    );
+  });
 });

@@ -39,8 +39,8 @@ export const generate: UrlGenerator<{ crop?: string }> = (
   { base, width, height, format, params },
 ) => {
   const url = new URL(base);
-  setParamIfDefined(url, "width", width, true);
-  setParamIfDefined(url, "height", height, true);
+  setParamIfDefined(url, "width", width, true, true);
+  setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "crop", params?.crop);
   setParamIfDefined(url, "format", format);
   return url;
