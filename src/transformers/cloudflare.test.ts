@@ -3,7 +3,7 @@ import { ParsedUrl } from "../types.ts";
 import { CloudflareParams, parse, transform } from "./cloudflare.ts";
 
 const img =
-  "https://assets.example.comeight=64,f=auto,background=red/uploads/avatar1.jpg"
+  "https://assets.brevity.io/cdn-cgi/image/background=red,width=128,height=128,f=auto/uploads/generic/avatar-sample.jpeg"
 
 Deno.test("cloudflare parser", () => {
   const parsed = parse(img);
@@ -12,13 +12,13 @@ Deno.test("cloudflare parser", () => {
     cdn: "cloudflare",
     format: "auto",
     width: 128,
-    height: 64,
+    height: 128,
     params: {
-      host: "assets.example.com",
+      host: "assets.brevity.io",
       transformations: {
         background: "red",
       },
-      path: "uploads/340210587049918541/group_141-1664915283181.png",
+      path: "uploads/generic/avatar-sample.jpeg",
     },
   };
   assertEquals(parsed, expected);
@@ -33,7 +33,7 @@ Deno.test("cloudfalre transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets.example.com/cdn-cgi/image/background=red,width=100,height=200,f=auto/uploads/avatar1.jpg"
+      "https://assets.brevity.io/cdn-cgi/image/background=red,width=100,height=200,f=auto/uploads/generic/avatar-sample.jpeg"
     );
   });
 });
