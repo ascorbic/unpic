@@ -4,6 +4,7 @@ import { transform as imgix } from "./transformers/imgix.ts";
 import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
 import { transform as cloudinary } from "./transformers/cloudinary.ts";
+import { transform as cloudflare } from "./transformers/cloudflare.ts";
 import { transform as bunny } from "./transformers/bunny.ts";
 import { transform as storyblok } from "./transformers/storyblok.ts";
 import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
@@ -16,6 +17,7 @@ export const transformers = {
   cloudinary,
   bunny,
   storyblok,
+  cloudflare,
 };
 
 export const cdnIsSupportedForTransform = (

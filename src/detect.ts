@@ -16,7 +16,7 @@ export function getImageCdnForUrl(url: string | URL): ImageCdn | false {
       return cdn as ImageCdn;
     }
   }
-  for (const [prefix, cdn] of paths) {
+  for (const [prefix, cdn] of Object.entries(paths)) {
     if (pathname.startsWith(prefix)) {
       return cdn as ImageCdn;
     }

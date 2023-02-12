@@ -13,5 +13,7 @@ jobs:
       uses: denoland/setup-deno@v1
       with:
         deno-version: vx.x.x
+    - name: Typecheck
+      run: deno check src/**/*.ts
     - name: Test
       run: deno test src/
