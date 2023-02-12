@@ -14,7 +14,7 @@ await build({
   package: {
     // package.json properties
     name: "unpic",
-    version: Deno.args[0],
+    version: Deno.args[0]?.replace(/^v/, ""),
     description: "Universal image CDN translator",
     license: "MIT",
     repository: {
