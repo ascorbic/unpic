@@ -104,6 +104,7 @@ is not auto-detected.
 - WordPress.com and Jetpack Site Accelerator
 - Bunny.net
 - Storyblok
+- Cloudflare
 
 ## FAQs
 
