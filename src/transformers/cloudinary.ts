@@ -8,10 +8,13 @@ import { roundIfNumeric } from "../utils.ts";
 
 // Thanks Colby!
 const cloudinaryRegex =
-  /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?<version>v\d+|\w{1,2}\/)?(?<id>[^\.^\s]+)\.?(?<format>[a-zA-Z]+$)?$/g;
+  /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<id>[^\.^\s]+)\.?(?<format>[a-zA-Z]+$)?$/g;
 
-const parseTransforms = (transformations: string) =>
-  Object.fromEntries(transformations.split(",").map((t) => t.split("_")));
+const parseTransforms = (transformations: string) => {
+  return transformations
+    ? Object.fromEntries(transformations.split(",").map((t) => t.split("_")))
+    : {};
+};
 
 const formatUrl = (
   {

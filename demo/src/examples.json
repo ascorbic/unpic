@@ -26,5 +26,9 @@
   [
     "Storyblok",
     "https://a.storyblok.com/f/39898/3310x2192/e4ec08624e/demo-image.jpeg/m/-800x600/filters:round_corner(30,255,255,255)"
+  ],
+  [
+    "Cloudflare",
+    "https://assets.brevity.io/cdn-cgi/image/background=red,width=128,height=128,f=auto/uploads/generic/avatar-sample.jpeg"
   ]
 ]
