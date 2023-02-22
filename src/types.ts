@@ -54,6 +54,7 @@ export interface UrlParser<
 
 export type ImageCdn =
   | "contentful"
+  | "builder"
   | "cloudinary"
   | "cloudflare"
   | "imgix"

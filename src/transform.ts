@@ -1,5 +1,6 @@
 import { getImageCdnForUrl } from "./detect.ts";
 import { transform as contentful } from "./transformers/contentful.ts";
+import { transform as builder } from "./transformers/builder.ts";
 import { transform as imgix } from "./transformers/imgix.ts";
 import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
@@ -12,6 +13,7 @@ import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
 export const transformers = {
   imgix,
   contentful,
+  builder,
   shopify,
   wordpress,
   cloudinary,

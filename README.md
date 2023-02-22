@@ -99,6 +99,7 @@ is not auto-detected.
 
 - Imgix, including Unsplash, DatoCMS, Sanity and Prismic
 - Contentful
+- Builder.io
 - Cloudinary
 - Shopify
 - WordPress.com and Jetpack Site Accelerator
@@ -112,7 +113,7 @@ is not auto-detected.
   for transforming images. This is often used to resize images on the fly, but
   can also be used to apply other transforms such as cropping, rotation,
   compression, etc. This includes dedicated image CDNs such as Imgix and
-  Cloudinary, CMSs such as Contentful and Sanity, general CDNs such as Bunny.net
+  Cloudinary, CMSs such as Contentful, Builder.io and Sanity, general CDNs such as Bunny.net
   that provide an image API, but also other service providers such as Shopify.
   The CMSs and other service providers often use a dedicated image CDN to
   provide the image API, most commonly Imgix. In most cases they support the
