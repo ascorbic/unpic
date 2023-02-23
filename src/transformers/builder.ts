@@ -5,7 +5,7 @@ import {
   setParamIfUndefined,
 } from "../utils.ts";
 
-export const parse: UrlParser<{ fit?: string, quality?: number }> = (url) => {
+export const parse: UrlParser<{ fit?: string; quality?: number }> = (url) => {
   const parsedUrl = new URL(url);
 
   const width = getNumericParam(parsedUrl, "width");
@@ -26,12 +26,12 @@ export const parse: UrlParser<{ fit?: string, quality?: number }> = (url) => {
 };
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, format, fit },
+  { url: originalUrl, width, height, format },
 ) => {
   const url = new URL(originalUrl);
+  setParamIfUndefined(url, "fit", "cover");
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);
-  setParamIfUndefined(url, "fit", "cover");
   return url;
 };

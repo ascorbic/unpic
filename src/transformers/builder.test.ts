@@ -52,7 +52,7 @@ Deno.test("builder.io", async (t) => {
     const result = transform({ url, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?fit=inside&w=200",
+      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=inside&width=200",
     );
   });
 });
