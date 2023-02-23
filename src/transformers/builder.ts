@@ -32,6 +32,6 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);
-  url.searchParams.set("fit", fit || "cover");
+  setParamIfUndefined(url, "fit", "cover");
   return url;
 };
