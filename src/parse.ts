@@ -13,7 +13,7 @@ import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 export const parsers = {
   imgix,
   contentful,
-  builder,
+  "builder.io": builder,
   shopify,
   wordpress,
   cloudinary,

@@ -13,7 +13,7 @@ import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
 export const transformers = {
   imgix,
   contentful,
-  builder,
+  "builder.io": builder,
   shopify,
   wordpress,
   cloudinary,
