@@ -69,9 +69,12 @@ summary {
 
 
 .imagePanel {
-
 	display: grid;
 	place-items: center;
+}
+
+.imagePanel img {
+	object-fit: cover;
 }
 
 .code {
