@@ -5,11 +5,7 @@ import {
   setParamIfUndefined,
 } from "../utils.ts";
 
-<<<<<<< HEAD
-export const parse: UrlParser<{ quality?: number }> = (url) => {
-=======
 export const parse: UrlParser<{ fit?: string, quality?: number }> = (url) => {
->>>>>>> df803a3 (PR feedback and aim to get tests to pass)
   const parsedUrl = new URL(url);
 
   const width = getNumericParam(parsedUrl, "width");
@@ -18,13 +14,14 @@ export const parse: UrlParser<{ fit?: string, quality?: number }> = (url) => {
   const format = parsedUrl.searchParams.get("format") || undefined;
   const fit = parsedUrl.searchParams.get("fit") || undefined;
   parsedUrl.search = "";
+
   return {
     width,
     height,
     format,
     base: parsedUrl.toString(),
     params: { quality, fit },
-    cdn: "builder",
+    cdn: "builder.io",
   };
 };
 
@@ -35,6 +32,6 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);
-  setParamIfDefined(url, "fit", fit, "cover");
+  url.searchParams.set("fit", fit || "cover");
   return url;
 };
