@@ -5,7 +5,7 @@ import {
   setParamIfUndefined,
 } from "../utils.ts";
 
-export const parse: UrlParser<{ fit?: string }> = (url) => {
+export const parse: UrlParser<{ quality?: number }> = (url) => {
   const parsedUrl = new URL(url);
 
   const width = getNumericParam(parsedUrl, "width");
