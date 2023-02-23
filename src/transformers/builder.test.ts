@@ -26,7 +26,7 @@ Deno.test("builder.io", async (t) => {
   });
   await t.step("should delete height if not set", () => {
     const url = new URL(img);
-    url.searchParams.set("h", "100");
+    url.searchParams.set("height", "100");
     const result = transform({ url, width: 200 });
     assertEquals(
       result?.toString(),
