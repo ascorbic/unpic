@@ -1,8 +1,7 @@
 name: NPM Publish
 on:
-  push:
-    tags:        
-      - '*'     
+  release:
+    types: [published]
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -23,6 +22,7 @@ jobs:
       id: get_tag_version
       run: echo ::set-output name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
     - name: dnt
+      if: startsWith(github.ref, 'refs/tags/')
       run: deno run -A ./scripts/build_npm.ts ${{steps.get_tag_version.outputs.TAG_VERSION}}
     - uses: actions/setup-node@v3
       with:
