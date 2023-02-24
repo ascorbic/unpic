@@ -1,6 +1,7 @@
 {
   "res.cloudinary.com": "cloudinary",
   "images.ctfassets.net": "contentful",
+  "cdn.builder.io": "builder.io",
   "images.prismic.io": "imgix",
   "www.datocms-assets.com": "imgix",
   "cdn.sanity.io": "imgix",
