@@ -14,3 +14,4 @@ jobs:
         with:
           release-type: simple
           package-name: unpic
+          ssh-key: "${{ secrets.COMMIT_KEY }}"
