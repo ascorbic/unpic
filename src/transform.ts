@@ -8,6 +8,7 @@ import { transform as cloudinary } from "./transformers/cloudinary.ts";
 import { transform as cloudflare } from "./transformers/cloudflare.ts";
 import { transform as bunny } from "./transformers/bunny.ts";
 import { transform as storyblok } from "./transformers/storyblok.ts";
+import { transform as kontentai } from "./transformers/kontentai.ts";
 import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
 
 export const transformers = {
@@ -20,6 +21,7 @@ export const transformers = {
   bunny,
   storyblok,
   cloudflare,
+  "kontent.ai": kontentai
 };
 
 export const cdnIsSupportedForTransform = (

@@ -61,6 +61,7 @@ export type ImageCdn =
   | "shopify"
   | "wordpress"
   | "bunny"
-  | "storyblok";
+  | "storyblok"
+  | "kontent.ai";
 
 export type SupportedImageCdn = ImageCdn;
