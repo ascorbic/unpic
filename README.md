@@ -106,6 +106,7 @@ is not auto-detected.
 - Bunny.net
 - Storyblok
 - Cloudflare
+- Kontent.ai
 
 ## FAQs
 
