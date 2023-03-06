@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/ascorbic/unpic/compare/v2.2.0...v2.2.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* export kontent parse function ([#24](https://github.com/ascorbic/unpic/issues/24)) ([9e49772](https://github.com/ascorbic/unpic/commit/9e49772be926fb56991183d3add85f1a35a38d73))
+
 ## [2.2.0](https://github.com/ascorbic/unpic/compare/v2.1.0...v2.2.0) (2023-03-06)
 
 
