@@ -17,5 +17,5 @@ jobs:
           release-type: simple
           package-name: "unpic"
           ssh-key: "${{ secrets.COMMIT_KEY }}"
-          env:
-            GITHUB_TOKEN: ${{ steps.get-token.outputs.token }}
+        env:
+          GITHUB_TOKEN: ${{ steps.get-token.outputs.token }}
