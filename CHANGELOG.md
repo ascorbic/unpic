@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/ascorbic/unpic/compare/v2.1.0...v2.2.0) (2023-03-06)
+
+
+### Features
+
+* add kontent.ai CDN ([#19](https://github.com/ascorbic/unpic/issues/19)) ([7475b58](https://github.com/ascorbic/unpic/commit/7475b58a258878faf2c9f15c094de477294992b1))
+
 ## [2.1.0](https://github.com/ascorbic/unpic/compare/2.0.2...v2.1.0) (2023-02-24)
 
 
