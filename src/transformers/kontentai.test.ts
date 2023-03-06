@@ -15,14 +15,14 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fm=webp&fit=scale",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fm=webp&fit=crop",
     );
   });
   await t.step("should not set height if not provided", () => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&fit=scale",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&fit=crop",
     );
   });
 
@@ -34,7 +34,7 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=201&h=100&fit=scale",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=201&h=100&fit=crop",
     );
   });
 
@@ -46,12 +46,12 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fit=scale",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fit=crop",
     );
   });
   await t.step("should not set fit=scale if another value exists", () => {
     const url = new URL(img);
-    url.searchParams.set("fit", "crop");
+    url.searchParams.set("fit", "scale");
     const result = transform({
       url: url,
       width: 200,
@@ -59,7 +59,7 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?fit=crop&w=200&h=100",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?fit=scale&w=200&h=100",
     );
   });
 });

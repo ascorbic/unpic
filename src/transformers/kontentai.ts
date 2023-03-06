@@ -33,7 +33,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "h", height, true, true);
   setParamIfDefined(url, "fm", format, true);
   if (width || height) {
-    setParamIfUndefined(url, "fit", "scale");
+    setParamIfUndefined(url, "fit", "crop");
   }
   return url;
 };
