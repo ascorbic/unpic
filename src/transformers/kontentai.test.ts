@@ -15,14 +15,14 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=128&h=128&fm=webp",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fm=webp",
     );
   });
   await t.step("should not set height if not provided", () => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=128",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200",
     );
   });
 
