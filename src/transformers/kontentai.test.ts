@@ -15,14 +15,14 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fm=webp",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fm=webp&fit=scale",
     );
   });
   await t.step("should not set height if not provided", () => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&fit=scale",
     );
   });
 
@@ -34,7 +34,32 @@ Deno.test("kontent.ai", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=201&h=100",
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=201&h=100&fit=scale",
+    );
+  });
+
+  await t.step("should add fit=scale when height or width (or both) provided and no other fit setting", () => {
+    const result = transform({
+      url: img,
+      width: 200,
+      height: 100,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=200&h=100&fit=scale",
+    );
+  });
+  await t.step("should not set fit=scale if another value exists", () => {
+    const url = new URL(img);
+    url.searchParams.set("fit", "crop");
+    const result = transform({
+      url: url,
+      width: 200,
+      height: 100
+    });
+    assertEquals(
+      result?.toString(),
+      "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?fit=crop&w=200&h=100",
     );
   });
 });
