@@ -8,6 +8,8 @@ import { parse as cloudinary } from "./transformers/cloudinary.ts";
 import { parse as cloudflare } from "./transformers/cloudflare.ts";
 import { parse as bunny } from "./transformers/bunny.ts";
 import { parse as storyblok } from "./transformers/storyblok.ts";
+import { parse as kontentai } from "./transformers/kontentai.ts";
+
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -20,6 +22,7 @@ export const parsers = {
   cloudflare,
   bunny,
   storyblok,
+  "kontent.ai": kontentai,
 };
 
 export const cdnIsSupportedForParse = (

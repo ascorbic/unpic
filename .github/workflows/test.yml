@@ -14,6 +14,6 @@ jobs:
       with:
         deno-version: vx.x.x
     - name: Typecheck
-      run: deno check src/**/*.ts
+      run: deno check mod.ts
     - name: Test
       run: deno test src/
