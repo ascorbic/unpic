@@ -71,7 +71,7 @@ export const parse: UrlParser<CloudinaryParams> = (
 
   const group = matches[0].groups || {};
   const {
-    transformations: transformString,
+    transformations: transformString = "",
     format: originalFormat,
     ...baseParams
   } = group;
@@ -104,13 +104,15 @@ export const generate: UrlGenerator<CloudinaryParams> = (
     ...params,
     format: format || "auto",
   };
-
   if (width) {
     props.transformations.w = roundIfNumeric(width).toString();
   }
   if (height) {
     props.transformations.h = roundIfNumeric(height).toString();
   }
+
+  // Default crop to fill without upscaling
+  props.transformations.c ||= "lfill";
   return new URL(formatUrl(props));
 };
 

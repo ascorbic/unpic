@@ -123,7 +123,7 @@ Deno.test("cloudinary transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://res.cloudinary.com/demo/image/upload/w_100,h_200,f_auto/dog",
+      "https://res.cloudinary.com/demo/image/upload/c_lfill,w_100,h_200,f_auto/dog",
     );
   });
 
