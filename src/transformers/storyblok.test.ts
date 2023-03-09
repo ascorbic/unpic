@@ -20,7 +20,7 @@ Deno.test("storyblok parser", async (t) => {
   for (const image of images) {
     await t.step(image, () => {
       const res = parse(image);
-      console.log(res);
+      // console.log(res);
     });
     // await t.step(original, () => {
     //   const { params, ...parsed } = parse(original ) as any;
