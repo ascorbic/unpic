@@ -10,6 +10,11 @@ const imgNoTransforms = "https://res.cloudinary.com/demo/image/upload/dog.jpg";
 const imgWithPath =
   "https://res.cloudinary.com/demo/image/upload/b_rgb:FFFFFF,c_fill,dpr_2.0,f_auto,g_auto,h_600,q_auto,w_600/v1/Product%20gallery%20demo/New%20Demo%20Pages/Tshirt/tshirt1";
 
+const imgSubdomain =
+  "https://private-name.cloudinary.com/demo/image/upload/c_lfill/dog";
+
+const imgCustom = "https://media.codingcat.dev/demo/image/upload/c_lfill/dog";
+
 Deno.test("cloudinary parser", async (t) => {
   await t.step("parses a URL", () => {
     const parsed = parse(img);
@@ -53,6 +58,56 @@ Deno.test("cloudinary parser", async (t) => {
         id: "dog",
         signature: undefined,
         transformations: {},
+        version: undefined,
+      },
+    };
+    assertEquals(parsed, expected);
+  });
+
+  await t.step("parses a URL with custom subdomain", () => {
+    const parsed = parse(imgSubdomain);
+    const expected: ParsedUrl<CloudinaryParams> = {
+      base: "https://private-name.cloudinary.com/demo/image/upload/c_lfill/dog",
+      cdn: "cloudinary",
+      format: undefined,
+      width: undefined,
+      height: undefined,
+      params: {
+        assetType: "image",
+        cloudName: "demo",
+        deliveryType: "upload",
+        format: undefined,
+        host: "private-name.cloudinary.com",
+        id: "dog",
+        signature: undefined,
+        transformations: {
+          c: "lfill",
+        },
+        version: undefined,
+      },
+    };
+    assertEquals(parsed, expected);
+  });
+
+  await t.step("parses a URL with custom domain", () => {
+    const parsed = parse(imgCustom);
+    const expected: ParsedUrl<CloudinaryParams> = {
+      base: "https://media.codingcat.dev/demo/image/upload/c_lfill/dog",
+      cdn: "cloudinary",
+      format: undefined,
+      width: undefined,
+      height: undefined,
+      params: {
+        assetType: "image",
+        cloudName: "demo",
+        deliveryType: "upload",
+        format: undefined,
+        host: "media.codingcat.dev",
+        id: "dog",
+        signature: undefined,
+        transformations: {
+          c: "lfill",
+        },
         version: undefined,
       },
     };
