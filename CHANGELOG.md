@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.2](https://github.com/ascorbic/unpic/compare/v2.2.1...v2.2.2) (2023-03-09)
+
+
+### Bug Fixes
+
+* **cloudinary:** default to fill without upscale ([#27](https://github.com/ascorbic/unpic/issues/27)) ([e7a3de5](https://github.com/ascorbic/unpic/commit/e7a3de584b6e4acefd6ce9259319a24ce617ce1c))
+* handle custom cloudinary domains ([ce2d1e6](https://github.com/ascorbic/unpic/commit/ce2d1e615c6fc3ac3d3a0dff78ace317b572ad4f))
+
 ## [2.2.1](https://github.com/ascorbic/unpic/compare/v2.2.0...v2.2.1) (2023-03-06)
 
 
