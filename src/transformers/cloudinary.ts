@@ -113,7 +113,7 @@ export const generate: UrlGenerator<CloudinaryParams> = (
 
   // Default crop to fill without upscaling
   props.transformations.c ||= "lfill";
-  return new URL(formatUrl(props));
+  return formatUrl(props);
 };
 
 export const transform: UrlTransformer = (
