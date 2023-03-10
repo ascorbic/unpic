@@ -23,7 +23,7 @@ export interface UrlGeneratorOptions<TParams = Record<string, string>> {
 }
 
 export interface UrlGenerator<TParams = Record<string, string>> {
-  (options: UrlGeneratorOptions<TParams>): URL;
+  (options: UrlGeneratorOptions<TParams>): URL | string;
 }
 
 export interface ParsedUrl<TParams = Record<string, string>> {
@@ -43,7 +43,7 @@ export interface ParsedUrl<TParams = Record<string, string>> {
  * Parse an image URL into its components
  */
 export interface UrlTransformer {
-  (options: UrlTransformerOptions): URL | undefined;
+  (options: UrlTransformerOptions): string | URL | undefined;
 }
 
 export interface UrlParser<
