@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0](https://github.com/ascorbic/unpic/compare/v2.2.2...v3.0.0) (2023-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* transformers may return URLs as strings ([#30](https://github.com/ascorbic/unpic/issues/30))
+
+### Features
+
+* add Next.js and Vercel support ([#32](https://github.com/ascorbic/unpic/issues/32)) ([4cff46d](https://github.com/ascorbic/unpic/commit/4cff46d48988a9e9e8b11a2741109f452acdd334))
+* transformers may return URLs as strings ([#30](https://github.com/ascorbic/unpic/issues/30)) ([ce95cfe](https://github.com/ascorbic/unpic/commit/ce95cfe9470fdee43c056f4d861b3477572808df))
+
 ## [2.2.2](https://github.com/ascorbic/unpic/compare/v2.2.1...v2.2.2) (2023-03-09)
 
 
