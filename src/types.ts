@@ -62,6 +62,8 @@ export type ImageCdn =
   | "wordpress"
   | "bunny"
   | "storyblok"
-  | "kontent.ai";
+  | "kontent.ai"
+  | "vercel"
+  | "nextjs";
 
 export type SupportedImageCdn = ImageCdn;

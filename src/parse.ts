@@ -9,6 +9,7 @@ import { parse as cloudflare } from "./transformers/cloudflare.ts";
 import { parse as bunny } from "./transformers/bunny.ts";
 import { parse as storyblok } from "./transformers/storyblok.ts";
 import { parse as kontentai } from "./transformers/kontentai.ts";
+import { parse as vercel } from "./transformers/vercel.ts";
 
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
@@ -23,6 +24,7 @@ export const parsers = {
   bunny,
   storyblok,
   "kontent.ai": kontentai,
+  vercel,
 };
 
 export const cdnIsSupportedForParse = (

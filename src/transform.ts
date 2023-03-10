@@ -9,9 +9,11 @@ import { transform as cloudflare } from "./transformers/cloudflare.ts";
 import { transform as bunny } from "./transformers/bunny.ts";
 import { transform as storyblok } from "./transformers/storyblok.ts";
 import { transform as kontentai } from "./transformers/kontentai.ts";
-import { ImageCdn, SupportedImageCdn, UrlTransformer } from "./types.ts";
+import { transform as vercel } from "./transformers/vercel.ts";
+import { transform as nextjs } from "./transformers/nextjs.ts";
+import { ImageCdn, UrlTransformer } from "./types.ts";
 
-export const transformers = {
+export const getTransformer = (cdn: ImageCdn) => ({
   imgix,
   contentful,
   "builder.io": builder,
@@ -21,12 +23,10 @@ export const transformers = {
   bunny,
   storyblok,
   cloudflare,
-  "kontent.ai": kontentai
-};
-
-export const cdnIsSupportedForTransform = (
-  cdn: ImageCdn | false,
-): cdn is SupportedImageCdn => cdn && cdn in transformers;
+  vercel,
+  nextjs,
+  "kontent.ai": kontentai,
+}[cdn]);
 
 /**
  * Returns a transformer function if the given URL is from a known image CDN
@@ -41,10 +41,10 @@ export const getTransformerForUrl = (
 export const getTransformerForCdn = (
   cdn: ImageCdn | false | undefined,
 ): UrlTransformer | undefined => {
-  if (!cdn || !cdnIsSupportedForTransform(cdn)) {
+  if (!cdn) {
     return undefined;
   }
-  return transformers[cdn];
+  return getTransformer(cdn);
 };
 
 /**

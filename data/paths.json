@@ -1,3 +1,6 @@
 {
-  "/cdn-cgi/image/": "cloudflare"
+  "/cdn-cgi/image/": "cloudflare",
+  "/_next/image": "nextjs",
+  "/_next/static": "nextjs",
+  "/_vercel/image": "vercel"
 }

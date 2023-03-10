@@ -107,6 +107,16 @@ is not auto-detected.
 - Storyblok
 - Cloudflare
 - Kontent.ai
+- Next.js/Vercel
+
+## Usage with Next.js
+
+Unpic has special handling for Next.js image URLs. It detects supported image
+CDNs, and falls back to `/_next/image` for local and unsupported remote images.
+
+For more information, see the
+[Unpic Next.js](https://github.com/ascorbic/unpic/blob/main/nextjs.md)
+documentation.
 
 ## FAQs
 
@@ -114,12 +124,12 @@ is not auto-detected.
   for transforming images. This is often used to resize images on the fly, but
   can also be used to apply other transforms such as cropping, rotation,
   compression, etc. This includes dedicated image CDNs such as Imgix and
-  Cloudinary, CMSs such as Contentful, Builder.io and Sanity, general CDNs such as Bunny.net
-  that provide an image API, but also other service providers such as Shopify.
-  The CMSs and other service providers often use a dedicated image CDN to
-  provide the image API, most commonly Imgix. In most cases they support the
-  same API, but in others they may proxy the image through their own CDN, or use
-  a different API.
+  Cloudinary, CMSs such as Contentful, Builder.io and Sanity, general CDNs such
+  as Bunny.net that provide an image API, but also other service providers such
+  as Shopify. The CMSs and other service providers often use a dedicated image
+  CDN to provide the image API, most commonly Imgix. In most cases they support
+  the same API, but in others they may proxy the image through their own CDN, or
+  use a different API.
 - **Why would I use this instead of the CDN's own SDK?** If you you know that
   your images will all come from one CDN, then you probably should use the CDN's
   own SDK. This library is designed to work with images from multiple CDNs, and
@@ -169,3 +179,4 @@ To add a new CDN, add the following:
 - add the new CDN to the types in `src/types.ts`, and import the new source file
   in `src/transform.ts`
 - add a sample image to `examples.json` in the demo site
+- ensure tests pass by installing Deno and running `deno test src`
