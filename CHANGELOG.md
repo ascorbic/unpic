@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/ascorbic/unpic/compare/v3.0.0...v3.0.1) (2023-03-11)
+
+
+### Bug Fixes
+
+* **nextjs:** default q to 75 ([#34](https://github.com/ascorbic/unpic/issues/34)) ([0948a17](https://github.com/ascorbic/unpic/commit/0948a171537e335afd5502bd6a31652f68d0c976))
+
 ## [3.0.0](https://github.com/ascorbic/unpic/compare/v2.2.2...v3.0.0) (2023-03-10)
 
 
