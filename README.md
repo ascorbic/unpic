@@ -97,25 +97,26 @@ is not auto-detected.
 
 ## Supported CDN APIs
 
-- Imgix, including Unsplash, DatoCMS, Sanity and Prismic
-- Contentful
 - Builder.io
-- Cloudinary
-- Shopify
-- WordPress.com and Jetpack Site Accelerator
 - Bunny.net
-- Storyblok
 - Cloudflare
+- Contentful
+- Cloudinary
+- Imgix, including Unsplash, DatoCMS, Sanity and Prismic
 - Kontent.ai
-- Next.js/Vercel
+- Shopify
+- Storyblok
+- Vercel / Next.js
+- WordPress.com and Jetpack Site Accelerator
 
-## Usage with Next.js
+## Usage with Vercel / Next.js
 
-Unpic has special handling for Next.js image URLs. It detects supported image
-CDNs, and falls back to `/_next/image` for local and unsupported remote images.
+Unpic has special handling for Vercel and Next.js image URLs. It detects supported
+image CDNs, and falls back to `/_vercel/image` or `/_next/image` for local and
+unsupported remote images.
 
 For more information, see the
-[Unpic Next.js](https://github.com/ascorbic/unpic/blob/main/nextjs.md)
+[Unpic Vercel / Next.js](https://github.com/ascorbic/unpic/blob/main/vercel.md)
 documentation.
 
 ## FAQs

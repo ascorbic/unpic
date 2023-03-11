@@ -1,13 +1,14 @@
-## Using Unpic with Next.js
+## Using Unpic with Vercel or Next.js
 
-Unpic has special support for Next.js, which detects support image CDNs, and
-falls back to `/_next/image` for local and unsupported remote images.
+Unpic has special support for both Vercel and Next.js, which detects supported image
+CDNs, and falls back to `_vercel/image` or `/_next/image` for local and unsupported
+remote images.
 
-When Unpic is passed a Next.js image URL, it will try to parse the URL in the
-`url` param, and then apply the transforms to the parsed URL. If the `url` is a
-local image, or is not hosted on a supported image CDN then the transforms will
-be applied to the Next.js URL itself by modifying the `w` param. This avoid the
-need to download the image from the CDN and then transform it with Next.js.
+When Unpic is passed a Vercel or Next.js image URL, it will try to parse the URL
+in the `url` param, and then apply the transforms to the parsed URL. If the `url`
+is a local image, or is not hosted on a supported image CDN then the transforms
+will be applied to the URL itself by modifying the corresponding parameters. This
+avoids the need to download the image from the CDN and then transform it.
 Instead, the image is transformed by the original CDN.
 
 For example:
@@ -23,8 +24,8 @@ For example:
   `https://images.unsplash.com/photo?auto=format&fit=crop&w=200`
 
 You can also pass any relative URL or remote URL and manually set the `cdn`
-param to `nextjs`, and it will be transformed as above, falling back to a
-`/_next/image` URL if it is not from a supported CDN.
+param to `vercel` or `nextjs`, and it will be transformed as above, falling back to a
+`/_vercel/image` or `/_next/image` URL if it is not from a supported CDN.
 
 For example:
 
@@ -37,5 +38,4 @@ For example:
 
 ## Usage
 
-See [unpic-img](https://github.com/ascorbic/unpic-img) for a React component to
-use with Next.js
+See [unpic-img](https://github.com/ascorbic/unpic-img) for framework-specific image components to use with Vercel or Next.js
