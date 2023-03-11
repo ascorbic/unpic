@@ -1,5 +1,9 @@
 import { UrlGenerator, UrlParser, UrlTransformer } from "../types.ts";
-import { setParamIfDefined, toRelativeUrl } from "../utils.ts";
+import {
+  setParamIfDefined,
+  setParamIfUndefined,
+  toRelativeUrl,
+} from "../utils.ts";
 import { getTransformerForCdn } from "../transform.ts";
 import { getImageCdnForUrl } from "../detect.ts";
 
@@ -24,14 +28,14 @@ export interface VercelParams {
   src?: string;
 }
 export const generate: UrlGenerator<VercelParams> = (
-  { base, width, params: { quality, root = "_vercel" } = {} },
+  { base, width, params: { quality = 75, root = "_vercel" } = {} },
 ) => {
   // If the base is a relative URL, we need to add a dummy host to the URL
   const url = new URL("http://n");
   url.pathname = `/${root}/image`;
   url.searchParams.set("url", base.toString());
   setParamIfDefined(url, "w", width, false, true);
-  setParamIfDefined(url, "q", quality, false, true);
+  setParamIfUndefined(url, "q", quality);
   return toRelativeUrl(url);
 };
 
