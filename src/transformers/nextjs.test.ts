@@ -42,7 +42,7 @@ Deno.test("Next.js", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/_next/image?url=%2F_next%2Fstatic%2Fimage.jpg&w=200",
+      "/_next/image?url=%2F_next%2Fstatic%2Fimage.jpg&w=200&q=75",
     );
   });
 
@@ -54,7 +54,7 @@ Deno.test("Next.js", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/_next/image?url=%2Fprofile.png&w=200",
+      "/_next/image?url=%2Fprofile.png&w=200&q=75",
     );
   });
 
@@ -78,7 +78,7 @@ Deno.test("Next.js", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/_next/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200",
+      "/_next/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200&q=75",
     );
   });
 
