@@ -52,7 +52,7 @@ Deno.test("vercel", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/_vercel/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200",
+      "/_vercel/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200&q=75",
     );
   });
 
