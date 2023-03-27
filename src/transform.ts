@@ -11,6 +11,7 @@ import { transform as storyblok } from "./transformers/storyblok.ts";
 import { transform as kontentai } from "./transformers/kontentai.ts";
 import { transform as vercel } from "./transformers/vercel.ts";
 import { transform as nextjs } from "./transformers/nextjs.ts";
+import { transform as scene7 } from "./transformers/scene7.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 
 export const getTransformer = (cdn: ImageCdn) => ({
@@ -25,6 +26,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   cloudflare,
   vercel,
   nextjs,
+  scene7,
   "kontent.ai": kontentai,
 }[cdn]);
 

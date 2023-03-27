@@ -2,5 +2,6 @@
   "/cdn-cgi/image/": "cloudflare",
   "/_next/image": "nextjs",
   "/_next/static": "nextjs",
-  "/_vercel/image": "vercel"
+  "/_vercel/image": "vercel",
+  "/is/image": "scene7"
 }
