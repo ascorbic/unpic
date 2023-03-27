@@ -42,5 +42,9 @@
   [
     "Next.js",
     "https://netlify-plugin-nextjs-demo.netlify.app/_next/image/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1674255909399-9bcb2cab6489%3Fauto%3Dformat%26fit%3Dcrop%26w%3D200%26q%3D80%26h%3D100&w=384&q=75"
+  ],
+  [
+    "Adobe Dynamic Media (Scene7)",
+    "https://s7d1.scene7.com/is/image/sample/s9?wid=500&hei=700&fmt=webp"
   ]
 ]
