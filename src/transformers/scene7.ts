@@ -43,7 +43,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "fmt", format, true);
   setParamIfDefined(url, "qlt", getNumericParam(url, 'qlt'), true)
   setParamIfDefined(url, "scl", getNumericParam(url, 'scl'), true)
-  setParamIfUndefined(url, "fit", "crop")
+  setParamIfUndefined(url, "fit", "crop,1")
   
   if (!width && !height) {
     setParamIfUndefined(url, "scl", 1);

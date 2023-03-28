@@ -67,7 +67,7 @@ Deno.test("Scene 7", async (t) => {
         });
         assertEquals(
           result?.toString(),
-          "https://s7d1.scene7.com/is/image/sample/s9?wid=100&hei=200&fit=crop",
+          "https://s7d1.scene7.com/is/image/sample/s9?wid=100&hei=200&fit=crop%2C1",
         );
       });
 
