@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/ascorbic/unpic/compare/v3.0.1...v3.1.0) (2023-03-28)
+
+
+### Features
+
+* add Scene7 transformer ([#39](https://github.com/ascorbic/unpic/issues/39)) ([ad6edf2](https://github.com/ascorbic/unpic/commit/ad6edf2b5a119cf6d6a26db0f569c5305d66e911))
+
 ## [3.0.1](https://github.com/ascorbic/unpic/compare/v3.0.0...v3.0.1) (2023-03-11)
 
 
