@@ -5,5 +5,6 @@
   "www.datocms-assets.com": "imgix",
   "cdn.sanity.io": "imgix",
   "images.unsplash.com": "imgix",
-  "cdn.shopify.com": "shopify"
+  "cdn.shopify.com": "shopify",
+  "s7d1.scene7.com": "scene7"
 }

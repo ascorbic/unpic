@@ -64,6 +64,7 @@ export type ImageCdn =
   | "storyblok"
   | "kontent.ai"
   | "vercel"
-  | "nextjs";
+  | "nextjs"
+  | "scene7";
 
 export type SupportedImageCdn = ImageCdn;
