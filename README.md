@@ -97,6 +97,7 @@ is not auto-detected.
 
 ## Supported CDN APIs
 
+- Adobe Dynamic Media (Scene7)
 - Builder.io
 - Bunny.net
 - Cloudflare
