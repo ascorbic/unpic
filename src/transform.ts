@@ -12,6 +12,7 @@ import { transform as kontentai } from "./transformers/kontentai.ts";
 import { transform as vercel } from "./transformers/vercel.ts";
 import { transform as nextjs } from "./transformers/nextjs.ts";
 import { transform as scene7 } from "./transformers/scene7.ts";
+import { transform as keycdn } from "./transformers/keycdn.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 
 export const getTransformer = (cdn: ImageCdn) => ({
@@ -28,6 +29,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   nextjs,
   scene7,
   "kontent.ai": kontentai,
+  keycdn,
 }[cdn]);
 
 /**
