@@ -46,5 +46,9 @@
   [
     "Adobe Dynamic Media (Scene7)",
     "https://s7d1.scene7.com/is/image/sample/s9?wid=500&hei=700&fmt=webp"
+  ],
+  [
+    "KeyCDN",
+    "https://ip.keycdn.com/example.jpg"
   ]
 ]

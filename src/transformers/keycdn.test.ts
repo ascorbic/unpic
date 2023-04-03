@@ -1,6 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { KeyCDNParams, parse, transform } from "./keycdn.ts";
 import { ParsedUrl } from "../types.ts";
+import { getImageCdnForUrl } from "../detect.ts";
 
 const img = "https://ip.keycdn.com/example.jpg";
 const imgNoTransforms = "https://ip.keycdn.com/example.jpg";
@@ -79,5 +80,19 @@ Deno.test("keycdn", async (t) => {
       },
     };
     assertEquals(parsed, expected);
+  });
+
+  await t.step("url detection example image", () => {
+    const detected = getImageCdnForUrl("https://ip.keycdn.com/example.jpg");
+    const expected = "keycdn";
+    assertEquals(detected, expected);
+  });
+
+  await t.step("url detection kxcdn", () => {
+    const detected = getImageCdnForUrl(
+      "https://dodeka-1e294.kxcdn.com/nieuws-3d7ac29c.jpg",
+    );
+    const expected = "keycdn";
+    assertEquals(detected, expected);
   });
 });
