@@ -1,5 +1,9 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import { getNumericParam, setParamIfDefined } from "../utils.ts";
+import {
+  getNumericParam,
+  setParamIfDefined,
+  setParamIfUndefined,
+} from "../utils.ts";
 
 export interface KeyCDNParams {
   quality?: number;
@@ -31,5 +35,6 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format, true);
   setParamIfDefined(url, "quality", getNumericParam(url, "quality"), true);
+  setParamIfUndefined(url, "enlarge", 0);
   return url;
 };

@@ -8,6 +8,7 @@ const imgNoTransforms = "https://ip.keycdn.com/example.jpg";
 const imgWithHeightWidthFormat =
   "https://ip.keycdn.com/example.jpg?width=500&height=700&format=png";
 const imgWithQuality = "https://ip.keycdn.com/example.jpg?quality=30";
+const imgOverrideEnlarge = "https://abc.kxcdn.com/example.jpg?enlarge=1";
 
 Deno.test("keycdn", async (t) => {
   await t.step("should overwrite format", () => {
@@ -19,7 +20,7 @@ Deno.test("keycdn", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ip.keycdn.com/example.jpg?width=200&height=200",
+      "https://ip.keycdn.com/example.jpg?width=200&height=200&enlarge=0",
     );
   });
 
@@ -33,7 +34,19 @@ Deno.test("keycdn", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ip.keycdn.com/example.jpg?width=200&height=200&format=png",
+      "https://ip.keycdn.com/example.jpg?width=200&height=200&format=png&enlarge=0",
+    );
+  });
+
+  await t.step("should not override and match keycdn for kxcdn domain", () => {
+    const result = transform({
+      url: imgOverrideEnlarge,
+      width: 400,
+      height: 600,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://abc.kxcdn.com/example.jpg?enlarge=1&width=400&height=600",
     );
   });
 
