@@ -6,5 +6,6 @@
   "cdn.sanity.io": "imgix",
   "images.unsplash.com": "imgix",
   "cdn.shopify.com": "shopify",
-  "s7d1.scene7.com": "scene7"
+  "s7d1.scene7.com": "scene7",
+  "ip.keycdn.com": "keycdn"
 }

@@ -65,6 +65,7 @@ export type ImageCdn =
   | "kontent.ai"
   | "vercel"
   | "nextjs"
-  | "scene7";
+  | "scene7"
+  | "keycdn";
 
 export type SupportedImageCdn = ImageCdn;
