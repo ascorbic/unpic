@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/ascorbic/unpic/compare/v3.1.0...v3.2.0) (2023-04-04)
+
+
+### Features
+
+* add KeyCDN support ([#43](https://github.com/ascorbic/unpic/issues/43)) ([0cfde2e](https://github.com/ascorbic/unpic/commit/0cfde2edf76af9e3825c695d68dc113832d4ad89))
+
 ## [3.1.0](https://github.com/ascorbic/unpic/compare/v3.0.1...v3.1.0) (2023-03-28)
 
 
