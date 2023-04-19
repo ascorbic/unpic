@@ -5,7 +5,7 @@ import { ParsedUrl } from "../types.ts";
 import { getImageCdnForUrl } from "../detect.ts";
 
 const img =
-  "https://marketing.directus.app/assets/852ad2fc-0d8c-4f12-9adb-edcf0b99cd00";
+  "https://apollo.kazel.academy/assets/6d910d38-0659-49bf-80b8-fa6e0b257975";
 const imgNoTransforms = img;
 const imgWithQuality = `${img}?quality=30`;
 const imgOverrideEnlargement = `${img}?withoutEnlargement=true`;
