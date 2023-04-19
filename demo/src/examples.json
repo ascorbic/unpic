@@ -50,5 +50,9 @@
   [
     "KeyCDN",
     "https://ip.keycdn.com/example.jpg"
+  ],
+  [
+    "Directus",
+    "https://marketing.directus.app/assets/852ad2fc-0d8c-4f12-9adb-edcf0b99cd00"
   ]
 ]
