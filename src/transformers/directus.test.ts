@@ -49,7 +49,7 @@ Deno.test("directus", async (t) => {
       });
       assertEquals(
         result?.toString(),
-        `${img}?withoutEnlargement=true&width=400&height=600&format=auto`,
+        `${img}?withoutEnlargement=true&width=400&height=600`,
       );
     },
   );
@@ -59,7 +59,7 @@ Deno.test("directus", async (t) => {
     const expected: ParsedUrl<DirectusParams> = {
       base: imgNoTransforms,
       cdn: "directus",
-      format: "auto",
+      format: undefined,
       width: 0,
       height: 0,
       params: {

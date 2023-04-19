@@ -4,7 +4,7 @@ import { getNumericParam, setParamIfDefined } from "../utils.ts";
 type Fit = "cover" | "contain" | "inside" | "outside";
 
 export interface DirectusParams {
-  fit?: Fit;
+  fit?: "cover" | "contain" | "inside" | "outside";
   quality?: number;
   withoutEnlargement?: boolean;
   /**
@@ -24,7 +24,7 @@ export const parse: UrlParser<DirectusParams> = (imageUrl) => {
 
   const width = getNumericParam(parsedUrl, "width");
   const height = getNumericParam(parsedUrl, "height");
-  const format = parsedUrl.searchParams.get("format") || "auto"; // We must set this to `auto` because Directus doesn't have a default value for this parameter.
+  const format = parsedUrl.searchParams.get("format") || undefined;
   const quality = getNumericParam(parsedUrl, "quality") || undefined;
   let fit: Fit | undefined = parsedUrl.searchParams.get("fit") as Fit ||
     undefined;
@@ -53,7 +53,7 @@ export const parse: UrlParser<DirectusParams> = (imageUrl) => {
 };
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, format = "auto" },
+  { url: originalUrl, width, height, format },
 ) => {
   const url = new URL(originalUrl);
   setParamIfDefined(url, "width", width, true, true);
