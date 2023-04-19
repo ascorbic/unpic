@@ -3,6 +3,5 @@
   "/_next/image": "nextjs",
   "/_next/static": "nextjs",
   "/_vercel/image": "vercel",
-  "/is/image": "scene7",
-  "/assets": "directus"
+  "/is/image": "scene7"
 }

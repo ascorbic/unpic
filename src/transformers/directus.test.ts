@@ -2,7 +2,6 @@ import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 
 import { DirectusParams, parse, transform } from "./directus.ts";
 import { ParsedUrl } from "../types.ts";
-import { getImageCdnForUrl } from "../detect.ts";
 
 const img =
   "https://apollo.kazel.academy/assets/6d910d38-0659-49bf-80b8-fa6e0b257975";
@@ -70,11 +69,5 @@ Deno.test("directus", async (t) => {
       },
     };
     assertEquals(parsed, expected);
-  });
-
-  await t.step("url detection example image", () => {
-    const detected = getImageCdnForUrl(img);
-    const expected = "directus";
-    assertEquals(detected, expected);
   });
 });
