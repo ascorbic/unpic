@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/ascorbic/unpic/compare/v3.3.0...v3.4.0) (2023-04-22)
+
+
+### Features
+
+* add Directus support ([#46](https://github.com/ascorbic/unpic/issues/46)) ([3be1fe3](https://github.com/ascorbic/unpic/commit/3be1fe33861b7980ba333fc63b9fd47e4e4cf314))
+
 ## [3.3.0](https://github.com/ascorbic/unpic/compare/v3.2.0...v3.3.0) (2023-04-22)
 
 
