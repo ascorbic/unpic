@@ -89,6 +89,7 @@ export type ImageCdn =
   | "vercel"
   | "nextjs"
   | "scene7"
-  | "keycdn";
+  | "keycdn"
+  | "directus";
 
 export type SupportedImageCdn = ImageCdn;

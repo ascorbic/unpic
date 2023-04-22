@@ -13,6 +13,7 @@ import { parse as vercel } from "./transformers/vercel.ts";
 import { parse as nextjs } from "./transformers/nextjs.ts";
 import { parse as scene7 } from "./transformers/scene7.ts";
 import { parse as keycdn } from "./transformers/keycdn.ts";
+import { parse as directus } from "./transformers/directus.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -30,6 +31,7 @@ export const parsers = {
   nextjs,
   scene7,
   keycdn,
+  directus,
 };
 
 export const cdnIsSupportedForParse = (

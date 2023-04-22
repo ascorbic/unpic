@@ -47,5 +47,9 @@
     "Adobe Dynamic Media (Scene7)",
     "https://s7d1.scene7.com/is/image/sample/s9?wid=500&hei=700&fmt=webp"
   ],
-  "keycdn": ["KeyCDN", "https://ip.keycdn.com/example.jpg"]
+  "keycdn": ["KeyCDN", "https://ip.keycdn.com/example.jpg"],
+  "directus": [
+    "Directus",
+    "https://apollo.kazel.academy/assets/6d910d38-0659-49bf-80b8-fa6e0b257975"
+  ]
 }
