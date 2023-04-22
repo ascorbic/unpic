@@ -25,9 +25,6 @@ await build({
     bugs: {
       url: "https://github.com/ascorbic/unpic/issues",
     },
-    publishConfig: {
-      "provenance": true,
-    },
   },
 });
 
