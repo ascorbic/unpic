@@ -10,10 +10,33 @@ export interface UrlTransformerOptions {
   height?: number;
   /** The desired format of the image. Default is auto-detect */
   format?: string;
+  /** Recursively find the the canonical CDN for a source image. Default is true */
+  recursive?: boolean;
   /** Specify a CDN rather than auto-detecting */
   cdn?: ImageCdn;
+  /** CDN-specific options. */
+  cdnOptions?: CdnOptions;
 }
 
+export interface CanonicalCdnUrl {
+  /** The source image URL */
+  url: string | URL;
+  /** The CDN to use */
+  cdn: ImageCdn;
+}
+
+/**
+ * Asks a CDN if there is a different canonical CDN for the given URL
+ * @param url The URL to check
+ * @returns The canonical CDN URL, or false if the given CDN will handle it itself
+ */
+export interface ShouldDelegateUrl {
+  (url: string | URL): CanonicalCdnUrl | false;
+}
+
+export type CdnOptions = {
+  [key in ImageCdn]: Record<string, unknown>;
+};
 export interface UrlGeneratorOptions<TParams = Record<string, string>> {
   base: string | URL;
   width?: number;

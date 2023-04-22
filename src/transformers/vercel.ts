@@ -1,11 +1,15 @@
-import { UrlGenerator, UrlParser, UrlTransformer } from "../types.ts";
+import {
+  ShouldDelegateUrl,
+  UrlGenerator,
+  UrlParser,
+  UrlTransformer,
+} from "../types.ts";
 import {
   setParamIfDefined,
   setParamIfUndefined,
   toRelativeUrl,
 } from "../utils.ts";
-import { getTransformerForCdn } from "../transform.ts";
-import { getImageCdnForUrl } from "../detect.ts";
+import { getImageCdnForUrlByDomain } from "../detect.ts";
 
 export const parse: UrlParser = (
   url,
@@ -19,6 +23,22 @@ export const parse: UrlParser = (
     width,
     quality,
     cdn: "vercel",
+  };
+};
+
+export const delegateUrl: ShouldDelegateUrl = (url) => {
+  const parsed = new URL(url);
+  const source = parsed.searchParams.get("url");
+  if (!source || !source.startsWith("http")) {
+    return false;
+  }
+  const cdn = getImageCdnForUrlByDomain(source);
+  if (!cdn) {
+    return false;
+  }
+  return {
+    cdn,
+    url: source,
   };
 };
 
@@ -40,7 +60,7 @@ export const generate: UrlGenerator<VercelParams> = (
 };
 
 export const transform: UrlTransformer = (
-  { url, width, height, cdn },
+  { url, width, cdn },
 ) => {
   // the URL might be relative, so we need to add a dummy host to it
   const parsedUrl = new URL(url, "http://n");
@@ -53,14 +73,7 @@ export const transform: UrlTransformer = (
     return undefined;
   }
 
-  if (src.startsWith("http")) {
-    const cdn = getImageCdnForUrl(src);
-    if (cdn && cdn !== "nextjs" && cdn !== "vercel") {
-      return getTransformerForCdn(cdn)?.({ url: src, width, height });
-    }
-  } else {
-    setParamIfDefined(parsedUrl, "w", width, true, true);
-  }
+  setParamIfDefined(parsedUrl, "w", width, true, true);
 
   if (isNextImage) {
     if (parsedUrl.hostname === "n") {
