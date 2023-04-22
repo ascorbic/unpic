@@ -4,7 +4,9 @@ import { computed, signal } from "@preact/signals";
 import "./style.css";
 import examples from "./examples.json";
 
-const inputUrl = signal(examples[0][1]);
+const inputUrl = signal(examples.shopify[1]);
+const cdn = signal("");
+const recursive = signal(true);
 
 const width = signal(800);
 const height = signal(600);
@@ -14,6 +16,8 @@ const url = computed(() => {
     url: inputUrl.value,
     width: width.value,
     height: height.value,
+    cdn: cdn.value || undefined,
+    recursive: recursive.value,
   });
 });
 
@@ -37,6 +41,46 @@ export default function App() {
         Enter an image URL below, or choose from one of the examples
       </p>
       <div class="tools">
+        <div class="example">
+          <label for="example">
+            Load example
+          </label>
+          <select
+            onChange={(e) => {
+              inputUrl.value = e.target.value;
+            }}
+            id="example"
+          >
+            {Object.values(examples).map(([name, url]) => (
+              <option value={url}>{name}</option>
+            ))}
+          </select>
+        </div>
+        <div class="cdn">
+          <label for="cdn">
+            Force CDN
+          </label>
+          <select
+            onChange={(e) => cdn.value = e.target.value}
+            id="cdn"
+          >
+            <option value="">Auto</option>
+            {Object.entries(examples).map(([cdnKey, [name]]) => (
+              <option value={cdnKey}>{name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label for="recursive">
+            Recursive
+          </label>
+          <input
+            type="checkbox"
+            id="recursive"
+            checked={recursive}
+            onChange={(e) => recursive.value = e.target.checked}
+          />
+        </div>
         <div class="url">
           <label for="url">
             Source URL
@@ -47,17 +91,6 @@ export default function App() {
             value={inputUrl}
             onInput={(e) => inputUrl.value = e.target.value}
           />
-        </div>
-        <div class="example">
-          <label for="example">
-            Load example
-          </label>
-          <select
-            onChange={(e) => inputUrl.value = e.target.value}
-            id="example"
-          >
-            {examples.map(([name, url]) => <option value={url}>{name}</option>)}
-          </select>
         </div>
         <div>
           <label for="width">
