@@ -6,8 +6,16 @@ import { ImageCdn } from "./types.ts";
 const cdnDomains = new Map(Object.entries(domains));
 const cdnSubdomains = Object.entries(subdomains);
 
-export function getImageCdnForUrl(url: string | URL): ImageCdn | false {
-  const { hostname, pathname } = new URL(url);
+export function getImageCdnForUrl(
+  url: string | URL,
+): ImageCdn | false {
+  return getImageCdnForUrlByDomain(url) || getImageCdnForUrlByPath(url);
+}
+
+export function getImageCdnForUrlByDomain(
+  url: string | URL,
+): ImageCdn | false {
+  const { hostname } = new URL(url);
   if (cdnDomains.has(hostname)) {
     return cdnDomains.get(hostname) as ImageCdn;
   }
@@ -16,6 +24,13 @@ export function getImageCdnForUrl(url: string | URL): ImageCdn | false {
       return cdn as ImageCdn;
     }
   }
+  return false;
+}
+
+export function getImageCdnForUrlByPath(
+  url: string | URL,
+): ImageCdn | false {
+  const { pathname } = new URL(url);
   for (const [prefix, cdn] of Object.entries(paths)) {
     if (pathname.startsWith(prefix)) {
       return cdn as ImageCdn;
