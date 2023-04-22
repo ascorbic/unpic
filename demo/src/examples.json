@@ -1,58 +1,55 @@
-[
-  [
+{
+  "shopify": [
     "Shopify",
     "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg"
   ],
-  [
+  "contentful": [
     "Contentful",
     "https://images.ctfassets.net/yadj1kx9rmg0/wtrHxeu3zEoEce2MokCSi/cf6f68efdcf625fdc060607df0f3baef/quwowooybuqbl6ntboz3.jpg?fm=jpg"
   ],
-  [
+  "builder.io": [
     "Builder.io",
     "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?format=webp&fit=cover"
   ],
-  [
+  "cloudinary": [
     "Cloudinary",
     "https://res.cloudinary.com/demo/image/upload/c_lfill,w_800,h_550,f_auto/dog.webp"
   ],
-  [
+  "imgix": [
     "Imgix (Unsplash)",
     "https://images.unsplash.com/photo-1674255909399-9bcb2cab6489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80"
   ],
-  [
+  "wordpress": [
     "WordPress",
     "https://cultivatedemo.files.wordpress.com/2022/06/marisa-morton-c9xtptclntg-unsplash-1.jpg"
   ],
-  [
+  "bunny": [
     "Bunny.net",
     "https://bunnyoptimizerdemo.b-cdn.net/bunny7.jpg?width=300"
   ],
-  [
+  "storyblok": [
     "Storyblok",
     "https://a.storyblok.com/f/39898/3310x2192/e4ec08624e/demo-image.jpeg/m/-800x600/filters:round_corner(30,255,255,255)"
   ],
-  [
+  "cloudflare": [
     "Cloudflare",
     "https://assets.brevity.io/cdn-cgi/image/background=red,width=128,height=128,f=auto/uploads/generic/avatar-sample.jpeg"
   ],
-  [
+  "kontent.ai": [
     "Kontent.ai",
     "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg"
   ],
-  [
+  "nextjs": [
     "Next.js",
     "https://netlify-plugin-nextjs-demo.netlify.app/_next/image/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1674255909399-9bcb2cab6489%3Fauto%3Dformat%26fit%3Dcrop%26w%3D200%26q%3D80%26h%3D100&w=384&q=75"
   ],
-  [
+  "scene7": [
     "Adobe Dynamic Media (Scene7)",
     "https://s7d1.scene7.com/is/image/sample/s9?wid=500&hei=700&fmt=webp"
   ],
-  [
-    "KeyCDN",
-    "https://ip.keycdn.com/example.jpg"
-  ],
-  [
+  "keycdn": ["KeyCDN", "https://ip.keycdn.com/example.jpg"],
+  "directus": [
     "Directus",
     "https://apollo.kazel.academy/assets/6d910d38-0659-49bf-80b8-fa6e0b257975"
   ]
-]
+}

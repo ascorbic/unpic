@@ -17,6 +17,7 @@ await build({
     version: Deno.args[0]?.replace(/^v/, ""),
     description: "Universal image CDN translator",
     license: "MIT",
+    homepage: "https://unpic.pics/lib",
     repository: {
       type: "git",
       url: "git+https://github.com/ascorbic/unpic.git",
@@ -28,5 +29,4 @@ await build({
 });
 
 // post build steps
-// Deno.copyFileSync("LICENSE", "npm/LICENSE");
 Deno.copyFileSync("README.md", "npm/README.md");

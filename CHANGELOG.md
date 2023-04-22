@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/ascorbic/unpic/compare/v3.2.0...v3.3.0) (2023-04-22)
+
+
+### Features
+
+* add support for delegated URLs ([#47](https://github.com/ascorbic/unpic/issues/47)) ([3f29447](https://github.com/ascorbic/unpic/commit/3f294470e012d535e4aeec31c642b6202e0db177))
+
 ## [3.2.0](https://github.com/ascorbic/unpic/compare/v3.1.0...v3.2.0) (2023-04-04)
 
 

@@ -15,6 +15,7 @@ import { transform as scene7 } from "./transformers/scene7.ts";
 import { transform as keycdn } from "./transformers/keycdn.ts";
 import { transform as directus } from "./transformers/directus.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
+import { getCanonicalCdnForUrl } from "./canonical.ts";
 
 export const getTransformer = (cdn: ImageCdn) => ({
   imgix,
@@ -35,13 +36,6 @@ export const getTransformer = (cdn: ImageCdn) => ({
 }[cdn]);
 
 /**
- * Returns a transformer function if the given URL is from a known image CDN
- */
-export const getTransformerForUrl = (
-  url: string | URL,
-): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));
-
-/**
  * Returns a transformer function if the given CDN is supported
  */
 export const getTransformerForCdn = (
@@ -58,8 +52,30 @@ export const getTransformerForCdn = (
  * If the URL is not from a known image CDN it returns undefined.
  */
 export const transformUrl: UrlTransformer = (options) => {
-  if (options.cdn) {
-    return getTransformerForCdn(options.cdn)?.(options);
+  const cdn = options?.cdn ?? getImageCdnForUrl(options.url);
+
+  // Default to recursive
+  if (!(options.recursive ?? true)) {
+    return getTransformerForCdn(cdn)?.(options);
   }
-  return getTransformerForUrl(options.url)?.(options);
+  const canonical = getCanonicalCdnForUrl(
+    options.url,
+    cdn,
+  );
+  if (!canonical || !canonical.cdn) {
+    return undefined;
+  }
+  return getTransformer(canonical.cdn)?.({
+    ...options,
+    url: canonical.url,
+  });
 };
+
+/**
+ * Returns a transformer function if the given URL is from a known image CDN
+ *
+ * @deprecated Use `getCanonicalCdnForUrl` and `getTransformerForCdn` instead
+ */
+export const getTransformerForUrl = (
+  url: string | URL,
+): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));

@@ -1,4 +1,6 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
+export { delegateUrl } from "./vercel.ts";
+
 import {
   parse as vercelParse,
   transform as vercelTransform,
