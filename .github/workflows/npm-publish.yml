@@ -8,6 +8,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
     steps:
     - name: Setup Deno
       uses: denoland/setup-deno@v1
