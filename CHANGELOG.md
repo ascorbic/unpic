@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/ascorbic/unpic/compare/v3.4.0...v3.4.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* not delete existing format ([#54](https://github.com/ascorbic/unpic/issues/54)) ([9d656a8](https://github.com/ascorbic/unpic/commit/9d656a87876c061892679068dd3aaec5b39ec164))
+
 ## [3.4.0](https://github.com/ascorbic/unpic/compare/v3.3.0...v3.4.0) (2023-04-22)
 
 
