@@ -58,7 +58,7 @@ export const transform: UrlTransformer = (
   const url = new URL(originalUrl);
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "format", format, true);
+  setParamIfDefined(url, "format", format);
   setParamIfDefined(url, "quality", getNumericParam(url, "quality"), true);
   return url;
 };
