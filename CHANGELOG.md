@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/ascorbic/unpic/compare/v3.4.1...v3.5.0) (2023-04-25)
+
+
+### Features
+
+* add caisy ([39ec49b](https://github.com/ascorbic/unpic/commit/39ec49b6fae6dfa2f08db5737594dfe2c54e8489))
+
 ## [3.4.1](https://github.com/ascorbic/unpic/compare/v3.4.0...v3.4.1) (2023-04-23)
 
 
