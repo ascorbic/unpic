@@ -6,7 +6,7 @@ import {
 } from "../types.ts";
 
 const cloudflareRegex =
-  /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/image\/(?<transformations>[^\/]+)\/(?<path>.*)$/g;
+  /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/image\/(?<transformations>[^\/]+)?\/(?<path>.*)$/g;
 
 const parseTransforms = (transformations: string) =>
   Object.fromEntries(transformations.split(",").map((t) => t.split("=")));
