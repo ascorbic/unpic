@@ -15,6 +15,9 @@ export function getImageCdnForUrl(
 export function getImageCdnForUrlByDomain(
   url: string | URL,
 ): ImageCdn | false {
+  if (typeof url === "string" && !url.startsWith("https://")) {
+    return false;
+  }
   const { hostname } = new URL(url);
   if (cdnDomains.has(hostname)) {
     return cdnDomains.get(hostname) as ImageCdn;
@@ -30,7 +33,8 @@ export function getImageCdnForUrlByDomain(
 export function getImageCdnForUrlByPath(
   url: string | URL,
 ): ImageCdn | false {
-  const { pathname } = new URL(url);
+  // Allow relative URLs
+  const { pathname } = new URL(url, "http://n");
   for (const [prefix, cdn] of Object.entries(paths)) {
     if (pathname.startsWith(prefix)) {
       return cdn as ImageCdn;
