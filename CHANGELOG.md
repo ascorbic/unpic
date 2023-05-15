@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/ascorbic/unpic/compare/v3.5.0...v3.6.0) (2023-05-15)
+
+
+### Features
+
+* support relative URLs when detecting by path ([#61](https://github.com/ascorbic/unpic/issues/61)) ([a28ffa9](https://github.com/ascorbic/unpic/commit/a28ffa913340b0419a9f755dd2835e716250903c))
+
 ## [3.5.0](https://github.com/ascorbic/unpic/compare/v3.4.1...v3.5.0) (2023-04-25)
 
 
