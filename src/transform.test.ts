@@ -58,6 +58,18 @@ Deno.test("delegation", async (t) => {
     );
   });
 
+  await t.step("should not delegate a local URL", () => {
+    const result = transformUrl({
+      url: "/_next/static/image.png",
+      width: 200,
+      height: 100,
+    });
+    assertEquals(
+      result?.toString(),
+      "/_next/image?url=%2F_next%2Fstatic%2Fimage.png&w=200&q=75",
+    );
+  });
+
   await t.step(
     "should not delegate an image CDN URL if recursion is disabled",
     () => {

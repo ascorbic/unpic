@@ -27,7 +27,7 @@ export const parse: UrlParser = (
 };
 
 export const delegateUrl: ShouldDelegateUrl = (url) => {
-  const parsed = new URL(url);
+  const parsed = new URL(url, "http://n");
   const source = parsed.searchParams.get("url");
   if (!source || !source.startsWith("http")) {
     return false;
