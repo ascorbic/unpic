@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/ascorbic/unpic/compare/v3.6.0...v3.6.1) (2023-05-16)
+
+
+### Bug Fixes
+
+* correctly detect relative next.js URLs ([#64](https://github.com/ascorbic/unpic/issues/64)) ([e2eb2ae](https://github.com/ascorbic/unpic/commit/e2eb2aef43d04c979c8b9041fa12e7b4829cd292))
+
 ## [3.6.0](https://github.com/ascorbic/unpic/compare/v3.5.0...v3.6.0) (2023-05-15)
 
 
