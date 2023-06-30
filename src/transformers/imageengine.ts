@@ -140,9 +140,6 @@ export const transform: UrlTransformer = (
     directives["height"] = height;
   if(format)
     directives["format"] = format;
-  if(!directives.hasOwnProperty('fit')){
-    directives = {...directives,"fit": "fill"};
-  }
   let directives_string = build_IE_directives(directives);
   let query_string = build_IE_query_string(directives_string);
   let query_prefix = query_string === "" ? "" :	(src.includes("?") ? "&" : "?");    

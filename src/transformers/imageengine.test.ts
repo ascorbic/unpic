@@ -5,9 +5,9 @@ import { parse, transform, ImageEngineParams } from "./imageengine.ts";
 const img =
   "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg";
 const parseImg = 
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_fill" 
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_box" 
 const transformImage = 
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover"   
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover/f_png"   
 
 Deno.test("ImageEngine parser", async (t) => {
   await t.step("parses a URL", () => {
@@ -19,7 +19,7 @@ Deno.test("ImageEngine parser", async (t) => {
       width: 200,
       height: 100,
       params: {
-        fit: "fill",
+        fit: "box",
       },
     };
     assertEquals(parsed, expected);
@@ -49,22 +49,22 @@ Deno.test("ImageEngine transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_fill",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp",
     );
   });
   await t.step("should not set height if not provided", () => {
     const result = transform({ url: img, width: 200, format: "jpg" });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/f_jpg/m_fill",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/f_jpg",
     );
   });
-  await t.step("should not set fit=fill if another value exists", () => {
+  await t.step("should not remove any directives that are part of the url", () => {
     const url = new URL(transformImage);
     const result = transform({ url, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover/w_200",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover/f_png/w_200",
     );
   });
 });
