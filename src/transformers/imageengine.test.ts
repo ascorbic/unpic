@@ -1,58 +1,70 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
-
-import { transform } from "./imageengine.ts";
+import { ParsedUrl } from "../types.ts";
+import { parse, transform, ImageEngineParams } from "./imageengine.ts";
 
 const img =
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg";
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg";
+const parseImg = 
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_fill" 
+const transformImage = 
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover"   
 
-Deno.test("imageengine", async (t) => {
+Deno.test("ImageEngine parser", async (t) => {
+  await t.step("parses a URL", () => {
+    const parsed = parse(parseImg);
+    const expected: ParsedUrl<ImageEngineParams> = {
+      base: "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg",
+      cdn: "imageengine",
+      format: "webp",
+      width: 200,
+      height: 100,
+      params: {
+        fit: "fill",
+      },
+    };
+    assertEquals(parsed, expected);
+  });
+
+  await t.step("parses a URL without transforms", () => {
+    const parsed = parse(img);
+    const expected: ParsedUrl<ImageEngineParams> = {
+      base: "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg",
+      cdn: "imageengine",
+      format: undefined,
+      width: undefined,
+      height: undefined,
+      params: {},
+    };
+    assertEquals(parsed, expected);
+  });
+});
+
+Deno.test("ImageEngine transformer", async (t) => {
   await t.step("should format a URL", () => {
     const result = transform({
       url: img,
       width: 200,
       height: 100,
+      format: "webp"
     });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg?w=200&h=100&fit=fill",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_fill",
     );
   });
   await t.step("should not set height if not provided", () => {
-    const result = transform({ url: img, width: 200 });
+    const result = transform({ url: img, width: 200, format: "jpg" });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg?w=200&fit=fill",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/f_jpg/m_fill",
     );
   });
-  await t.step("should delete height if not set", () => {
-    const url = new URL(img);
-    url.searchParams.set("h", "100");
-    const result = transform({ url, width: 200 });
-    assertEquals(
-      result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg?w=200&fit=fill",
-    );
-  });
-
-  await t.step("should round non-integer params", () => {
-    const result = transform({
-      url: img,
-      width: 200.6,
-      height: 100.2,
-    });
-    assertEquals(
-      result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg?w=201&h=100&fit=fill",
-    );
-  });
-
   await t.step("should not set fit=fill if another value exists", () => {
-    const url = new URL(img);
-    url.searchParams.set("fit", "crop");
+    const url = new URL(transformImage);
     const result = transform({ url, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://blazing-fast-pics.cdn.imgeng.in/images/pic.jpg?fit=crop&w=200",
+      "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_cover/w_200",
     );
   });
 });
