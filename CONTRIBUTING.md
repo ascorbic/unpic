@@ -37,7 +37,7 @@ if supported, to ensure consistent behaviour across all CDNs:
   should be AVIF, WebP, then the original format.
 - Fit = cover. The image should fill the requested dimensions, cropping if
   necessary and without distortion. This is the equivalent of the CSS
-  `object-fit: cover` setting.
+  `object-fit: cover` setting. There is an e2e test for this.
 - No upscaling. The image should not be upscaled if it is smaller than the
   requested dimensions. Instead it should return the largest available size, but
   maintain the requested aspect ratio.

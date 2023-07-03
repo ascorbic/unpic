@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.6.4](https://github.com/ascorbic/unpic/compare/v3.6.3...v3.6.4) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix npm publish test ([aa927c8](https://github.com/ascorbic/unpic/commit/aa927c83d7662cca554ad6659714cd1a64b8d2ff))
+
+## [3.6.3](https://github.com/ascorbic/unpic/compare/v3.6.2...v3.6.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* correct npm publish test ([b54d6cd](https://github.com/ascorbic/unpic/commit/b54d6cdd28e301177f945c61a6331d675ead8cf6))
+
+## [3.6.2](https://github.com/ascorbic/unpic/compare/v3.6.1...v3.6.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* correctly handle fit mode in Bunny.net, Cloudflare and Kontent.ai ([#68](https://github.com/ascorbic/unpic/issues/68)) ([4b2bf38](https://github.com/ascorbic/unpic/commit/4b2bf38e8621fecd18ff2e6dc5ced3d24bf5b7e5))
+
 ## [3.6.1](https://github.com/ascorbic/unpic/compare/v3.6.0...v3.6.1) (2023-05-16)
 
 

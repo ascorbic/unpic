@@ -3,6 +3,7 @@ import {
   getNumericParam,
   setParamIfDefined,
   setParamIfUndefined,
+  toUrl,
 } from "../utils.ts";
 
 export interface KeyCDNParams {
@@ -10,7 +11,7 @@ export interface KeyCDNParams {
 }
 
 export const parse: UrlParser<KeyCDNParams> = (url) => {
-  const parsedUrl = new URL(url);
+  const parsedUrl = toUrl(url);
 
   const width = getNumericParam(parsedUrl, "width");
   const height = getNumericParam(parsedUrl, "height");
@@ -30,7 +31,7 @@ export const parse: UrlParser<KeyCDNParams> = (url) => {
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format, true);

@@ -1,10 +1,10 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import { setParamIfDefined, setParamIfUndefined } from "../utils.ts";
+import { setParamIfDefined, setParamIfUndefined, toUrl } from "../utils.ts";
 
 export const parse: UrlParser = (
   url,
 ) => {
-  const parsed = new URL(url);
+  const parsed = toUrl(url);
   const width = Number(parsed.searchParams.get("w")) || undefined;
   const height = Number(parsed.searchParams.get("h")) || undefined;
   const quality = Number(parsed.searchParams.get("q")) || undefined;
@@ -28,7 +28,7 @@ export const parse: UrlParser = (
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfUndefined(url, "fit", "min");

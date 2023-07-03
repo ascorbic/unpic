@@ -1,4 +1,5 @@
 import { UrlGenerator, UrlParser, UrlTransformer } from "../types.ts";
+import { toUrl } from "../utils.ts";
 
 const storyBlokAssets =
   /(?<id>\/f\/\d+\/\d+x\d+\/\w+\/[^\/]+)\/?(?<modifiers>m\/?(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?)?$/g;
@@ -42,7 +43,7 @@ export const generateFilters = (filters?: Record<string, string>) => {
 export const parse: UrlParser<StoryblokParams> = (
   imageUrl,
 ) => {
-  const url = new URL(imageUrl);
+  const url = toUrl(imageUrl);
 
   // img2.storyblok.com is the old domain for Storyblok images, which used a
   // different path format. We'll assume custom domains are using the new format.
