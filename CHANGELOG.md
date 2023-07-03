@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.2](https://github.com/ascorbic/unpic/compare/v3.6.1...v3.6.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* correctly handle fit mode in Bunny.net, Cloudflare and Kontent.ai ([#68](https://github.com/ascorbic/unpic/issues/68)) ([4b2bf38](https://github.com/ascorbic/unpic/commit/4b2bf38e8621fecd18ff2e6dc5ced3d24bf5b7e5))
+
 ## [3.6.1](https://github.com/ascorbic/unpic/compare/v3.6.0...v3.6.1) (2023-05-16)
 
 
