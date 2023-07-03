@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/ascorbic/unpic/compare/v3.6.4...v3.7.0) (2023-07-03)
+
+
+### Features
+
+* improve compatibility of URLs in Node ([#72](https://github.com/ascorbic/unpic/issues/72)) ([b91f194](https://github.com/ascorbic/unpic/commit/b91f1948844a1bc96b8aa94014f85046d93fb725))
+
 ## [3.6.4](https://github.com/ascorbic/unpic/compare/v3.6.3...v3.6.4) (2023-07-03)
 
 
