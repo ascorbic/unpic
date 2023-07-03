@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.3](https://github.com/ascorbic/unpic/compare/v3.6.2...v3.6.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* correct npm publish test ([b54d6cd](https://github.com/ascorbic/unpic/commit/b54d6cdd28e301177f945c61a6331d675ead8cf6))
+
 ## [3.6.2](https://github.com/ascorbic/unpic/compare/v3.6.1...v3.6.2) (2023-07-03)
 
 
