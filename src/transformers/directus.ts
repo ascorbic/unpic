@@ -1,5 +1,5 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import { getNumericParam, setParamIfDefined } from "../utils.ts";
+import { getNumericParam, setParamIfDefined, toUrl } from "../utils.ts";
 
 type Fit = "cover" | "contain" | "inside" | "outside";
 
@@ -20,7 +20,7 @@ export interface DirectusParams {
 }
 
 export const parse: UrlParser<DirectusParams> = (imageUrl) => {
-  const parsedUrl = new URL(imageUrl);
+  const parsedUrl = toUrl(imageUrl);
 
   const width = getNumericParam(parsedUrl, "width");
   const height = getNumericParam(parsedUrl, "height");
@@ -55,7 +55,7 @@ export const parse: UrlParser<DirectusParams> = (imageUrl) => {
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);

@@ -2,12 +2,12 @@
   "deno.enable": true,
   "deno.unstable": true,
   "deno.enablePaths": [
-    "src",
-    "scripts",
-    "mod.ts",
-    "deps.ts",
+    "./src",
+    "./scripts",
+    "./mod.ts",
+    "./deps.ts",
     "*/*.json",
-    "example"
+    "./example"
   ],
   "editor.formatOnSave": true,
   "[typescript]": {

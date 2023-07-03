@@ -2,6 +2,7 @@ import domains from "../data/domains.json" assert { type: "json" };
 import subdomains from "../data/subdomains.json" assert { type: "json" };
 import paths from "../data/paths.json" assert { type: "json" };
 import { ImageCdn } from "./types.ts";
+import { toUrl } from "./utils.ts";
 
 const cdnDomains = new Map(Object.entries(domains));
 const cdnSubdomains = Object.entries(subdomains);
@@ -18,7 +19,7 @@ export function getImageCdnForUrlByDomain(
   if (typeof url === "string" && !url.startsWith("https://")) {
     return false;
   }
-  const { hostname } = new URL(url);
+  const { hostname } = toUrl(url);
   if (cdnDomains.has(hostname)) {
     return cdnDomains.get(hostname) as ImageCdn;
   }
@@ -34,7 +35,7 @@ export function getImageCdnForUrlByPath(
   url: string | URL,
 ): ImageCdn | false {
   // Allow relative URLs
-  const { pathname } = new URL(url, "http://n");
+  const { pathname } = toUrl(url);
   for (const [prefix, cdn] of Object.entries(paths)) {
     if (pathname.startsWith(prefix)) {
       return cdn as ImageCdn;

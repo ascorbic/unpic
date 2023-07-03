@@ -42,3 +42,7 @@ export const toRelativeUrl = (url: URL) => {
   const { pathname, search } = url;
   return `${pathname}${search}`;
 };
+
+export const toUrl = (url: string | URL, base?: string | URL | undefined) => {
+  return typeof url === "string" ? new URL(url, base ?? "http://n/") : url;
+};
