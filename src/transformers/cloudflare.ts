@@ -15,7 +15,7 @@ const formatUrl = (
   {
     host,
     transformations = {},
-    path
+    path,
   }: CloudflareParams,
 ): string => {
   const transformString = Object.entries(transformations).map(
@@ -27,7 +27,7 @@ const formatUrl = (
     "cdn-cgi",
     "image",
     transformString,
-    path
+    path,
   ].join("/");
   return `https://${pathSegments}`;
 };
@@ -87,6 +87,9 @@ export const generate: UrlGenerator<CloudflareParams> = (
   if (format) {
     props.transformations.f = format;
   }
+
+  props.transformations.fit ||= "cover";
+
   return new URL(formatUrl(props));
 };
 

@@ -9,14 +9,14 @@
   ],
   "builder.io": [
     "Builder.io",
-    "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?format=webp&fit=cover"
+    "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f"
   ],
   "cloudinary": [
     "Cloudinary",
     "https://res.cloudinary.com/demo/image/upload/c_lfill,w_800,h_550,f_auto/dog.webp"
   ],
   "imgix": [
-    "Imgix (Unsplash)",
+    "Imgix",
     "https://images.unsplash.com/photo-1674255909399-9bcb2cab6489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80"
   ],
   "wordpress": [

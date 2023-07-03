@@ -29,9 +29,11 @@ export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
   const url = new URL(originalUrl);
-  setParamIfUndefined(url, "fit", "cover");
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);
+  if (width && height) {
+    setParamIfUndefined(url, "fit", "cover");
+  }
   return url;
 };

@@ -1,5 +1,9 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import { getNumericParam, setParamIfDefined } from "../utils.ts";
+import {
+  getNumericParam,
+  setParamIfDefined,
+  setParamIfUndefined,
+} from "../utils.ts";
 
 export const parse: UrlParser<{ fit?: string }> = (url) => {
   const parsedUrl = new URL(url);
@@ -25,6 +29,8 @@ export const transform: UrlTransformer = (
 ) => {
   const url = new URL(originalUrl);
   setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
+  if (width && height) {
+    setParamIfUndefined(url, "aspect_ratio", `${width}:${height}`);
+  }
   return url;
 };
