@@ -4,7 +4,7 @@ import {
   UrlParser,
   UrlTransformer,
 } from "../types.ts";
-import { roundIfNumeric } from "../utils.ts";
+import { roundIfNumeric, toUrl } from "../utils.ts";
 
 // Thanks Colby!
 const cloudinaryRegex =
@@ -63,7 +63,7 @@ export interface CloudinaryParams {
 export const parse: UrlParser<CloudinaryParams> = (
   imageUrl,
 ) => {
-  const url = new URL(imageUrl);
+  const url = toUrl(imageUrl);
   const matches = [...url.toString().matchAll(cloudinaryRegex)];
   if (!matches.length) {
     throw new Error("Invalid Cloudinary URL");
@@ -75,10 +75,14 @@ export const parse: UrlParser<CloudinaryParams> = (
     idAndFormat,
     ...baseParams
   } = group;
-  delete group.idAndFormat
-  const lastDotIndex = idAndFormat.lastIndexOf('.')
-  const id = lastDotIndex<0 ? idAndFormat: idAndFormat.slice(0, lastDotIndex)
-  const originalFormat = lastDotIndex<0 ? undefined : idAndFormat.slice(lastDotIndex + 1)
+  delete group.idAndFormat;
+  const lastDotIndex = idAndFormat.lastIndexOf(".");
+  const id = lastDotIndex < 0
+    ? idAndFormat
+    : idAndFormat.slice(0, lastDotIndex);
+  const originalFormat = lastDotIndex < 0
+    ? undefined
+    : idAndFormat.slice(lastDotIndex + 1);
 
   const { w, h, f, ...transformations } = parseTransforms(
     transformString,
@@ -93,7 +97,12 @@ export const parse: UrlParser<CloudinaryParams> = (
     height: Number(h) || undefined,
     format,
     cdn: "cloudinary",
-    params: { ...group, id: group.deliveryType === 'fetch' ? idAndFormat : id, format, transformations },
+    params: {
+      ...group,
+      id: group.deliveryType === "fetch" ? idAndFormat : id,
+      format,
+      transformations,
+    },
   };
 };
 

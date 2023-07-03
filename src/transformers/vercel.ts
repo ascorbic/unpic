@@ -8,13 +8,14 @@ import {
   setParamIfDefined,
   setParamIfUndefined,
   toRelativeUrl,
+  toUrl,
 } from "../utils.ts";
 import { getImageCdnForUrlByDomain } from "../detect.ts";
 
 export const parse: UrlParser = (
   url,
 ) => {
-  const parsed = new URL(url);
+  const parsed = toUrl(url);
   const width = Number(parsed.searchParams.get("w")) || undefined;
   const quality = Number(parsed.searchParams.get("q")) || undefined;
 
@@ -27,7 +28,7 @@ export const parse: UrlParser = (
 };
 
 export const delegateUrl: ShouldDelegateUrl = (url) => {
-  const parsed = new URL(url, "http://n");
+  const parsed = toUrl(url);
   const source = parsed.searchParams.get("url");
   if (!source || !source.startsWith("http")) {
     return false;
@@ -63,7 +64,7 @@ export const transform: UrlTransformer = (
   { url, width, cdn },
 ) => {
   // the URL might be relative, so we need to add a dummy host to it
-  const parsedUrl = new URL(url, "http://n");
+  const parsedUrl = toUrl(url);
 
   const isNextImage = parsedUrl.pathname.startsWith("/_next/image") ||
     parsedUrl.pathname.startsWith("/_vercel/image");

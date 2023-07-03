@@ -4,6 +4,7 @@ import {
   UrlParser,
   UrlTransformer,
 } from "../types.ts";
+import { toUrl } from "../utils.ts";
 
 const cloudflareRegex =
   /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/image\/(?<transformations>[^\/]+)\/(?<path>.*)$/g;
@@ -40,7 +41,7 @@ export interface CloudflareParams {
 export const parse: UrlParser<CloudflareParams> = (
   imageUrl,
 ) => {
-  const url = new URL(imageUrl);
+  const url = toUrl(imageUrl);
   const matches = [...url.toString().matchAll(cloudflareRegex)];
   if (!matches.length) {
     throw new Error("Invalid Cloudflare URL");
