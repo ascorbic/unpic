@@ -2,7 +2,7 @@ import { UrlParser, UrlTransformer } from "../types.ts";
 import {
   getNumericParam,
   setParamIfDefined,
-  setParamIfUndefined
+  setParamIfUndefined,
 } from "../utils.ts";
 
 export const parse: UrlParser<{ fit?: string }> = (url) => {
@@ -32,7 +32,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfDefined(url, "fm", format, true);
-  if (width || height) {
+  if (width && height) {
     setParamIfUndefined(url, "fit", "crop");
   }
   return url;
