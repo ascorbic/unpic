@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/ascorbic/unpic/compare/v3.7.0...v3.8.0) (2023-07-04)
+
+
+### Features
+
+* add support for imageengine cdn ([#66](https://github.com/ascorbic/unpic/issues/66)) ([788633e](https://github.com/ascorbic/unpic/commit/788633ed57f658b1e79f1140ffac67b2bd09f21e))
+
 ## [3.7.0](https://github.com/ascorbic/unpic/compare/v3.6.4...v3.7.0) (2023-07-03)
 
 
