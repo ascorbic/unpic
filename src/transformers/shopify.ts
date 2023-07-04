@@ -4,7 +4,7 @@ import {
   UrlParser,
   UrlTransformer,
 } from "../types.ts";
-import { setParamIfDefined } from "../utils.ts";
+import { setParamIfDefined, toUrl } from "../utils.ts";
 
 const shopifyRegex =
   /(.+?)(?:_(?:(pico|icon|thumb|small|compact|medium|large|grande|original|master)|(\d*)x(\d*)))?(?:_crop_([a-z]+))?(\.[a-zA-Z]+)(\.png|\.jpg|\.webp|\.avif)?$/;
@@ -12,7 +12,7 @@ const shopifyRegex =
 export const parse: UrlParser<{ crop?: string; size?: string }> = (
   imageUrl,
 ) => {
-  const url = new URL(imageUrl);
+  const url = toUrl(imageUrl);
   const match = url.pathname.match(shopifyRegex);
   if (!match) {
     throw new Error("Invalid Shopify URL");
@@ -38,7 +38,7 @@ export const parse: UrlParser<{ crop?: string; size?: string }> = (
 export const generate: UrlGenerator<{ crop?: string }> = (
   { base, width, height, format, params },
 ) => {
-  const url = new URL(base);
+  const url = toUrl(base);
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "crop", params?.crop);

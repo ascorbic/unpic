@@ -4,11 +4,11 @@ import {
   UrlParser,
   UrlTransformer,
 } from "../types.ts";
-import { roundIfNumeric } from "../utils.ts";
+import { roundIfNumeric, toUrl } from "../utils.ts";
 
 // Thanks Colby!
 const cloudinaryRegex =
-  /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<id>[^\.^\s]+)\.?(?<format>[a-zA-Z]+$)?$/g;
+  /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<idAndFormat>[^\s]+)$/g;
 
 const parseTransforms = (transformations: string) => {
   return transformations
@@ -63,7 +63,7 @@ export interface CloudinaryParams {
 export const parse: UrlParser<CloudinaryParams> = (
   imageUrl,
 ) => {
-  const url = new URL(imageUrl);
+  const url = toUrl(imageUrl);
   const matches = [...url.toString().matchAll(cloudinaryRegex)];
   if (!matches.length) {
     throw new Error("Invalid Cloudinary URL");
@@ -72,9 +72,17 @@ export const parse: UrlParser<CloudinaryParams> = (
   const group = matches[0].groups || {};
   const {
     transformations: transformString = "",
-    format: originalFormat,
+    idAndFormat,
     ...baseParams
   } = group;
+  delete group.idAndFormat;
+  const lastDotIndex = idAndFormat.lastIndexOf(".");
+  const id = lastDotIndex < 0
+    ? idAndFormat
+    : idAndFormat.slice(0, lastDotIndex);
+  const originalFormat = lastDotIndex < 0
+    ? undefined
+    : idAndFormat.slice(lastDotIndex + 1);
 
   const { w, h, f, ...transformations } = parseTransforms(
     transformString,
@@ -82,14 +90,19 @@ export const parse: UrlParser<CloudinaryParams> = (
 
   const format = (f && f !== "auto") ? f : originalFormat;
 
-  const base = formatUrl({ ...baseParams, transformations });
+  const base = formatUrl({ ...baseParams, id, transformations });
   return {
     base,
     width: Number(w) || undefined,
     height: Number(h) || undefined,
     format,
     cdn: "cloudinary",
-    params: { ...group, transformations },
+    params: {
+      ...group,
+      id: group.deliveryType === "fetch" ? idAndFormat : id,
+      format,
+      transformations,
+    },
   };
 };
 

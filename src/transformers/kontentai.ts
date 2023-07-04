@@ -2,11 +2,12 @@ import { UrlParser, UrlTransformer } from "../types.ts";
 import {
   getNumericParam,
   setParamIfDefined,
-  setParamIfUndefined
+  setParamIfUndefined,
+  toUrl,
 } from "../utils.ts";
 
 export const parse: UrlParser<{ fit?: string }> = (url) => {
-  const parsedUrl = new URL(url);
+  const parsedUrl = toUrl(url);
 
   const fit = parsedUrl.searchParams.get("fit") || undefined;
   const width = getNumericParam(parsedUrl, "w");
@@ -28,11 +29,11 @@ export const parse: UrlParser<{ fit?: string }> = (url) => {
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfDefined(url, "fm", format, true);
-  if (width || height) {
+  if (width && height) {
     setParamIfUndefined(url, "fit", "crop");
   }
   return url;

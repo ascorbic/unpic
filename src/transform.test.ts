@@ -1,4 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { getImageCdnForUrl } from "./detect.ts";
 import { transformUrl } from "./transform.ts";
 
 const imgRemote =
@@ -40,5 +41,57 @@ Deno.test("transformer", async (t) => {
       result?.toString(),
       "/_next/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200&q=75",
     );
+  });
+});
+
+Deno.test("delegation", async (t) => {
+  await t.step("should delegate an image CDN URL", () => {
+    const result = transformUrl({
+      url: "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
+      width: 200,
+      height: 100,
+      cdn: "nextjs",
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.unsplash.com/photo?auto=format&fit=crop&w=200&q=80&h=100",
+    );
+  });
+
+  await t.step("should not delegate a local URL", () => {
+    const result = transformUrl({
+      url: "/_next/static/image.png",
+      width: 200,
+      height: 100,
+    });
+    assertEquals(
+      result?.toString(),
+      "/_next/image?url=%2F_next%2Fstatic%2Fimage.png&w=200&q=75",
+    );
+  });
+
+  await t.step(
+    "should not delegate an image CDN URL if recursion is disabled",
+    () => {
+      const result = transformUrl({
+        url:
+          "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
+        width: 200,
+        height: 100,
+        recursive: false,
+        cdn: "nextjs",
+      });
+      assertEquals(
+        result?.toString(),
+        "/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto%3Fauto%3Dformat%26fit%3Dcrop%26w%3D2089%26q%3D80&w=200&q=75",
+      );
+    },
+  );
+});
+
+Deno.test("detection", async (t) => {
+  await t.step("should detect by path with a relative URL", () => {
+    const cdn = getImageCdnForUrl("/_next/image?url=%2Fprofile.png&w=200&q=75");
+    assertEquals(cdn, "nextjs");
   });
 });

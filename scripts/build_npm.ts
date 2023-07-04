@@ -1,4 +1,4 @@
-import { build, emptyDir } from "https://deno.land/x/dnt@0.22.0/mod.ts";
+import { build, emptyDir } from "https://deno.land/x/dnt@0.37.0/mod.ts";
 
 await emptyDir("./npm");
 
@@ -25,6 +25,12 @@ await build({
     bugs: {
       url: "https://github.com/ascorbic/unpic/issues",
     },
+    devDependencies: {
+      "@unpic/pixels": "latest",
+    },
+  },
+  mappings: {
+    "https://deno.land/x/get_pixels@1.0.0/mod.ts": "@unpic/pixels",
   },
 });
 

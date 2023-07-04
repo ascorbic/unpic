@@ -16,4 +16,4 @@ jobs:
     - name: Typecheck
       run: deno check mod.ts
     - name: Test
-      run: deno test src/
+      run: deno test -A src/

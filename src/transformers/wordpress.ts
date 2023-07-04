@@ -3,12 +3,13 @@ import {
   getNumericParam,
   setParamIfDefined,
   setParamIfUndefined,
+  toUrl,
 } from "../utils.ts";
 
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height },
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfUndefined(url, "crop", "1");
@@ -18,7 +19,7 @@ export const transform: UrlTransformer = (
 export const parse: UrlParser<{ crop?: boolean }> = (
   url,
 ) => {
-  const parsed = new URL(url);
+  const parsed = toUrl(url);
   const width = getNumericParam(parsed, "w");
   const height = getNumericParam(parsed, "h");
   const crop = parsed.searchParams.get("crop") === "1";
