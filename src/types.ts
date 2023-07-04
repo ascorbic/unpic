@@ -90,6 +90,7 @@ export type ImageCdn =
   | "nextjs"
   | "scene7"
   | "keycdn"
-  | "directus";
+  | "directus"
+  | "imageengine";
 
 export type SupportedImageCdn = ImageCdn;

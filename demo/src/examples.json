@@ -51,5 +51,9 @@
   "directus": [
     "Directus",
     "https://apollo.kazel.academy/assets/6d910d38-0659-49bf-80b8-fa6e0b257975"
+  ],
+  "imageengine": [
+    "ImageEngine",
+    "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_400"
   ]
 }
