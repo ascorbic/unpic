@@ -1,5 +1,5 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import { getNumericParam, setParamIfDefined, setParamIfUndefined } from "../utils.ts";
+import { toUrl } from "../utils.ts";
 
 export interface ImageEngineParams {
   host?: number;
@@ -54,7 +54,7 @@ export const OBJECT_TO_DIRECTIVES_MAP: { [key: string]: string } = {
 export const parse: UrlParser<ImageEngineParams> = (
   imageUrl,
 ) => {
-  const parsedUrl = new URL(imageUrl);
+  const parsedUrl = toUrl(imageUrl);
   const paramArray = getParameterArray(parsedUrl);
   const baseUrl = getBaseUrl(parsedUrl);
   let width = undefined, height = undefined,format = undefined; 
@@ -127,7 +127,7 @@ export function getBaseUrl(url: URL){
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format},
 ) => {
-  const url = new URL(originalUrl);
+  const url = toUrl(originalUrl);
   const src = getBaseUrl(url);
   let directives: Record<string, any> = {};
   const param: [] = url.toString() === src ? [] : getParameterArray(url);
@@ -140,6 +140,9 @@ export const transform: UrlTransformer = (
     directives["height"] = height;
   if(format)
     directives["format"] = format;
+  if(!directives.hasOwnProperty('fit')){
+    directives = {...directives,"fit": "cropbox"};
+  }
   let directives_string = build_IE_directives(directives);
   let query_string = build_IE_query_string(directives_string);
   let query_prefix = query_string === "" ? "" :	(src.includes("?") ? "&" : "?");    
