@@ -23,11 +23,6 @@ Deno.test("E2E tests", async (t) => {
       assertEquals(width, 100);
     });
 
-    // Builder.io handles crop incorrectly at the moment
-    if (cdn === "builder.io") {
-      continue;
-    }
-
     await t.step(`${name} returns requested aspect ratio`, async () => {
       const image = transformUrl({
         url,
