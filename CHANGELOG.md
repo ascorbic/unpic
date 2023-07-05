@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.1](https://github.com/ascorbic/unpic/compare/v3.8.0...v3.8.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* **builder.io:** force sharp to ensure correct fit behaviour ([#75](https://github.com/ascorbic/unpic/issues/75)) ([0146f0c](https://github.com/ascorbic/unpic/commit/0146f0c7c6eddab0f7a7a6f46f38b8eba9827ecc))
+
 ## [3.8.0](https://github.com/ascorbic/unpic/compare/v3.7.0...v3.8.0) (2023-07-04)
 
 
