@@ -14,7 +14,7 @@ Deno.test("builder.io", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover",
+      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover&sharp=true",
     );
   });
   await t.step("should not set height if not provided", () => {
@@ -42,17 +42,17 @@ Deno.test("builder.io", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=201&height=100&fit=cover",
+      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=201&height=100&fit=cover&sharp=true",
     );
   });
 
   await t.step("should not set fit=cover if another value exists", () => {
     const url = new URL(img);
     url.searchParams.set("fit", "inside");
-    const result = transform({ url, width: 200 });
+    const result = transform({ url, width: 200, height: 100 });
     assertEquals(
       result?.toString(),
-      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=inside&width=200",
+      "https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=inside&width=200&height=100&sharp=true",
     );
   });
 });

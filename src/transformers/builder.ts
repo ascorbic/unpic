@@ -35,6 +35,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "format", format);
   if (width && height) {
     setParamIfUndefined(url, "fit", "cover");
+    setParamIfUndefined(url, "sharp", "true");
   }
   return url;
 };
