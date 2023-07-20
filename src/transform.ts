@@ -15,6 +15,7 @@ import { transform as scene7 } from "./transformers/scene7.ts";
 import { transform as keycdn } from "./transformers/keycdn.ts";
 import { transform as directus } from "./transformers/directus.ts";
 import { transform as imageengine } from "./transformers/imageengine.ts";
+import { transform as contentstack } from "./transformers/contentstack.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
@@ -35,6 +36,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   keycdn,
   directus,
   imageengine,
+  contentstack,
 }[cdn]);
 
 /**

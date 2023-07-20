@@ -55,5 +55,9 @@
   "imageengine": [
     "ImageEngine",
     "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_400"
+  ],
+  "contentstack": [
+    "Contentstack",
+    "https://images.contentstack.io/v3/assets/blteae40eb499811073/bltc5064f36b5855343/59e0c41ac0eddd140d5a8e3e/owl.jpg"
   ]
 }

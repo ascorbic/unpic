@@ -91,6 +91,7 @@ export type ImageCdn =
   | "scene7"
   | "keycdn"
   | "directus"
-  | "imageengine";
+  | "imageengine"
+  | "contentstack";
 
 export type SupportedImageCdn = ImageCdn;
