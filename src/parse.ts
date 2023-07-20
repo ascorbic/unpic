@@ -15,6 +15,7 @@ import { parse as scene7 } from "./transformers/scene7.ts";
 import { parse as keycdn } from "./transformers/keycdn.ts";
 import { parse as directus } from "./transformers/directus.ts";
 import { parse as imageengine } from "./transformers/imageengine.ts";
+import { parse as contentstack } from "./transformers/contentstack.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -33,7 +34,8 @@ export const parsers = {
   scene7,
   keycdn,
   directus,
-  imageengine
+  imageengine,
+  contentstack,
 };
 
 export const cdnIsSupportedForParse = (
