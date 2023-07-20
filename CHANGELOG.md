@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/ascorbic/unpic/compare/v3.8.1...v3.9.0) (2023-07-20)
+
+
+### Features
+
+* add Contentstack support ([#77](https://github.com/ascorbic/unpic/issues/77)) ([eaf33b7](https://github.com/ascorbic/unpic/commit/eaf33b7662a408c38aa311a3e917295f306f8c07))
+
 ## [3.8.1](https://github.com/ascorbic/unpic/compare/v3.8.0...v3.8.1) (2023-07-05)
 
 
