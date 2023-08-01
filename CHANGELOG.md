@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/ascorbic/unpic/compare/v3.9.0...v3.10.0) (2023-08-01)
+
+
+### Features
+
+* add support for Cloudflare Images ([#79](https://github.com/ascorbic/unpic/issues/79)) ([50f5d59](https://github.com/ascorbic/unpic/commit/50f5d5943de15e301d4ccf5afde70988f6c065be))
+
 ## [3.9.0](https://github.com/ascorbic/unpic/compare/v3.8.1...v3.9.0) (2023-07-20)
 
 
