@@ -105,6 +105,7 @@ is not auto-detected.
 - Contentstack
 - Cloudinary
 - Directus
+- ImageEngine
 - Imgix, including Unsplash, DatoCMS, Sanity and Prismic
 - Kontent.ai
 - Shopify
