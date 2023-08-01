@@ -16,6 +16,7 @@ import { parse as keycdn } from "./transformers/keycdn.ts";
 import { parse as directus } from "./transformers/directus.ts";
 import { parse as imageengine } from "./transformers/imageengine.ts";
 import { parse as contentstack } from "./transformers/contentstack.ts";
+import { parse as cloudflareImages } from "./transformers/cloudflareimages.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -36,6 +37,7 @@ export const parsers = {
   directus,
   imageengine,
   contentstack,
+  "cloudflare_images": cloudflareImages,
 };
 
 export const cdnIsSupportedForParse = (

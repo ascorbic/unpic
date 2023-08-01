@@ -25,7 +25,7 @@ To add a new CDN, add the following:
 - import the new source file in `src/transform.ts` and `src/parse.ts`
 - add a sample image to `examples.json` in the demo site. Run the site locally
   to see that it works.
-- ensure tests pass by installing Deno and running `deno test src`
+- ensure tests pass by installing Deno and running `deno test src --allow-net`
 
 ### Image defaults
 

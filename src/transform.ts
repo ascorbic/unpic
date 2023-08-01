@@ -16,6 +16,7 @@ import { transform as keycdn } from "./transformers/keycdn.ts";
 import { transform as directus } from "./transformers/directus.ts";
 import { transform as imageengine } from "./transformers/imageengine.ts";
 import { transform as contentstack } from "./transformers/contentstack.ts";
+import { transform as cloudflareImages } from "./transformers/cloudflareimages.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
@@ -37,6 +38,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   directus,
   imageengine,
   contentstack,
+  "cloudflare_images": cloudflareImages,
 }[cdn]);
 
 /**
