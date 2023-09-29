@@ -11,6 +11,9 @@ await build({
     },
   },
   rootTestDir: "./src",
+  compilerOptions: {
+    lib: ["ESNext", "WebWorker"],
+  },
   package: {
     // package.json properties
     name: "unpic",
