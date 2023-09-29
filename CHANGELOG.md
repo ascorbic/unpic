@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.1](https://github.com/ascorbic/unpic/compare/v3.10.0...v3.10.1) (2023-09-29)
+
+
+### Bug Fixes
+
+* don't include node type refs in declaration ([#83](https://github.com/ascorbic/unpic/issues/83)) ([b960e77](https://github.com/ascorbic/unpic/commit/b960e779b70508ed4b11cce84cd2e3fc2d529213))
+
 ## [3.10.0](https://github.com/ascorbic/unpic/compare/v3.9.0...v3.10.0) (2023-08-01)
 
 
