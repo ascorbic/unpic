@@ -25,7 +25,7 @@ export const parse: UrlParser = (
     width: Number(params.w) || undefined,
     height: Number(params.h) || undefined,
     quality: Number(params.q) || undefined,
-    format: params.f || undefined,
+    format: params.f || "auto",
     params,
     cdn: "ipx",
   };
