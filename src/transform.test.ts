@@ -64,7 +64,7 @@ Deno.test("transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://example.com/_ipx/s_200x100/https://placekitten.com/100",
+      "https://example.com/_ipx/s_200x100,f_auto/https://placekitten.com/100",
     );
   });
 

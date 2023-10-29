@@ -2,8 +2,3 @@
 command = "yarn build"
 publish = "dist"
 ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF .."
-
-[[redirects]]
-from = "/_ipx/*"
-to = "/.netlify/builders/ipx/:splat"
-status = 200
