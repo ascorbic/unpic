@@ -1,7 +1,6 @@
 import { createIPXHandler } from "@netlify/ipx";
-import type { Config } from "@netlify/functions";
 
-export const handler = createIPXHandler({
+const handle = createIPXHandler({
   domains: [
     "placekitten.com",
   ],
@@ -11,3 +10,7 @@ export const handler = createIPXHandler({
     "X-Test": "foobar",
   },
 });
+
+export const handler = (event, context) => {
+  return handle(event, context);
+};
