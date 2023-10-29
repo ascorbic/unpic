@@ -6,23 +6,22 @@ import {
   toUrl,
 } from "../utils.ts";
 
-export const parse: UrlParser<{ fit?: string; quality?: number }> = (url) => {
+export const parse: UrlParser<{ fit?: string }> = (url) => {
   const parsedUrl = toUrl(url);
 
+  const fit = parsedUrl.searchParams.get("fit") || undefined;
   const width = getNumericParam(parsedUrl, "width");
   const height = getNumericParam(parsedUrl, "height");
   const quality = getNumericParam(parsedUrl, "quality");
   const format = parsedUrl.searchParams.get("format") || undefined;
-  const fit = parsedUrl.searchParams.get("fit") || undefined;
   parsedUrl.search = "";
-
   return {
     width,
     height,
     format,
     base: parsedUrl.toString(),
-    params: { quality, fit },
-    cdn: "builder.io",
+    params: { fit, quality },
+    cdn: "contentstack",
   };
 };
 
@@ -33,9 +32,11 @@ export const transform: UrlTransformer = (
   setParamIfDefined(url, "width", width, true, true);
   setParamIfDefined(url, "height", height, true, true);
   setParamIfDefined(url, "format", format);
+  if (!url.searchParams.has("format")) {
+    setParamIfUndefined(url, "auto", "webp");
+  }
   if (width && height) {
-    setParamIfUndefined(url, "fit", "cover");
-    setParamIfUndefined(url, "sharp", "true");
+    setParamIfUndefined(url, "fit", "crop");
   }
   return url;
 };

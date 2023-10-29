@@ -102,8 +102,10 @@ is not auto-detected.
 - Bunny.net, including caisy
 - Cloudflare
 - Contentful
+- Contentstack
 - Cloudinary
 - Directus
+- ImageEngine
 - Imgix, including Unsplash, DatoCMS, Sanity and Prismic
 - Kontent.ai
 - Shopify

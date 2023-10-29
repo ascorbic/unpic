@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.10.1](https://github.com/ascorbic/unpic/compare/v3.10.0...v3.10.1) (2023-09-29)
+
+
+### Bug Fixes
+
+* don't include node type refs in declaration ([#83](https://github.com/ascorbic/unpic/issues/83)) ([b960e77](https://github.com/ascorbic/unpic/commit/b960e779b70508ed4b11cce84cd2e3fc2d529213))
+
+## [3.10.0](https://github.com/ascorbic/unpic/compare/v3.9.0...v3.10.0) (2023-08-01)
+
+
+### Features
+
+* add support for Cloudflare Images ([#79](https://github.com/ascorbic/unpic/issues/79)) ([50f5d59](https://github.com/ascorbic/unpic/commit/50f5d5943de15e301d4ccf5afde70988f6c065be))
+
+## [3.9.0](https://github.com/ascorbic/unpic/compare/v3.8.1...v3.9.0) (2023-07-20)
+
+
+### Features
+
+* add Contentstack support ([#77](https://github.com/ascorbic/unpic/issues/77)) ([eaf33b7](https://github.com/ascorbic/unpic/commit/eaf33b7662a408c38aa311a3e917295f306f8c07))
+
+## [3.8.1](https://github.com/ascorbic/unpic/compare/v3.8.0...v3.8.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* **builder.io:** force sharp to ensure correct fit behaviour ([#75](https://github.com/ascorbic/unpic/issues/75)) ([0146f0c](https://github.com/ascorbic/unpic/commit/0146f0c7c6eddab0f7a7a6f46f38b8eba9827ecc))
+
 ## [3.8.0](https://github.com/ascorbic/unpic/compare/v3.7.0...v3.8.0) (2023-07-04)
 
 

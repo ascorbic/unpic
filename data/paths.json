@@ -1,7 +1,9 @@
 {
   "/cdn-cgi/image/": "cloudflare",
+  "/cdn-cgi/imagedelivery/": "cloudflare_images",
   "/_next/image": "nextjs",
   "/_next/static": "nextjs",
   "/_vercel/image": "vercel",
-  "/is/image": "scene7"
+  "/is/image": "scene7",
+  "/_ipx/": "ipx"
 }

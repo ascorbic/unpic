@@ -11,6 +11,9 @@ await build({
     },
   },
   rootTestDir: "./src",
+  compilerOptions: {
+    lib: ["ESNext", "WebWorker"],
+  },
   package: {
     // package.json properties
     name: "unpic",
@@ -30,7 +33,7 @@ await build({
     },
   },
   mappings: {
-    "https://deno.land/x/get_pixels@1.0.0/mod.ts": "@unpic/pixels",
+    "https://deno.land/x/get_pixels@v1.2.1/mod.ts": "@unpic/pixels",
   },
 });
 
