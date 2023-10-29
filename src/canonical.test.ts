@@ -41,7 +41,7 @@ Deno.test("Canonical", async (t) => {
   );
 
   await t.step(
-    "should fall back to the default CDN for unrecognized image domains",
+    "should fall back to the default CDN for unrecognized image domains - vercel",
     () => {
       const result =
         getCanonicalCdnForUrl("https://placekitten.com/100", "vercel") ||
@@ -54,6 +54,24 @@ Deno.test("Canonical", async (t) => {
       assertEquals(
         result?.cdn,
         "vercel",
+      );
+    },
+  );
+
+  await t.step(
+    "should fall back to the default CDN for unrecognized image domains - ipx",
+    () => {
+      const result =
+        getCanonicalCdnForUrl("https://placekitten.com/100", "ipx") ||
+        undefined;
+      assertExists(result);
+      assertEquals(
+        result?.url,
+        "https://placekitten.com/100",
+      );
+      assertEquals(
+        result?.cdn,
+        "ipx",
       );
     },
   );
