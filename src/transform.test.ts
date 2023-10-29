@@ -42,15 +42,66 @@ Deno.test("transformer", async (t) => {
       "/_next/image?url=https%3A%2F%2Fplacekitten.com%2F100&w=200&q=75",
     );
   });
+
+  await t.step("should format a remote, no-CDN ipx image", () => {
+    const result = transformUrl({
+      url: "https://placekitten.com/100",
+      width: 200,
+      height: 100,
+      cdn: "ipx",
+    });
+    assertEquals(
+      result?.toString(),
+      "/_ipx/s_200x100/https://placekitten.com/100",
+    );
+  });
+
+  await t.step("should transform a local IPX URL", () => {
+    const result = transformUrl({
+      url: "https://example.com/_ipx/s_800x600/https://placekitten.com/100",
+      width: 200,
+      height: 100,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://example.com/_ipx/s_200x100,f_auto/https://placekitten.com/100",
+    );
+  });
+
+  await t.step("should format a local URL with ipx", () => {
+    const result = transformUrl({
+      url: "/image.png",
+      width: 200,
+      height: 100,
+      cdn: "ipx",
+    });
+    assertEquals(
+      result?.toString(),
+      "/_ipx/s_200x100/image.png",
+    );
+  });
 });
 
 Deno.test("delegation", async (t) => {
-  await t.step("should delegate an image CDN URL", () => {
+  await t.step("should delegate an image CDN URL and nextjs", () => {
     const result = transformUrl({
       url: "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
       width: 200,
       height: 100,
       cdn: "nextjs",
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.unsplash.com/photo?auto=format&fit=crop&w=200&q=80&h=100",
+    );
+  });
+
+  await t.step("should delegate an image CDN URL and ipx", () => {
+    const result = transformUrl({
+      url: "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
+      width: 200,
+      height: 100,
+      cdn: "ipx",
     });
     assertEquals(
       result?.toString(),

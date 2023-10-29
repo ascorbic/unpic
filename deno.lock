@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "remote": {
     "https://deno.land/std@0.111.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.111.0/_util/os.ts": "dfb186cc4e968c770ab6cc3288bd65f4871be03b93beecae57d657232ecffcac",
@@ -157,7 +157,8 @@
     "https://deno.land/x/dnt@0.37.0/lib/utils.ts": "878b7ac7003a10c16e6061aa49dbef9b42bd43174853ebffc9b67ea47eeb11d8",
     "https://deno.land/x/dnt@0.37.0/mod.ts": "37d0c784371cf1750f30203a95de2555ba4c1aa89d826024f14c038f87e0f344",
     "https://deno.land/x/dnt@0.37.0/transform.ts": "1b127c5f22699c8ab2545b98aeca38c4e5c21405b0f5342ea17e9c46280ed277",
-    "https://deno.land/x/get_pixels@1.0.0/mod.ts": "db20f584e1569a522d4fe41a9db879f7b16c8a32d9bdeb74f25a8997994cd593",
+    "https://deno.land/x/get_pixels@v1.2.1/mod.ts": "5710900b4ef304edb0f8621d63419b927340ebdcafe67263cffd76669cfa0db8",
+    "https://deno.land/x/get_pixels@v1.2.1/src/get-pixels.ts": "d2a4ec97dfd2966a50120a3c41c64f8538b2f73433622bf0a25b8cd6480e5c54",
     "https://deno.land/x/jpegts@1.1/lib/decoder.ts": "b8823ee917fc99a1e085c353b2cd4ca1fbaacaaf1f80be94175e42487666c822",
     "https://deno.land/x/jpegts@1.1/lib/encoder.ts": "d75fc5ae88f77e1fa349af08d7a46937add31a03b6d3605ff4d2e3303eb32b3b",
     "https://deno.land/x/jpegts@1.1/lib/image.ts": "32255e99b6c1bf4e72e13367516a0d878ba9d195d81fac1f145ce4c11e951962",
