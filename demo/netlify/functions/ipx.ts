@@ -5,13 +5,16 @@ import {
   ipxHttpStorage,
 } from "ipx";
 
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
 const ipx = createIPX({
   httpStorage: ipxHttpStorage({
     domains: [
       "placekitten.com",
     ],
   }),
-  storage: ipxFSStorage({ dir: "./public/_ipx" }),
+  storage: ipxFSStorage({ dir: join(tmpdir(), "ipx") }),
 });
 
 const server = createIPXWebServer(ipx);
