@@ -18,6 +18,7 @@ import { parse as imageengine } from "./transformers/imageengine.ts";
 import { parse as contentstack } from "./transformers/contentstack.ts";
 import { parse as cloudflareImages } from "./transformers/cloudflareimages.ts";
 import { parse as ipx } from "./transformers/ipx.ts";
+import { parse as netlify } from "./transformers/netlify.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -40,6 +41,7 @@ export const parsers = {
   contentstack,
   "cloudflare_images": cloudflareImages,
   ipx,
+  netlify,
 };
 
 export const cdnIsSupportedForParse = (

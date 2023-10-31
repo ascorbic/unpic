@@ -86,7 +86,7 @@ export const generate: UrlGenerator<CloudflareParams> = (
     props.transformations.height = height?.toString();
   }
   if (format) {
-    props.transformations.f = format;
+    props.transformations.f = format === "jpg" ? "jpeg" : format;
   }
 
   props.transformations.fit ||= "cover";

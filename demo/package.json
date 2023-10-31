@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html && cp public/* dist/",
     "dev": "parcel src/index.html",
     "lint": "eslint src"
   },
