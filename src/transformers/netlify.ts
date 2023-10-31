@@ -1,5 +1,10 @@
 import type { UrlGenerator, UrlParser, UrlTransformer } from "../types.ts";
-import { setParamIfDefined, toCanonicalUrlString, toUrl } from "../utils.ts";
+import {
+  setParamIfDefined,
+  setParamIfUndefined,
+  toCanonicalUrlString,
+  toUrl,
+} from "../utils.ts";
 
 export const parse: UrlParser = (
   url,
@@ -36,6 +41,7 @@ export const generate: UrlGenerator<NetlifyParams> = (
   setParamIfDefined(url, "w", width, false, true);
   setParamIfDefined(url, "h", height, false, true);
   setParamIfDefined(url, "fm", format);
+  setParamIfUndefined(url, "fit", "crop");
   url.searchParams.set("url", base.toString());
   return toCanonicalUrlString(url);
 };
