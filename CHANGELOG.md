@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/ascorbic/unpic/compare/v3.11.0...v3.12.0) (2023-10-31)
+
+
+### Features
+
+* add Netlify support ([#88](https://github.com/ascorbic/unpic/issues/88)) ([4dd047f](https://github.com/ascorbic/unpic/commit/4dd047fe034f61d99432f687c219cb2329628865))
+
 ## [3.11.0](https://github.com/ascorbic/unpic/compare/v3.10.1...v3.11.0) (2023-10-29)
 
 
