@@ -81,7 +81,6 @@ export const transform: UrlTransformer = (
   // If this is a Netlify image URL, we'll manipulate it rather than using it as the source image
   if (url.pathname.startsWith("/.netlify/images")) {
     const { params, base, format } = parse(url);
-    console.log({ params });
     return generate({
       base,
       format,

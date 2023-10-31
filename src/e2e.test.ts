@@ -20,6 +20,7 @@ Deno.test("E2E tests", async (t) => {
           url,
           width: 100,
           cdn: cdn as ImageCdn,
+          format: "jpg",
         });
 
         assertExists(image, `Failed to resize ${name} with ${cdn}`);
@@ -38,6 +39,7 @@ Deno.test("E2E tests", async (t) => {
           width: 100,
           height: 50,
           cdn: cdn as ImageCdn,
+          format: "jpg",
         });
 
         assertExists(image, `Failed to resize ${name} with ${cdn}`);
