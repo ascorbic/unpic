@@ -18,6 +18,7 @@ import { transform as imageengine } from "./transformers/imageengine.ts";
 import { transform as contentstack } from "./transformers/contentstack.ts";
 import { transform as cloudflareImages } from "./transformers/cloudflareimages.ts";
 import { transform as ipx } from "./transformers/ipx.ts";
+import { transform as netlify } from "./transformers/netlify.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
@@ -41,6 +42,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   contentstack,
   "cloudflare_images": cloudflareImages,
   ipx,
+  netlify,
 }[cdn]);
 
 /**

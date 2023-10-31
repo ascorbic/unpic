@@ -47,6 +47,14 @@ export const toRelativeUrl = (url: URL) => {
 };
 
 /**
+ * Returns a URL string that may be relative or absolute
+ */
+
+export const toCanonicalUrlString = (url: URL) => {
+  return url.hostname === "n" ? toRelativeUrl(url) : url.toString();
+};
+
+/**
  * Normalises a URL object or string URL to a URL object.
  */
 export const toUrl = (url: string | URL, base?: string | URL | undefined) => {
