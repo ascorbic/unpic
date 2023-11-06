@@ -93,6 +93,7 @@ export type ImageCdn =
   | "directus"
   | "imageengine"
   | "contentstack"
-  | "cloudflare_images";
+  | "cloudflare_images"
+  | "imagekit"
 
 export type SupportedImageCdn = ImageCdn;
