@@ -38,11 +38,25 @@ export const getNumericParam = (url: URL, key: string) => {
   return isNaN(value) ? undefined : value;
 };
 
+/**
+ * Given a URL object, returns path and query params
+ */
 export const toRelativeUrl = (url: URL) => {
   const { pathname, search } = url;
   return `${pathname}${search}`;
 };
 
+/**
+ * Returns a URL string that may be relative or absolute
+ */
+
+export const toCanonicalUrlString = (url: URL) => {
+  return url.hostname === "n" ? toRelativeUrl(url) : url.toString();
+};
+
+/**
+ * Normalises a URL object or string URL to a URL object.
+ */
 export const toUrl = (url: string | URL, base?: string | URL | undefined) => {
   return typeof url === "string" ? new URL(url, base ?? "http://n/") : url;
 };

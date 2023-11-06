@@ -17,6 +17,8 @@ import { transform as directus } from "./transformers/directus.ts";
 import { transform as imageengine } from "./transformers/imageengine.ts";
 import { transform as contentstack } from "./transformers/contentstack.ts";
 import { transform as cloudflareImages } from "./transformers/cloudflareimages.ts";
+import { transform as ipx } from "./transformers/ipx.ts";
+import { transform as netlify } from "./transformers/netlify.ts";
 import { transform as imagekit } from "./transformers/imagekit.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
@@ -40,6 +42,8 @@ export const getTransformer = (cdn: ImageCdn) => ({
   imageengine,
   contentstack,
   "cloudflare_images": cloudflareImages,
+  ipx,
+  netlify,
   imagekit
 }[cdn]);
 
@@ -61,7 +65,6 @@ export const getTransformerForCdn = (
  */
 export const transformUrl: UrlTransformer = (options) => {
   const cdn = options?.cdn ?? getImageCdnForUrl(options.url);
-
   // Default to recursive
   if (!(options.recursive ?? true)) {
     return getTransformerForCdn(cdn)?.(options);

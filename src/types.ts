@@ -35,7 +35,7 @@ export interface ShouldDelegateUrl {
 }
 
 export type CdnOptions = {
-  [key in ImageCdn]: Record<string, unknown>;
+  [key in ImageCdn]?: Record<string, unknown>;
 };
 export interface UrlGeneratorOptions<TParams = Record<string, string>> {
   base: string | URL;
@@ -94,6 +94,8 @@ export type ImageCdn =
   | "imageengine"
   | "contentstack"
   | "cloudflare_images"
-  | "imagekit"
+  | "ipx"
+  | "netlify"
+  | "imagekit";
 
 export type SupportedImageCdn = ImageCdn;

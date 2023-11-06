@@ -7,6 +7,7 @@ import {
 import {
   setParamIfDefined,
   setParamIfUndefined,
+  toCanonicalUrlString,
   toRelativeUrl,
   toUrl,
 } from "../utils.ts";
@@ -77,10 +78,7 @@ export const transform: UrlTransformer = (
   setParamIfDefined(parsedUrl, "w", width, true, true);
 
   if (isNextImage) {
-    if (parsedUrl.hostname === "n") {
-      return toRelativeUrl(parsedUrl);
-    }
-    return parsedUrl.toString();
+    return toCanonicalUrlString(parsedUrl);
   }
 
   return generate({

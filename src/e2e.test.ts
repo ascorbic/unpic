@@ -3,7 +3,7 @@ import {
   assertExists,
 } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import examples from "../demo/src/examples.json" assert { type: "json" };
-import { getPixels } from "https://deno.land/x/get_pixels@1.0.0/mod.ts";
+import { getPixels } from "https://deno.land/x/get_pixels@v1.2.1/mod.ts";
 import { transformUrl } from "./transform.ts";
 import type { ImageCdn } from "./types.ts";
 
@@ -20,6 +20,7 @@ Deno.test("E2E tests", async (t) => {
           url,
           width: 100,
           cdn: cdn as ImageCdn,
+          format: "jpg",
         });
 
         assertExists(image, `Failed to resize ${name} with ${cdn}`);
@@ -38,6 +39,7 @@ Deno.test("E2E tests", async (t) => {
           width: 100,
           height: 50,
           cdn: cdn as ImageCdn,
+          format: "jpg",
         });
 
         assertExists(image, `Failed to resize ${name} with ${cdn}`);
