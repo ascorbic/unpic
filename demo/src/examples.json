@@ -67,5 +67,9 @@
   "netlify": [
     "Netlify",
     "https://deploy-preview-88--unpic-playground.netlify.app/.netlify/images?url=/cappadocia.jpg"
+  ],
+  "imagekit": [
+    "Imagekit",
+    "https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg"
   ]
 }
