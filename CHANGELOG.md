@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.0](https://github.com/ascorbic/unpic/compare/v3.12.0...v3.13.0) (2023-11-07)
+
+
+### Features
+
+* add imagekit support ([#91](https://github.com/ascorbic/unpic/issues/91)) ([cb03686](https://github.com/ascorbic/unpic/commit/cb03686afc998cbd106163098397813a114e1cff))
+
 ## [3.12.0](https://github.com/ascorbic/unpic/compare/v3.11.0...v3.12.0) (2023-10-31)
 
 
