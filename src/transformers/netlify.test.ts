@@ -8,7 +8,7 @@ const remoteImage = "https://example.org/static/moose.png";
 Deno.test("netlify", async (t) => {
   await t.step("should parse a URL", () => {
     const result = parse(
-      "https://example.netlify.app/.netlify/images?url=/cappadocia.jpg&w=200&h=300&fit=crop&q=80&fm=webp",
+      "https://example.netlify.app/.netlify/images?url=/cappadocia.jpg&w=200&h=300&fit=cover&q=80&fm=webp",
     );
     assertEquals(
       result.width,
@@ -35,7 +35,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://example.netlify.app/.netlify/images?w=200&h=100&fit=crop&url=%2Fcappadocia.jpg",
+      "https://example.netlify.app/.netlify/images?w=200&h=100&fit=cover&url=%2Fcappadocia.jpg",
     );
   });
 
@@ -48,7 +48,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/.netlify/images?w=200&h=100&fit=crop&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
+      "/.netlify/images?w=200&h=100&fit=cover&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
     );
   });
 
@@ -56,7 +56,7 @@ Deno.test("netlify", async (t) => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://example.netlify.app/.netlify/images?w=200&fit=crop&url=%2Fcappadocia.jpg",
+      "https://example.netlify.app/.netlify/images?w=200&fit=cover&url=%2Fcappadocia.jpg",
     );
   });
 
@@ -66,7 +66,7 @@ Deno.test("netlify", async (t) => {
     const result = transform({ url, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://example.netlify.app/.netlify/images?w=200&fit=crop&url=%2Fcappadocia.jpg",
+      "https://example.netlify.app/.netlify/images?w=200&fit=cover&url=%2Fcappadocia.jpg",
     );
   });
 
@@ -78,7 +78,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://example.netlify.app/.netlify/images?w=201&h=100&fit=crop&url=%2Fcappadocia.jpg",
+      "https://example.netlify.app/.netlify/images?w=201&h=100&fit=cover&url=%2Fcappadocia.jpg",
     );
   });
 
@@ -91,7 +91,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/.netlify/images?w=100&h=200&fm=webp&fit=crop&url=https%3A%2F%2Fexample.org%2Fstatic%2Fmoose.png",
+      "/.netlify/images?w=100&h=200&fm=webp&fit=cover&url=https%3A%2F%2Fexample.org%2Fstatic%2Fmoose.png",
     );
   });
 
@@ -104,7 +104,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/.netlify/images?w=100&h=200&fm=webp&fit=crop&url=%2Fstatic%2Fmoose.png",
+      "/.netlify/images?w=100&h=200&fm=webp&fit=cover&url=%2Fstatic%2Fmoose.png",
     );
   });
 
@@ -122,7 +122,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://petsofnetlify.com/.netlify/images?w=100&h=200&fm=webp&fit=crop&url=https%3A%2F%2Fexample.org%2Fstatic%2Fmoose.png",
+      "https://petsofnetlify.com/.netlify/images?w=100&h=200&fm=webp&fit=cover&url=https%3A%2F%2Fexample.org%2Fstatic%2Fmoose.png",
     );
   });
 
@@ -135,7 +135,7 @@ Deno.test("netlify", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "/.netlify/images?q=10&w=200&h=100&fit=crop&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
+      "/.netlify/images?q=10&w=200&h=100&fit=cover&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
     );
   });
 
