@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.14.0](https://github.com/ascorbic/unpic/compare/v3.13.0...v3.14.0) (2023-11-15)
+
+
+### Features
+
+* add subpath exports ([#99](https://github.com/ascorbic/unpic/issues/99)) ([7c9da42](https://github.com/ascorbic/unpic/commit/7c9da427ab3449b2b1c270ad49071ace1cc5ccb1))
+
+
+### Bug Fixes
+
+* **netlify:** correct "fit" param ([#97](https://github.com/ascorbic/unpic/issues/97)) ([66a48d4](https://github.com/ascorbic/unpic/commit/66a48d46f87f0938ae0a159dad070c715d7297b6))
+
 ## [3.13.0](https://github.com/ascorbic/unpic/compare/v3.12.0...v3.13.0) (2023-11-07)
 
 

@@ -68,7 +68,7 @@ export const generate: UrlGenerator<NetlifyParams> = (
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfDefined(url, "fm", format);
-  setParamIfUndefined(url, "fit", "crop");
+  setParamIfUndefined(url, "fit", "cover");
   url.searchParams.set("url", base.toString());
   return toCanonicalUrlString(url);
 };
