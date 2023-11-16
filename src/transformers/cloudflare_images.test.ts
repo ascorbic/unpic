@@ -1,6 +1,10 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { ParsedUrl } from "../types.ts";
-import { CloudflareImagesParams, parse, transform } from "./cloudflareimages.ts";
+import {
+  CloudflareImagesParams,
+  parse,
+  transform,
+} from "./cloudflare_images.ts";
 
 const img =
   "https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/w=128,h=128,rotate=90,f=auto";
@@ -17,9 +21,9 @@ Deno.test("cloudflare images parser", () => {
       host: "100francisco.com",
       accountHash: "1aS6NlIe-Sc1o3NhVvy8Qw",
       imageId: "2ba36ba9-69f6-41b6-8ff0-2779b41df200",
-        transformations: {
-            rotate: "90",
-        }
+      transformations: {
+        rotate: "90",
+      },
     },
   };
   assertEquals(parsed, expected);

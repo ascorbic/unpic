@@ -94,6 +94,8 @@ export type ImageCdn =
   | "imageengine"
   | "contentstack"
   | "cloudflare_images"
-  | "ipx";
+  | "ipx"
+  | "netlify"
+  | "imagekit";
 
 export type SupportedImageCdn = ImageCdn;

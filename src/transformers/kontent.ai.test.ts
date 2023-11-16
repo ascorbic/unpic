@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 
-import { transform } from "./kontentai.ts";
+import { transform } from "./kontent.ai.ts";
 
 const img =
   "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg";

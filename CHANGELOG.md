@@ -1,5 +1,38 @@
 # Changelog
 
+## [3.14.0](https://github.com/ascorbic/unpic/compare/v3.13.0...v3.14.0) (2023-11-15)
+
+
+### Features
+
+* add subpath exports ([#99](https://github.com/ascorbic/unpic/issues/99)) ([7c9da42](https://github.com/ascorbic/unpic/commit/7c9da427ab3449b2b1c270ad49071ace1cc5ccb1))
+
+
+### Bug Fixes
+
+* **netlify:** correct "fit" param ([#97](https://github.com/ascorbic/unpic/issues/97)) ([66a48d4](https://github.com/ascorbic/unpic/commit/66a48d46f87f0938ae0a159dad070c715d7297b6))
+
+## [3.13.0](https://github.com/ascorbic/unpic/compare/v3.12.0...v3.13.0) (2023-11-07)
+
+
+### Features
+
+* add imagekit support ([#91](https://github.com/ascorbic/unpic/issues/91)) ([cb03686](https://github.com/ascorbic/unpic/commit/cb03686afc998cbd106163098397813a114e1cff))
+
+## [3.12.0](https://github.com/ascorbic/unpic/compare/v3.11.0...v3.12.0) (2023-10-31)
+
+
+### Features
+
+* add Netlify support ([#88](https://github.com/ascorbic/unpic/issues/88)) ([4dd047f](https://github.com/ascorbic/unpic/commit/4dd047fe034f61d99432f687c219cb2329628865))
+
+## [3.11.0](https://github.com/ascorbic/unpic/compare/v3.10.1...v3.11.0) (2023-10-29)
+
+
+### Features
+
+* add support for ipx ([#85](https://github.com/ascorbic/unpic/issues/85)) ([0ef9eed](https://github.com/ascorbic/unpic/commit/0ef9eedfe59892e2ad96e129d3f52632dc12c52c))
+
 ## [3.10.1](https://github.com/ascorbic/unpic/compare/v3.10.0...v3.10.1) (2023-09-29)
 
 

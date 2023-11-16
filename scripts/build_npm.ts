@@ -1,9 +1,27 @@
 import { build, emptyDir } from "https://deno.land/x/dnt@0.37.0/mod.ts";
+import { basename } from "https://deno.land/std@0.206.0/path/mod.ts";
+import { walk } from "https://deno.land/std@0.206.0/fs/mod.ts";
 
 await emptyDir("./npm");
 
+const trans = await Array.fromAsync(walk("./src/transformers", {
+  match: [/^(?!.*test\.ts$).*\.ts$/],
+}));
+
+const entry = trans.map((t) => ({
+  path: t.path,
+  name: `./transformers/${basename(t.path, ".ts")}`,
+}));
+
 await build({
-  entryPoints: ["./mod.ts"],
+  entryPoints: [
+    "./mod.ts",
+    {
+      path: "./src/detect.ts",
+      name: "./detect",
+    },
+    ...entry,
+  ],
   outDir: "./npm",
   shims: {
     deno: {
@@ -21,6 +39,7 @@ await build({
     description: "Universal image CDN translator",
     license: "MIT",
     homepage: "https://unpic.pics/lib",
+    sideEffects: false,
     repository: {
       type: "git",
       url: "git+https://github.com/ascorbic/unpic.git",

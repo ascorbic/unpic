@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html && cp public/* dist/",
     "dev": "parcel src/index.html",
     "lint": "eslint src"
   },
@@ -17,6 +17,7 @@
   ],
   "devDependencies": {
     "@netlify/functions": "^2.3.0",
+    "@types/node": "^20.8.9",
     "parcel": "^2.8.3"
   },
   "dependencies": {

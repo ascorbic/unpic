@@ -1,6 +1,6 @@
 import { getImageCdnForUrl } from "./detect.ts";
 import { parse as contentful } from "./transformers/contentful.ts";
-import { parse as builder } from "./transformers/builder.ts";
+import { parse as builder } from "./transformers/builder.io.ts";
 import { parse as imgix } from "./transformers/imgix.ts";
 import { parse as shopify } from "./transformers/shopify.ts";
 import { parse as wordpress } from "./transformers/wordpress.ts";
@@ -8,7 +8,7 @@ import { parse as cloudinary } from "./transformers/cloudinary.ts";
 import { parse as cloudflare } from "./transformers/cloudflare.ts";
 import { parse as bunny } from "./transformers/bunny.ts";
 import { parse as storyblok } from "./transformers/storyblok.ts";
-import { parse as kontentai } from "./transformers/kontentai.ts";
+import { parse as kontentai } from "./transformers/kontent.ai.ts";
 import { parse as vercel } from "./transformers/vercel.ts";
 import { parse as nextjs } from "./transformers/nextjs.ts";
 import { parse as scene7 } from "./transformers/scene7.ts";
@@ -16,8 +16,10 @@ import { parse as keycdn } from "./transformers/keycdn.ts";
 import { parse as directus } from "./transformers/directus.ts";
 import { parse as imageengine } from "./transformers/imageengine.ts";
 import { parse as contentstack } from "./transformers/contentstack.ts";
-import { parse as cloudflareImages } from "./transformers/cloudflareimages.ts";
+import { parse as cloudflareImages } from "./transformers/cloudflare_images.ts";
 import { parse as ipx } from "./transformers/ipx.ts";
+import { parse as netlify } from "./transformers/netlify.ts";
+import { parse as imagekit } from "./transformers/imagekit.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -40,6 +42,8 @@ export const parsers = {
   contentstack,
   "cloudflare_images": cloudflareImages,
   ipx,
+  netlify,
+  imagekit,
 };
 
 export const cdnIsSupportedForParse = (
