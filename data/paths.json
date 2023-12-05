@@ -6,5 +6,6 @@
   "/_vercel/image": "vercel",
   "/is/image": "scene7",
   "/_ipx/": "ipx",
+  "/_image": "astro",
   "/.netlify/images": "netlify"
 }

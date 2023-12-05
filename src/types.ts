@@ -95,6 +95,7 @@ export type ImageCdn =
   | "contentstack"
   | "cloudflare_images"
   | "ipx"
+  | "astro"
   | "netlify"
   | "imagekit";
 
