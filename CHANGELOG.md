@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.1](https://github.com/ascorbic/unpic/compare/v3.14.0...v3.14.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* **cloudflare:** use optional regex for transformation group [#60](https://github.com/ascorbic/unpic/issues/60) ([2800f41](https://github.com/ascorbic/unpic/commit/2800f41e6226868dd63091881d8750a532932da8))
+
 ## [3.14.0](https://github.com/ascorbic/unpic/compare/v3.13.0...v3.14.0) (2023-11-15)
 
 
