@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.15.0](https://github.com/ascorbic/unpic/compare/v3.14.1...v3.15.0) (2023-12-05)
+
+
+### Features
+
+* astro _image endpoint ([#94](https://github.com/ascorbic/unpic/issues/94)) ([b015190](https://github.com/ascorbic/unpic/commit/b015190d39855232d415c2c101cef2c1d4161ab9))
+
+
+### Bug Fixes
+
+* **contentful:** limit dimensions to 4000px ([#101](https://github.com/ascorbic/unpic/issues/101)) ([8d84f4d](https://github.com/ascorbic/unpic/commit/8d84f4d9987f020e09a705209686f21bf0c7806b))
+
 ## [3.14.1](https://github.com/ascorbic/unpic/compare/v3.14.0...v3.14.1) (2023-11-16)
 
 
