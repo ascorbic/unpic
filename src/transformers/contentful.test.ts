@@ -55,4 +55,62 @@ Deno.test("contentful", async (t) => {
       "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?fit=crop&w=200",
     );
   });
+
+  await t.step("should bracket width if > 4000", () => {
+    const result = transform({
+      url: img,
+      width: 5000,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=4000&fit=fill",
+    );
+  });
+
+  await t.step("should adjust height proportionally if width > 4000", () => {
+    const result = transform({
+      url: img,
+      width: 5000,
+      height: 2000,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=4000&h=1600&fit=fill",
+    );
+  });
+
+  await t.step("should bracket height if > 4000", () => {
+    const result = transform({
+      url: img,
+      height: 5000,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?h=4000&fit=fill",
+    );
+  });
+
+  await t.step("should adjust width proportionally if height > 4000", () => {
+    const result = transform({
+      url: img,
+      width: 2000,
+      height: 5000,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=1600&h=4000&fit=fill",
+    );
+  });
+
+  await t.step("it should adjust width and height if both are > 4000", () => {
+    const result = transform({
+      url: img,
+      width: 6000,
+      height: 4500,
+    });
+    assertEquals(
+      result?.toString(),
+      "https://images.ctfassets.net/aaaa/xxxx/yyyy/how-to-wow-a-customer.jpg?w=4000&h=3000&fit=fill",
+    );
+  });
 });

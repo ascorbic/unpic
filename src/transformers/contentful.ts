@@ -29,6 +29,20 @@ export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
 ) => {
   const url = toUrl(originalUrl);
+  if (width && width > 4000) {
+    if (height) {
+      height = Math.round(height * 4000 / width);
+    }
+    width = 4000;
+  }
+
+  if (height && height > 4000) {
+    if (width) {
+      width = Math.round(width * 4000 / height);
+    }
+    height = 4000;
+  }
+
   setParamIfDefined(url, "w", width, true, true);
   setParamIfDefined(url, "h", height, true, true);
   setParamIfDefined(url, "fm", format);
