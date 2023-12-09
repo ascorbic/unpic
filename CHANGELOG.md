@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.16.0](https://github.com/ascorbic/unpic/compare/v3.15.0...v3.16.0) (2023-12-09)
+
+
+### Features
+
+* add Cloudimage support ([#107](https://github.com/ascorbic/unpic/issues/107)) ([e8df456](https://github.com/ascorbic/unpic/commit/e8df456f80c6c5acfee23579382bf7334b4f67e5))
+
 ## [3.15.0](https://github.com/ascorbic/unpic/compare/v3.14.1...v3.15.0) (2023-12-05)
 
 
