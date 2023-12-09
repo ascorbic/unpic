@@ -4,6 +4,7 @@ import { transform as builderio } from "./transformers/builder.io.ts";
 import { transform as imgix } from "./transformers/imgix.ts";
 import { transform as shopify } from "./transformers/shopify.ts";
 import { transform as wordpress } from "./transformers/wordpress.ts";
+import { transform as cloudimage } from "./transformers/cloudimage.ts";
 import { transform as cloudinary } from "./transformers/cloudinary.ts";
 import { transform as cloudflare } from "./transformers/cloudflare.ts";
 import { transform as bunny } from "./transformers/bunny.ts";
@@ -30,6 +31,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   "builder.io": builderio,
   shopify,
   wordpress,
+  cloudimage,
   cloudinary,
   bunny,
   storyblok,

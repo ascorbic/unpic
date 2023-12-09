@@ -71,5 +71,9 @@
   "imagekit": [
     "Imagekit",
     "https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg"
+  ],
+  "cloudimage": [
+    "Cloudimage",
+    "https://doc.cloudimg.io/sample.li/flat1.jpg?w=450&q=90"
   ]
 }
