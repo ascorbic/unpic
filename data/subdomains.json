@@ -7,5 +7,6 @@
   "cloudinary.com": "cloudinary",
   "kxcdn.com": "keycdn",
   "imgeng.in": "imageengine",
-  "imagekit.io": "imagekit"
+  "imagekit.io": "imagekit",
+  "cloudimg.io": "cloudimage"
 }

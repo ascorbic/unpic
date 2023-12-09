@@ -4,6 +4,7 @@ import { parse as builder } from "./transformers/builder.io.ts";
 import { parse as imgix } from "./transformers/imgix.ts";
 import { parse as shopify } from "./transformers/shopify.ts";
 import { parse as wordpress } from "./transformers/wordpress.ts";
+import { parse as cloudimage } from "./transformers/cloudimage.ts";
 import { parse as cloudinary } from "./transformers/cloudinary.ts";
 import { parse as cloudflare } from "./transformers/cloudflare.ts";
 import { parse as bunny } from "./transformers/bunny.ts";
@@ -29,6 +30,7 @@ export const parsers = {
   "builder.io": builder,
   shopify,
   wordpress,
+  cloudimage,
   cloudinary,
   cloudflare,
   bunny,
