@@ -1,4 +1,4 @@
-name: Deno test
+name: Format
 on:
   pull_request:
   push:
