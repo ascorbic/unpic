@@ -1,9 +1,9 @@
-import { UrlParser, UrlTransformer, ShouldDelegateUrl } from "../types.ts";
+import { ShouldDelegateUrl, UrlParser, UrlTransformer } from "../types.ts";
 import {
   getNumericParam,
   setParamIfDefined,
-  toUrl,
   toCanonicalUrlString,
+  toUrl,
 } from "../utils.ts";
 import { getImageCdnForUrlByDomain } from "../detect.ts";
 
@@ -14,10 +14,10 @@ export interface AstroParams {
 
 export const delegateUrl: ShouldDelegateUrl = (url) => {
   const parsedUrl = toUrl(url);
-  const searchParamHref = parsedUrl.searchParams.get("href")
+  const searchParamHref = parsedUrl.searchParams.get("href");
   const decodedHref = typeof searchParamHref === "string"
     ? decodeURIComponent(searchParamHref)
-    : new URL(parsedUrl.pathname, parsedUrl.origin).toString()
+    : new URL(parsedUrl.pathname, parsedUrl.origin).toString();
   const source = toCanonicalUrlString(toUrl(decodedHref));
 
   if (!source || !source.startsWith("http")) {
@@ -35,11 +35,13 @@ export const delegateUrl: ShouldDelegateUrl = (url) => {
 
 export const parse: UrlParser<AstroParams> = (url) => {
   const parsedUrl = toUrl(url);
-  const searchParamHref = parsedUrl.searchParams.get("href")
+  const searchParamHref = parsedUrl.searchParams.get("href");
   const decodedHref = typeof searchParamHref === "string"
     ? decodeURIComponent(searchParamHref)
-    : new URL(parsedUrl.pathname, parsedUrl.origin).toString()
-  const encodedHref = encodeURIComponent(toCanonicalUrlString(toUrl(decodedHref)));
+    : new URL(parsedUrl.pathname, parsedUrl.origin).toString();
+  const encodedHref = encodeURIComponent(
+    toCanonicalUrlString(toUrl(decodedHref)),
+  );
   const width = getNumericParam(parsedUrl, "w") || undefined;
   const height = getNumericParam(parsedUrl, "h") || undefined;
   const format = parsedUrl.searchParams.get("f") || undefined;
@@ -56,11 +58,13 @@ export const parse: UrlParser<AstroParams> = (url) => {
 };
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, format, },
+  { url: originalUrl, width, height, format },
 ) => {
   const parsedUrl = toUrl(originalUrl);
-  const href = toCanonicalUrlString(new URL(parsedUrl.pathname, parsedUrl.origin))
-  const url = {searchParams: new URLSearchParams()} as URL
+  const href = toCanonicalUrlString(
+    new URL(parsedUrl.pathname, parsedUrl.origin),
+  );
+  const url = { searchParams: new URLSearchParams() } as URL;
 
   setParamIfDefined(url, "href", href, true, true);
   setParamIfDefined(url, "w", width, true, true);
