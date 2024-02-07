@@ -1,5 +1,5 @@
-import { UrlParser, UrlTransformer } from "../types.ts";
-import { toUrl } from "../utils.ts";
+import {UrlParser, UrlTransformer} from "../types.ts";
+import {toUrl} from "../utils.ts";
 
 const getTransformParams = (url: URL) => {
   const transforms = url.searchParams.get('tr') || "";
@@ -21,12 +21,12 @@ export const transform: UrlTransformer = (
   transformParams.w = width ? Math.round(width) : width
   transformParams.h = height ? Math.round(height) : height
 
-  if(!transformParams.fm){
-    transformParams.fm = 'auto'
+  if(!transformParams.f){
+    transformParams.f = 'auto'
   } 
 
   if(format){
-    transformParams.fm = format
+    transformParams.f = format
   }
 
   const tr = Object.keys(transformParams).map(key => {
@@ -52,7 +52,7 @@ export const parse: UrlParser = (
 
   const width = Number(transformParams.w) || undefined;
   const height = Number(transformParams.h) || undefined;
-  const format = transformParams.fm || undefined;
+  const format = transformParams.f || undefined;
 
   parsed.search = "";
 
