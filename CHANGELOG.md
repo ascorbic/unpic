@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # Changelog
 
+## [3.16.1](https://github.com/ascorbic/unpic/compare/v3.16.0...v3.16.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **imagekit:** set format param to "f" ([#116](https://github.com/ascorbic/unpic/issues/116)) ([d06651e](https://github.com/ascorbic/unpic/commit/d06651ed2d74e0c6123855d7129e1abab15c023a))
+
 ## [3.16.0](https://github.com/ascorbic/unpic/compare/v3.15.0...v3.16.0) (2023-12-09)
 
 
