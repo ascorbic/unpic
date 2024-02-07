@@ -1,13 +1,12 @@
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { ParsedUrl } from "../types.ts";
-import { parse, transform, ImageEngineParams } from "./imageengine.ts";
+import { ImageEngineParams, parse, transform } from "./imageengine.ts";
 
-const img =
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg";
-const parseImg = 
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_box" 
-const transformImage = 
-  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_outside/f_png"   
+const img = "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg";
+const parseImg =
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/w_200/h_100/f_webp/m_box";
+const transformImage =
+  "https://blazing-fast-pics.cdn.imgeng.in/images/pic_1.jpg?imgeng=/m_outside/f_png";
 
 Deno.test("ImageEngine parser", async (t) => {
   await t.step("parses a URL", () => {
@@ -45,7 +44,7 @@ Deno.test("ImageEngine transformer", async (t) => {
       url: img,
       width: 200,
       height: 100,
-      format: "webp"
+      format: "webp",
     });
     assertEquals(
       result?.toString(),

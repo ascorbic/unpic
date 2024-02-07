@@ -1,3 +1,4 @@
+<!-- deno-fmt-ignore-file -->
 # Changelog
 
 ## [3.16.1](https://github.com/ascorbic/unpic/compare/v3.16.0...v3.16.1) (2024-02-07)

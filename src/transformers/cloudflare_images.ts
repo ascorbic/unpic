@@ -10,7 +10,9 @@ const cloudflareImagesRegex =
   /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
 
 const parseTransforms = (transformations: string) =>
-  Object.fromEntries(transformations?.split(",")?.map((t) => t.split("=")) ?? []);
+  Object.fromEntries(
+    transformations?.split(",")?.map((t) => t.split("=")) ?? [],
+  );
 
 const formatUrl = (
   {
@@ -25,7 +27,7 @@ const formatUrl = (
   ).join(",");
 
   const pathSegments = [
-      host,
+    host,
     "cdn-cgi",
     "imagedelivery",
     accountHash,

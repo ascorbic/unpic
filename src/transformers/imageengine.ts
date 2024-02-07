@@ -48,7 +48,7 @@ export const OBJECT_TO_DIRECTIVES_MAP: { [key: string]: string } = {
   no_optimization: "pass",
   force_download: "dl",
   max_device_pixel_ratio: "maxdpr",
-  maxDevicePixelRatio: "maxdpr"
+  maxDevicePixelRatio: "maxdpr",
 };
 
 export const parse: UrlParser<ImageEngineParams> = (
@@ -57,27 +57,29 @@ export const parse: UrlParser<ImageEngineParams> = (
   const parsedUrl = toUrl(imageUrl);
   const paramArray = getParameterArray(parsedUrl);
   const baseUrl = getBaseUrl(parsedUrl);
-  let width = undefined, height = undefined,format = undefined; 
+  let width = undefined, height = undefined, format = undefined;
   const params: Record<string, string> = {};
-  if(paramArray.length>0){
-    paramArray.forEach((para:string) => {
-      let key_value = para.split("_")
-      if(key_value.length>1){
-        switch(key_value[0]){
-          case 'w':
-          width = Number(key_value[1]);
-          break; 
-          case 'h':
+  if (paramArray.length > 0) {
+    paramArray.forEach((para: string) => {
+      let key_value = para.split("_");
+      if (key_value.length > 1) {
+        switch (key_value[0]) {
+          case "w":
+            width = Number(key_value[1]);
+            break;
+          case "h":
             height = Number(key_value[1]);
             break;
-          case 'f':
+          case "f":
             format = key_value[1];
             break;
           default:
-            if( Object.values(OBJECT_TO_DIRECTIVES_MAP).includes(key_value[0])){
-              let directive: string = getDirective(key_value[0])
+            if (
+              Object.values(OBJECT_TO_DIRECTIVES_MAP).includes(key_value[0])
+            ) {
+              let directive: string = getDirective(key_value[0]);
               params[directive] = key_value[1];
-            }            
+            }
         }
       }
     });
@@ -85,82 +87,86 @@ export const parse: UrlParser<ImageEngineParams> = (
   return {
     base: baseUrl,
     width,
-    height,    
+    height,
     format,
     params,
     cdn: "imageengine",
   };
 };
 
-export function getDirective(key: string):string{
-  let keyArray = Object.keys(OBJECT_TO_DIRECTIVES_MAP)
-  let directive = keyArray.find(k => OBJECT_TO_DIRECTIVES_MAP[k] === key) || ""
+export function getDirective(key: string): string {
+  let keyArray = Object.keys(OBJECT_TO_DIRECTIVES_MAP);
+  let directive = keyArray.find((k) => OBJECT_TO_DIRECTIVES_MAP[k] === key) ||
+    "";
   return directive;
-};
+}
 
-export function getParameterArray(url: URL){
+export function getParameterArray(url: URL) {
   let url_string = url.toString();
-  let paramArray:any = []
-  if(url_string){
+  let paramArray: any = [];
+  if (url_string) {
     let splitURL: string[] = url_string.split("imgeng=");
-    if(splitURL.length>1){
-      paramArray = splitURL[1].split("/")
-    }      
+    if (splitURL.length > 1) {
+      paramArray = splitURL[1].split("/");
+    }
   }
   return paramArray;
-};
+}
 
-export function getBaseUrl(url: URL){
+export function getBaseUrl(url: URL) {
   let url_string = url.toString();
-  let baseUrl:string = ""
-  if(url_string){
+  let baseUrl: string = "";
+  if (url_string) {
     let splitURL: string[] = url_string.split("imgeng=");
-    if(splitURL.length>1){
-      baseUrl = splitURL[0].slice(0,-1)
+    if (splitURL.length > 1) {
+      baseUrl = splitURL[0].slice(0, -1);
+    } else {
+      baseUrl = url_string;
     }
-    else  
-      baseUrl = url_string;      
   }
   return baseUrl;
-};
+}
 
 export const transform: UrlTransformer = (
-  { url: originalUrl, width, height, format},
+  { url: originalUrl, width, height, format },
 ) => {
   const url = toUrl(originalUrl);
   const src = getBaseUrl(url);
   let directives: Record<string, any> = {};
   const param: [] = url.toString() === src ? [] : getParameterArray(url);
-  if(param.length){
-    directives = getDirectives(param)
+  if (param.length) {
+    directives = getDirectives(param);
   }
-  if(width)
-    directives["width"] = width; 
-  if(height)
+  if (width) {
+    directives["width"] = width;
+  }
+  if (height) {
     directives["height"] = height;
-  if(format)
+  }
+  if (format) {
     directives["format"] = format;
-  if(!directives.hasOwnProperty('fit')){
-    directives = {...directives,"fit": "cropbox"};
+  }
+  if (!directives.hasOwnProperty("fit")) {
+    directives = { ...directives, "fit": "cropbox" };
   }
   let directives_string = build_IE_directives(directives);
   let query_string = build_IE_query_string(directives_string);
-  let query_prefix = query_string === "" ? "" :	(src.includes("?") ? "&" : "?");    
-  return `${src}${query_prefix}${query_string}`;  
+  let query_prefix = query_string === "" ? "" : (src.includes("?") ? "&" : "?");
+  return `${src}${query_prefix}${query_string}`;
 };
 
-export function build_IE_directives(directives:any): string {
+export function build_IE_directives(directives: any): string {
   return Object.entries(directives).reduce((acc, [k, v]) => {
-    return acc + maybe_create_directive(k, v)
-    }, "");
-};
+    return acc + maybe_create_directive(k, v);
+  }, "");
+}
 
 export function build_IE_query_string(directives_string: string): string {
   if (directives_string && directives_string !== "") {
     return `imgeng=${directives_string}`;
   }
-  return ""
-};
+  return "";
+}
 
 export function maybe_create_directive(directive: string, value: any): string {
   let translated_directive = OBJECT_TO_DIRECTIVES_MAP[directive];
@@ -169,20 +175,20 @@ export function maybe_create_directive(directive: string, value: any): string {
     return `/${translated_directive}_${value}`;
   }
   return "";
-};
+}
 
-export function getDirectives(paramArray: []): {}{
+export function getDirectives(paramArray: []): {} {
   let directives: Record<string, any> = {};
-  paramArray.forEach((para:string)=>{
+  paramArray.forEach((para: string) => {
     let keyValue = para.split("_");
-    if(keyValue.length>1){
+    if (keyValue.length > 1) {
       let key = keyValue[0];
       let value = keyValue[1];
       let directiveKey = getDirective(key);
-      if(directiveKey){
+      if (directiveKey) {
         directives[directiveKey] = value;
       }
     }
-  })
-  return directives
+  });
+  return directives;
 }

@@ -1,9 +1,5 @@
 import { UrlParser, UrlTransformer } from "../types.ts";
-import {
-  getNumericParam,
-  setParamIfDefined,
-  toUrl,
-} from "../utils.ts";
+import { getNumericParam, setParamIfDefined, toUrl } from "../utils.ts";
 
 export interface CloudimageParams {
   quality?: number;
@@ -21,7 +17,7 @@ export const parse: UrlParser<CloudimageParams> = (url) => {
     height,
     base: parsedUrl.toString(),
     params: {
-      quality
+      quality,
     },
     cdn: "cloudimage",
   };
