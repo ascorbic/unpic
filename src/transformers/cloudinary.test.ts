@@ -7,7 +7,8 @@ const img =
 
 const imgNoTransforms = "https://res.cloudinary.com/demo/image/upload/dog.jpg";
 
-const imgFetchNoTransforms = "https://res.cloudinary.com/demo/image/fetch/https://mydomain.com/images/logo.jpg";
+const imgFetchNoTransforms =
+  "https://res.cloudinary.com/demo/image/fetch/https://mydomain.com/images/logo.jpg";
 
 const imgWithPath =
   "https://res.cloudinary.com/demo/image/upload/b_rgb:FFFFFF,c_fill,dpr_2.0,f_auto,g_auto,h_600,q_auto,w_600/v1/Product%20gallery%20demo/New%20Demo%20Pages/Tshirt/tshirt1";
@@ -69,7 +70,8 @@ Deno.test("cloudinary parser", async (t) => {
   await t.step("parses a fetch URL without transforms", () => {
     const parsed = parse(imgFetchNoTransforms);
     const expected: ParsedUrl<CloudinaryParams> = {
-      base: "https://res.cloudinary.com/demo/image/fetch/https://mydomain.com/images/logo",
+      base:
+        "https://res.cloudinary.com/demo/image/fetch/https://mydomain.com/images/logo",
       cdn: "cloudinary",
       format: "jpg",
       width: undefined,
@@ -207,7 +209,7 @@ Deno.test("cloudinary transformer", async (t) => {
     );
   });
 
-    await t.step("transforms a fetch URL without parsed transforms", () => {
+  await t.step("transforms a fetch URL without parsed transforms", () => {
     const result = transform({
       url: imgFetchNoTransforms,
       width: 100,
@@ -215,7 +217,7 @@ Deno.test("cloudinary transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://res.cloudinary.com/demo/image/fetch/w_100,h_200,c_lfill,f_auto/https://mydomain.com/images/logo.jpg"
+      "https://res.cloudinary.com/demo/image/fetch/w_100,h_200,c_lfill,f_auto/https://mydomain.com/images/logo.jpg",
     );
   });
 

@@ -9,27 +9,32 @@ const img =
 Deno.test("astro parser", () => {
   const parsed = parse(img);
   const expected: ParsedUrl<AstroParams> = {
-    base: "/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
+    base:
+      "/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
     params: {
-      "href": "https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg"
+      "href":
+        "https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
     },
-    cdn: "astro"
-  }
+    cdn: "astro",
+  };
   assertEquals(JSON.stringify(parsed), JSON.stringify(expected));
 });
 
 Deno.test("astro parser endpoint", () => {
-  const parsed = parse("/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg");
+  const parsed = parse(
+    "/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
+  );
   const expected: ParsedUrl<AstroParams> = {
-    base: "/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
+    base:
+      "/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
     params: {
-      "href": "https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg"
+      "href":
+        "https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg",
     },
-    cdn: "astro"
-  }
+    cdn: "astro",
+  };
   assertEquals(JSON.stringify(parsed), JSON.stringify(expected));
 });
-
 
 Deno.test("astro", async (t) => {
   await t.step("should format a URL", () => {
