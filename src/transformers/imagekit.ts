@@ -1,16 +1,15 @@
-import {UrlParser, UrlTransformer} from "../types.ts";
-import {toUrl} from "../utils.ts";
+import { UrlParser, UrlTransformer } from "../types.ts";
+import { toUrl } from "../utils.ts";
 
 const getTransformParams = (url: URL) => {
-  const transforms = url.searchParams.get('tr') || "";
+  const transforms = url.searchParams.get("tr") || "";
 
-  return transforms.split(',').reduce((acc: any, transform: any)=> {
-    const [key, value] = transform.split('-');
+  return transforms.split(",").reduce((acc: any, transform: any) => {
+    const [key, value] = transform.split("-");
     acc[key] = value;
     return acc;
   }, {});
-}
-
+};
 
 export const transform: UrlTransformer = (
   { url: originalUrl, width, height, format },
@@ -18,28 +17,28 @@ export const transform: UrlTransformer = (
   const url = toUrl(originalUrl);
   const transformParams = getTransformParams(url);
 
-  transformParams.w = width ? Math.round(width) : width
-  transformParams.h = height ? Math.round(height) : height
+  transformParams.w = width ? Math.round(width) : width;
+  transformParams.h = height ? Math.round(height) : height;
 
-  if(!transformParams.f){
-    transformParams.f = 'auto'
-  } 
-
-  if(format){
-    transformParams.f = format
+  if (!transformParams.f) {
+    transformParams.f = "auto";
   }
 
-  const tr = Object.keys(transformParams).map(key => {
+  if (format) {
+    transformParams.f = format;
+  }
+
+  const tr = Object.keys(transformParams).map((key) => {
     const value = transformParams[key];
 
-    if(value){
+    if (value) {
       return `${key}-${value}`;
     }
   })
-  .filter(x => x)
-  .join(',');
+    .filter((x) => x)
+    .join(",");
 
-  url.searchParams.set('tr', tr);
+  url.searchParams.set("tr", tr);
 
   return url;
 };
@@ -48,7 +47,7 @@ export const parse: UrlParser = (
   url,
 ) => {
   const parsed = toUrl(url);
-  const transformParams = getTransformParams(parsed)
+  const transformParams = getTransformParams(parsed);
 
   const width = Number(transformParams.w) || undefined;
   const height = Number(transformParams.h) || undefined;
@@ -65,5 +64,3 @@ export const parse: UrlParser = (
     cdn: "imagekit",
   };
 };
-
-
