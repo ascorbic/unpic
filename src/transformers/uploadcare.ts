@@ -359,7 +359,8 @@ export const generate: UrlGenerator<UploadcareParams> = ({
   height,
   params,
 }) => {
-  const parsed = parse(base.toString());
+  const baseUrl = base.toString();
+  const parsed = parse(baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`);
 
   const props: UploadcareParams = {
     operations: {},
