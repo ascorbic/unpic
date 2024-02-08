@@ -75,5 +75,9 @@
   "cloudimage": [
     "Cloudimage",
     "https://doc.cloudimg.io/sample.li/flat1.jpg?w=450&q=90"
+  ],
+  "uploadcare": [
+    "Uploadcare",
+    "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/"
   ]
 }
