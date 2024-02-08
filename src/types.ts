@@ -98,6 +98,7 @@ export type ImageCdn =
   | "ipx"
   | "astro"
   | "netlify"
-  | "imagekit";
+  | "imagekit"
+  | "uploadcare";
 
 export type SupportedImageCdn = ImageCdn;
