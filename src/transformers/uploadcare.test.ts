@@ -9,7 +9,7 @@ const img =
 const imgNoOperations = baseImage;
 
 const imgSubdomain =
-  "https://private-name.example.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/";
+  "https://private-name.example.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/";
 
 const imgWithFilename =
   "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/auto/tshirt1.jpg";
@@ -23,7 +23,7 @@ Deno.test("uploadcare parser", async (t) => {
       cdn: "uploadcare",
       params: {
         host: "ucarecdn.com",
-        uuid: "d7fe74ac-65b8-4ade-875f-ccd92759a70f",
+        uuid: "661bd414-064c-477a-b50f-8ffd8f66aa49",
         operations: {
           resize: "800x550",
           format: "auto",
@@ -41,7 +41,7 @@ Deno.test("uploadcare parser", async (t) => {
       cdn: "uploadcare",
       params: {
         host: "ucarecdn.com",
-        uuid: "d7fe74ac-65b8-4ade-875f-ccd92759a70f",
+        uuid: "661bd414-064c-477a-b50f-8ffd8f66aa49",
         operations: {
           format: "auto",
         },
@@ -55,11 +55,11 @@ Deno.test("uploadcare parser", async (t) => {
     const parsed = parse(imgSubdomain);
     const expected: ParsedUrl<UploadcareParams> = {
       base:
-        "https://private-name.example.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/-/format/auto/",
+        "https://private-name.example.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/-/format/auto/",
       cdn: "uploadcare",
       params: {
         host: "private-name.example.com",
-        uuid: "d7fe74ac-65b8-4ade-875f-ccd92759a70f",
+        uuid: "661bd414-064c-477a-b50f-8ffd8f66aa49",
         operations: {
           resize: "800x550",
           format: "auto",
@@ -78,7 +78,7 @@ Deno.test("uploadcare parser", async (t) => {
       cdn: "uploadcare",
       params: {
         host: "ucarecdn.com",
-        uuid: "d7fe74ac-65b8-4ade-875f-ccd92759a70f",
+        uuid: "661bd414-064c-477a-b50f-8ffd8f66aa49",
         operations: {
           resize: "800x550",
           format: "auto",
