@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # Changelog
 
+## [3.17.0](https://github.com/ascorbic/unpic/compare/v3.16.1...v3.17.0) (2024-02-08)
+
+
+### Features
+
+* add Uploadcare support ([#120](https://github.com/ascorbic/unpic/issues/120)) ([68307a4](https://github.com/ascorbic/unpic/commit/68307a492a52b9db1d93f063b6b28b5e30db5c30))
+
 ## [3.16.1](https://github.com/ascorbic/unpic/compare/v3.16.0...v3.16.1) (2024-02-07)
 
 
