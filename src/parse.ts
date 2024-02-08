@@ -22,6 +22,7 @@ import { parse as ipx } from "./transformers/ipx.ts";
 import { parse as astro } from "./transformers/astro.ts";
 import { parse as netlify } from "./transformers/netlify.ts";
 import { parse as imagekit } from "./transformers/imagekit.ts";
+import { parse as uploadcare } from "./transformers/uploadcare.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -48,6 +49,7 @@ export const parsers = {
   astro,
   netlify,
   imagekit,
+  uploadcare,
 };
 
 export const cdnIsSupportedForParse = (
