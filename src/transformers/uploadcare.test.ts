@@ -2,9 +2,9 @@ import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { ParsedUrl } from "../types.ts";
 import { parse, transform, UploadcareParams } from "./uploadcare.ts";
 
-const baseImage = "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/";
+const baseImage = "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/";
 const img =
-  "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/";
+  "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/";
 
 const imgNoOperations = baseImage;
 
@@ -12,14 +12,14 @@ const imgSubdomain =
   "https://private-name.example.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/";
 
 const imgWithFilename =
-  "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/auto/tshirt1.jpg";
+  "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/auto/tshirt1.jpg";
 
 Deno.test("uploadcare parser", async (t) => {
   await t.step("parses a URL", () => {
     const parsed = parse(img);
     const expected: ParsedUrl<UploadcareParams> = {
       base:
-        "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/-/format/auto/",
+        "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/-/format/auto/",
       cdn: "uploadcare",
       params: {
         host: "ucarecdn.com",
@@ -74,7 +74,7 @@ Deno.test("uploadcare parser", async (t) => {
     const parsed = parse(imgWithFilename);
     const expected: ParsedUrl<UploadcareParams> = {
       base:
-        "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/800x550/-/format/auto/tshirt1.jpg",
+        "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/800x550/-/format/auto/tshirt1.jpg",
       cdn: "uploadcare",
       params: {
         host: "ucarecdn.com",
@@ -99,7 +99,7 @@ Deno.test("uploadcare transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/100x200/-/format/auto/",
+      "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/100x200/-/format/auto/",
     );
   });
 
@@ -111,7 +111,7 @@ Deno.test("uploadcare transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/100.6x200.2/-/format/auto/",
+      "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/100.6x200.2/-/format/auto/",
     );
   });
 
@@ -123,7 +123,7 @@ Deno.test("uploadcare transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/format/auto/-/resize/100x200/",
+      "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/format/auto/-/resize/100x200/",
     );
   });
 
@@ -135,7 +135,7 @@ Deno.test("uploadcare transformer", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ucarecdn.com/d7fe74ac-65b8-4ade-875f-ccd92759a70f/-/resize/100x200/-/format/auto/tshirt1.jpg",
+      "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/-/resize/100x200/-/format/auto/tshirt1.jpg",
     );
   });
 });
