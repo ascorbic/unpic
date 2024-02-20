@@ -79,5 +79,9 @@
   "uploadcare": [
     "Uploadcare",
     "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/"
+  ],
+  "supabase": [
+    "Supabase",
+    "https://yowqvxclgkqcewrmwzzv.supabase.co/storage/v1/object/public/test/unpic.avif"
   ]
 }
