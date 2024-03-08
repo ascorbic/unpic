@@ -23,6 +23,7 @@ import { transform as astro } from "./transformers/astro.ts";
 import { transform as netlify } from "./transformers/netlify.ts";
 import { transform as imagekit } from "./transformers/imagekit.ts";
 import { transform as uploadcare } from "./transformers/uploadcare.ts";
+import { transform as supabase } from "./transformers/supabase.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
@@ -51,6 +52,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
   netlify,
   imagekit,
   uploadcare,
+  supabase,
 }[cdn]);
 
 /**

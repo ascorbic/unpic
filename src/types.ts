@@ -99,6 +99,7 @@ export type ImageCdn =
   | "astro"
   | "netlify"
   | "imagekit"
-  | "uploadcare";
+  | "uploadcare"
+  | "supabase";
 
 export type SupportedImageCdn = ImageCdn;

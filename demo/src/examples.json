@@ -79,5 +79,9 @@
   "uploadcare": [
     "Uploadcare",
     "https://ucarecdn.com/661bd414-064c-477a-b50f-8ffd8f66aa49/"
+  ],
+  "supabase": [
+    "Supabase",
+    "https://enlyjtqaeutqbhqgkadn.supabase.co/storage/v1/object/public/sample-public-bucket/alexander-shatov-PHH_0uw9-Qw-unsplash.jpg"
   ]
 }
