@@ -6,6 +6,8 @@ import {
 } from "../types.ts";
 import { roundIfNumeric, toUrl } from "../utils.ts";
 
+const ALLOWED_FORMATS = ["origin"];
+
 const STORAGE_URL_PREFIX = "/storage/v1/object/public/";
 const RENDER_URL_PREFIX = "/storage/v1/render/image/public/";
 
@@ -94,7 +96,7 @@ export const generate: UrlGenerator<SupabaseParams> = (
 
   if (height) searchParams.set("height", roundIfNumeric(height).toString());
 
-  if (format) searchParams.set("format", format);
+  if (format && ALLOWED_FORMATS.includes(format)) searchParams.set("format", format);
 
   if (params?.quality) {
     searchParams.set("quality", roundIfNumeric(params.quality).toString());
