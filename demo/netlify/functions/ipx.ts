@@ -12,6 +12,7 @@ const ipx = createIPX({
   httpStorage: ipxHttpStorage({
     domains: [
       "placekitten.com",
+      "unpic.pics",
     ],
   }),
   storage: ipxFSStorage({ dir: join(tmpdir(), "ipx") }),
