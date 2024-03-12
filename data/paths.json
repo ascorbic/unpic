@@ -7,5 +7,7 @@
   "/is/image": "scene7",
   "/_ipx/": "ipx",
   "/_image": "astro",
-  "/.netlify/images": "netlify"
+  "/.netlify/images": "netlify",
+  "/storage/v1/object/public/": "supabase",
+  "/storage/v1/render/image/public/": "supabase"
 }
