@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # Changelog
 
+## [3.18.0](https://github.com/ascorbic/unpic/compare/v3.17.0...v3.18.0) (2024-03-12)
+
+
+### Features
+
+* add Supabase support ([#123](https://github.com/ascorbic/unpic/issues/123)) ([0aa185a](https://github.com/ascorbic/unpic/commit/0aa185ac71263e4d487d5ece19f316f65a6c0403))
+
 ## [3.17.0](https://github.com/ascorbic/unpic/compare/v3.16.1...v3.17.0) (2024-02-08)
 
 
