@@ -10,5 +10,6 @@
   "ip.keycdn.com": "keycdn",
   "assets.caisy.io": "bunny",
   "images.contentstack.io": "contentstack",
-  "ucarecdn.com": "uploadcare"
+  "ucarecdn.com": "uploadcare",
+  "imagedelivery.net": "cloudflare_images"
 }

@@ -8,6 +8,8 @@ import { toUrl } from "../utils.ts";
 
 const cloudflareImagesRegex =
   /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
+const imagedeliveryRegex =
+  /https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g
 
 const parseTransforms = (transformations: string) =>
   Object.fromEntries(
@@ -22,14 +24,16 @@ const formatUrl = (
     imageId,
   }: CloudflareImagesParams,
 ): string => {
-  const transformString = Object.entries(transformations).map(
-    ([key, value]) => `${key}=${value}`,
-  ).join(",");
+  const transformString = Object.entries(transformations)
+    .filter(([key, value]) => Boolean(key) && value !== undefined)
+    .map(([key, value]) => `${key}=${value}`)
+    .join(",");
 
   const pathSegments = [
-    host,
-    "cdn-cgi",
-    "imagedelivery",
+    ...(host === 'imagedelivery.net'
+      ? [host]
+      : [host, "cdn-cgi", "imagedelivery"]
+    ),
     accountHash,
     imageId,
     transformString,
@@ -47,7 +51,10 @@ export const parse: UrlParser<CloudflareImagesParams> = (
   imageUrl,
 ) => {
   const url = toUrl(imageUrl);
-  const matches = [...url.toString().matchAll(cloudflareImagesRegex)];
+  const matches = [
+    ...url.toString().matchAll(cloudflareImagesRegex),
+    ...url.toString().matchAll(imagedeliveryRegex),
+  ];
   if (!matches.length) {
     throw new Error("Invalid Cloudflare Images URL");
   }
