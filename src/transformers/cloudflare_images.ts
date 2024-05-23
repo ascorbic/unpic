@@ -9,7 +9,7 @@ import { toUrl } from "../utils.ts";
 const cloudflareImagesRegex =
   /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
 const imagedeliveryRegex =
-  /https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g
+  /https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
 
 const parseTransforms = (transformations: string) =>
   Object.fromEntries(
@@ -30,10 +30,9 @@ const formatUrl = (
     .join(",");
 
   const pathSegments = [
-    ...(host === 'imagedelivery.net'
+    ...(host === "imagedelivery.net"
       ? [host]
-      : [host, "cdn-cgi", "imagedelivery"]
-    ),
+      : [host, "cdn-cgi", "imagedelivery"]),
     accountHash,
     imageId,
     transformString,
