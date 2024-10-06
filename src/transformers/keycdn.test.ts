@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "jsr:@std/assert";
 import { KeyCDNParams, parse, transform } from "./keycdn.ts";
 import { ParsedUrl } from "../types.ts";
 import { getImageCdnForUrl } from "../detect.ts";

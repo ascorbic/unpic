@@ -1,0 +1,70 @@
+import { Operations, URLTransformer } from "../types.ts";
+import {
+	createOperationsGenerator,
+	extractFromURL,
+	toCanonicalUrlString,
+} from "../utils.ts";
+
+import { URLGenerator } from "../types.ts";
+
+export type FitType = "cover" | "contain" | "fill" | "inside" | "outside";
+
+export type Position =
+	| "center"
+	| "top"
+	| "right top"
+	| "right"
+	| "right bottom"
+	| "bottom"
+	| "left bottom"
+	| "left"
+	| "left top";
+
+export type ImageFormat = "jpg" | "jpeg" | "png" | "gif" | "webp";
+
+export interface BuilderOperations extends Operations {
+	/**
+	 * Defines how the image fits into the specified dimensions.
+	 * Possible values:
+	 * - `cover`: Scales the image to cover the target dimensions while maintaining aspect ratio.
+	 * - `contain`: Scales the image to fit within the target dimensions without cropping.
+	 * - `fill`: Stretches the image to fill both dimensions, potentially distorting the aspect ratio.
+	 * - `inside`: Scales the image to fit within the target dimensions, with both sides being within the limits.
+	 * - `outside`: Scales the image to be fully outside the target dimensions, while maintaining aspect ratio.
+	 */
+	fit?: FitType;
+
+	/**
+	 * Defines the cropping anchor point when resizing the image.
+	 * Possible values:
+	 * - `center`, `top`, `right top`, `right`, `right bottom`, `bottom`, `left bottom`, `left`, `left top`.
+	 */
+	position?: Position;
+}
+
+const operationsGenerator = createOperationsGenerator<BuilderOperations>({
+	defaults: {
+		fit: "cover",
+	},
+});
+
+export const generate: URLGenerator<BuilderOperations> = (
+	src,
+	modifiers = {},
+) => {
+	const operations = operationsGenerator(modifiers);
+	const url = new URL(src);
+	url.search = operations;
+	return toCanonicalUrlString(url);
+};
+
+export const transform: URLTransformer<BuilderOperations> = (
+	src,
+	operations = {},
+) => {
+	const base = extractFromURL(src);
+	return generate(base.src, {
+		...base.operations,
+		...operations,
+	});
+};

@@ -5,5 +5,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "https://esm.sh/preact@10.11.2"
+  },
+  "fmt": {
+    "useTabs": false
   }
 }
