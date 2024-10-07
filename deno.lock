@@ -333,6 +333,8 @@
     "https://deno.land/x/wasmbuild@0.13.0/loader.ts": "d98d195a715f823151cbc8baa3f32127337628379a02d9eb2a3c5902dbccfc02",
     "https://esm.sh/preact@10.11.2/jsx-runtime": "40654c7e9066221bab024d036ab828d9e9eb7ae0f386ace02d86c0cc8bb22ce0",
     "https://esm.sh/stable/preact@10.11.2/deno/jsx-runtime.js": "e04822710db4725f5ed01cf21f8ef713fbf10f6bc472415b8fec3801bba3133e",
-    "https://esm.sh/stable/preact@10.11.2/deno/preact.js": "10e7be6ea2698598105f404198789d8a34fd6a1ca020482f94eaaaca736badf5"
+    "https://esm.sh/stable/preact@10.11.2/deno/preact.js": "10e7be6ea2698598105f404198789d8a34fd6a1ca020482f94eaaaca736badf5",
+    "https://esm.sh/stable/preact@10.11.2/denonext/src.js": "51fec7a6abc7c997b03411e7905968eb1cd832622039cc157223d2d31968507a",
+    "https://esm.sh/v96/preact@10.11.2/src/index.js": "726d661ce9b6fa58cd440f067d80d3be289953f4cff38c7be7f589fb507d8f7f"
   }
 }

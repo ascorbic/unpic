@@ -1,4 +1,4 @@
-import { Operations, URLTransformer } from "../types.ts";
+import { ImageFormat, Operations, URLTransformer } from "../types.ts";
 import {
 	clampDimensions,
 	createOperationsGenerator,
@@ -22,8 +22,6 @@ export type FocusArea =
 	| "bottom_left"
 	| "face"
 	| "faces";
-
-export type ImageFormat = "jpg" | "png" | "webp" | "avif";
 
 export interface ContentfulOperations extends Operations {
 	/**
@@ -113,7 +111,7 @@ const operationsGenerator = createOperationsGenerator<
 
 export const generate: URLGenerator<ContentfulOperations> = (
 	src,
-	modifiers = {},
+	modifiers,
 ) => {
 	const operations = operationsGenerator(modifiers);
 	const url = new URL(src);
@@ -123,7 +121,7 @@ export const generate: URLGenerator<ContentfulOperations> = (
 
 export const transform: URLTransformer<ContentfulOperations> = (
 	src,
-	operations = {},
+	operations,
 ) => {
 	const { width, height } = clampDimensions(operations, 4000, 4000);
 

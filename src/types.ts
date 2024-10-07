@@ -1,3 +1,5 @@
+import { Image } from "https://deno.land/x/jpegts@1.1/mod.ts";
+
 /**
  * Options to transform an image URL
  */
@@ -116,41 +118,70 @@ export interface OperationMap<TOperations extends Operations = Operations> {
 }
 
 export interface FormatMap {
-	jpeg?: string;
-	jpg?: never;
-	[key: string]: string | undefined;
+	// deno-lint-ignore ban-types
+	[key: string]: ImageFormat | (string & {});
 }
 
-export interface Operations {
+export type ImageFormat = "jpeg" | "jpg" | "png" | "webp" | "avif";
+
+// deno-lint-ignore ban-types
+export interface Operations<TImageFormat = (string & {})> {
 	width?: number;
 	height?: number;
-	format?: string;
+	format?: ImageFormat | TImageFormat;
 	quality?: number;
 }
 
 export interface OperationGeneratorConfig<
 	TOperations extends Operations = Operations,
 > {
+	/**
+	 * Maps standard operation names to their equivalent with this provider.
+	 * Keys are any of width, height, format, quality. Only include those
+	 * that are different from the standard.
+	 */
 	keyMap?: OperationMap<TOperations>;
+	/**
+	 * Defaults that should always be applied to operations unless overridden.
+	 */
 	defaults?: Partial<TOperations>;
+	/**
+	 * Maps standard format names to their equivalent with this provider.
+	 * Only include those that are different from the standard.
+	 */
 	formatMap?: FormatMap;
+	/**
+	 * Custom formatter for the operations. Defaults to query string.
+	 */
 	formatter?: OperationFormatter<TOperations>;
 }
 
 export type URLGenerator<
 	TOperations extends Operations = Operations,
 	TOptions = undefined,
-> = (
-	src: string | URL,
-	operations?: TOperations,
-	options?: TOptions,
-) => string;
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (src: string | URL, operations: TOperations, options: TOptions) => string;
 
 export type URLTransformer<
 	TOperations extends Operations = Operations,
 	TOptions = undefined,
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (src: string | URL, operations: TOperations, options: TOptions) => string;
+
+export type OperationExtractor<
+	TOperations extends Operations = Operations,
+	TOptions = undefined,
 > = (
-	src: string | URL,
-	operations?: TOperations,
+	url: string | URL,
 	options?: TOptions,
-) => string;
+) => TOptions extends undefined ? {
+		operations: TOperations;
+		src: string;
+	}
+	: {
+		operations: TOperations;
+		src: string;
+		options: Partial<TOptions>;
+	};

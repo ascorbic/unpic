@@ -1,8 +1,9 @@
-import { Operations, URLTransformer } from "../types.ts";
+import { OperationExtractor, Operations, URLTransformer } from "../types.ts";
 import {
 	createOperationsGenerator,
 	extractFromURL,
 	toCanonicalUrlString,
+	toUrl,
 } from "../utils.ts";
 
 import { URLGenerator } from "../types.ts";
@@ -19,8 +20,6 @@ export type Position =
 	| "left bottom"
 	| "left"
 	| "left top";
-
-export type ImageFormat = "jpg" | "jpeg" | "png" | "gif" | "webp";
 
 export interface BuilderOperations extends Operations {
 	/**
@@ -48,21 +47,23 @@ const operationsGenerator = createOperationsGenerator<BuilderOperations>({
 	},
 });
 
+export const extract: OperationExtractor<BuilderOperations> = extractFromURL;
+
 export const generate: URLGenerator<BuilderOperations> = (
 	src,
-	modifiers = {},
+	modifiers,
 ) => {
 	const operations = operationsGenerator(modifiers);
-	const url = new URL(src);
+	const url = toUrl(src);
 	url.search = operations;
 	return toCanonicalUrlString(url);
 };
 
 export const transform: URLTransformer<BuilderOperations> = (
 	src,
-	operations = {},
+	operations,
 ) => {
-	const base = extractFromURL(src);
+	const base = extract(src);
 	return generate(base.src, {
 		...base.operations,
 		...operations,

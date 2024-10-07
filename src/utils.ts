@@ -1,4 +1,5 @@
 import {
+	OperationExtractor,
 	OperationFormatter,
 	OperationGeneratorConfig,
 	OperationMap,
@@ -150,7 +151,7 @@ export function clampDimensions(
 	return { width, height };
 }
 
-export function extractFromURL(url: string | URL) {
+export const extractFromURL: OperationExtractor = (url: string | URL) => {
 	const parsedUrl = toUrl(url);
 	const operations = Object.fromEntries(
 		parsedUrl.searchParams.entries(),
@@ -159,7 +160,7 @@ export function extractFromURL(url: string | URL) {
 		operations,
 		src: parsedUrl.origin + parsedUrl.pathname,
 	};
-}
+};
 
 export function normaliseOperations<T extends Operations = Operations>(
 	{ keyMap = {}, formatMap = {}, defaults = {} }: Omit<
