@@ -1,4 +1,9 @@
-import { ImageFormat, Operations, URLTransformer } from "../types.ts";
+import {
+	ImageFormat,
+	OperationExtractor,
+	Operations,
+	URLTransformer,
+} from "../types.ts";
 import {
 	clampDimensions,
 	createOperationsGenerator,
@@ -119,13 +124,18 @@ export const generate: URLGenerator<ContentfulOperations> = (
 	return toCanonicalUrlString(url);
 };
 
+export const extract: OperationExtractor<ContentfulOperations> = extractFromURL;
+
 export const transform: URLTransformer<ContentfulOperations> = (
 	src,
 	operations,
 ) => {
 	const { width, height } = clampDimensions(operations, 4000, 4000);
 
-	const base = extractFromURL(src);
+	const base = extract(src);
+	if (!base) {
+		return generate(src, operations);
+	}
 	return generate(base.src, {
 		...base.operations,
 		...operations,

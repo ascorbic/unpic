@@ -1,4 +1,3 @@
-import { options } from "https://esm.sh/v96/preact@10.11.2/src/index.js";
 import { getImageCdnForUrlByPath } from "../detect.ts";
 import {
 	OperationExtractor,
@@ -9,7 +8,9 @@ import {
 import { ImageFormat } from "../types.ts";
 import {
 	createFormatter,
-	createOperationsGenerator,
+	createOperationsHandlers,
+	createParser,
+	stripLeadingSlash,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -55,6 +56,7 @@ export interface CloudflareOperations extends Operations<"auto" | "json"> {
 
 	/** Output image format, or "auto" to choose based on browser support. */
 	format?: ImageFormat | "auto" | "json";
+	f?: ImageFormat | "auto" | "json";
 
 	/** Gamma correction factor. */
 	gamma?: number;
@@ -62,17 +64,11 @@ export interface CloudflareOperations extends Operations<"auto" | "json"> {
 	/** Cropping gravity (focal point) or alignment. */
 	gravity?: "auto" | "left" | "right" | "top" | "bottom" | string;
 
-	/** Maximum image height in pixels. */
-	height?: number;
-
 	/** Control the preservation of metadata. */
 	metadata?: "keep" | "copyright" | "none";
 
 	/** Redirect to original image if transformation fails. */
 	onerror?: "redirect";
-
-	/** Image quality level (1-100). */
-	quality?: number;
 
 	/** Rotate the image by 90, 180, or 270 degrees. */
 	rotate?: 90 | 180 | 270;
@@ -89,9 +85,6 @@ export interface CloudflareOperations extends Operations<"auto" | "json"> {
 		width?: number;
 		height?: number;
 	};
-
-	/** Maximum image width in pixels. */
-	width?: number;
 }
 
 export interface CloudflareOptions {
@@ -99,9 +92,12 @@ export interface CloudflareOptions {
 	domain?: string;
 }
 
-const operationsGenerator = createOperationsGenerator<
+const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	CloudflareOperations
 >({
+	keyMap: {
+		"format": "f",
+	},
 	defaults: {
 		format: "auto",
 		fit: "cover",
@@ -110,6 +106,7 @@ const operationsGenerator = createOperationsGenerator<
 		jpg: "jpeg",
 	},
 	formatter: createFormatter(",", "="),
+	parser: createParser(",", "="),
 });
 
 export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (
@@ -121,7 +118,9 @@ export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (
 ) => {
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(domain ? `https://${domain}` : "/");
-	url.pathname = `/cdn-cgi/image/${modifiers}/${src}`;
+	url.pathname = `/cdn-cgi/image/${modifiers}/${
+		stripLeadingSlash(src.toString())
+	}`;
 	return toCanonicalUrlString(url);
 };
 
@@ -130,12 +129,13 @@ export const extract: OperationExtractor<
 	CloudflareOptions
 > = (url, options) => {
 	const parsedUrl = toUrl(url);
-	const [, , modifiers, src] = parsedUrl.pathname.split("/");
-	const operations = Object.fromEntries(
-		modifiers.split(",").map((pair) => pair.split("=")),
-	);
+	if (!parsedUrl.pathname.startsWith("/cdn-cgi/image/")) {
+		return null;
+	}
+	const [, , , modifiers, ...src] = parsedUrl.pathname.split("/");
+	const operations = operationsParser(modifiers);
 	return {
-		src,
+		src: toCanonicalUrlString(toUrl(src.join("/"))),
 		operations,
 		options: {
 			domain: options?.domain || parsedUrl.hostname === "n"
@@ -156,10 +156,12 @@ export const transform: URLTransformer<
 	const url = toUrl(src);
 	if (getImageCdnForUrlByPath(url) === "cloudflare") {
 		const base = extract(url, options);
-		return generate(base.src, {
-			...base.operations,
-			...operations,
-		}, base.options);
+		if (base) {
+			return generate(base.src, {
+				...base.operations,
+				...operations,
+			}, base.options);
+		}
 	}
 	return generate(src, operations, options);
 };

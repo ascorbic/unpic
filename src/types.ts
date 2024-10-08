@@ -110,6 +110,10 @@ export type OperationFormatter<T extends Operations = Operations> = (
 	operations: T,
 ) => string;
 
+export type OperationParser<T extends Operations = Operations> = (
+	url: string | URL,
+) => T;
+
 export interface OperationMap<TOperations extends Operations = Operations> {
 	width?: keyof TOperations | false;
 	height?: keyof TOperations | false;
@@ -132,7 +136,7 @@ export interface Operations<TImageFormat = (string & {})> {
 	quality?: number;
 }
 
-export interface OperationGeneratorConfig<
+export interface ProviderConfig<
 	TOperations extends Operations = Operations,
 > {
 	/**
@@ -154,6 +158,10 @@ export interface OperationGeneratorConfig<
 	 * Custom formatter for the operations. Defaults to query string.
 	 */
 	formatter?: OperationFormatter<TOperations>;
+	/**
+	 * Operation extractor for the provider. Defaults to query parser.
+	 */
+	parser?: OperationParser<TOperations>;
 }
 
 export type URLGenerator<
@@ -176,12 +184,14 @@ export type OperationExtractor<
 > = (
 	url: string | URL,
 	options?: TOptions,
-) => TOptions extends undefined ? {
-		operations: TOperations;
-		src: string;
-	}
-	: {
-		operations: TOperations;
-		src: string;
-		options: Partial<TOptions>;
-	};
+) =>
+	| (TOptions extends undefined ? {
+			operations: TOperations;
+			src: string;
+		}
+		: {
+			operations: TOperations;
+			src: string;
+			options: Partial<TOptions>;
+		})
+	| null;

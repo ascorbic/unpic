@@ -1,9 +1,10 @@
 import {
 	OperationExtractor,
 	OperationFormatter,
-	OperationGeneratorConfig,
 	OperationMap,
+	OperationParser,
 	Operations,
+	ProviderConfig,
 } from "./types.ts";
 
 export function roundIfNumeric<T extends string | number | undefined>(
@@ -86,6 +87,9 @@ export const escapeChar = (text: string) =>
 	text === " " ? "+" : ("%" +
 		text.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0"));
 
+export const stripLeadingSlash = (str: string) =>
+	str.startsWith("/") ? str.slice(1) : str;
+
 /**
  * Creates a formatter given an operation joiner and key/value joiner
  */
@@ -121,6 +125,24 @@ export const createFormatter = (
 			}
 			return format(key, value);
 		}).join(operationJoiner);
+	};
+};
+
+/**
+ * Creates a parser given an operation joiner and key/value joiner
+ */
+export const createParser = <T extends Operations = Operations>(
+	operationJoiner: string,
+	valueJoiner: string,
+): OperationParser<T> => {
+	return (url) => {
+		const urlString = url.toString();
+		return Object.fromEntries(
+			urlString.split(operationJoiner).map((pair) => {
+				const [key, value] = pair.split(valueJoiner);
+				return [decodeURI(key), decodeURI(value)];
+			}),
+		) as unknown as T;
 	};
 };
 
@@ -164,7 +186,7 @@ export const extractFromURL: OperationExtractor = (url: string | URL) => {
 
 export function normaliseOperations<T extends Operations = Operations>(
 	{ keyMap = {}, formatMap = {}, defaults = {} }: Omit<
-		OperationGeneratorConfig<T>,
+		ProviderConfig<T>,
 		"formatter"
 	>,
 	operations: T,
@@ -189,28 +211,93 @@ export function normaliseOperations<T extends Operations = Operations>(
 		}
 	}
 
-	for (const key in defaults) {
-		if (!Object.prototype.hasOwnProperty.call(defaults, key)) {
+	for (const k in defaults) {
+		if (!Object.prototype.hasOwnProperty.call(defaults, k)) {
 			continue;
 		}
+		const key = k as keyof OperationMap<T>;
+
 		const value = defaults[key as keyof T];
 		if (!operations[key] && value !== undefined) {
-			operations[key] = value as T[typeof key];
+			if (keyMap[key] === false) {
+				continue;
+			}
+			const resolvedKey = keyMap[key] ?? key;
+			if (resolvedKey in operations) {
+				continue;
+			}
+			// deno-lint-ignore no-explicit-any
+			operations[resolvedKey] = value as any;
 		}
 	}
 
 	return operations;
 }
 
+const invertMap = (
+	map: Record<string, any>,
+) => Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
+
+export function denormaliseOperations<T extends Operations = Operations>(
+	{ keyMap = {}, formatMap = {}, defaults = {} }: Omit<
+		ProviderConfig<T>,
+		"formatter"
+	>,
+	operations: T,
+): T {
+	const invertedKeyMap = invertMap(keyMap);
+	const invertedFormatMap = invertMap(formatMap);
+	const ops = normaliseOperations({
+		keyMap: invertedKeyMap,
+		formatMap: invertedFormatMap,
+		defaults,
+	}, operations);
+	ops.width = roundIfNumeric(ops.width);
+	ops.height = roundIfNumeric(ops.height);
+	const q = Number(ops.quality);
+	if (!isNaN(q)) {
+		ops.quality = q;
+	}
+	return ops;
+}
+
 // Formats as a query string
 const queryFormatter = createFormatter("&", "=");
 
+// Parses a query string
+const queryParser: OperationParser = (url) => {
+	const parsedUrl = toUrl(url);
+	return Object.fromEntries(
+		parsedUrl.searchParams.entries(),
+	);
+};
+
 export function createOperationsGenerator<T extends Operations = Operations>(
-	{ formatter = queryFormatter, ...options }: OperationGeneratorConfig<T> =
-		{},
+	{ formatter = queryFormatter, ...options }: ProviderConfig<T> = {},
 ) {
 	return (operations: T) => {
 		const normalisedOperations = normaliseOperations(options, operations);
 		return formatter(normalisedOperations);
 	};
+}
+
+export function createOperationsParser<T extends Operations = Operations>(
+	{ parser, defaults: _, ...options }: ProviderConfig<T> = {},
+) {
+	parser ??= queryParser as OperationParser<T>;
+	return (url: string | URL) => {
+		const operations = parser(url);
+		return denormaliseOperations(
+			options,
+			operations,
+		);
+	};
+}
+
+export function createOperationsHandlers<T extends Operations = Operations>(
+	config: ProviderConfig<T>,
+) {
+	const operationsGenerator = createOperationsGenerator(config);
+	const operationsParser = createOperationsParser(config);
+	return { operationsGenerator, operationsParser };
 }

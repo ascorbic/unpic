@@ -1,5 +1,3 @@
-import { assertEquals } from "jsr:@std/assert";
-
 import { generate, transform } from "./builder.io.ts";
 import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
 

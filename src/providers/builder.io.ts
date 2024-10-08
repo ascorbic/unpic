@@ -64,6 +64,9 @@ export const transform: URLTransformer<BuilderOperations> = (
 	operations,
 ) => {
 	const base = extract(src);
+	if (!base) {
+		return generate(src, operations);
+	}
 	return generate(base.src, {
 		...base.operations,
 		...operations,

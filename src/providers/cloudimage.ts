@@ -144,6 +144,9 @@ export const extract: OperationExtractor<
 	CloudimageOptions
 > = (url, options = {}) => {
 	const result = extractFromURL(url);
+	if (!result) {
+		return null;
+	}
 	options.token ??= toUrl(url).hostname.replace(".cloudimg.io", "");
 	return {
 		...result,
@@ -163,6 +166,10 @@ export const transform: URLTransformer<
 	// This is a cloudimage URL, so extract the image and operations from the URL
 	if (getImageCdnForUrlByDomain(url) === "cloudimage") {
 		const base = extract(url, options);
+		if (!base) {
+			console.error("Invalid Cloudimage URL", url.href);
+			return url.toString();
+		}
 		return generate(url.pathname, {
 			...base.operations,
 			...operations,
