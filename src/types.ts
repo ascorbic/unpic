@@ -130,10 +130,10 @@ export type ImageFormat = "jpeg" | "jpg" | "png" | "webp" | "avif";
 
 // deno-lint-ignore ban-types
 export interface Operations<TImageFormat = (string & {})> {
-	width?: number;
-	height?: number;
+	width?: number | string;
+	height?: number | string;
 	format?: ImageFormat | TImageFormat;
-	quality?: number;
+	quality?: number | string;
 }
 
 export interface ProviderConfig<
@@ -169,7 +169,11 @@ export type URLGenerator<
 	TOptions = undefined,
 > = TOptions extends undefined
 	? (src: string | URL, operations: TOperations) => string
-	: (src: string | URL, operations: TOperations, options: TOptions) => string;
+	: (
+		src: string | URL,
+		operations: TOperations,
+		options?: TOptions,
+	) => string;
 
 export type URLTransformer<
 	TOperations extends Operations = Operations,

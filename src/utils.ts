@@ -156,6 +156,8 @@ export function clampDimensions(
 	maxHeight = 4000,
 ) {
 	let { width, height } = operations;
+	width = Number(width);
+	height = Number(height);
 	if (width && width > maxWidth) {
 		if (height) {
 			height = Math.round(height * maxWidth / width);
@@ -178,6 +180,15 @@ export const extractFromURL: OperationExtractor = (url: string | URL) => {
 	const operations = Object.fromEntries(
 		parsedUrl.searchParams.entries(),
 	);
+	for (const key in ["width", "height", "quality"]) {
+		const value = operations[key];
+		if (value) {
+			const newVal = Number(value);
+			if (!isNaN(newVal)) {
+				operations[key] = newVal as any;
+			}
+		}
+	}
 	return {
 		operations,
 		src: parsedUrl.origin + parsedUrl.pathname,
