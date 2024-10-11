@@ -2,7 +2,7 @@ import { assertEquals } from "jsr:@std/assert";
 import { parse, transform } from "./imagekit.ts";
 
 const img =
-  "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-500,h-300,f-png,q-80";
+  "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-500,h-300,f-png,q-80";
 
 Deno.test("imagekit", async (t) => {
   await t.step("should format a URL", () => {
@@ -13,7 +13,7 @@ Deno.test("imagekit", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-200%2Ch-100%2Cf-png%2Cq-80",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-200%2Ch-100%2Cf-png%2Cq-80",
     );
   });
 
@@ -21,7 +21,7 @@ Deno.test("imagekit", async (t) => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-200%2Cf-png%2Cq-80",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-200%2Cf-png%2Cq-80",
     );
   });
 
@@ -29,7 +29,7 @@ Deno.test("imagekit", async (t) => {
     const result = transform({ url: img, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-200%2Cf-png%2Cq-80",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-200%2Cf-png%2Cq-80",
     );
   });
 
@@ -41,18 +41,18 @@ Deno.test("imagekit", async (t) => {
     });
     assertEquals(
       result?.toString(),
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-201%2Ch-100%2Cf-png%2Cq-80",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-201%2Ch-100%2Cf-png%2Cq-80",
     );
   });
 
   await t.step("should set f-auto if no format is provided", () => {
     const imgWithoutFormat =
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-500,h-300,q-80";
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-500,h-300,q-80";
 
     const result = transform({ url: imgWithoutFormat, width: 200 });
     assertEquals(
       result?.toString(),
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-200%2Cq-80%2Cf-auto",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-200%2Cq-80%2Cf-auto",
     );
   });
 
@@ -62,7 +62,7 @@ Deno.test("imagekit", async (t) => {
       const result = transform({ url: img, width: 200, format: "jpg" });
       assertEquals(
         result?.toString(),
-        "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png?tr=w-200%2Cf-jpg%2Cq-80",
+        "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=w-200%2Cf-jpg%2Cq-80",
       );
     },
   );
@@ -72,7 +72,7 @@ Deno.test("imagekit", async (t) => {
 
     assertEquals(
       result.base,
-      "https://ik.imagekit.io/subman/v2/asset-3d/icon-standard.png",
+      "https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg",
     );
     assertEquals(result.width, 500);
     assertEquals(result.height, 300);

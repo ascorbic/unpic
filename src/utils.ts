@@ -87,8 +87,11 @@ export const escapeChar = (text: string) =>
 	text === " " ? "+" : ("%" +
 		text.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0"));
 
-export const stripLeadingSlash = (str: string) =>
-	str.startsWith("/") ? str.slice(1) : str;
+export const stripLeadingSlash = (str?: string) =>
+	str?.startsWith("/") ? str.slice(1) : str;
+
+export const stripTrailingSlash = (str?: string) =>
+	str?.endsWith("/") ? str.slice(0, -1) : str;
 
 /**
  * Creates a formatter given an operation joiner and key/value joiner
@@ -156,8 +159,9 @@ export function clampDimensions(
 	maxHeight = 4000,
 ) {
 	let { width, height } = operations;
-	width = Number(width);
-	height = Number(height);
+	width = Number(width) || undefined;
+	height = Number(height) || undefined;
+
 	if (width && width > maxWidth) {
 		if (height) {
 			height = Math.round(height * maxWidth / width);
@@ -175,7 +179,9 @@ export function clampDimensions(
 	return { width, height };
 }
 
-export const extractFromURL: OperationExtractor = (url: string | URL) => {
+export function extractFromURL<
+	T extends Operations = Operations,
+>(url: string | URL) {
 	const parsedUrl = toUrl(url);
 	const operations = Object.fromEntries(
 		parsedUrl.searchParams.entries(),
@@ -189,11 +195,13 @@ export const extractFromURL: OperationExtractor = (url: string | URL) => {
 			}
 		}
 	}
+	parsedUrl.search = "";
+
 	return {
-		operations,
-		src: parsedUrl.origin + parsedUrl.pathname,
+		operations: operations as unknown as T,
+		src: toCanonicalUrlString(parsedUrl),
 	};
-};
+}
 
 export function normaliseOperations<T extends Operations = Operations>(
 	{ keyMap = {}, formatMap = {}, defaults = {} }: Omit<
@@ -205,8 +213,12 @@ export function normaliseOperations<T extends Operations = Operations>(
 	if (operations.format && operations.format in formatMap) {
 		operations.format = formatMap[operations.format];
 	}
-	operations.width = roundIfNumeric(operations.width);
-	operations.height = roundIfNumeric(operations.height);
+	if (operations.width) {
+		operations.width = roundIfNumeric(operations.width);
+	}
+	if (operations.height) {
+		operations.height = roundIfNumeric(operations.height);
+	}
 
 	for (const k in keyMap) {
 		if (!Object.prototype.hasOwnProperty.call(keyMap, k)) {
@@ -263,8 +275,12 @@ export function denormaliseOperations<T extends Operations = Operations>(
 		formatMap: invertedFormatMap,
 		defaults,
 	}, operations);
-	ops.width = roundIfNumeric(ops.width);
-	ops.height = roundIfNumeric(ops.height);
+	if (ops.width) {
+		ops.width = roundIfNumeric(ops.width);
+	}
+	if (ops.height) {
+		ops.height = roundIfNumeric(ops.height);
+	}
 	const q = Number(ops.quality);
 	if (!isNaN(q)) {
 		ops.quality = q;
