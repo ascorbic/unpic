@@ -1,20 +1,18 @@
 {
-  "version": "3",
-  "packages": {
-    "specifiers": {
-      "jsr:@std/assert": "jsr:@std/assert@1.0.6",
-      "jsr:@std/internal@^1.0.4": "jsr:@std/internal@1.0.4"
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/assert@*": "1.0.6",
+    "jsr:@std/internal@^1.0.4": "1.0.4"
+  },
+  "jsr": {
+    "@std/assert@1.0.6": {
+      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
     },
-    "jsr": {
-      "@std/assert@1.0.6": {
-        "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
-        "dependencies": [
-          "jsr:@std/internal@^1.0.4"
-        ]
-      },
-      "@std/internal@1.0.4": {
-        "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
-      }
+    "@std/internal@1.0.4": {
+      "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
     }
   },
   "redirects": {
@@ -336,9 +334,12 @@
     "https://deno.land/x/wasmbuild@0.13.0/cache.ts": "89eea5f3ce6035a1164b3e655c95f21300498920575ade23161421f5b01967f4",
     "https://deno.land/x/wasmbuild@0.13.0/loader.ts": "d98d195a715f823151cbc8baa3f32127337628379a02d9eb2a3c5902dbccfc02",
     "https://esm.sh/preact@10.11.2/jsx-runtime": "40654c7e9066221bab024d036ab828d9e9eb7ae0f386ace02d86c0cc8bb22ce0",
+    "https://esm.sh/preact@10.24.2/jsx-runtime": "0eefab34a2439424a9c9ac0a4222f0a8b57473a183c71e1acd81b6c48d667996",
     "https://esm.sh/stable/preact@10.11.2/deno/jsx-runtime.js": "e04822710db4725f5ed01cf21f8ef713fbf10f6bc472415b8fec3801bba3133e",
     "https://esm.sh/stable/preact@10.11.2/deno/preact.js": "10e7be6ea2698598105f404198789d8a34fd6a1ca020482f94eaaaca736badf5",
     "https://esm.sh/stable/preact@10.11.2/denonext/src.js": "51fec7a6abc7c997b03411e7905968eb1cd832622039cc157223d2d31968507a",
+    "https://esm.sh/stable/preact@10.24.2/denonext/jsx-runtime.js": "bc4dbd5c8941c61f5d45d58a9e5f0e09bed22fb88bc0d466ac71320ed11fd556",
+    "https://esm.sh/stable/preact@10.24.2/denonext/preact.mjs": "6aebc2ced876881c6c2df672124f2dd64529e86914d181421a37d4161bf2faaa",
     "https://esm.sh/v96/preact@10.11.2/src/index.js": "726d661ce9b6fa58cd440f067d80d3be289953f4cff38c7be7f589fb507d8f7f"
   }
 }

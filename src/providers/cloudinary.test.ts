@@ -1,5 +1,5 @@
 import { assertEquals } from "jsr:@std/assert";
-import { extract, generate, transform } from "./cloudinary.ts";
+import { extract, transform } from "./cloudinary.ts";
 
 const sampleImg = "https://res.cloudinary.com/demo/image/upload/v1/sample.jpg";
 const privateCdnImg =
