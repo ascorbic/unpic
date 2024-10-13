@@ -1,5 +1,4 @@
 import {
-	OperationExtractor,
 	OperationFormatter,
 	OperationMap,
 	OperationParser,
@@ -313,7 +312,7 @@ export function createOperationsParser<T extends Operations = Operations>(
 ) {
 	parser ??= queryParser as OperationParser<T>;
 	return (url: string | URL) => {
-		const operations = parser(url);
+		const operations = url ? parser(url) : {} as T;
 		return denormaliseOperations(
 			options,
 			operations,

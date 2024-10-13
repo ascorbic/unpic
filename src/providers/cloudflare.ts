@@ -14,7 +14,6 @@ import {
   toCanonicalUrlString,
   toUrl,
 } from "../utils.ts";
-import o from "https://deno.land/x/lz4@v0.1.2/wasm.js";
 
 /**
  * Image transform options for Cloudflare URL-based image processing.

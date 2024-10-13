@@ -200,6 +200,6 @@ export type OperationExtractor<
     : {
       operations: TOperations;
       src: string;
-      options: Partial<TOptions>;
+      options: TOptions;
     })
   | null;
