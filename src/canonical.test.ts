@@ -40,11 +40,10 @@ Deno.test("Canonical", async (t) => {
 	await t.step(
 		"should fall back to the default CDN for unrecognized image domains - vercel",
 		() => {
-			const result =
-				getCanonicalCdnForUrl(
-					"https://placekitten.com/100",
-					"vercel",
-				) ||
+			const result = getCanonicalCdnForUrl(
+				"https://placekitten.com/100",
+				"vercel",
+			) ||
 				undefined;
 			assertExists(result);
 			assertEquals(
