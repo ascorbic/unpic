@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
 import { parse, transform } from "./shopify.ts";
-import examples from "./shopify.fixtures.json" assert { type: "json" };
+import examples from "./shopify.fixtures.json" with { type: "json" };
 
 const img =
 	"https://cdn.shopify.com/s/files/1/2345/6789/products/myimage_medium_crop_top.webp?v=3";
