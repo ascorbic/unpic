@@ -7,6 +7,6 @@
 		"jsxImportSource": "https://esm.sh/preact@10.24.2"
 	},
 	"fmt": {
-		"useTabs": false
+		"useTabs": true
 	}
 }

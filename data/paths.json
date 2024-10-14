@@ -1,13 +1,13 @@
 {
-  "/cdn-cgi/image/": "cloudflare",
-  "/cdn-cgi/imagedelivery/": "cloudflare_images",
-  "/_next/image": "nextjs",
-  "/_next/static": "nextjs",
-  "/_vercel/image": "vercel",
-  "/is/image": "scene7",
-  "/_ipx/": "ipx",
-  "/_image": "astro",
-  "/.netlify/images": "netlify",
-  "/storage/v1/object/public/": "supabase",
-  "/storage/v1/render/image/public/": "supabase"
+	"/cdn-cgi/image/": "cloudflare",
+	"/cdn-cgi/imagedelivery/": "cloudflare_images",
+	"/_next/image": "nextjs",
+	"/_next/static": "nextjs",
+	"/_vercel/image": "vercel",
+	"/is/image": "scene7",
+	"/_ipx/": "ipx",
+	"/_image": "astro",
+	"/.netlify/images": "netlify",
+	"/storage/v1/object/public/": "supabase",
+	"/storage/v1/render/image/public/": "supabase"
 }
