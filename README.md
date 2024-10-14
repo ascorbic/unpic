@@ -45,12 +45,12 @@ You can then use the `transformUrl` function to transform a URL:
 
 ```ts
 const url = transformUrl(
-  {
-    url:
-      "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-    width: 800,
-    height: 600,
-  },
+	{
+		url:
+			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+		width: 800,
+		height: 600,
+	},
 );
 
 console.log(url.toString());
@@ -63,7 +63,7 @@ params:
 
 ```ts
 const parsedUrl = parseUrl(
-  "https://cdn.shopify.com/static/sample-images/bath_800x600_crop_center.jpeg",
+	"https://cdn.shopify.com/static/sample-images/bath_800x600_crop_center.jpeg",
 );
 
 console.log(parsedUrl);
@@ -82,13 +82,13 @@ You can bypass auto-detection by specifying the CDN:
 
 ```ts
 const url = transformUrl(
-  {
-    url:
-      "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-    width: 800,
-    height: 600,
-    cdn: "shopify",
-  },
+	{
+		url:
+			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+		width: 800,
+		height: 600,
+		cdn: "shopify",
+	},
 );
 ```
 

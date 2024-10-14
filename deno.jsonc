@@ -1,9 +1,12 @@
 {
-  "tasks": {
-    "build:npm": "deno run --allow-all scripts/build_npm.ts"
-  },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "https://esm.sh/preact@10.11.2"
-  }
+	"tasks": {
+		"build:npm": "deno run --allow-all scripts/build_npm.ts"
+	},
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "https://esm.sh/preact@10.11.2"
+	},
+	"fmt": {
+		"useTabs": true
+	}
 }

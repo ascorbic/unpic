@@ -8,38 +8,38 @@ const cdnDomains = new Map(Object.entries(domains));
 const cdnSubdomains = Object.entries(subdomains);
 
 export function getImageCdnForUrl(
-  url: string | URL,
+	url: string | URL,
 ): ImageCdn | false {
-  return getImageCdnForUrlByDomain(url) || getImageCdnForUrlByPath(url);
+	return getImageCdnForUrlByDomain(url) || getImageCdnForUrlByPath(url);
 }
 
 export function getImageCdnForUrlByDomain(
-  url: string | URL,
+	url: string | URL,
 ): ImageCdn | false {
-  if (typeof url === "string" && !url.startsWith("https://")) {
-    return false;
-  }
-  const { hostname } = toUrl(url);
-  if (cdnDomains.has(hostname)) {
-    return cdnDomains.get(hostname) as ImageCdn;
-  }
-  for (const [subdomain, cdn] of cdnSubdomains) {
-    if (hostname.endsWith(`.${subdomain}`)) {
-      return cdn as ImageCdn;
-    }
-  }
-  return false;
+	if (typeof url === "string" && !url.startsWith("https://")) {
+		return false;
+	}
+	const { hostname } = toUrl(url);
+	if (cdnDomains.has(hostname)) {
+		return cdnDomains.get(hostname) as ImageCdn;
+	}
+	for (const [subdomain, cdn] of cdnSubdomains) {
+		if (hostname.endsWith(`.${subdomain}`)) {
+			return cdn as ImageCdn;
+		}
+	}
+	return false;
 }
 
 export function getImageCdnForUrlByPath(
-  url: string | URL,
+	url: string | URL,
 ): ImageCdn | false {
-  // Allow relative URLs
-  const { pathname } = toUrl(url);
-  for (const [prefix, cdn] of Object.entries(paths)) {
-    if (pathname.startsWith(prefix)) {
-      return cdn as ImageCdn;
-    }
-  }
-  return false;
+	// Allow relative URLs
+	const { pathname } = toUrl(url);
+	for (const [prefix, cdn] of Object.entries(paths)) {
+		if (pathname.startsWith(prefix)) {
+			return cdn as ImageCdn;
+		}
+	}
+	return false;
 }
