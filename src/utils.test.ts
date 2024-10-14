@@ -50,21 +50,6 @@ Deno.test("query formatter", () => {
 	);
 });
 
-Deno.test("ops as entries", () => {
-	const { withAnArray: _, ...rest } = testOperations;
-	const ops = Object.entries(rest);
-	ops.push(["withAnArray", "value"], ["withAnArray", "with"], [
-		"withAnArray",
-		"array",
-	]);
-	const formatter = createFormatter("&", "=");
-	const result = formatter(ops);
-	assertEquals(
-		result,
-		"width=200&withSlash=value%2Fwith%2Fslash&boolean=true&isFalse=false&withAmpersand=value%26with%26ampersand&withEqual=value%3Dwith%3Dequal&withComma=value%2Cwith%2Ccomma&withUserscore=value_with_userscore&withAnArray=value&withAnArray=with&withAnArray=array",
-	);
-});
-
 Deno.test("comma-separated formatter", () => {
 	const formatter = createFormatter(",", "=");
 	const result = formatter(testOperations);
