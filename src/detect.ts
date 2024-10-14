@@ -1,6 +1,6 @@
-import domains from "../data/domains.json" assert { type: "json" };
-import subdomains from "../data/subdomains.json" assert { type: "json" };
-import paths from "../data/paths.json" assert { type: "json" };
+import domains from "../data/domains.json" with { type: "json" };
+import subdomains from "../data/subdomains.json" with { type: "json" };
+import paths from "../data/paths.json" with { type: "json" };
 import { ImageCdn } from "./types.ts";
 import { toUrl } from "./utils.ts";
 
