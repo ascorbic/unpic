@@ -28,43 +28,43 @@ import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
 export const getTransformer = (cdn: ImageCdn) => ({
-  imgix,
-  contentful,
-  "builder.io": builderio,
-  shopify,
-  wordpress,
-  cloudimage,
-  cloudinary,
-  bunny,
-  storyblok,
-  cloudflare,
-  vercel,
-  nextjs,
-  scene7,
-  "kontent.ai": kontentai,
-  keycdn,
-  directus,
-  imageengine,
-  contentstack,
-  "cloudflare_images": cloudflareImages,
-  ipx,
-  astro,
-  netlify,
-  imagekit,
-  uploadcare,
-  supabase,
+	imgix,
+	contentful,
+	"builder.io": builderio,
+	shopify,
+	wordpress,
+	cloudimage,
+	cloudinary,
+	bunny,
+	storyblok,
+	cloudflare,
+	vercel,
+	nextjs,
+	scene7,
+	"kontent.ai": kontentai,
+	keycdn,
+	directus,
+	imageengine,
+	contentstack,
+	"cloudflare_images": cloudflareImages,
+	ipx,
+	astro,
+	netlify,
+	imagekit,
+	uploadcare,
+	supabase,
 }[cdn]);
 
 /**
  * Returns a transformer function if the given CDN is supported
  */
 export const getTransformerForCdn = (
-  cdn: ImageCdn | false | undefined,
+	cdn: ImageCdn | false | undefined,
 ): UrlTransformer | undefined => {
-  if (!cdn) {
-    return undefined;
-  }
-  return getTransformer(cdn);
+	if (!cdn) {
+		return undefined;
+	}
+	return getTransformer(cdn);
 };
 
 /**
@@ -72,22 +72,22 @@ export const getTransformerForCdn = (
  * If the URL is not from a known image CDN it returns undefined.
  */
 export const transformUrl: UrlTransformer = (options) => {
-  const cdn = options?.cdn ?? getImageCdnForUrl(options.url);
-  // Default to recursive
-  if (!(options.recursive ?? true)) {
-    return getTransformerForCdn(cdn)?.(options);
-  }
-  const canonical = getCanonicalCdnForUrl(
-    options.url,
-    cdn,
-  );
-  if (!canonical || !canonical.cdn) {
-    return undefined;
-  }
-  return getTransformer(canonical.cdn)?.({
-    ...options,
-    url: canonical.url,
-  });
+	const cdn = options?.cdn ?? getImageCdnForUrl(options.url);
+	// Default to recursive
+	if (!(options.recursive ?? true)) {
+		return getTransformerForCdn(cdn)?.(options);
+	}
+	const canonical = getCanonicalCdnForUrl(
+		options.url,
+		cdn,
+	);
+	if (!canonical || !canonical.cdn) {
+		return undefined;
+	}
+	return getTransformer(canonical.cdn)?.({
+		...options,
+		url: canonical.url,
+	});
 };
 
 /**
@@ -96,5 +96,5 @@ export const transformUrl: UrlTransformer = (options) => {
  * @deprecated Use `getCanonicalCdnForUrl` and `getTransformerForCdn` instead
  */
 export const getTransformerForUrl = (
-  url: string | URL,
+	url: string | URL,
 ): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));

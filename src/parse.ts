@@ -27,35 +27,35 @@ import { parse as supabase } from "./transformers/supabase.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
-  imgix,
-  contentful,
-  "builder.io": builder,
-  shopify,
-  wordpress,
-  cloudimage,
-  cloudinary,
-  cloudflare,
-  bunny,
-  storyblok,
-  "kontent.ai": kontentai,
-  vercel,
-  nextjs,
-  scene7,
-  keycdn,
-  directus,
-  imageengine,
-  contentstack,
-  "cloudflare_images": cloudflareImages,
-  ipx,
-  astro,
-  netlify,
-  imagekit,
-  uploadcare,
-  supabase,
+	imgix,
+	contentful,
+	"builder.io": builder,
+	shopify,
+	wordpress,
+	cloudimage,
+	cloudinary,
+	cloudflare,
+	bunny,
+	storyblok,
+	"kontent.ai": kontentai,
+	vercel,
+	nextjs,
+	scene7,
+	keycdn,
+	directus,
+	imageengine,
+	contentstack,
+	"cloudflare_images": cloudflareImages,
+	ipx,
+	astro,
+	netlify,
+	imagekit,
+	uploadcare,
+	supabase,
 };
 
 export const cdnIsSupportedForParse = (
-  cdn: ImageCdn | false,
+	cdn: ImageCdn | false,
 ): cdn is SupportedImageCdn => cdn && cdn in parsers;
 
 /**
@@ -63,17 +63,17 @@ export const cdnIsSupportedForParse = (
  * @param url
  */
 export const getParserForUrl = <TParams extends Record<string, unknown>>(
-  url: string | URL,
+	url: string | URL,
 ): UrlParser<TParams> | undefined =>
-  getParserForCdn<TParams>(getImageCdnForUrl(url));
+	getParserForCdn<TParams>(getImageCdnForUrl(url));
 
 export const getParserForCdn = <TParams extends Record<string, unknown>>(
-  cdn: ImageCdn | false | undefined,
+	cdn: ImageCdn | false | undefined,
 ): UrlParser<TParams> | undefined => {
-  if (!cdn || !cdnIsSupportedForParse(cdn)) {
-    return undefined;
-  }
-  return parsers[cdn] as UrlParser<TParams>;
+	if (!cdn || !cdnIsSupportedForParse(cdn)) {
+		return undefined;
+	}
+	return parsers[cdn] as UrlParser<TParams>;
 };
 
 /**
@@ -82,18 +82,18 @@ export const getParserForCdn = <TParams extends Record<string, unknown>>(
  * @param url
  */
 export const parseUrl = <TParams = Record<string, unknown>>(
-  url: string | URL,
-  cdn?: ImageCdn,
+	url: string | URL,
+	cdn?: ImageCdn,
 ): ParsedUrl<TParams> | undefined => {
-  if (cdn) {
-    return getParserForCdn(cdn)?.(url) as ParsedUrl<TParams>;
-  }
-  const detectedCdn = getImageCdnForUrl(url);
-  if (!detectedCdn) {
-    return undefined;
-  }
-  if (!cdnIsSupportedForParse(detectedCdn)) {
-    return { cdn: detectedCdn, base: url.toString() } as ParsedUrl<TParams>;
-  }
-  return getParserForCdn(detectedCdn)?.(url) as ParsedUrl<TParams>;
+	if (cdn) {
+		return getParserForCdn(cdn)?.(url) as ParsedUrl<TParams>;
+	}
+	const detectedCdn = getImageCdnForUrl(url);
+	if (!detectedCdn) {
+		return undefined;
+	}
+	if (!cdnIsSupportedForParse(detectedCdn)) {
+		return { cdn: detectedCdn, base: url.toString() } as ParsedUrl<TParams>;
+	}
+	return getParserForCdn(detectedCdn)?.(url) as ParsedUrl<TParams>;
 };

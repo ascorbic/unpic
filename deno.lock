@@ -1,5 +1,5 @@
 {
-  "version": "3",
+  "version": "4",
   "remote": {
     "https://deno.land/std@0.111.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.111.0/_util/os.ts": "dfb186cc4e968c770ab6cc3288bd65f4871be03b93beecae57d657232ecffcac",
@@ -277,6 +277,9 @@
     "https://deno.land/x/ts_morph@18.0.0/common/ts_morph_common.js": "845671ca951073400ce142f8acefa2d39ea9a51e29ca80928642f3f8cf2b7700",
     "https://deno.land/x/ts_morph@18.0.0/common/typescript.js": "d5c598b6a2db2202d0428fca5fd79fc9a301a71880831a805d778797d2413c59",
     "https://deno.land/x/wasmbuild@0.13.0/cache.ts": "89eea5f3ce6035a1164b3e655c95f21300498920575ade23161421f5b01967f4",
-    "https://deno.land/x/wasmbuild@0.13.0/loader.ts": "d98d195a715f823151cbc8baa3f32127337628379a02d9eb2a3c5902dbccfc02"
+    "https://deno.land/x/wasmbuild@0.13.0/loader.ts": "d98d195a715f823151cbc8baa3f32127337628379a02d9eb2a3c5902dbccfc02",
+    "https://esm.sh/preact@10.11.2/jsx-runtime": "a5aaf30a5718f778318c62218b57b8ffd74a240e8a2406ffa81f7895c6f7dbb6",
+    "https://esm.sh/stable/preact@10.11.2/denonext/jsx-runtime.js": "ed453ca93891a111997d4a0039569103025ebff9a0447f90578f5c0f4e8ae4c7",
+    "https://esm.sh/stable/preact@10.11.2/denonext/preact.mjs": "deeb0873c83971be55cddc2f90bf0099a4c86adb3797884300677a3daf1b70b7"
   }
 }

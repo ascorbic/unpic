@@ -7,13 +7,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Setup Deno
-      uses: denoland/setup-deno@v1
-      with:
-        deno-version: vx.x.x
-    - name: Typecheck
-      run: deno check mod.ts
-    - name: Test
-      run: deno test -A src/
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: vx.x.x
+      - name: Typecheck
+        run: deno check mod.ts
+      - name: Test
+        run: deno test -A src/

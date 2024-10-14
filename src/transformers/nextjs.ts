@@ -2,13 +2,13 @@ import { UrlParser, UrlTransformer } from "../types.ts";
 export { delegateUrl } from "./vercel.ts";
 
 import {
-  parse as vercelParse,
-  transform as vercelTransform,
+	parse as vercelParse,
+	transform as vercelTransform,
 } from "./vercel.ts";
 export const parse: UrlParser = (
-  url,
+	url,
 ) => ({ ...vercelParse(url), cdn: "nextjs" });
 
 export const transform: UrlTransformer = (
-  params,
+	params,
 ) => vercelTransform({ ...params, cdn: "nextjs" });
