@@ -330,3 +330,16 @@ export function createOperationsHandlers<T extends Operations = Operations>(
 	const operationsParser = createOperationsParser(config);
 	return { operationsGenerator, operationsParser };
 }
+
+export function paramToBoolean(
+	value: boolean | string | number,
+): boolean | undefined {
+	if (value === undefined || value === null) {
+		return undefined;
+	}
+	try {
+		return Boolean(JSON.parse(value?.toString()));
+	} catch {
+		return Boolean(value);
+	}
+}
