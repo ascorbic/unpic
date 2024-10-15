@@ -7,7 +7,6 @@ import {
 } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
-	createFormatter,
 	createOperationsHandlers,
 	createParser,
 	toCanonicalUrlString,
@@ -99,8 +98,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	defaults: {
 		m: "cropbox",
 	},
-	formatter: createFormatter("/", "_"),
-	parser: createParser("/", "_"),
+	kvSeparator: "_",
+	paramSeparator: "/",
 });
 
 export const generate: URLGenerator<ImageEngineOperations> = (

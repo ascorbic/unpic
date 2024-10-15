@@ -96,22 +96,22 @@ export const stripTrailingSlash = (str?: string) =>
  * Creates a formatter given an operation joiner and key/value joiner
  */
 export const createFormatter = (
-	operationJoiner: string,
-	valueJoiner: string,
+	kvSeparator: string,
+	paramSeparator: string,
 ): OperationFormatter => {
-	const encodedValueJoiner = escapeChar(valueJoiner);
-	const encodedOperationJoiner = escapeChar(operationJoiner);
+	const encodedValueJoiner = escapeChar(kvSeparator);
+	const encodedOperationJoiner = escapeChar(paramSeparator);
 
 	function escape(value: string) {
-		return encodeURI(value).replaceAll(
-			valueJoiner,
+		return encodeURIComponent(value).replaceAll(
+			kvSeparator,
 			encodedValueJoiner,
 		)
-			.replaceAll(operationJoiner, encodedOperationJoiner);
+			.replaceAll(paramSeparator, encodedOperationJoiner);
 	}
 
 	function format(key: string, value: unknown) {
-		return `${escape(key)}${valueJoiner}${escape(String(value))}`;
+		return `${escape(key)}${kvSeparator}${escape(String(value))}`;
 	}
 
 	return (operations) => {
@@ -126,7 +126,7 @@ export const createFormatter = (
 				return value.map((v) => format(key, v));
 			}
 			return format(key, value);
-		}).join(operationJoiner);
+		}).join(paramSeparator);
 	};
 };
 
@@ -134,14 +134,17 @@ export const createFormatter = (
  * Creates a parser given an operation joiner and key/value joiner
  */
 export const createParser = <T extends Operations = Operations>(
-	operationJoiner: string,
-	valueJoiner: string,
+	kvSeparator: string,
+	paramSeparator: string,
 ): OperationParser<T> => {
+	if (kvSeparator === "=" && paramSeparator === "&") {
+		return queryParser as OperationParser<T>;
+	}
 	return (url) => {
 		const urlString = url.toString();
 		return Object.fromEntries(
-			urlString.split(operationJoiner).map((pair) => {
-				const [key, value] = pair.split(valueJoiner);
+			urlString.split(paramSeparator).map((pair) => {
+				const [key, value] = pair.split(kvSeparator);
 				return [decodeURI(key), decodeURI(value)];
 			}),
 		) as unknown as T;
@@ -287,9 +290,6 @@ export function denormaliseOperations<T extends Operations = Operations>(
 	return ops;
 }
 
-// Formats as a query string
-const queryFormatter = createFormatter("&", "=");
-
 // Parses a query string
 const queryParser: OperationParser = (url) => {
 	const parsedUrl = toUrl(url);
@@ -299,8 +299,10 @@ const queryParser: OperationParser = (url) => {
 };
 
 export function createOperationsGenerator<T extends Operations = Operations>(
-	{ formatter = queryFormatter, ...options }: ProviderConfig<T> = {},
+	{ kvSeparator = "=", paramSeparator = "&", ...options }: ProviderConfig<T> =
+		{},
 ) {
+	const formatter = createFormatter(kvSeparator, paramSeparator);
 	return (operations: T) => {
 		const normalisedOperations = normaliseOperations(options, operations);
 		return formatter(normalisedOperations);
@@ -308,9 +310,10 @@ export function createOperationsGenerator<T extends Operations = Operations>(
 }
 
 export function createOperationsParser<T extends Operations = Operations>(
-	{ parser, defaults: _, ...options }: ProviderConfig<T> = {},
+	{ kvSeparator = "=", paramSeparator = "&", defaults: _, ...options }:
+		ProviderConfig<T> = {},
 ) {
-	parser ??= queryParser as OperationParser<T>;
+	const parser = createParser<T>(kvSeparator, paramSeparator);
 	return (url: string | URL) => {
 		const operations = url ? parser(url) : {} as T;
 		return denormaliseOperations(

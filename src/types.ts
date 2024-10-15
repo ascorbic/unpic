@@ -155,13 +155,13 @@ export interface ProviderConfig<
 	 */
 	formatMap?: FormatMap;
 	/**
-	 * Custom formatter for the operations. Defaults to query string.
+	 * Separator between keys and values in the URL. Defaults to "=".
 	 */
-	formatter?: OperationFormatter<TOperations>;
+	kvSeparator?: string;
 	/**
-	 * Operation extractor for the provider. Defaults to query parser.
+	 * Parameter separator in the URL. Defaults to "&".
 	 */
-	parser?: OperationParser<TOperations>;
+	paramSeparator?: string;
 	/**
 	 * If provided, the src URL will be extracted from this parameter.
 	 */

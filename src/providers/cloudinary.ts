@@ -5,11 +5,7 @@ import {
 	URLTransformer,
 } from "../types.ts";
 import { ImageFormat } from "../types.ts";
-import {
-	createFormatter,
-	createOperationsHandlers,
-	createParser,
-} from "../utils.ts";
+import { createOperationsHandlers } from "../utils.ts";
 
 const publicRegex =
 	/https?:\/\/(?<host>res\.cloudinary\.com)\/(?<cloudName>[a-zA-Z0-9-]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<id>[^\s\/]+(?:\.[a-zA-Z0-9]+)?)$/;
@@ -248,8 +244,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 		format: "auto",
 		c: "lfill",
 	},
-	formatter: createFormatter(",", "_"),
-	parser: createParser(",", "_"),
+	kvSeparator: "_",
+	paramSeparator: ",",
 });
 
 export const generate: URLGenerator<CloudinaryOperations, CloudinaryOptions> = (

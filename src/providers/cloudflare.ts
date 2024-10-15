@@ -7,9 +7,7 @@ import {
 } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
-	createFormatter,
 	createOperationsHandlers,
-	createParser,
 	stripLeadingSlash,
 	toCanonicalUrlString,
 	toUrl,
@@ -104,8 +102,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	formatMap: {
 		jpg: "jpeg",
 	},
-	formatter: createFormatter(",", "="),
-	parser: createParser(",", "="),
+	kvSeparator: "=",
+	paramSeparator: ",",
 });
 
 export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (

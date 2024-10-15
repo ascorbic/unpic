@@ -6,9 +6,7 @@ import {
 	URLTransformer,
 } from "../types.ts";
 import {
-	createFormatter,
 	createOperationsHandlers,
-	createParser,
 	stripLeadingSlash,
 	toCanonicalUrlString,
 	toUrl,
@@ -57,8 +55,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	defaults: {
 		f: "auto",
 	},
-	formatter: createFormatter(",", "_"),
-	parser: createParser(",", "_"),
+	kvSeparator: "_",
+	paramSeparator: ",",
 });
 
 export const generate: URLGenerator<IPXOperations, IPXOptions> = (
@@ -84,7 +82,9 @@ export const generate: URLGenerator<IPXOperations, IPXOptions> = (
 
 export const extract: OperationExtractor<IPXOperations, IPXOptions> = (url) => {
 	const parsedUrl = toUrl(url);
-	const [, baseUrlPart, modifiers, ...srcParts] = parsedUrl.pathname.split("/");
+	const [, baseUrlPart, modifiers, ...srcParts] = parsedUrl.pathname.split(
+		"/",
+	);
 
 	if (!modifiers || !srcParts.length) {
 		return null;

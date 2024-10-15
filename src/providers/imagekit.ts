@@ -6,9 +6,7 @@ import {
 	URLTransformer,
 } from "../types.ts";
 import {
-	createFormatter,
 	createOperationsHandlers,
-	createParser,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -142,8 +140,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 		c: "maintain_ratio",
 		fo: "auto",
 	},
-	formatter: createFormatter(",", "-"),
-	parser: createParser(",", "-"),
+	kvSeparator: "-",
+	paramSeparator: ",",
 });
 
 export const generate: URLGenerator<ImageKitOperations> = (

@@ -42,7 +42,7 @@ const testOperations = {
 };
 
 Deno.test("query formatter", () => {
-	const formatter = createFormatter("&", "=");
+	const formatter = createFormatter("=", "&");
 	const result = formatter(testOperations);
 	assertEquals(
 		result,
@@ -51,7 +51,7 @@ Deno.test("query formatter", () => {
 });
 
 Deno.test("comma-separated formatter", () => {
-	const formatter = createFormatter(",", "=");
+	const formatter = createFormatter("=", ",");
 	const result = formatter(testOperations);
 	assertEquals(
 		result,
@@ -60,7 +60,7 @@ Deno.test("comma-separated formatter", () => {
 });
 
 Deno.test("userscore formatter", () => {
-	const formatter = createFormatter("/", "_");
+	const formatter = createFormatter("_", "/");
 	const result = formatter(testOperations);
 	assertEquals(
 		result,
