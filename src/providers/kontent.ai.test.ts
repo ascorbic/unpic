@@ -61,7 +61,8 @@ Deno.test("kontent.ai extract", async (t) => {
 			"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?w=800&h=600&fit=clip",
 		);
 		assertEquals(parsed, {
-			src: "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
+			src:
+				"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
 			operations: {
 				width: 800,
 				height: 600,
@@ -75,7 +76,8 @@ Deno.test("kontent.ai extract", async (t) => {
 			"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?fm=webp&q=90",
 		);
 		assertEquals(parsed, {
-			src: "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
+			src:
+				"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
 			operations: {
 				format: "webp",
 				quality: 90,
@@ -88,7 +90,8 @@ Deno.test("kontent.ai extract", async (t) => {
 			"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg?fm=webp&lossless=1",
 		);
 		assertEquals(parsed, {
-			src: "https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
+			src:
+				"https://assets-us-01.kc-usercontent.com/b744f382-bfc7-434d-93e7-a65d51249bc7/cc0afdc7-23d7-4fde-be2c-f58ad54d2934/daylight.jpg",
 			operations: {
 				format: "webp",
 				lossless: true,
