@@ -65,10 +65,13 @@ Deno.test("Netlify Image CDN - extract", async (t) => {
 			assertEquals(parsed, {
 				src: "/cappadocia.jpg",
 				operations: {
-					width: 800, // Long form: width
-					height: 600, // Long form: height
-					format: "webp", // Long form: format
-					quality: 75, // Long form: quality
+					width: 800,
+					height: 600,
+					format: "webp",
+					quality: 75,
+				},
+				options: {
+					baseUrl,
 				},
 			});
 		},

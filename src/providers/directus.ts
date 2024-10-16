@@ -1,10 +1,6 @@
+import { OperationExtractor, Operations, URLGenerator } from "../types.ts";
 import {
-	OperationExtractor,
-	Operations,
-	URLGenerator,
-	URLTransformer,
-} from "../types.ts";
-import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	extractFromURL,
 	toCanonicalUrlString,
@@ -67,17 +63,4 @@ export const extract: OperationExtractor<DirectusOperations> = (url) => {
 	return base;
 };
 
-export const transform: URLTransformer<DirectusOperations> = (
-	src,
-	operations,
-) => {
-	const base = extract(src);
-	if (!base) {
-		return generate(src, operations);
-	}
-
-	return generate(base.src, {
-		...base.operations,
-		...operations,
-	});
-};
+export const transform = createExtractAndGenerate(extract, generate);

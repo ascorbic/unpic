@@ -34,7 +34,7 @@ Deno.test("contentstack transform", async (t) => {
 	await t.step(
 		"should apply defaults when no operations are provided",
 		() => {
-			const result = transform(img, {});
+			const result = transform(img, {}, {});
 			assertEqualIgnoringQueryOrder(
 				result,
 				`${img}?fit=crop&auto=webp&disable=upscale`,
@@ -51,7 +51,7 @@ Deno.test("contentstack transform", async (t) => {
 				fit: "bounds",
 				auto: "avif",
 				disable: false,
-			});
+			}, {});
 			assertEqualIgnoringQueryOrder(
 				result,
 				`${img}?width=200&height=100&fit=bounds&auto=avif&disable=false`,
@@ -62,7 +62,7 @@ Deno.test("contentstack transform", async (t) => {
 	await t.step("should handle edge case: pjpg format", () => {
 		const result = transform(img, {
 			format: "pjpg",
-		});
+		}, {});
 		assertEqualIgnoringQueryOrder(
 			result,
 			`${img}?auto=webp&format=pjpg&fit=crop&disable=upscale`,
@@ -73,7 +73,7 @@ Deno.test("contentstack transform", async (t) => {
 		const result = transform(img, {
 			overlay: "overlay-image.png",
 			"overlay-align": "top,left",
-		});
+		}, {});
 		assertEqualIgnoringQueryOrder(
 			result,
 			`${img}?overlay=overlay-image.png&overlay-align=top,left&fit=crop&auto=webp&disable=upscale`,

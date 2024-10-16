@@ -1,11 +1,12 @@
+import { getImageCdnForUrlByPath } from "../../mod.ts";
 import type {
 	ImageFormat,
 	OperationExtractor,
 	Operations,
 	URLGenerator,
-	URLTransformer,
 } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	toCanonicalUrlString,
 	toUrl,
@@ -89,7 +90,13 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<NetlifyImageOperations> = (url) => {
+export const extract: OperationExtractor<
+	NetlifyImageOperations,
+	NetlifyImageOptions
+> = (url) => {
+	if (!getImageCdnForUrlByPath(url)) {
+		return null;
+	}
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 	// deno-lint-ignore no-explicit-any
@@ -101,28 +108,10 @@ export const extract: OperationExtractor<NetlifyImageOperations> = (url) => {
 	return {
 		src: sourceUrl,
 		operations,
+		options: {
+			baseUrl: parsedUrl.hostname === "n" ? undefined : parsedUrl.origin,
+		},
 	};
 };
 
-export const transform: URLTransformer<
-	NetlifyImageOperations,
-	NetlifyImageOptions
-> = (
-	src,
-	operations,
-	options = {},
-) => {
-	const url = toUrl(src);
-	if (url.pathname.startsWith("/.netlify/images")) {
-		const base = extract(src);
-		if (base) {
-			return generate(
-				base.src,
-				{ ...base.operations, ...operations },
-				options,
-			);
-		}
-		return toCanonicalUrlString(url);
-	}
-	return generate(src, operations, options);
-};
+export const transform = createExtractAndGenerate(extract, generate);

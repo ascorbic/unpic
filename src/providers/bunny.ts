@@ -5,6 +5,7 @@ import {
 	URLTransformer,
 } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsGenerator,
 	extractFromURL,
 	toCanonicalUrlString,
@@ -132,6 +133,8 @@ export const generate: URLGenerator<BunnyOperations> = (
 	return toCanonicalUrlString(url);
 };
 
+const extractAndGenerate = createExtractAndGenerate(extract, generate);
+
 export const transform: URLTransformer<BunnyOperations> = (
 	src,
 	operations,
@@ -142,12 +145,5 @@ export const transform: URLTransformer<BunnyOperations> = (
 			Math.round(Number(height))
 		}`;
 	}
-	const base = extract(src);
-	if (!base) {
-		return generate(src, operations);
-	}
-	return generate(base.src, {
-		...base.operations,
-		...operations,
-	});
+	return extractAndGenerate(src, operations);
 };

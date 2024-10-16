@@ -52,8 +52,11 @@ Deno.test("Vercel Image CDN - extract", async (t) => {
 			assertEquals(parsed, {
 				src: "/image.jpg",
 				operations: {
-					width: 800, // Long form: width
-					quality: 75, // Long form: quality
+					width: 800,
+					quality: 75,
+				},
+				options: {
+					baseUrl: "https://example.com",
 				},
 			});
 		},

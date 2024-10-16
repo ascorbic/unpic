@@ -3,9 +3,9 @@ import {
 	OperationExtractor,
 	Operations,
 	URLGenerator,
-	URLTransformer,
 } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsGenerator,
 	extractFromURL,
 	toCanonicalUrlString,
@@ -180,19 +180,4 @@ export const extract: OperationExtractor<
 	};
 };
 
-export const transform: URLTransformer<ContentstackOperations> = (
-	src,
-	operations,
-) => {
-	const base = extract(src);
-	if (!base) {
-		return generate(src, operations);
-	}
-
-	const combinedOperations = {
-		...base.operations,
-		...operations,
-	};
-
-	return generate(base.src, combinedOperations);
-};
+export const transform = createExtractAndGenerate(extract, generate);

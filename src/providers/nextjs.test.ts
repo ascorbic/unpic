@@ -59,6 +59,7 @@ Deno.test("Next.js Image CDN - extract", async (t) => {
 					width: 828, // Long form: width
 					quality: 75, // Long form: quality
 				},
+				options: {},
 			});
 		},
 	);

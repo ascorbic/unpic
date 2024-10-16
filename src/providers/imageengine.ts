@@ -1,14 +1,8 @@
-import { getImageCdnForUrl } from "../detect.ts";
-import {
-	OperationExtractor,
-	Operations,
-	URLGenerator,
-	URLTransformer,
-} from "../types.ts";
+import { OperationExtractor, Operations, URLGenerator } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
-	createParser,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -128,21 +122,4 @@ export const extract: OperationExtractor<
 	};
 };
 
-export const transform: URLTransformer<
-	ImageEngineOperations
-> = (
-	src,
-	operations,
-) => {
-	const url = toUrl(src);
-	if (getImageCdnForUrl(url) === "imageengine") {
-		const base = extract(url);
-		if (base) {
-			return generate(base.src, {
-				...base.operations,
-				...operations,
-			});
-		}
-	}
-	return generate(src, operations);
-};
+export const transform = createExtractAndGenerate(extract, generate);

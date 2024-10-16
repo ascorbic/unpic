@@ -1,12 +1,8 @@
 import { getImageCdnForUrlByPath } from "../detect.ts";
-import {
-	OperationExtractor,
-	Operations,
-	URLGenerator,
-	URLTransformer,
-} from "../types.ts";
+import { OperationExtractor, Operations, URLGenerator } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	stripLeadingSlash,
 	toCanonicalUrlString,
@@ -123,40 +119,21 @@ export const extract: OperationExtractor<
 	CloudflareOperations,
 	CloudflareOptions
 > = (url, options) => {
-	const parsedUrl = toUrl(url);
-	if (!parsedUrl.pathname.startsWith("/cdn-cgi/image/")) {
+	if (getImageCdnForUrlByPath(url) !== "cloudflare") {
 		return null;
 	}
+	const parsedUrl = toUrl(url);
+
 	const [, , , modifiers, ...src] = parsedUrl.pathname.split("/");
 	const operations = operationsParser(modifiers);
 	return {
 		src: toCanonicalUrlString(toUrl(src.join("/"))),
 		operations,
 		options: {
-			domain: options?.domain || parsedUrl.hostname === "n"
-				? undefined
-				: parsedUrl.hostname,
+			domain: options?.domain ??
+				(parsedUrl.hostname === "n" ? undefined : parsedUrl.hostname),
 		},
 	};
 };
 
-export const transform: URLTransformer<
-	CloudflareOperations,
-	CloudflareOptions
-> = (
-	src,
-	operations,
-	options,
-) => {
-	const url = toUrl(src);
-	if (getImageCdnForUrlByPath(url) === "cloudflare") {
-		const base = extract(url, options);
-		if (base) {
-			return generate(base.src, {
-				...base.operations,
-				...operations,
-			}, base.options);
-		}
-	}
-	return generate(src, operations, options);
-};
+export const transform = createExtractAndGenerate(extract, generate);

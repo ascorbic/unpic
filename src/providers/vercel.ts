@@ -5,6 +5,7 @@ import type {
 	URLTransformer,
 } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	toCanonicalUrlString,
 	toUrl,
@@ -64,19 +65,25 @@ export const generate: URLGenerator<VercelOperations, VercelImageOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<VercelOperations> = (url) => {
-	const parsedUrl = toUrl(url);
-	const sourceUrl = parsedUrl.searchParams.get("url") || "";
-	parsedUrl.searchParams.delete("url");
-	const operations = operationsParser(parsedUrl);
+export const extract: OperationExtractor<VercelOperations, VercelImageOptions> =
+	(url, options = {}) => {
+		const parsedUrl = toUrl(url);
+		const sourceUrl = parsedUrl.searchParams.get("url") || "";
+		parsedUrl.searchParams.delete("url");
+		const operations = operationsParser(parsedUrl);
 
-	parsedUrl.search = "";
+		parsedUrl.search = "";
 
-	return {
-		src: sourceUrl,
-		operations,
+		return {
+			src: sourceUrl,
+			operations,
+			options: {
+				baseUrl: options.baseUrl ?? parsedUrl.origin,
+			},
+		};
 	};
-};
+
+const extractAndGenerate = createExtractAndGenerate(extract, generate);
 
 export const transform: URLTransformer<
 	VercelOperations,
@@ -88,14 +95,7 @@ export const transform: URLTransformer<
 ) => {
 	const url = toUrl(src);
 	if (url.pathname.startsWith(`/${options.prefix || "_vercel"}/image`)) {
-		const base = extract(src);
-		if (base) {
-			return generate(
-				base.src,
-				{ ...base.operations, ...operations },
-				options,
-			);
-		}
+		return extractAndGenerate(src, operations, options);
 	}
 	return generate(src, operations, options);
 };

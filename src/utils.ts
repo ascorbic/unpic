@@ -1,9 +1,12 @@
 import {
+	OperationExtractor,
 	OperationFormatter,
 	OperationMap,
 	OperationParser,
 	Operations,
 	ProviderConfig,
+	URLGenerator,
+	URLTransformer,
 } from "./types.ts";
 
 export function roundIfNumeric<T extends string | number | undefined>(
@@ -342,4 +345,27 @@ export function paramToBoolean(
 	} catch {
 		return Boolean(value);
 	}
+}
+
+export function createExtractAndGenerate<
+	TOperations extends Operations = Operations,
+	TOptions = undefined,
+>(
+	extract: OperationExtractor<TOperations, TOptions>,
+	generate: URLGenerator<TOperations, TOptions>,
+): URLTransformer<TOperations, TOptions> {
+	return ((src: string | URL, operations: TOperations, options?: TOptions) => {
+		const base = extract(src, options);
+		if (!base) {
+			return generate(src, operations, options);
+		}
+		return generate(base.src, {
+			...base.operations,
+			...operations,
+		}, {
+			// deno-lint-ignore no-explicit-any
+			...(base as any).options,
+			...options,
+		});
+	}) as URLTransformer<TOperations, TOptions>;
 }

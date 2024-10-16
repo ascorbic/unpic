@@ -22,7 +22,8 @@ export const generate: URLGenerator<NextjsOperations, NextjsImageOptions> = (
 	options = {},
 ) => vercelGenerate(src, operations, { ...options, prefix: "_next" });
 
-export const extract: OperationExtractor<NextjsOperations> = vercelExtract;
+export const extract: OperationExtractor<NextjsOperations, NextjsImageOptions> =
+	vercelExtract;
 
 export const transform: URLTransformer<NextjsOperations, NextjsImageOptions> = (
 	src,

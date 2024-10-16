@@ -5,6 +5,7 @@ import {
 	URLGenerator,
 } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	toCanonicalUrlString,
 	toUrl,
@@ -239,13 +240,4 @@ export const generate: URLGenerator<ImgixOperations> = (src, operations) => {
 	return toCanonicalUrlString(url);
 };
 
-export const transform: URLGenerator<ImgixOperations> = (src, operations) => {
-	const base = extract(src);
-	if (!base) {
-		return generate(src, operations);
-	}
-	return generate(base.src, {
-		...base.operations,
-		...operations,
-	});
-};
+export const transform = createExtractAndGenerate(extract, generate);

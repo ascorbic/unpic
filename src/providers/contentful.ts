@@ -6,6 +6,7 @@ import {
 } from "../types.ts";
 import {
 	clampDimensions,
+	createExtractAndGenerate,
 	createOperationsGenerator,
 	extractFromURL,
 	toCanonicalUrlString,
@@ -126,18 +127,14 @@ export const generate: URLGenerator<ContentfulOperations> = (
 
 export const extract: OperationExtractor<ContentfulOperations> = extractFromURL;
 
+const extractAndGenerate = createExtractAndGenerate(extract, generate);
+
 export const transform: URLTransformer<ContentfulOperations> = (
 	src,
 	operations,
 ) => {
 	const { width, height } = clampDimensions(operations, 4000, 4000);
-
-	const base = extract(src);
-	if (!base) {
-		return generate(src, operations);
-	}
-	return generate(base.src, {
-		...base.operations,
+	return extractAndGenerate(src, {
 		...operations,
 		width,
 		height,

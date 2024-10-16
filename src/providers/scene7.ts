@@ -1,13 +1,9 @@
-import type {
-	OperationExtractor,
-	Operations,
-	URLGenerator,
-	URLTransformer,
-} from "../types.ts";
+import { getImageCdnForUrl } from "../../mod.ts";
+import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
 import {
+	createExtractAndGenerate,
 	createOperationsHandlers,
 	toCanonicalUrlString,
-	toUrl,
 } from "../utils.ts";
 
 type Scene7Formats =
@@ -220,6 +216,9 @@ export const generate: URLGenerator<
 export const extract: OperationExtractor<Scene7Operations> = (
 	url,
 ) => {
+	if (getImageCdnForUrl(url) !== "scene7") {
+		return null;
+	}
 	const parsedUrl = new URL(url, BASE);
 	const operations = operationsParser(parsedUrl);
 
@@ -231,21 +230,4 @@ export const extract: OperationExtractor<Scene7Operations> = (
 	};
 };
 
-export const transform: URLTransformer<
-	Scene7Operations
-> = (
-	src,
-	operations,
-) => {
-	const url = toUrl(src);
-	if (url.pathname.startsWith("/is/image/")) {
-		const base = extract(src);
-		if (base) {
-			return generate(base.src, {
-				...base.operations,
-				...operations,
-			});
-		}
-	}
-	return generate(src, operations);
-};
+export const transform = createExtractAndGenerate(extract, generate);
