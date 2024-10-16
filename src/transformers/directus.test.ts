@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "jsr:@std/assert";
 
 import { DirectusParams, parse, transform } from "./directus.ts";
 import { ParsedUrl } from "../types.ts";

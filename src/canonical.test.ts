@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertExists,
-} from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals, assertExists } from "jsr:@std/assert";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
 const nextImgLocal =
@@ -43,8 +40,10 @@ Deno.test("Canonical", async (t) => {
 	await t.step(
 		"should fall back to the default CDN for unrecognized image domains - vercel",
 		() => {
-			const result =
-				getCanonicalCdnForUrl("https://placekitten.com/100", "vercel") ||
+			const result = getCanonicalCdnForUrl(
+				"https://placekitten.com/100",
+				"vercel",
+			) ||
 				undefined;
 			assertExists(result);
 			assertEquals(

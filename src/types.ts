@@ -1,3 +1,5 @@
+import { Image } from "https://deno.land/x/jpegts@1.1/mod.ts";
+
 /**
  * Options to transform an image URL
  */
@@ -103,3 +105,101 @@ export type ImageCdn =
 	| "supabase";
 
 export type SupportedImageCdn = ImageCdn;
+
+export type OperationFormatter<T extends Operations = Operations> = (
+	operations: T,
+) => string;
+
+export type OperationParser<T extends Operations = Operations> = (
+	url: string | URL,
+) => T;
+
+export interface OperationMap<TOperations extends Operations = Operations> {
+	width?: keyof TOperations | false;
+	height?: keyof TOperations | false;
+	format?: keyof TOperations | false;
+	quality?: keyof TOperations | false;
+}
+
+export interface FormatMap {
+	// deno-lint-ignore ban-types
+	[key: string]: ImageFormat | (string & {});
+}
+
+export type ImageFormat = "jpeg" | "jpg" | "png" | "webp" | "avif";
+
+// deno-lint-ignore ban-types
+export interface Operations<TImageFormat = (string & {})> {
+	width?: number | string;
+	height?: number | string;
+	format?: ImageFormat | TImageFormat;
+	quality?: number | string;
+}
+
+export interface ProviderConfig<
+	TOperations extends Operations = Operations,
+> {
+	/**
+	 * Maps standard operation names to their equivalent with this provider.
+	 * Keys are any of width, height, format, quality. Only include those
+	 * that are different from the standard.
+	 */
+	keyMap?: OperationMap<TOperations>;
+	/**
+	 * Defaults that should always be applied to operations unless overridden.
+	 */
+	defaults?: Partial<TOperations>;
+	/**
+	 * Maps standard format names to their equivalent with this provider.
+	 * Only include those that are different from the standard.
+	 */
+	formatMap?: FormatMap;
+	/**
+	 * Separator between keys and values in the URL. Defaults to "=".
+	 */
+	kvSeparator?: string;
+	/**
+	 * Parameter separator in the URL. Defaults to "&".
+	 */
+	paramSeparator?: string;
+	/**
+	 * If provided, the src URL will be extracted from this parameter.
+	 */
+	srcParam?: string;
+}
+
+export type URLGenerator<
+	TOperations extends Operations = Operations,
+	TOptions = undefined,
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (
+		src: string | URL,
+		operations: TOperations,
+		options?: TOptions,
+	) => string;
+
+export type URLTransformer<
+	TOperations extends Operations = Operations,
+	TOptions = undefined,
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (src: string | URL, operations: TOperations, options: TOptions) => string;
+
+export type OperationExtractor<
+	TOperations extends Operations = Operations,
+	TOptions = undefined,
+> = (
+	url: string | URL,
+	options?: TOptions,
+) =>
+	| (TOptions extends undefined ? {
+			operations: TOperations;
+			src: string;
+		}
+		: {
+			operations: TOperations;
+			src: string;
+			options: TOptions;
+		})
+	| null;
