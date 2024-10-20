@@ -1,10 +1,10 @@
 import {
-	OperationExtractor,
 	OperationFormatter,
 	OperationMap,
 	OperationParser,
 	Operations,
 	ProviderConfig,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "./types.ts";
@@ -357,7 +357,7 @@ export function createExtractAndGenerate<
 	TOperations extends Operations = Operations,
 	TOptions = undefined,
 >(
-	extract: OperationExtractor<TOperations, TOptions>,
+	extract: URLExtractor<TOperations, TOptions>,
 	generate: URLGenerator<TOperations, TOptions>,
 ): URLTransformer<TOperations, TOptions> {
 	return ((

@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -160,7 +160,7 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	ContentstackOperations,
 	ContentstackOptions
 > = (url) => {

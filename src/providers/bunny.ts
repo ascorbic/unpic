@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLTransformer,
 } from "../types.ts";
 import {
@@ -121,7 +121,7 @@ const operationsGenerator = createOperationsGenerator<BunnyOperations>({
 	},
 });
 
-export const extract: OperationExtractor<BunnyOperations> = extractFromURL;
+export const extract: URLExtractor<BunnyOperations> = extractFromURL;
 
 export const generate: URLGenerator<BunnyOperations> = (
 	src,

@@ -1,5 +1,5 @@
 import { getImageCdnForUrl } from "../../mod.ts";
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -213,7 +213,7 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<Scene7Operations> = (
+export const extract: URLExtractor<Scene7Operations> = (
 	url,
 ) => {
 	if (getImageCdnForUrl(url) !== "scene7") {

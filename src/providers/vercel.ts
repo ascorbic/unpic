@@ -1,6 +1,6 @@
 import type {
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
@@ -65,23 +65,25 @@ export const generate: URLGenerator<VercelOperations, VercelImageOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<VercelOperations, VercelImageOptions> =
-	(url, options = {}) => {
-		const parsedUrl = toUrl(url);
-		const sourceUrl = parsedUrl.searchParams.get("url") || "";
-		parsedUrl.searchParams.delete("url");
-		const operations = operationsParser(parsedUrl);
+export const extract: URLExtractor<VercelOperations, VercelImageOptions> = (
+	url,
+	options = {},
+) => {
+	const parsedUrl = toUrl(url);
+	const sourceUrl = parsedUrl.searchParams.get("url") || "";
+	parsedUrl.searchParams.delete("url");
+	const operations = operationsParser(parsedUrl);
 
-		parsedUrl.search = "";
+	parsedUrl.search = "";
 
-		return {
-			src: sourceUrl,
-			operations,
-			options: {
-				baseUrl: options.baseUrl ?? parsedUrl.origin,
-			},
-		};
+	return {
+		src: sourceUrl,
+		operations,
+		options: {
+			baseUrl: options.baseUrl ?? parsedUrl.origin,
+		},
 	};
+};
 
 const extractAndGenerate = createExtractAndGenerate(extract, generate);
 

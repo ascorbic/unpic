@@ -186,7 +186,7 @@ export type URLTransformer<
 	? (src: string | URL, operations: TOperations) => string
 	: (src: string | URL, operations: TOperations, options: TOptions) => string;
 
-export type OperationExtractor<
+export type URLExtractor<
 	TOperations extends Operations = Operations,
 	TOptions = undefined,
 > = (

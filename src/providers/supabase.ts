@@ -1,4 +1,4 @@
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -38,7 +38,10 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 
 export const generate: URLGenerator<SupabaseOperations> = (src, operations) => {
 	const url = toUrl(src);
-	const basePath = url.pathname.replace(RENDER_URL_PREFIX, STORAGE_URL_PREFIX);
+	const basePath = url.pathname.replace(
+		RENDER_URL_PREFIX,
+		STORAGE_URL_PREFIX,
+	);
 
 	// Update the pathname with the cleaned version
 	url.pathname = basePath;
@@ -58,7 +61,7 @@ export const generate: URLGenerator<SupabaseOperations> = (src, operations) => {
 	);
 };
 
-export const extract: OperationExtractor<SupabaseOperations> = (url) => {
+export const extract: URLExtractor<SupabaseOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 	const isRender = isRenderUrl(parsedUrl);

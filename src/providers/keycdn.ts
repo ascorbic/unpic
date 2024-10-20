@@ -1,7 +1,7 @@
 import type {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -281,7 +281,7 @@ export const generate: URLGenerator<KeyCDNOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<KeyCDNOperations> = (url) => {
+export const extract: URLExtractor<KeyCDNOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 

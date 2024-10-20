@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
@@ -80,7 +80,7 @@ export const generate: URLGenerator<IPXOperations, IPXOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<IPXOperations, IPXOptions> = (url) => {
+export const extract: URLExtractor<IPXOperations, IPXOptions> = (url) => {
 	const parsedUrl = toUrl(url);
 	const [, baseUrlPart, modifiers, ...srcParts] = parsedUrl.pathname.split(
 		"/",

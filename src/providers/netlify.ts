@@ -1,8 +1,8 @@
 import { getImageCdnForUrlByPath } from "../../mod.ts";
 import type {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -90,7 +90,7 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	NetlifyImageOperations,
 	NetlifyImageOptions
 > = (url) => {

@@ -1,7 +1,7 @@
 import type {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -121,7 +121,7 @@ export const generate: URLGenerator<KontentAiOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<KontentAiOperations> = (url) => {
+export const extract: URLExtractor<KontentAiOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 

@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -221,7 +221,7 @@ export const { operationsGenerator, operationsParser } =
 		},
 	});
 
-export const extract: OperationExtractor<ImgixOperations> = (url) => {
+export const extract: URLExtractor<ImgixOperations> = (url) => {
 	const src = toUrl(url);
 	const operations = operationsParser(url);
 	src.search = "";

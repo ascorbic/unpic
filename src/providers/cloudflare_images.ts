@@ -1,7 +1,7 @@
 import type {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
@@ -72,7 +72,7 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(toUrl(url));
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	CloudflareImagesOperations,
 	CloudflareImagesOptions
 > = (url) => {

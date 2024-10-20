@@ -1,4 +1,4 @@
-import { OperationExtractor, Operations } from "../types.ts";
+import { Operations, URLExtractor } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsGenerator,
@@ -48,7 +48,7 @@ const operationsGenerator = createOperationsGenerator<BuilderOperations>({
 	},
 });
 
-export const extract: OperationExtractor<BuilderOperations> = extractFromURL;
+export const extract: URLExtractor<BuilderOperations> = extractFromURL;
 
 export const generate: URLGenerator<BuilderOperations> = (
 	src,

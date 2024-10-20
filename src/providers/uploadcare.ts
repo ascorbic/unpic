@@ -1,4 +1,4 @@
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import { stripTrailingSlash } from "../utils.ts";
 import {
 	addTrailingSlash,
@@ -68,7 +68,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: "/-/",
 });
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	UploadcareOperations,
 	UploadcareOptions
 > = (url) => {

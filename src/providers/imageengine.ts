@@ -1,4 +1,4 @@
-import { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -106,7 +106,7 @@ export const generate: URLGenerator<ImageEngineOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	ImageEngineOperations
 > = (url) => {
 	const parsedUrl = toUrl(url);

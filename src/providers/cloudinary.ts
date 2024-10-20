@@ -1,6 +1,6 @@
 import {
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
@@ -307,7 +307,7 @@ function parseCloudinaryUrl(url: string): CloudinaryParts | null {
 	return matches.groups || {};
 }
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	CloudinaryOperations,
 	CloudinaryOptions
 > = (url) => {

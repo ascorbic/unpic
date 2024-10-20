@@ -4,11 +4,7 @@ import {
 	transform as vercelTransform,
 	type VercelOperations as NextjsOperations,
 } from "./vercel.ts";
-import type {
-	OperationExtractor,
-	URLGenerator,
-	URLTransformer,
-} from "../types.ts";
+import type { URLExtractor, URLGenerator, URLTransformer } from "../types.ts";
 
 export type { NextjsOperations };
 
@@ -22,7 +18,7 @@ export const generate: URLGenerator<NextjsOperations, NextjsImageOptions> = (
 	options = {},
 ) => vercelGenerate(src, operations, { ...options, prefix: "_next" });
 
-export const extract: OperationExtractor<NextjsOperations, NextjsImageOptions> =
+export const extract: URLExtractor<NextjsOperations, NextjsImageOptions> =
 	vercelExtract;
 
 export const transform: URLTransformer<NextjsOperations, NextjsImageOptions> = (

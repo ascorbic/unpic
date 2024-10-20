@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
@@ -50,7 +50,7 @@ export const generate: URLGenerator<AstroOperations, AstroOptions | undefined> =
 		return toCanonicalUrlString(url);
 	};
 
-export const extract: OperationExtractor<AstroOperations, AstroOptions> = (
+export const extract: URLExtractor<AstroOperations, AstroOptions> = (
 	url,
 ) => {
 	const parsedUrl = toUrl(url);

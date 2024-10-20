@@ -1,4 +1,4 @@
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -37,7 +37,7 @@ export const generate: URLGenerator<WordPressOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<WordPressOperations> = (url) => {
+export const extract: URLExtractor<WordPressOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 

@@ -1,7 +1,7 @@
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -154,7 +154,7 @@ export const generate: URLGenerator<ImageKitOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<ImageKitOperations> = (url) => {
+export const extract: URLExtractor<ImageKitOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	let trPart: string | null = null;
 	let path = parsedUrl.pathname;

@@ -1,5 +1,5 @@
 import { getImageCdnForUrlByPath } from "../detect.ts";
-import { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -115,7 +115,7 @@ export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	CloudflareOperations,
 	CloudflareOptions
 > = (url, options) => {

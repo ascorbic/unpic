@@ -1,4 +1,4 @@
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -45,7 +45,7 @@ export const generate: URLGenerator<ShopifyOperations> = (src, operations) => {
 	return toCanonicalUrlString(url);
 };
 
-export const extract: OperationExtractor<ShopifyOperations> = (url) => {
+export const extract: URLExtractor<ShopifyOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 	const match = shopifyRegex.exec(parsedUrl.pathname);
 	const operations: ShopifyOperations = operationsParser(parsedUrl);

@@ -1,4 +1,4 @@
-import type { OperationExtractor, Operations, URLGenerator } from "../types.ts";
+import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	toCanonicalUrlString,
@@ -44,7 +44,7 @@ const generateFilters = (filters?: Record<string, string>) => {
 	return `filters:${filterItems.join(":")}`;
 };
 
-export const extract: OperationExtractor<StoryblokOperations> = (url) => {
+export const extract: URLExtractor<StoryblokOperations> = (url) => {
 	const parsedUrl = toUrl(url);
 
 	const regex = parsedUrl.hostname === "img2.storyblok.com"

@@ -1,8 +1,8 @@
 import { getImageCdnForUrlByDomain } from "../detect.ts";
 import {
 	ImageFormat,
-	OperationExtractor,
 	Operations,
+	URLExtractor,
 	URLGenerator,
 } from "../types.ts";
 import {
@@ -146,7 +146,7 @@ export const generate: URLGenerator<CloudimageOperations, CloudimageOptions> = (
 	return url.toString();
 };
 
-export const extract: OperationExtractor<
+export const extract: URLExtractor<
 	CloudimageOperations,
 	CloudimageOptions
 > = (url, options = {}) => {
