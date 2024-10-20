@@ -95,6 +95,12 @@ export const stripLeadingSlash = (str?: string) =>
 export const stripTrailingSlash = (str?: string) =>
 	str?.endsWith("/") ? str.slice(0, -1) : str;
 
+export const addLeadingSlash = (str?: string) =>
+	str?.startsWith("/") ? str : `/${str}`;
+
+export const addTrailingSlash = (str?: string) =>
+	str?.endsWith("/") ? str : `${str}/`;
+
 /**
  * Creates a formatter given an operation joiner and key/value joiner
  */
@@ -354,7 +360,11 @@ export function createExtractAndGenerate<
 	extract: OperationExtractor<TOperations, TOptions>,
 	generate: URLGenerator<TOperations, TOptions>,
 ): URLTransformer<TOperations, TOptions> {
-	return ((src: string | URL, operations: TOperations, options?: TOptions) => {
+	return ((
+		src: string | URL,
+		operations: TOperations,
+		options?: TOptions,
+	) => {
 		const base = extract(src, options);
 		if (!base) {
 			return generate(src, operations, options);
