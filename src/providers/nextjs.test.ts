@@ -56,10 +56,12 @@ Deno.test("Next.js Image CDN - extract", async (t) => {
 			assertEquals(parsed, {
 				src: "/_next/static/media/bunny.0e498116.jpg",
 				operations: {
-					width: 828, // Long form: width
-					quality: 75, // Long form: quality
+					width: 828,
+					quality: 75,
 				},
-				options: {},
+				options: {
+					baseUrl: "https://unpic-next.netlify.app",
+				},
 			});
 		},
 	);
