@@ -1,3 +1,5 @@
+import { getProviderForUrl, getProviderForUrlByPath } from "../detect.ts";
+import { getTransformer } from "../transform.ts";
 import type {
 	Operations,
 	URLExtractor,
@@ -31,12 +33,16 @@ export interface VercelOperations extends Operations {
 	q?: number;
 }
 
-interface VercelImageOptions {
+export interface VercelOptions {
 	baseUrl?: string;
 	/**
 	 * Either "_vercel" or "_next". Defaults to "_vercel".
 	 */
 	prefix?: string;
+	/**
+	 * Always use the Vercel CDN, even if the source URL matches another provider.
+	 */
+	force?: boolean;
 }
 
 const { operationsGenerator, operationsParser } = createOperationsHandlers<
@@ -48,9 +54,12 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 		height: false,
 		format: false,
 	},
+	defaults: {
+		q: 75,
+	},
 });
 
-export const generate: URLGenerator<VercelOperations, VercelImageOptions> = (
+export const generate: URLGenerator<VercelOperations, VercelOptions> = (
 	src,
 	operations,
 	options = {},
@@ -65,10 +74,15 @@ export const generate: URLGenerator<VercelOperations, VercelImageOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<VercelOperations, VercelImageOptions> = (
+export const extract: URLExtractor<VercelOperations, VercelOptions> = (
 	url,
 	options = {},
 ) => {
+	if (
+		!["vercel", "nextjs"].includes(getProviderForUrlByPath(url) || "")
+	) {
+		return null;
+	}
 	const parsedUrl = toUrl(url);
 	const sourceUrl = parsedUrl.searchParams.get("url") || "";
 	parsedUrl.searchParams.delete("url");
@@ -85,19 +99,7 @@ export const extract: URLExtractor<VercelOperations, VercelImageOptions> = (
 	};
 };
 
-const extractAndGenerate = createExtractAndGenerate(extract, generate);
-
 export const transform: URLTransformer<
 	VercelOperations,
-	VercelImageOptions
-> = (
-	src,
-	operations,
-	options = {},
-) => {
-	const url = toUrl(src);
-	if (url.pathname.startsWith(`/${options.prefix || "_vercel"}/image`)) {
-		return extractAndGenerate(src, operations, options);
-	}
-	return generate(src, operations, options);
-};
+	VercelOptions
+> = createExtractAndGenerate(extract, generate);

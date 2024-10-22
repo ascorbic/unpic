@@ -14,7 +14,7 @@ const isRenderUrl = (url: URL) => url.pathname.startsWith(RENDER_URL_PREFIX);
 /**
  * Supabase Image Transformation API operations
  */
-interface SupabaseOperations extends Operations<"origin"> {
+export interface SupabaseOperations extends Operations<"origin"> {
 	/**
 	 * You can use different resizing modes:
 	 * - `cover`: resizes the image while keeping the aspect ratio to fill a given size and crops projecting parts.

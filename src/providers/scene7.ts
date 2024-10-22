@@ -1,4 +1,4 @@
-import { getImageCdnForUrl } from "../../mod.ts";
+import { getProviderForUrl } from "../detect.ts";
 import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -6,7 +6,7 @@ import {
 	toCanonicalUrlString,
 } from "../utils.ts";
 
-type Scene7Formats =
+export type Scene7Formats =
 	| "avif-alpha"
 	| "avif"
 	| "eps"
@@ -36,7 +36,7 @@ type Scene7Formats =
 	| "web-alpha"
 	| "webp";
 
-type Scene7Fit =
+export type Scene7Fit =
 	| "fit"
 	| "constrain"
 	| "crop"
@@ -49,7 +49,7 @@ type Scene7Fit =
  * Adobe Dynamic Media Image Rendering API operations
  * @see https://experienceleague.adobe.com/en/docs/dynamic-media-developer-resources/image-serving-api/image-serving-api/http-protocol-reference/command-reference/c-command-reference
  */
-interface Scene7Operations extends Operations<Scene7Formats> {
+export interface Scene7Operations extends Operations<Scene7Formats> {
 	/**
 	 * Request type to perform on the image.
 	 */
@@ -216,7 +216,7 @@ export const generate: URLGenerator<
 export const extract: URLExtractor<Scene7Operations> = (
 	url,
 ) => {
-	if (getImageCdnForUrl(url) !== "scene7") {
+	if (getProviderForUrl(url) !== "scene7") {
 		return null;
 	}
 	const parsedUrl = new URL(url, BASE);

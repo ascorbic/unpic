@@ -136,7 +136,6 @@ export interface ContentstackOptions {
 
 const operationsGenerator = createOperationsGenerator<ContentstackOperations>({
 	defaults: {
-		fit: "crop",
 		auto: "webp",
 		disable: "upscale",
 	},
@@ -150,6 +149,9 @@ export const generate: URLGenerator<
 	operations,
 	{ baseURL = "https://images.contentstack.io/" }: ContentstackOptions = {},
 ) => {
+	if (operations.width && operations.height) {
+		operations.fit ??= "crop";
+	}
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(src);
 	if (url.hostname === "n") {

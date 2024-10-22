@@ -13,7 +13,7 @@ Deno.test("Vercel Image CDN - generate", async (t) => {
 		const result = generate(relativeUrl, { w: 800 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_vercel/image?url=/image.jpg&w=800", // Short param: w
+			"/_vercel/image?url=/image.jpg&w=800&q=75",
 		);
 	});
 
@@ -21,25 +21,54 @@ Deno.test("Vercel Image CDN - generate", async (t) => {
 		const result = generate(relativeUrl, { w: 800 }, { baseUrl });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://example.com/_vercel/image?url=/image.jpg&w=800", // Short param: w
+			"https://example.com/_vercel/image?url=/image.jpg&w=800&q=75",
 		);
 	});
 
 	await t.step("should generate a URL with quality", () => {
-		const result = generate(relativeUrl, { w: 800, q: 75 });
+		const result = generate(relativeUrl, { w: 800, q: 80 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_vercel/image?url=/image.jpg&w=800&q=75", // Short params: w, q
+			"/_vercel/image?url=/image.jpg&w=800&q=80",
 		);
 	});
 
 	await t.step("should generate an absolute URL with quality", () => {
-		const result = generate(relativeUrl, { w: 800, q: 75 }, { baseUrl });
+		const result = generate(relativeUrl, { w: 800, q: 80 }, { baseUrl });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://example.com/_vercel/image?url=/image.jpg&w=800&q=75", // Short params: w, q
+			"https://example.com/_vercel/image?url=/image.jpg&w=800&q=80",
 		);
 	});
+
+	await t.step("should generate a URL with a remote image", () => {
+		const result = generate(
+			"https://example.net/image.jpg",
+			{ w: 800, q: 80 },
+			{
+				baseUrl,
+			},
+		);
+		assertEqualIgnoringQueryOrder(
+			result,
+			"https://example.com/_vercel/image?url=https%3A%2F%2Fexample.net%2Fimage.jpg&w=800&q=80",
+		);
+	});
+
+	await t.step(
+		"should generate a relative path when transforming a remote URL with no base URL",
+		() => {
+			const result = generate(
+				"https://example.net/image.jpg",
+				{ w: 800, q: 80 },
+				{},
+			);
+			assertEqualIgnoringQueryOrder(
+				result,
+				"/_vercel/image?url=https%3A%2F%2Fexample.net%2Fimage.jpg&w=800&q=80",
+			);
+		},
+	);
 });
 
 Deno.test("Vercel Image CDN - extract", async (t) => {
@@ -66,13 +95,13 @@ Deno.test("Vercel Image CDN - extract", async (t) => {
 Deno.test("Vercel Image CDN - transform", async (t) => {
 	await t.step("should transform a URL with new operations", () => {
 		const result = transform(
-			"/_vercel/image?url=/image.jpg&w=400",
+			"/_vercel/image?url=/image.jpg&w=400&q=75",
 			{ width: 800 },
 			{},
 		);
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_vercel/image?url=/image.jpg&w=800", // Short param: w
+			"/_vercel/image?url=/image.jpg&w=800&q=75",
 		);
 	});
 
@@ -80,7 +109,7 @@ Deno.test("Vercel Image CDN - transform", async (t) => {
 		const result = transform(relativeUrl, { w: 800 }, {});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_vercel/image?url=/image.jpg&w=800", // Short param: w
+			"/_vercel/image?url=/image.jpg&w=800&q=75",
 		);
 	});
 
@@ -92,7 +121,7 @@ Deno.test("Vercel Image CDN - transform", async (t) => {
 		);
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://example.com/_vercel/image?url=/image.jpg&w=1200&q=80", // Short params: w, q
+			"https://example.com/_vercel/image?url=/image.jpg&w=1200&q=80",
 		);
 	});
 });

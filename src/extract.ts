@@ -1,4 +1,12 @@
-import { getImageCdnForUrl } from "./detect.ts";
+import { getProviderForUrl } from "./detect.ts";
+import type {
+	AllProviderOptions,
+	ExtractedURLForProvider,
+	ProviderExtractor,
+	ProviderExtractorMap,
+} from "./providers/types.ts";
+import type { ImageCdn } from "./types.ts";
+
 import { extract as astro } from "./providers/astro.ts";
 import { extract as builder } from "./providers/builder.io.ts";
 import { extract as bunny } from "./providers/bunny.ts";
@@ -24,56 +32,55 @@ import { extract as supabase } from "./providers/supabase.ts";
 import { extract as uploadcare } from "./providers/uploadcare.ts";
 import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
-import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
-export const parsers = {
-	imgix,
-	contentful,
+export const parsers: ProviderExtractorMap = {
+	astro,
 	"builder.io": builder,
-	shopify,
-	wordpress,
+	bunny,
+	cloudflare,
+	cloudflare_images: cloudflareImages,
 	cloudimage,
 	cloudinary,
-	cloudflare,
-	bunny,
-	storyblok,
-	"kontent.ai": kontentai,
-	vercel,
-	nextjs,
-	scene7,
-	keycdn,
+	contentful,
+	contentstack,
 	directus,
 	imageengine,
-	contentstack,
-	"cloudflare_images": cloudflareImages,
-	ipx,
-	astro,
-	netlify,
 	imagekit,
-	uploadcare,
+	imgix,
+	ipx,
+	keycdn,
+	"kontent.ai": kontentai,
+	netlify,
+	nextjs,
+	scene7,
+	shopify,
+	storyblok,
 	supabase,
-};
-
-export const cdnIsSupportedForParse = (
-	cdn: ImageCdn | false,
-): cdn is SupportedImageCdn => cdn && cdn in parsers;
+	uploadcare,
+	vercel,
+	wordpress,
+} as const;
 
 /**
  * Returns a parser function if the given URL is from a known image CDN
  * @param url
  */
-export const getParserForUrl = <TParams extends Record<string, unknown>>(
+export const getExtractorForUrl = <
+	TCDN extends ImageCdn = ImageCdn,
+>(
 	url: string | URL,
-): UrlParser<TParams> | undefined =>
-	getParserForCdn<TParams>(getImageCdnForUrl(url));
+): ProviderExtractor<TCDN> | undefined =>
+	getExtractorForProvider<TCDN>(getProviderForUrl(url) as TCDN);
 
-export const getParserForCdn = <TParams extends Record<string, unknown>>(
-	cdn: ImageCdn | false | undefined,
-): UrlParser<TParams> | undefined => {
-	if (!cdn || !cdnIsSupportedForParse(cdn)) {
+export const getExtractorForProvider = <
+	TCDN extends ImageCdn,
+>(
+	cdn: TCDN | false | undefined,
+): ProviderExtractor<TCDN> | undefined => {
+	if (!cdn) {
 		return undefined;
 	}
-	return parsers[cdn] as UrlParser<TParams>;
+	return parsers[cdn];
 };
 
 /**
@@ -81,19 +88,32 @@ export const getParserForCdn = <TParams extends Record<string, unknown>>(
  * If the URL is not from a known image CDN it returns undefined.
  * @param url
  */
-export const parseUrl = <TParams = Record<string, unknown>>(
+export const parseUrl = <
+	TCDN extends ImageCdn = ImageCdn,
+>(
 	url: string | URL,
-	cdn?: ImageCdn,
-): ParsedUrl<TParams> | undefined => {
+	cdn?: TCDN,
+	options?: AllProviderOptions[TCDN],
+):
+	| ExtractedURLForProvider<TCDN>
+	| undefined => {
 	if (cdn) {
-		return getParserForCdn(cdn)?.(url) as ParsedUrl<TParams>;
+		return getExtractorForProvider(cdn)?.(url);
 	}
-	const detectedCdn = getImageCdnForUrl(url);
+	const detectedCdn = getProviderForUrl(url) as TCDN;
 	if (!detectedCdn) {
 		return undefined;
 	}
-	if (!cdnIsSupportedForParse(detectedCdn)) {
-		return { cdn: detectedCdn, base: url.toString() } as ParsedUrl<TParams>;
+
+	const parser = getExtractorForProvider<TCDN>(detectedCdn);
+
+	if (!parser) {
+		return {
+			src: url.toString(),
+			operations: {},
+			options: {},
+		} as ExtractedURLForProvider<TCDN>;
 	}
-	return getParserForCdn(detectedCdn)?.(url) as ParsedUrl<TParams>;
+
+	return parser(url, options);
 };

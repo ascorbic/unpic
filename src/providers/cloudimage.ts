@@ -1,4 +1,4 @@
-import { getImageCdnForUrlByDomain } from "../detect.ts";
+import { getProviderForUrl } from "../detect.ts";
 import {
 	ImageFormat,
 	Operations,
@@ -7,8 +7,9 @@ import {
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
-	createOperationsGenerator,
+	createOperationsHandlers,
 	extractFromURL,
+	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
 
@@ -105,10 +106,10 @@ export interface CloudimageOperations extends Operations {
 	 */
 	bg_color?: string;
 
-	ci_url_encoded?: 1;
+	ci_url_encoded?: 1 | "1";
 }
 
-const operationsGenerator = createOperationsGenerator<
+const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	CloudimageOperations
 >({
 	keyMap: {
@@ -132,9 +133,10 @@ export const generate: URLGenerator<CloudimageOperations, CloudimageOptions> = (
 	{ token } = {},
 ) => {
 	if (!token) {
-		throw new Error("Token is required for Cloudimage URLs");
+		throw new Error("Token is required for Cloudimage URLs" + src);
 	}
 	let srcString = src.toString();
+	srcString = srcString.replace(/^https?:\/\//, "");
 	if (srcString.includes("?")) {
 		modifiers.ci_url_encoded = 1;
 		srcString = encodeURIComponent(srcString);
@@ -149,17 +151,23 @@ export const generate: URLGenerator<CloudimageOperations, CloudimageOptions> = (
 export const extract: URLExtractor<
 	CloudimageOperations,
 	CloudimageOptions
-> = (url, options = {}) => {
-	if (getImageCdnForUrlByDomain(url) !== "cloudimage") {
+> = (src, options = {}) => {
+	const url = toUrl(src);
+	if (getProviderForUrl(url) !== "cloudimage") {
 		return null;
 	}
-	const result = extractFromURL(url);
-	if (!result) {
-		return null;
+	const operations = operationsParser(url);
+
+	let originalSrc = url.pathname;
+	if (operations.ci_url_encoded) {
+		originalSrc = decodeURIComponent(originalSrc);
+		delete operations.ci_url_encoded;
 	}
-	options.token ??= toUrl(url).hostname.replace(".cloudimg.io", "");
+
+	options.token ??= url.hostname.replace(".cloudimg.io", "");
 	return {
-		...result,
+		src: `${url.protocol}/${originalSrc}`,
+		operations,
 		options,
 	};
 };

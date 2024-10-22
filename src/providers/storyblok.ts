@@ -11,7 +11,7 @@ const storyBlokAssets =
 const storyBlokImg2 =
 	/^(?<modifiers>\/(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?\/?)?(?<id>\/f\/.+)$/;
 
-interface StoryblokOperations extends Operations {
+export interface StoryblokOperations extends Operations {
 	crop?: string;
 	filters?: Record<string, string>;
 	flipx?: "-";

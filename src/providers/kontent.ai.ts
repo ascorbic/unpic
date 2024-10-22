@@ -15,7 +15,8 @@ import {
 /**
  * @see https://kontent.ai/learn/docs/apis/image-transformation-api
  */
-interface KontentAiOperations extends Operations<"gif" | "png8" | "pjpg"> {
+export interface KontentAiOperations
+	extends Operations<"gif" | "png8" | "pjpg"> {
 	/**
 	 * Resize the image to a specified width in pixels.
 	 * @type {number} Range: 1-8192
@@ -93,9 +94,6 @@ interface KontentAiOperations extends Operations<"gif" | "png8" | "pjpg"> {
 const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	KontentAiOperations
 >({
-	defaults: {
-		fit: "crop",
-	},
 	formatMap: {
 		jpg: "jpeg",
 	},
@@ -114,6 +112,10 @@ export const generate: URLGenerator<KontentAiOperations> = (
 	const url = toUrl(src);
 	if (operations.lossless !== undefined) {
 		operations.lossless = operations.lossless ? 1 : 0;
+	}
+
+	if (operations.width && operations.height) {
+		operations.fit = "crop";
 	}
 
 	url.search = operationsGenerator(operations);

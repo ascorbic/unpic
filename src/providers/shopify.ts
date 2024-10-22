@@ -12,7 +12,7 @@ const shopifyRegex =
 /**
  * Shopify Image API operations
  */
-interface ShopifyOperations extends Operations {
+export interface ShopifyOperations extends Operations {
 	/**
 	 * Crop option, such as top, bottom, or center.
 	 */

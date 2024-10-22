@@ -15,7 +15,7 @@ Deno.test("Next.js Image CDN - generate", async (t) => {
 		const result = generate(relativeUrl, { width: 828 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828", // Long param: width
+			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",
 		);
 	});
 
@@ -23,25 +23,25 @@ Deno.test("Next.js Image CDN - generate", async (t) => {
 		const result = generate(relativeUrl, { width: 828 }, { baseUrl });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828", // Long param: width
+			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",
 		);
 	});
 
 	await t.step("should generate a URL with quality", () => {
-		const result = generate(relativeUrl, { width: 828, quality: 75 });
+		const result = generate(relativeUrl, { width: 828, quality: 80 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75", // Long params: width, quality
+			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=80",
 		);
 	});
 
 	await t.step("should generate an absolute URL with quality", () => {
-		const result = generate(relativeUrl, { width: 828, quality: 75 }, {
+		const result = generate(relativeUrl, { width: 828, quality: 80 }, {
 			baseUrl,
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75", // Long params: width, quality
+			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=80",
 		);
 	});
 });
@@ -76,7 +76,7 @@ Deno.test("Next.js Image CDN - transform", async (t) => {
 		);
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828", // Long param: width
+			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",
 		);
 	});
 
@@ -84,7 +84,7 @@ Deno.test("Next.js Image CDN - transform", async (t) => {
 		const result = transform(relativeUrl, { width: 828 }, {});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828", // Long param: width
+			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",
 		);
 	});
 
@@ -96,7 +96,7 @@ Deno.test("Next.js Image CDN - transform", async (t) => {
 		);
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=1200&q=80", // Long params: width, quality
+			"https://unpic-next.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=1200&q=80",
 		);
 	});
 });

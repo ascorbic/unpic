@@ -1,9 +1,11 @@
-import { getImageCdnForUrlByPath } from "../../mod.ts";
+import { getProviderForUrl, getProviderForUrlByPath } from "../detect.ts";
+import { getTransformer } from "../transform.ts";
 import type {
 	ImageFormat,
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -15,7 +17,7 @@ import {
 /**
  * @see https://docs.netlify.com/image-cdn/overview/
  */
-interface NetlifyImageOperations extends Operations<"blurhash"> {
+export interface NetlifyOperations extends Operations<"blurhash"> {
 	/**
 	 * Resize the image to a specified width in pixels.
 	 * @type {number} Range: 1-8192
@@ -53,15 +55,19 @@ interface NetlifyImageOperations extends Operations<"blurhash"> {
 	position?: "center" | "top" | "bottom" | "left" | "right";
 }
 
-interface NetlifyImageOptions {
+export interface NetlifyOptions {
 	/**
 	 * Base URL for the Netlify Image CDN. Defaults to relative URLs.
 	 */
 	baseUrl?: string;
+	/**
+	 * Always use the Netlify Image CDN, even if the source URL matches another provider.
+	 */
+	force?: boolean;
 }
 
 const { operationsGenerator, operationsParser } = createOperationsHandlers<
-	NetlifyImageOperations
+	NetlifyOperations
 >({
 	defaults: {
 		fit: "cover",
@@ -75,8 +81,8 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 });
 
 export const generate: URLGenerator<
-	NetlifyImageOperations,
-	NetlifyImageOptions
+	NetlifyOperations,
+	NetlifyOptions
 > = (
 	src,
 	operations,
@@ -91,10 +97,10 @@ export const generate: URLGenerator<
 };
 
 export const extract: URLExtractor<
-	NetlifyImageOperations,
-	NetlifyImageOptions
+	NetlifyOperations,
+	NetlifyOptions
 > = (url) => {
-	if (!getImageCdnForUrlByPath(url)) {
+	if (getProviderForUrlByPath(url) !== "netlify") {
 		return null;
 	}
 	const parsedUrl = toUrl(url);
@@ -114,4 +120,7 @@ export const extract: URLExtractor<
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<
+	NetlifyOperations,
+	NetlifyOptions
+> = createExtractAndGenerate(extract, generate);

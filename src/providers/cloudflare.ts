@@ -1,4 +1,4 @@
-import { getImageCdnForUrlByPath } from "../detect.ts";
+import { getProviderForUrlByPath } from "../detect.ts";
 import { Operations, URLExtractor, URLGenerator } from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
@@ -119,7 +119,7 @@ export const extract: URLExtractor<
 	CloudflareOperations,
 	CloudflareOptions
 > = (url, options) => {
-	if (getImageCdnForUrlByPath(url) !== "cloudflare") {
+	if (getProviderForUrlByPath(url) !== "cloudflare") {
 		return null;
 	}
 	const parsedUrl = toUrl(url);

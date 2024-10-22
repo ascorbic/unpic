@@ -15,7 +15,7 @@ import {
 /**
  * @see https://www.keycdn.com/support/image-processing
  */
-interface KeyCDNOperations extends Operations {
+export interface KeyCDNOperations extends Operations {
 	/**
 	 * Trim similar pixels from the edges.
 	 * @type {number} Range: 0-100

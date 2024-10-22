@@ -1,12 +1,10 @@
 import type {
-	ImageFormat,
 	Operations,
 	URLExtractor,
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
 import {
-	createExtractAndGenerate,
 	createOperationsHandlers,
 	toCanonicalUrlString,
 	toUrl,
@@ -15,7 +13,7 @@ import {
 const cloudflareImagesRegex =
 	/https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/;
 
-interface CloudflareImagesOperations extends Operations {
+export interface CloudflareImagesOperations extends Operations {
 	/**
 	 * Fit mode for the image.
 	 */
@@ -32,7 +30,7 @@ interface CloudflareImagesOperations extends Operations {
 	[key: string]: string | number | undefined;
 }
 
-interface CloudflareImagesOptions {
+export interface CloudflareImagesOptions {
 	host?: string;
 	accountHash?: string;
 	imageId?: string;

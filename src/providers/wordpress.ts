@@ -6,7 +6,7 @@ import {
 	toUrl,
 } from "../utils.ts";
 
-interface WordPressOperations extends Operations {
+export interface WordPressOperations extends Operations {
 	w?: number;
 	h?: number;
 	crop?: boolean | "1" | "0";

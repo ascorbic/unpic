@@ -40,11 +40,18 @@ export interface BuilderOperations extends Operations {
 	 * - `center`, `top`, `right top`, `right`, `right bottom`, `bottom`, `left bottom`, `left`, `left top`.
 	 */
 	position?: Position;
+	/**
+	 * Undocumented option to enable use of sharp library. ENabled automatically when using `format: "webp"`.
+	 * Required for crop support, so is enabled by default with Unpic.
+	 */
+	sharp?: boolean;
 }
 
 const operationsGenerator = createOperationsGenerator<BuilderOperations>({
 	defaults: {
 		fit: "cover",
+		format: "webp",
+		sharp: true,
 	},
 });
 

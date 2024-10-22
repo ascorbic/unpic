@@ -172,8 +172,7 @@ export const extract: URLExtractor<ImageKitOperations> = (url) => {
 			trPart = pathParts[trIndex].slice(3); // Remove 'tr:' prefix
 			path = pathParts.slice(0, trIndex).concat(
 				pathParts.slice(trIndex + 1),
-			)
-				.join("/");
+			).join("/");
 		}
 	}
 

@@ -4,42 +4,35 @@ import paths from "../data/paths.json" with { type: "json" };
 import { ImageCdn } from "./types.ts";
 import { toUrl } from "./utils.ts";
 
-const cdnDomains = new Map(Object.entries(domains));
-const cdnSubdomains = Object.entries(subdomains);
+const cdnDomains = new Map(Object.entries(domains)) as Map<string, ImageCdn>;
+const cdnSubdomains = Object.entries(subdomains) as [string, ImageCdn][];
+const cdnPaths = Object.entries(paths) as [string, ImageCdn][];
 
-export function getImageCdnForUrl(
+export function getProviderForUrl(
 	url: string | URL,
 ): ImageCdn | false {
-	return getImageCdnForUrlByDomain(url) || getImageCdnForUrlByPath(url);
+	return getProviderForUrlByDomain(url) || getProviderForUrlByPath(url);
 }
 
-export function getImageCdnForUrlByDomain(
+export function getProviderForUrlByDomain(
 	url: string | URL,
 ): ImageCdn | false {
 	if (typeof url === "string" && !url.startsWith("https://")) {
 		return false;
 	}
 	const { hostname } = toUrl(url);
-	if (cdnDomains.has(hostname)) {
-		return cdnDomains.get(hostname) as ImageCdn;
+	const cdn = cdnDomains.get(hostname);
+	if (cdn) {
+		return cdn;
 	}
-	for (const [subdomain, cdn] of cdnSubdomains) {
-		if (hostname.endsWith(`.${subdomain}`)) {
-			return cdn as ImageCdn;
-		}
-	}
-	return false;
+	return cdnSubdomains.find(([subdomain]) => hostname.endsWith(subdomain))
+		?.[1] || false;
 }
 
-export function getImageCdnForUrlByPath(
+export function getProviderForUrlByPath(
 	url: string | URL,
 ): ImageCdn | false {
 	// Allow relative URLs
 	const { pathname } = toUrl(url);
-	for (const [prefix, cdn] of Object.entries(paths)) {
-		if (pathname.startsWith(prefix)) {
-			return cdn as ImageCdn;
-		}
-	}
-	return false;
+	return cdnPaths.find(([path]) => pathname.startsWith(path))?.[1] || false;
 }

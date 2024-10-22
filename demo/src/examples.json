@@ -41,7 +41,7 @@
 	],
 	"nextjs": [
 		"Next.js",
-		"https://netlify-plugin-nextjs-demo.netlify.app/_next/image/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1674255909399-9bcb2cab6489%3Fauto%3Dformat%26fit%3Dcrop%26w%3D200%26q%3D80%26h%3D100&w=384&q=75"
+		"https://image-component.nextjs.gallery/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fmountains.a2eb1d50.jpg"
 	],
 	"scene7": [
 		"Adobe Dynamic Media (Scene7)",
@@ -83,5 +83,9 @@
 	"supabase": [
 		"Supabase",
 		"https://enlyjtqaeutqbhqgkadn.supabase.co/storage/v1/object/public/sample-public-bucket/alexander-shatov-PHH_0uw9-Qw-unsplash.jpg"
+	],
+	"vercel": [
+		"Vercel",
+		"https://build-output-api-image-optimization.vercel.sh/_vercel/image?url=%2Fimages%2Frio.jpeg"
 	]
 }
