@@ -7,8 +7,7 @@ const img =
 
 Deno.test("contentstack extract", async (t) => {
 	await t.step("should extract operations and baseURL from a URL", () => {
-		const url =
-			`${img}?width=200&height=100&format=webp&quality=80&fit=bounds`;
+		const url = `${img}?width=200&height=100&format=webp&quality=80&fit=bounds`;
 		const result = extract(url);
 		assertEqualIgnoringQueryOrder(
 			result?.src ?? "",
