@@ -8,8 +8,6 @@ import {
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
-	extractFromURL,
-	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
 

@@ -12,7 +12,7 @@ Deno.test("builder.io transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -20,7 +20,7 @@ Deno.test("builder.io transform", async (t) => {
 		const result = transform(img, { width: 200 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -32,7 +32,7 @@ Deno.test("builder.io transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -43,7 +43,7 @@ Deno.test("builder.io transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=201&height=100&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=201&height=100&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -55,7 +55,7 @@ Deno.test("builder.io transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=inside&width=200",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=inside&width=200&sharp=true&format=webp",
 		);
 	});
 });
@@ -68,7 +68,7 @@ Deno.test("builder.io generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=200&height=100&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -80,7 +80,7 @@ Deno.test("builder.io generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=contain&width=300&height=150",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?fit=contain&width=300&height=150&sharp=true&format=webp",
 		);
 	});
 
@@ -92,7 +92,7 @@ Deno.test("builder.io generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?position=bottom&width=400&height=300&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?position=bottom&width=400&height=300&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -103,7 +103,7 @@ Deno.test("builder.io generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=600&quality=80&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?width=600&quality=80&fit=cover&sharp=true&format=webp",
 		);
 	});
 
@@ -114,7 +114,7 @@ Deno.test("builder.io generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?format=webp&width=400&fit=cover",
+			"https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F462d29d57dda42cb9e26441501db535f?format=webp&width=400&fit=cover&sharp=true",
 		);
 	});
 });

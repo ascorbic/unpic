@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.190.0/testing/asserts.ts";
+import { assertEquals } from "jsr:@std/assert";
 import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
 import { extract, generate, transform } from "./wordpress.ts";
 

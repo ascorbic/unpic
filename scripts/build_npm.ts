@@ -1,25 +1,22 @@
-import { build, emptyDir } from "https://deno.land/x/dnt@0.37.0/mod.ts";
-import { basename } from "https://deno.land/std@0.206.0/path/mod.ts";
-import { walk } from "https://deno.land/std@0.206.0/fs/mod.ts";
+import { build, emptyDir } from "jsr:@deno/dnt";
+import { basename } from "jsr:@std/path";
+import { walk } from "jsr:@std/fs";
 
 await emptyDir("./npm");
 
-const trans = await Array.fromAsync(walk("./src/transformers", {
+const trans = await Array.fromAsync(walk("./src/providers", {
 	match: [/^(?!.*test\.ts$).*\.ts$/],
 }));
 
 const entry = trans.map((t) => ({
 	path: t.path,
-	name: `./transformers/${basename(t.path, ".ts")}`,
+	name: `./providers/${basename(t.path, ".ts")}`,
 }));
 
 await build({
 	entryPoints: [
 		"./mod.ts",
-		{
-			path: "./src/detect.ts",
-			name: "./detect",
-		},
+
 		...entry,
 	],
 	outDir: "./npm",

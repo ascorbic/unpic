@@ -1,5 +1,4 @@
-import { getProviderForUrl, getProviderForUrlByPath } from "../detect.ts";
-import { getTransformer } from "../transform.ts";
+import { getProviderForUrlByPath } from "../detect.ts";
 import type {
 	ImageFormat,
 	Operations,

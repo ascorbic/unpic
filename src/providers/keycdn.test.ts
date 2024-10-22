@@ -3,7 +3,6 @@ import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
 import { assertEquals } from "jsr:@std/assert";
 
 const img = "https://ip.keycdn.com/example.jpg";
-const privateCdnImg = "https://cdn-private.example.com/image.jpg";
 
 Deno.test("keycdn transform", async (t) => {
 	await t.step(

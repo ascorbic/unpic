@@ -1,13 +1,14 @@
 import { extract, generate, transform } from "./contentstack.ts";
 import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
-import { assertEquals } from "jsr:@std/assert/equals";
+import { assertEquals } from "jsr:@std/assert";
 
 const img =
 	"https://images.contentstack.io/v3/assets/example-asset-uid/example-image.jpg";
 
 Deno.test("contentstack extract", async (t) => {
 	await t.step("should extract operations and baseURL from a URL", () => {
-		const url = `${img}?width=200&height=100&format=webp&quality=80&fit=bounds`;
+		const url =
+			`${img}?width=200&height=100&format=webp&quality=80&fit=bounds`;
 		const result = extract(url);
 		assertEqualIgnoringQueryOrder(
 			result?.src ?? "",
@@ -37,7 +38,7 @@ Deno.test("contentstack transform", async (t) => {
 			const result = transform(img, {}, {});
 			assertEqualIgnoringQueryOrder(
 				result,
-				`${img}?fit=crop&auto=webp&disable=upscale`,
+				`${img}?auto=webp&disable=upscale`,
 			);
 		},
 	);
@@ -65,7 +66,7 @@ Deno.test("contentstack transform", async (t) => {
 		}, {});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${img}?auto=webp&format=pjpg&fit=crop&disable=upscale`,
+			`${img}?auto=webp&format=pjpg&disable=upscale`,
 		);
 	});
 
@@ -76,7 +77,7 @@ Deno.test("contentstack transform", async (t) => {
 		}, {});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${img}?overlay=overlay-image.png&overlay-align=top,left&fit=crop&auto=webp&disable=upscale`,
+			`${img}?overlay=overlay-image.png&overlay-align=top,left&auto=webp&disable=upscale`,
 		);
 	});
 });
@@ -86,7 +87,7 @@ Deno.test("contentstack generate", async (t) => {
 		const result = generate(img, {});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${img}?fit=crop&auto=webp&disable=upscale`,
+			`${img}?auto=webp&disable=upscale`,
 		);
 	});
 
@@ -100,7 +101,7 @@ Deno.test("contentstack generate", async (t) => {
 		);
 		assertEqualIgnoringQueryOrder(
 			result,
-			`https://eu-images.contentstack.com/v3/assets/example-asset-uid/example-image.jpg?fit=crop&auto=webp&disable=upscale`,
+			`https://eu-images.contentstack.com/v3/assets/example-asset-uid/example-image.jpg?auto=webp&disable=upscale`,
 		);
 	});
 
