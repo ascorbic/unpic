@@ -26,7 +26,8 @@ Deno.test("Storyblok Image CDN - extract", async (t) => {
 			"https://img2.storyblok.com/200x0/filters:rotate(90):format(png)/f/39898/3310x2192/e4ec08624e/demo-image.jpeg";
 		const result = extract(url);
 		assertEquals(result, {
-			src: "https://a.storyblok.com/f/39898/3310x2192/e4ec08624e/demo-image.jpeg",
+			src:
+				"https://a.storyblok.com/f/39898/3310x2192/e4ec08624e/demo-image.jpeg",
 			operations: {
 				width: 200,
 				format: "png",
