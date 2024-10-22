@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "@std/testing/asserts";
 import { parse, transform } from "./imagekit.ts";
 
 const img =

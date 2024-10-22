@@ -1,8 +1,4 @@
-import {
-	assertAlmostEquals,
-	assertEquals,
-	assertExists,
-} from "jsr:@std/assert";
+import { assertAlmostEquals, assertExists } from "jsr:@std/assert";
 import examples from "../demo/src/examples.json" with { type: "json" };
 import { getPixels } from "https://deno.land/x/get_pixels@v1.2.1/mod.ts";
 import { transformUrl } from "./transform.ts";

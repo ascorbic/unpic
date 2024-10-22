@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "@std/testing/asserts";
 import { transform } from "./wordpress.ts";
 
 const img = "https://jetpackme.files.wordpress.com/2020/01/jetpack-cdn.png";

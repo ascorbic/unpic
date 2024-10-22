@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "@std/testing/asserts";
 
 import { ParsedUrl } from "../types.ts";
 import { AstroParams, parse, transform } from "./astro.ts";
