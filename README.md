@@ -43,6 +43,9 @@ To use it in Deno, import [the module from JSR](https://jsr.io/@unpic/lib):
 import { transformUrl } from "jsr:@unpic/lib";
 ```
 
+If you previously installed the library from deno.land/x, you should update to
+use JSR instead as the deno.land/x version is no longer updated.
+
 You can then use the `transformUrl` function to transform a URL:
 
 ```ts
