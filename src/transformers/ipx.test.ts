@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { parse, transform } from "./ipx.ts";
 
 const img =
@@ -51,8 +51,7 @@ Deno.test("ipx", async (t) => {
 
 	await t.step("should format a remote URL", () => {
 		const result = transform({
-			url:
-				"https://example.com/_ipx/embed,f_webp,s_200x300/https://example.org/static/buffalo.png",
+			url: "https://example.com/_ipx/embed,f_webp,s_200x300/https://example.org/static/buffalo.png",
 			width: 200,
 			height: 100,
 			cdnOptions,

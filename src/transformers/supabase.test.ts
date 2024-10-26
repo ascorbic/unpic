@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { ParsedUrl } from "../types.ts";
 import { generate, parse, SupabaseParams, transform } from "./supabase.ts";
 

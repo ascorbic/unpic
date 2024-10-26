@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { ParsedUrl, UrlParser } from "../types.ts";
 import { parse, SceneParams, transform } from "./scene7.ts";
 

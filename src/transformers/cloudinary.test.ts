@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { ParsedUrl } from "../types.ts";
 import { CloudinaryParams, parse, transform } from "./cloudinary.ts";
 
@@ -94,7 +94,8 @@ Deno.test("cloudinary parser", async (t) => {
 	await t.step("parses a URL with custom subdomain", () => {
 		const parsed = parse(imgSubdomain);
 		const expected: ParsedUrl<CloudinaryParams> = {
-			base: "https://private-name.cloudinary.com/demo/image/upload/c_lfill/dog",
+			base:
+				"https://private-name.cloudinary.com/demo/image/upload/c_lfill/dog",
 			cdn: "cloudinary",
 			format: undefined,
 			width: undefined,

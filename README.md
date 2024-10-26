@@ -22,12 +22,8 @@ transform the image on the fly.
 
 ## Usage
 
-This library is available via URL imports for Deno and via npm for Node. To use
-it in Deno, import the module from deno.land:
-
-```ts
-import { transformUrl } from "https://deno.land/x/unpic/mod.ts";
-```
+This library is available via NPM as `unpic` and JSR as
+[`@unpic/lib`](https://jsr.io/@unpic/lib).
 
 To use it in Node, install it from npm:
 
@@ -39,6 +35,12 @@ Then import it in your code:
 
 ```ts
 import { transformUrl } from "unpic";
+```
+
+To use it in Deno, import [the module from JSR](https://jsr.io/@unpic/lib):
+
+```ts
+import { transformUrl } from "jsr:@unpic/lib";
 ```
 
 You can then use the `transformUrl` function to transform a URL:

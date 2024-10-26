@@ -6,6 +6,7 @@
 		"./scripts",
 		"./mod.ts",
 		"./deps.ts",
+		"./e2e.test.ts",
 		"*/*.json",
 		"./example"
 	],

@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { getImageCdnForUrl } from "./detect.ts";
 import { transformUrl } from "./transform.ts";
 
@@ -125,8 +125,7 @@ Deno.test("delegation", async (t) => {
 		"should not delegate an image CDN URL if recursion is disabled",
 		() => {
 			const result = transformUrl({
-				url:
-					"https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
+				url: "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
 				width: 200,
 				height: 100,
 				recursive: false,
@@ -142,7 +141,9 @@ Deno.test("delegation", async (t) => {
 
 Deno.test("detection", async (t) => {
 	await t.step("should detect by path with a relative URL", () => {
-		const cdn = getImageCdnForUrl("/_next/image?url=%2Fprofile.png&w=200&q=75");
+		const cdn = getImageCdnForUrl(
+			"/_next/image?url=%2Fprofile.png&w=200&q=75",
+		);
 		assertEquals(cdn, "nextjs");
 	});
 });

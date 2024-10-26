@@ -1,0 +1,33 @@
+{
+  "name": "@unpic/lib",
+  "version": "3.18.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    "build:npm": "deno run --allow-all scripts/build_npm.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/preact@10.11.2"
+  },
+  "fmt": {
+    "useTabs": true
+  },
+  "imports": {
+    "@deno/dnt": "jsr:@deno/dnt@0.37.0",
+    "@std/path": "jsr:@std/path@0.206.0",
+    "@std/fs": "jsr:@std/fs@0.206.0",
+    "@std/testing": "jsr:@std/testing@0.172.0"
+  },
+  "publish": {
+    "include": [
+      "src",
+      "mod.ts",
+      "README.md",
+      "data"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
+  },
+  "license": "MIT"
+}

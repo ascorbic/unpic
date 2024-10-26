@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { parse, transform } from "./shopify.ts";
 import examples from "./shopify.fixtures.json" with { type: "json" };
 

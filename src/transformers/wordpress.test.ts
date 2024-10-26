@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/testing/asserts";
+import { assertEquals } from "jsr:@std/assert";
 import { transform } from "./wordpress.ts";
 
 const img = "https://jetpackme.files.wordpress.com/2020/01/jetpack-cdn.png";

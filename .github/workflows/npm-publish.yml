@@ -27,10 +27,17 @@ jobs:
         run: deno run -A ./scripts/build_npm.ts ${{steps.get_tag_version.outputs.TAG_VERSION}}
       - uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
       - name: npm publish
         if: startsWith(github.ref, 'refs/tags/')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: cd npm && npm publish --provenance --access public
+      - name: Update version in deno.json
+        run: |
+          VERSION=$(cat version.txt) && jq --arg v "$VERSION" '.version = $v' deno.json > deno.json.tmp
+          mv deno.json.tmp deno.json
+          deno fmt deno.json
+      - name: Publish to JSR
+        run: npx jsr publish --allow-dirty
