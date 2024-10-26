@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "jsr:@std/assert";
 import { getImageCdnForUrl } from "./detect.ts";
 import { transformUrl } from "./transform.ts";
 
@@ -142,7 +142,9 @@ Deno.test("delegation", async (t) => {
 
 Deno.test("detection", async (t) => {
 	await t.step("should detect by path with a relative URL", () => {
-		const cdn = getImageCdnForUrl("/_next/image?url=%2Fprofile.png&w=200&q=75");
+		const cdn = getImageCdnForUrl(
+			"/_next/image?url=%2Fprofile.png&w=200&q=75",
+		);
 		assertEquals(cdn, "nextjs");
 	});
 });

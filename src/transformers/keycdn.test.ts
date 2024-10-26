@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.172.0/testing/asserts.ts";
+import { assertEquals } from "jsr:@std/assert";
 import { KeyCDNParams, parse, transform } from "./keycdn.ts";
 import { ParsedUrl } from "../types.ts";
 import { getImageCdnForUrl } from "../detect.ts";
@@ -38,17 +38,20 @@ Deno.test("keycdn", async (t) => {
 		);
 	});
 
-	await t.step("should not override and match keycdn for kxcdn domain", () => {
-		const result = transform({
-			url: imgOverrideEnlarge,
-			width: 400,
-			height: 600,
-		});
-		assertEquals(
-			result?.toString(),
-			"https://abc.kxcdn.com/example.jpg?enlarge=1&width=400&height=600",
-		);
-	});
+	await t.step(
+		"should not override and match keycdn for kxcdn domain",
+		() => {
+			const result = transform({
+				url: imgOverrideEnlarge,
+				width: 400,
+				height: 600,
+			});
+			assertEquals(
+				result?.toString(),
+				"https://abc.kxcdn.com/example.jpg?enlarge=1&width=400&height=600",
+			);
+		},
+	);
 
 	await t.step("parses image with base transforms", () => {
 		const parsed = parse(imgNoTransforms);

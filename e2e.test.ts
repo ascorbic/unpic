@@ -1,12 +1,8 @@
-import {
-	assertAlmostEquals,
-	assertEquals,
-	assertExists,
-} from "jsr:@std/assert";
-import examples from "../demo/src/examples.json" with { type: "json" };
-import { getPixels } from "https://deno.land/x/get_pixels@v1.2.1/mod.ts";
-import { transformUrl } from "./transform.ts";
-import type { ImageCdn } from "./types.ts";
+import { assertAlmostEquals, assertExists } from "jsr:@std/assert";
+import examples from "./demo/src/examples.json" with { type: "json" };
+import { getPixels } from "jsr:@unpic/pixels";
+import { transformUrl } from "./src/transform.ts";
+import type { ImageCdn } from "./src/types.ts";
 
 Deno.test("E2E tests", async (t) => {
 	for (const [cdn, example] of Object.entries(examples)) {
