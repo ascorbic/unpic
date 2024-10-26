@@ -125,7 +125,8 @@ Deno.test("delegation", async (t) => {
 		"should not delegate an image CDN URL if recursion is disabled",
 		() => {
 			const result = transformUrl({
-				url: "https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
+				url:
+					"https://images.unsplash.com/photo?auto=format&fit=crop&w=2089&q=80",
 				width: 200,
 				height: 100,
 				recursive: false,

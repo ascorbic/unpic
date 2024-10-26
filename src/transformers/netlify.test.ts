@@ -41,7 +41,8 @@ Deno.test("netlify", async (t) => {
 
 	await t.step("should format a remote URL", () => {
 		const result = transform({
-			url: "/.netlify/images?w=800&h=600&&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
+			url:
+				"/.netlify/images?w=800&h=600&&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
 			width: 200,
 			height: 100,
 		});
@@ -127,7 +128,8 @@ Deno.test("netlify", async (t) => {
 
 	await t.step("should rename aliased params", () => {
 		const result = transform({
-			url: "/.netlify/images?width=800&h=600&quality=10&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
+			url:
+				"/.netlify/images?width=800&h=600&quality=10&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
 			width: 200,
 			height: 100,
 		});
@@ -139,7 +141,8 @@ Deno.test("netlify", async (t) => {
 
 	await t.step("should preserve other params", () => {
 		const result = transform({
-			url: "/.netlify/images?width=800&h=600&quality=10&fit=scale&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
+			url:
+				"/.netlify/images?width=800&h=600&quality=10&fit=scale&url=https%3A%2F%2Fexample.org%2Fstatic%2Fbuffalo.png",
 			width: 200,
 			height: 100,
 		});
