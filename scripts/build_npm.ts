@@ -4,11 +4,11 @@ import { walk } from "jsr:@std/fs";
 
 await emptyDir("./npm");
 
-const trans = await Array.fromAsync(walk("./src/providers", {
+const providers = await Array.fromAsync(walk("./src/providers", {
 	match: [/^(?!.*test\.ts$).*\.ts$/],
 }));
 
-const entry = trans.map((t) => ({
+const entry = providers.map((t) => ({
 	path: t.path,
 	name: `./providers/${basename(t.path, ".ts")}`,
 }));
@@ -47,9 +47,6 @@ await build({
 		devDependencies: {
 			"@unpic/pixels": "latest",
 		},
-	},
-	mappings: {
-		"https://deno.land/x/get_pixels@v1.2.1/mod.ts": "@unpic/pixels",
 	},
 });
 

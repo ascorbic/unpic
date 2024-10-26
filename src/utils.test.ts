@@ -1,7 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { assertEquals } from "jsr:@std/assert";
-import { escapeChar, roundIfNumeric, toUrl } from "./utils.ts";
-import { createFormatter } from "./utils.ts";
+import { createFormatter, escapeChar, roundIfNumeric, toUrl } from "./utils.ts";
 
 Deno.test("roundIfNumeric", () => {
 	assertEquals(roundIfNumeric(1), 1);
@@ -19,7 +18,10 @@ Deno.test("roundIfNumeric", () => {
 });
 
 Deno.test("toUrl", () => {
-	assertEquals(toUrl("https://example.com").toString(), "https://example.com/");
+	assertEquals(
+		toUrl("https://example.com").toString(),
+		"https://example.com/",
+	);
 	assertEquals(toUrl("/foo").toString(), "http://n/foo");
 	assertEquals(toUrl("foo").toString(), "http://n/foo");
 });
