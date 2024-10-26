@@ -44,38 +44,38 @@ Deno.test("cloudflare images transformer", async (t) => {
 });
 
 const img2 =
-  "https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/w=128,h=128,rotate=90,f=auto";
+	"https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/w=128,h=128,rotate=90,f=auto";
 
 Deno.test("imagedelivery.net images parser", () => {
-  const parsed = parse(img2);
-  const expected: ParsedUrl<CloudflareImagesParams> = {
-    base: img2,
-    cdn: "cloudflare_images",
-    format: "auto",
-    width: 128,
-    height: 128,
-    params: {
-      host: "imagedelivery.net",
-      accountHash: "1aS6NlIe-Sc1o3NhVvy8Qw",
-      imageId: "2ba36ba9-69f6-41b6-8ff0-2779b41df200",
-      transformations: {
-        rotate: "90",
-      },
-    },
-  };
-  assertEquals(parsed, expected);
+	const parsed = parse(img2);
+	const expected: ParsedUrl<CloudflareImagesParams> = {
+		base: img2,
+		cdn: "cloudflare_images",
+		format: "auto",
+		width: 128,
+		height: 128,
+		params: {
+			host: "imagedelivery.net",
+			accountHash: "1aS6NlIe-Sc1o3NhVvy8Qw",
+			imageId: "2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+			transformations: {
+				rotate: "90",
+			},
+		},
+	};
+	assertEquals(parsed, expected);
 });
 
 Deno.test("imagedelivery.net images transformer", async (t) => {
-  await t.step("transforms a URL", () => {
-    const result = transform({
-      url: img2,
-      width: 100,
-      height: 200,
-    });
-    assertEquals(
-      result?.toString(),
-      "https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/rotate=90,w=100,h=200,f=auto,fit=cover",
-    );
-  });
+	await t.step("transforms a URL", () => {
+		const result = transform({
+			url: img2,
+			width: 100,
+			height: 200,
+		});
+		assertEquals(
+			result?.toString(),
+			"https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/rotate=90,w=100,h=200,f=auto,fit=cover",
+		);
+	});
 });
