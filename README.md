@@ -46,7 +46,7 @@ import { transformUrl } from "jsr:@unpic/lib";
 If you previously installed the library from deno.land/x, you should update to
 use JSR instead as the deno.land/x version is no longer updated.
 
- You can then use the `transformUrl` function to transform a URL:
+You can then use the `transformUrl` function to transform a URL:
 
 ```ts
 const url = transformUrl(
