@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # Changelog
 
+## [3.18.1](https://github.com/ascorbic/unpic/compare/v3.18.0...v3.18.1) (2024-10-26)
+
+
+### Bug Fixes
+
+* publish via JSR ([#136](https://github.com/ascorbic/unpic/issues/136)) ([6674473](https://github.com/ascorbic/unpic/commit/66744733a58a1e3d1ffed25eff8fe196cf8f6681))
+
 ## [3.18.0](https://github.com/ascorbic/unpic/compare/v3.17.0...v3.18.0) (2024-03-12)
 
 
