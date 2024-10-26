@@ -5,23 +5,23 @@ import { delegateUrl as nextjs } from "./transformers/nextjs.ts";
 
 // Image servers that might delegate to another CDN
 const delegators: Partial<Record<ImageCdn, ShouldDelegateUrl>> = {
-  vercel,
-  nextjs,
+	vercel,
+	nextjs,
 };
 
 export function getDelegatedCdn(
-  url: string | URL,
-  cdn: ImageCdn,
+	url: string | URL,
+	cdn: ImageCdn,
 ): CanonicalCdnUrl | false {
-  // Most CDNs are authoritative for their own URLs
-  if (!(cdn in delegators)) {
-    return false;
-  }
-  const maybeDelegate = delegators[cdn];
-  if (!maybeDelegate) {
-    return false;
-  }
-  return maybeDelegate(url);
+	// Most CDNs are authoritative for their own URLs
+	if (!(cdn in delegators)) {
+		return false;
+	}
+	const maybeDelegate = delegators[cdn];
+	if (!maybeDelegate) {
+		return false;
+	}
+	return maybeDelegate(url);
 }
 
 /**
@@ -29,16 +29,16 @@ export function getDelegatedCdn(
  * the source image if it is hosted on another CDN.
  */
 export function getCanonicalCdnForUrl(
-  url: string | URL,
-  defaultCdn?: ImageCdn | false,
+	url: string | URL,
+	defaultCdn?: ImageCdn | false,
 ): CanonicalCdnUrl | false {
-  const cdn = getImageCdnForUrl(url) || defaultCdn;
-  if (!cdn) {
-    return false;
-  }
-  const maybeDelegated = getDelegatedCdn(url, cdn);
-  if (maybeDelegated) {
-    return maybeDelegated;
-  }
-  return { cdn, url };
+	const cdn = getImageCdnForUrl(url) || defaultCdn;
+	if (!cdn) {
+		return false;
+	}
+	const maybeDelegated = getDelegatedCdn(url, cdn);
+	if (maybeDelegated) {
+		return maybeDelegated;
+	}
+	return { cdn, url };
 }

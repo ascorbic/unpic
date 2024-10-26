@@ -14,9 +14,7 @@ jobs:
         with:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           app-id: ${{ secrets.APP_ID }}
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
         with:
-          release-type: simple
-          package-name: "unpic"
-          ssh-key: "${{ secrets.COMMIT_KEY }}"
           token: ${{ steps.get-token.outputs.token }}
+          config-file: release-please-config.json

@@ -1,14 +1,14 @@
 {
-  "imgix.net": "imgix",
-  "files.wordpress.com": "wordpress",
-  "b-cdn.net": "bunny",
-  "storyblok.com": "storyblok",
-  "kc-usercontent.com": "kontent.ai",
-  "cloudinary.com": "cloudinary",
-  "kxcdn.com": "keycdn",
-  "imgeng.in": "imageengine",
-  "imagekit.io": "imagekit",
-  "cloudimg.io": "cloudimage",
-  "ucarecdn.com": "uploadcare",
-  "supabase.co": "supabase"
+	"imgix.net": "imgix",
+	"files.wordpress.com": "wordpress",
+	"b-cdn.net": "bunny",
+	"storyblok.com": "storyblok",
+	"kc-usercontent.com": "kontent.ai",
+	"cloudinary.com": "cloudinary",
+	"kxcdn.com": "keycdn",
+	"imgeng.in": "imageengine",
+	"imagekit.io": "imagekit",
+	"cloudimg.io": "cloudimage",
+	"ucarecdn.com": "uploadcare",
+	"supabase.co": "supabase"
 }

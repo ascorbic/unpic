@@ -1,0 +1,16 @@
+{
+	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+	"include-component-in-tag": false,
+	"packages": {
+		".": {
+			"release-type": "simple",
+			"extra-files": [
+				{
+					"type": "json",
+					"path": "deno.json",
+					"jsonpath": "$.version"
+				}
+			]
+		}
+	}
+}

@@ -22,12 +22,8 @@ transform the image on the fly.
 
 ## Usage
 
-This library is available via URL imports for Deno and via npm for Node. To use
-it in Deno, import the module from deno.land:
-
-```ts
-import { transformUrl } from "https://deno.land/x/unpic/mod.ts";
-```
+This library is available via NPM as `unpic` and JSR as
+[`@unpic/lib`](https://jsr.io/@unpic/lib).
 
 To use it in Node, install it from npm:
 
@@ -41,16 +37,25 @@ Then import it in your code:
 import { transformUrl } from "unpic";
 ```
 
+To use it in Deno, import [the module from JSR](https://jsr.io/@unpic/lib):
+
+```ts
+import { transformUrl } from "jsr:@unpic/lib";
+```
+
+If you previously installed the library from deno.land/x, you should update to
+use JSR instead as the deno.land/x version is no longer updated.
+
 You can then use the `transformUrl` function to transform a URL:
 
 ```ts
 const url = transformUrl(
-  {
-    url:
-      "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-    width: 800,
-    height: 600,
-  },
+	{
+		url:
+			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+		width: 800,
+		height: 600,
+	},
 );
 
 console.log(url.toString());
@@ -63,7 +68,7 @@ params:
 
 ```ts
 const parsedUrl = parseUrl(
-  "https://cdn.shopify.com/static/sample-images/bath_800x600_crop_center.jpeg",
+	"https://cdn.shopify.com/static/sample-images/bath_800x600_crop_center.jpeg",
 );
 
 console.log(parsedUrl);
@@ -82,13 +87,13 @@ You can bypass auto-detection by specifying the CDN:
 
 ```ts
 const url = transformUrl(
-  {
-    url:
-      "https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-    width: 800,
-    height: 600,
-    cdn: "shopify",
-  },
+	{
+		url:
+			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+		width: 800,
+		height: 600,
+		cdn: "shopify",
+	},
 );
 ```
 
