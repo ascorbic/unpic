@@ -1,6 +1,10 @@
 import { getProviderForUrl } from "./detect.ts";
-import type { AllProviderOptions, URLExtractorMap } from "./providers/types.ts";
-import type { ExtractedURL, ImageCdn, URLExtractor } from "./types.ts";
+import type {
+	AllProviderOperations,
+	AllProviderOptions,
+	URLExtractorMap,
+} from "./providers/types.ts";
+import type { ImageCdn, ParseURLResult, URLExtractor } from "./types.ts";
 
 import { extract as astro } from "./providers/astro.ts";
 import { extract as builder } from "./providers/builder.io.ts";
@@ -27,6 +31,7 @@ import { extract as supabase } from "./providers/supabase.ts";
 import { extract as uploadcare } from "./providers/uploadcare.ts";
 import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
+import type { Operations } from "./types.ts";
 
 export const parsers: URLExtractorMap = {
 	astro,
@@ -87,26 +92,24 @@ export const parseUrl = <
 	url: string | URL,
 	cdn?: TCDN,
 	options?: AllProviderOptions[TCDN],
-):
-	| ExtractedURL<TCDN>
-	| undefined => {
-	if (cdn) {
-		return getExtractorForProvider(cdn)?.(url);
-	}
-	const detectedCdn = getProviderForUrl(url) as TCDN;
+): ParseURLResult<TCDN> => {
+	const detectedCdn = cdn || getProviderForUrl(url) as TCDN;
 	if (!detectedCdn) {
 		return undefined;
 	}
 
-	const parser = getExtractorForProvider<TCDN>(detectedCdn);
+	const parser = getExtractorForProvider(detectedCdn);
 
 	if (!parser) {
 		return {
 			src: url.toString(),
-			operations: {},
-			options: {},
-		} as ExtractedURL<TCDN>;
+			operations: {} as AllProviderOperations[TCDN],
+			options: {} as AllProviderOptions[TCDN],
+			cdn: detectedCdn,
+		};
 	}
 
-	return parser(url, options);
+	return { ...parser(url, options), cdn: detectedCdn } as ParseURLResult<
+		TCDN
+	>;
 };

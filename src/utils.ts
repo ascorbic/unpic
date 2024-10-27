@@ -249,6 +249,7 @@ export function normaliseOperations<T extends Operations = Operations>(
 		}
 		const key = k as keyof OperationMap<T>;
 		if (keyMap[key] === false) {
+			delete operations[key];
 			continue;
 		}
 		if (keyMap[key] && operations[key]) {

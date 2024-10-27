@@ -160,3 +160,9 @@ export type URLExtractor<
 export type ExtractedURL<
 	TCDN extends ImageCdn = ImageCdn,
 > = ReturnType<URLExtractor<TCDN>>;
+
+export type ParseURLResult<TCDN extends ImageCdn = ImageCdn> =
+	| (ExtractedURL<TCDN> & {
+		cdn?: TCDN;
+	})
+	| undefined;
