@@ -8,11 +8,19 @@ const cdnDomains = new Map(Object.entries(domains)) as Map<string, ImageCdn>;
 const cdnSubdomains = Object.entries(subdomains) as [string, ImageCdn][];
 const cdnPaths = Object.entries(paths) as [string, ImageCdn][];
 
+/**
+ * Detects the image CDN provider for a given URL.
+ */
 export function getProviderForUrl(
 	url: string | URL,
 ): ImageCdn | false {
 	return getProviderForUrlByDomain(url) || getProviderForUrlByPath(url);
 }
+
+/**
+ * @deprecated Use `getProviderForUrl` instead.
+ */
+export const getImageCdnForUrl = getProviderForUrl;
 
 export function getProviderForUrlByDomain(
 	url: string | URL,
@@ -29,6 +37,16 @@ export function getProviderForUrlByDomain(
 		?.[1] || false;
 }
 
+/**
+ * @deprecated Use `getProviderForUrlByDomain` instead.
+ */
+
+export const getImageCdnForUrlByDomain = getProviderForUrlByDomain;
+
+/**
+ * Gets the image CDN provider for a given URL by its path.
+ */
+
 export function getProviderForUrlByPath(
 	url: string | URL,
 ): ImageCdn | false {
@@ -36,3 +54,9 @@ export function getProviderForUrlByPath(
 	const { pathname } = toUrl(url);
 	return cdnPaths.find(([path]) => pathname.startsWith(path))?.[1] || false;
 }
+
+/**
+ * @deprecated Use `getProviderForUrlByPath` instead.
+ */
+
+export const getImageCdnForUrlByPath = getProviderForUrlByPath;

@@ -63,7 +63,6 @@ export const parsers: ProviderExtractorMap = {
 
 /**
  * Returns a parser function if the given URL is from a known image CDN
- * @param url
  */
 export const getExtractorForUrl = <
 	TCDN extends ImageCdn = ImageCdn,
@@ -86,7 +85,6 @@ export const getExtractorForProvider = <
 /**
  * Parses an image URL into its components.
  * If the URL is not from a known image CDN it returns undefined.
- * @param url
  */
 export const parseUrl = <
 	TCDN extends ImageCdn = ImageCdn,
