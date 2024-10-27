@@ -1,7 +1,6 @@
 import {
 	extract as vercelExtract,
 	generate as vercelGenerate,
-	transform as vercelTransform,
 	type VercelOperations as NextjsOperations,
 } from "./vercel.ts";
 import type { URLExtractor, URLGenerator, URLTransformer } from "../types.ts";

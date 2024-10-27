@@ -84,6 +84,7 @@ Deno.test("Cloudflare Images CDN - generate", async (t) => {
 			try {
 				generate("https://example.com/image.jpg", {}, {});
 				throw new Error("Should have thrown");
+				// deno-lint-ignore no-explicit-any
 			} catch (error: any) {
 				assertEquals(
 					error.message,
@@ -145,6 +146,7 @@ Deno.test("Cloudflare Images CDN - transform", async (t) => {
 				height: 256,
 			}, {});
 			throw new Error("Should have thrown");
+			// deno-lint-ignore no-explicit-any
 		} catch (error: any) {
 			assertEquals(
 				error.message,

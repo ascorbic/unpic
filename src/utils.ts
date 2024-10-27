@@ -213,6 +213,7 @@ export function extractFromURL<
 		if (value) {
 			const newVal = Number(value);
 			if (!isNaN(newVal)) {
+				// deno-lint-ignore no-explicit-any
 				operations[key] = newVal as any;
 			}
 		}
@@ -280,6 +281,7 @@ export function normaliseOperations<T extends Operations = Operations>(
 }
 
 const invertMap = (
+	// deno-lint-ignore no-explicit-any
 	map: Record<string, any>,
 ) => Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
 
