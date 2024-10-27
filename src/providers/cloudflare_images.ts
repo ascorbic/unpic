@@ -11,7 +11,9 @@ import {
 } from "../utils.ts";
 
 const cloudflareImagesRegex =
-	/https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/;
+	/https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
+const imagedeliveryRegex =
+	/https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
 
 export interface CloudflareImagesOperations extends Operations {
 	/**
@@ -51,22 +53,36 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
-export const generate: URLGenerator<
-	CloudflareImagesOperations,
-	CloudflareImagesOptions
-> = (
-	src,
-	operations,
-	options = {},
-) => {
+function formatUrl(
+	options: CloudflareImagesOptions,
+	transformations?: string,
+): string {
 	const { host, accountHash, imageId } = options;
 	if (!host || !accountHash || !imageId) {
 		throw new Error("Missing required Cloudflare Images options");
 	}
+	const pathSegments = [
+		"https:/",
+		...(host === "imagedelivery.net"
+			? [host]
+			: [host, "cdn-cgi", "imagedelivery"]),
+		accountHash,
+		imageId,
+		transformations,
+	].filter(Boolean);
+	return pathSegments.join("/");
+}
 
+export const generate: URLGenerator<
+	CloudflareImagesOperations,
+	CloudflareImagesOptions
+> = (
+	_src,
+	operations,
+	options = {},
+) => {
 	const transformations = operationsGenerator(operations);
-	const url =
-		`https://${host}/cdn-cgi/imagedelivery/${accountHash}/${imageId}/${transformations}`;
+	const url = formatUrl(options, transformations);
 	return toCanonicalUrlString(toUrl(url));
 };
 
@@ -75,19 +91,23 @@ export const extract: URLExtractor<
 	CloudflareImagesOptions
 > = (url) => {
 	const parsedUrl = toUrl(url);
-	const match = cloudflareImagesRegex.exec(parsedUrl.toString());
-
-	if (!match || !match.groups) {
+	const matches = [
+		...parsedUrl.toString().matchAll(cloudflareImagesRegex),
+		...parsedUrl.toString().matchAll(imagedeliveryRegex),
+	];
+	if (!matches[0]?.groups) {
 		return null;
 	}
 
-	const { host, accountHash, imageId, transformations } = match.groups;
+	const { host, accountHash, imageId, transformations } = matches[0].groups;
 	const operations = operationsParser(transformations || "");
 
+	const options = { host, accountHash, imageId };
+
 	return {
-		src: `https://${host}/cdn-cgi/imagedelivery/${accountHash}/${imageId}`,
+		src: formatUrl(options),
 		operations,
-		options: { host, accountHash, imageId },
+		options: options,
 	};
 };
 

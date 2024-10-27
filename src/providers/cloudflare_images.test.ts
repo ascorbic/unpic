@@ -4,6 +4,8 @@ import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
 
 const sampleUrl =
 	"https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/w=128,h=128,rotate=90,f=auto";
+const urlWithoutDomain =
+	"https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/w=128,h=128,rotate=90,f=auto";
 
 Deno.test("Cloudflare Images CDN - extract", async (t) => {
 	await t.step(
@@ -11,8 +13,7 @@ Deno.test("Cloudflare Images CDN - extract", async (t) => {
 		() => {
 			const result = extract(sampleUrl);
 			assertEquals(result, {
-				src:
-					"https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+				src: "https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
 				operations: {
 					width: 128,
 					height: 128,
@@ -21,6 +22,27 @@ Deno.test("Cloudflare Images CDN - extract", async (t) => {
 				},
 				options: {
 					host: "100francisco.com",
+					accountHash: "1aS6NlIe-Sc1o3NhVvy8Qw",
+					imageId: "2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+				},
+			});
+		},
+	);
+
+	await t.step(
+		"should extract operations from a Cloudflare Images URL without custom domain",
+		() => {
+			const result = extract(urlWithoutDomain);
+			assertEquals(result, {
+				src: "https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+				operations: {
+					width: 128,
+					height: 128,
+					rotate: "90",
+					format: "auto",
+				},
+				options: {
+					host: "imagedelivery.net",
 					accountHash: "1aS6NlIe-Sc1o3NhVvy8Qw",
 					imageId: "2ba36ba9-69f6-41b6-8ff0-2779b41df200",
 				},
@@ -82,6 +104,21 @@ Deno.test("Cloudflare Images CDN - transform", async (t) => {
 			"https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/rotate=90,w=256,h=256,f=webp,fit=cover",
 		);
 	});
+
+	await t.step(
+		"should transform a Cloudflare Images URL without custom domain",
+		() => {
+			const result = transform(urlWithoutDomain, {
+				width: 256,
+				height: 256,
+				format: "webp",
+			}, {});
+			assertEqualIgnoringQueryOrder(
+				result,
+				"https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200/rotate=90,w=256,h=256,f=webp,fit=cover",
+			);
+		},
+	);
 
 	await t.step(
 		"should handle additional Cloudflare-specific operations",
