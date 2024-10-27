@@ -1,4 +1,5 @@
 import type {
+	ImageFormat,
 	Operations,
 	URLExtractor,
 	URLGenerator,
@@ -27,6 +28,11 @@ export interface ShopifyOperations extends Operations {
 	 * Background color for padding.
 	 */
 	pad_color?: string;
+
+	/**
+	 * @deprecated Format is not supported by Shopify.
+	 */
+	format?: ImageFormat;
 }
 
 const { operationsGenerator, operationsParser } = createOperationsHandlers<

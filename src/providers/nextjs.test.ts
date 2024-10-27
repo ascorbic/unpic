@@ -88,6 +88,14 @@ Deno.test("Next.js Image CDN - transform", async (t) => {
 		);
 	});
 
+	await t.step("should ignore height operations", () => {
+		const result = transform(relativeUrl, { width: 828, height: 400 });
+		assertEqualIgnoringQueryOrder(
+			result,
+			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",
+		);
+	});
+
 	await t.step("should transform an absolute URL with new operations", () => {
 		const result = transform(
 			transformedUrl,

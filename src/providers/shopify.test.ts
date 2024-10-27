@@ -12,7 +12,7 @@ const baseUrl = "https://cdn.shopify.com/static/sample-images";
 const pathWithSize = `${baseUrl}/garnished_800x600.jpeg`;
 const pathWithCrop = `${baseUrl}/garnished_800x600_crop_center.jpeg`;
 const transformedUrl =
-	`${baseUrl}/garnished_800x600_crop_center.jpeg?width=800&height=600&crop=center&format=jpeg`;
+	`${baseUrl}/garnished_800x600_crop_center.jpeg?width=800&height=600&crop=center`;
 
 // Tests for generate, extract, and transform
 
@@ -25,7 +25,7 @@ Deno.test("Shopify Image CDN - generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${baseUrl}/garnished.jpeg?width=800&height=600&format=jpeg`,
+			`${baseUrl}/garnished.jpeg?width=800&height=600`,
 		);
 	});
 
@@ -43,7 +43,7 @@ Deno.test("Shopify Image CDN - generate", async (t) => {
 			);
 			assertEqualIgnoringQueryOrder(
 				result,
-				`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center&format=jpeg`,
+				`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center`,
 			);
 		},
 	);
@@ -93,7 +93,6 @@ Deno.test("Shopify Image CDN - extract", async (t) => {
 				width: 800,
 				height: 600,
 				crop: "center",
-				format: "jpeg",
 			},
 		});
 	});
@@ -120,7 +119,7 @@ Deno.test("Shopify Image CDN - transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center&format=webp`,
+			`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center`,
 		);
 	});
 
@@ -132,7 +131,7 @@ Deno.test("Shopify Image CDN - transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${baseUrl}/garnished.jpeg?width=400&height=300&crop=center&format=png`,
+			`${baseUrl}/garnished.jpeg?width=400&height=300&crop=center`,
 		);
 	});
 
@@ -142,7 +141,7 @@ Deno.test("Shopify Image CDN - transform", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center&format=jpeg&pad_color=000000`,
+			`${baseUrl}/garnished.jpeg?width=800&height=600&crop=center&pad_color=000000`,
 		);
 	});
 });
