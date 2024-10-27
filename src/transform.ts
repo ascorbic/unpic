@@ -83,10 +83,9 @@ export function getTransformerForCdn<TCDN extends ImageCdn>(
  */
 export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, fallback, ...operations }:
-		UrlTransformerOptions<
-			TCDN
-		>,
+	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
+		TCDN
+	>,
 	providerOperations?: ProviderOperations,
 	providerOptions?: ProviderOptions,
 ): string | undefined {
