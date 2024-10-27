@@ -50,9 +50,8 @@ You can then use the `transformUrl` function to transform a URL:
 
 ```ts
 const url = transformUrl(
+	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
 	{
-		url:
-			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
 		width: 800,
 		height: 600,
 	},
@@ -77,9 +76,7 @@ console.log(parsedUrl);
 //   width: 800,
 //   height: 600,
 //   base: "https://cdn.shopify.com/static/sample-images/bath.jpeg",
-//   params: {
-//     crop: "center",
-//   },
+//   crop: "center",
 // }
 ```
 
@@ -87,9 +84,8 @@ You can bypass auto-detection by specifying the CDN:
 
 ```ts
 const url = transformUrl(
+	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
 	{
-		url:
-			"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
 		width: 800,
 		height: 600,
 		cdn: "shopify",
@@ -100,7 +96,124 @@ const url = transformUrl(
 This is particularly useful if you are using the CDN with a custom domain which
 is not auto-detected.
 
-## Supported CDN APIs
+You can also specify a fallback CDN to use if the URL is not recognised as
+coming from a known CDN:
+
+```ts
+const url = transformUrl(
+	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+	{
+		width: 800,
+		height: 600,
+		fallback: "netlify",
+	},
+);
+```
+
+This is useful if you are using a CDN provider that supports external images,
+but you still want to use the original CDN if possible.
+
+## Custom operations
+
+Different CDNs support different operations. By default, the transform function
+accepts the operations `width`, `height`, `quality` and `format`. You can pass
+provider-specific operations as the third argument to the `transformUrl`
+function:
+
+```ts
+const url = transformUrl(
+	"https://cdn.shopify.com/static/sample-images/bath.jpeg",
+	{
+		width: 800,
+		height: 600,
+	},
+	{
+		shopify: {
+			crop: "center",
+		},
+	},
+);
+```
+
+You can pass options for multiple providers, which will be passed to the
+provider depending on the detected CDN:
+
+```ts
+const url = transformUrl(
+	src,
+	{
+		width: 800,
+		height: 600,
+	},
+	{
+		shopify: {
+			crop: "left",
+		},
+		imgix: {
+			position: "left",
+		},
+	},
+);
+```
+
+These options are type-safe, as we include the types for each provider.
+
+You can do the same for provider options, such as base URLs project keys.
+
+```ts
+const url = transformUrl(
+	src,
+	{
+		width: 800,
+		height: 600,
+		fallback: "cloudinary",
+	},
+	{
+		shopify: {
+			crop: "left",
+		},
+	},
+	{
+		cloudinary: {
+			cloudName: "demo",
+		},
+	},
+);
+```
+
+## Provider imports
+
+If you know which providers you will be using, you can import them directly.
+This will reduce the bundle size of your application, as only the providers you
+use will be included. In this case you can pass provider-specific operations in
+the object.
+
+```ts
+import { transform } from "unpic/providers/shopify";
+
+const url = transform(
+	"https://cdn.shopify.com/static/sample-images/bath.jpeg",
+	{
+		width: 800,
+		height: 600,
+		crop: "center",
+	},
+);
+```
+
+```ts
+import { transformUrl } from "unpic/async";
+
+const url = await transformUrl(
+	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+	{
+		width: 800,
+		height: 600,
+	},
+);
+```
+
+## Supported Providers
 
 - Adobe Dynamic Media (Scene7)
 - Builder.io
@@ -117,19 +230,6 @@ is not auto-detected.
 - Storyblok
 - Vercel / Next.js
 - WordPress.com and Jetpack Site Accelerator
-
-## Delegated URLs
-
-Some transformers support URL delegation. This means that the source image URL
-is also checked, and if it matches a CDN then the transform is applied directly
-to the source image. For example: consider a `next/image` URL that points to an
-image on Shopify. The URL is detected as a `nextjs` URL because it starts with
-`/_next/image`. The `nextjs` transformer supports delegation, so the source
-image URL is then checked. As it matches a Shopify domain, the transform is
-applied directly to the Shopify URL. This means that the image is transformed on
-the fly by Shopify, rather than by Next.js. However if the source image is not a
-supported CDN, or is a local image then the `nextjs` transformer will return a
-`/_next/image` URL.
 
 ## FAQs
 
@@ -156,15 +256,18 @@ supported CDN, or is a local image then the `nextjs` transformer will return a
   use your URLs then probably. Examples may be image providers such as Unsplash,
   or CMSs. If it is just your own site then probably not. You can manually
   specify the CDN in the arguments to `transformUrl` and `parseUrl`.
-- **Can you support more params?** We deliberately just support the most common
-  params that are shared between all CDNs. If you need more params then you can
-  use the CDN-specific API directly.
 - **Why do you set auto format?** If the CDN support is, and no format is
   specified in `transformUrl`, the library will remove any format set in the
   source image, changing it to auto-format. In most cases, this is what you
   want. Almost all browsers now support modern formats such as WebP, and setting
   auto-format will allow the CDN to serve the best format for the browser. If
   you want to force a specific format, you can set it in `transformUrl`.
+- **Why do you set fit=cover (or equivalent)** If the CDN supports it, and no
+  fit is specified in `transformUrl`, the library will set fit to cover. This is
+  because in most cases you want the image to fill the space, rather than be
+  contained within it. Every CDN has its own syntax for this, so it's best if we
+  set a default that applies to all images. If you want to force a specific fit,
+  you can set it in `transformUrl`.
 - **Do you support SVG, animated GIF etc?** If the CDN supports it, then yes. We
   don't attempt to check if a format is valid - we will just pass it through to
   the CDN. If the CDN doesn't support it, then it will return an error or a
