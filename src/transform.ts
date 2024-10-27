@@ -64,21 +64,17 @@ const transformerMap: ProviderTransformerMap = {
 	vercel,
 	wordpress,
 } as const;
-
-export const getTransformer = <TCDN extends ImageCdn>(
-	cdn: TCDN,
-): URLTransformer<TCDN> => transformerMap[cdn];
-
 /**
  * Returns a transformer function if the given CDN is supported
  */
+
 export function getTransformerForCdn<TCDN extends ImageCdn>(
 	cdn: TCDN | false | undefined,
 ): URLTransformer<TCDN> | undefined {
 	if (!cdn) {
 		return undefined;
 	}
-	return getTransformer(cdn);
+	return transformerMap[cdn];
 }
 
 /**
@@ -87,9 +83,10 @@ export function getTransformerForCdn<TCDN extends ImageCdn>(
  */
 export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
-		TCDN
-	>,
+	{ provider, cdn: cdnOption, fallback, ...operations }:
+		UrlTransformerOptions<
+			TCDN
+		>,
 	providerOperations?: ProviderOperations,
 	providerOptions?: ProviderOptions,
 ): string | undefined {
@@ -100,7 +97,7 @@ export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 		return undefined;
 	}
 
-	return getTransformer(cdn)?.(url, {
+	return getTransformerForCdn(cdn)?.(url, {
 		...operations as AllProviderOperations[TCDN],
 		...providerOperations?.[cdn],
 	}, providerOptions?.[cdn] ?? {} as AllProviderOptions[TCDN]);
