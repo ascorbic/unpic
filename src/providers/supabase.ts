@@ -1,4 +1,9 @@
-import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import type {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	URLTransformer,
+} from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -36,7 +41,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	SupabaseOperations
 >({});
 
-export const generate: URLGenerator<SupabaseOperations> = (src, operations) => {
+export const generate: URLGenerator<"supabase"> = (src, operations) => {
 	const url = toUrl(src);
 	const basePath = url.pathname.replace(
 		RENDER_URL_PREFIX,
@@ -61,7 +66,7 @@ export const generate: URLGenerator<SupabaseOperations> = (src, operations) => {
 	);
 };
 
-export const extract: URLExtractor<SupabaseOperations> = (url) => {
+export const extract: URLExtractor<"supabase"> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 	const isRender = isRenderUrl(parsedUrl);
@@ -84,4 +89,7 @@ export const extract: URLExtractor<SupabaseOperations> = (url) => {
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"supabase"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

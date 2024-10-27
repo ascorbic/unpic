@@ -118,14 +118,14 @@ Deno.test("Uploadcare provider - generate", async (t) => {
 
 Deno.test("Uploadcare provider - transform", async (t) => {
 	await t.step("should transform a basic URL with default format", () => {
-		const result = transform(baseImageUrl, { width: 800, height: 600 }, {});
+		const result = transform(baseImageUrl, { width: 800, height: 600 });
 		assertEquals(result, `${baseImageUrl}-/resize/800x600/-/format/auto/`);
 	});
 
 	await t.step("should transform a URL with existing operations", () => {
 		const url =
 			`${baseImageUrl}-/preview/500x300/-/quality/normal/-/format/auto/`;
-		const result = transform(url, { width: 800, format: "webp" }, {});
+		const result = transform(url, { width: 800, format: "webp" });
 		assertEquals(
 			result,
 			`${baseImageUrl}-/preview/500x300/-/quality/normal/-/format/webp/-/resize/800x/`,
@@ -141,7 +141,7 @@ Deno.test("Uploadcare provider - transform", async (t) => {
 				width: 800,
 				height: 600,
 				quality: "best",
-			}, {});
+			});
 			assertEquals(
 				result,
 				`${baseImageUrl}-/preview/500x300/-/quality/best/-/format/auto/-/resize/800x600/`,

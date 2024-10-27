@@ -115,7 +115,7 @@ const operationsGenerator = createOperationsGenerator<
 	},
 });
 
-export const generate: URLGenerator<ContentfulOperations> = (
+export const generate: URLGenerator<"contentful"> = (
 	src,
 	modifiers,
 ) => {
@@ -125,11 +125,11 @@ export const generate: URLGenerator<ContentfulOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<ContentfulOperations> = extractFromURL;
+export const extract: URLExtractor<"contentful"> = extractFromURL;
 
 const extractAndGenerate = createExtractAndGenerate(extract, generate);
 
-export const transform: URLTransformer<ContentfulOperations> = (
+export const transform: URLTransformer<"contentful"> = (
 	src,
 	operations,
 ) => {

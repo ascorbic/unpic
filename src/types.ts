@@ -1,4 +1,7 @@
-import type { AllProviderOperations } from "./providers/types.ts";
+import type {
+	AllProviderOperations,
+	AllProviderOptions,
+} from "./providers/types.ts";
 
 /**
  * Options to transform an image URL
@@ -13,6 +16,8 @@ export interface UrlTransformerOptions<TCDN extends ImageCdn = ImageCdn>
 	provider?: TCDN;
 	/** @deprecated Use `provider` */
 	cdn?: TCDN;
+	/** Provider to use if none matches */
+	fallback?: TCDN;
 }
 
 export type CdnOptions = {
@@ -116,42 +121,42 @@ export interface ProviderConfig<
 }
 
 export type URLGenerator<
-	TOperations extends Operations = Operations,
-	TOptions = undefined,
-> = TOptions extends undefined
-	? (src: string | URL, operations: TOperations) => string
+	TCDN extends ImageCdn = ImageCdn,
+> = AllProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: AllProviderOperations[TCDN]) => string
 	: (
 		src: string | URL,
-		operations: TOperations,
-		options?: TOptions,
+		operations: AllProviderOperations[TCDN],
+		options?: AllProviderOptions[TCDN],
 	) => string;
 
 export type URLTransformer<
-	TOperations extends Operations = Operations,
-	TOptions = undefined,
-> = TOptions extends undefined
-	? (src: string | URL, operations: TOperations) => string
-	: (src: string | URL, operations: TOperations, options: TOptions) => string;
+	TCDN extends ImageCdn = ImageCdn,
+> = AllProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: AllProviderOperations[TCDN]) => string
+	: (
+		src: string | URL,
+		operations: AllProviderOperations[TCDN],
+		options?: AllProviderOptions[TCDN],
+	) => string;
 
 export type URLExtractor<
-	TOperations extends Operations = Operations,
-	TOptions = undefined,
+	TCDN extends ImageCdn = ImageCdn,
 > = (
 	url: string | URL,
-	options?: TOptions,
+	options?: AllProviderOptions[TCDN],
 ) =>
-	| (TOptions extends undefined ? {
-			operations: TOperations;
+	| (AllProviderOptions[TCDN] extends undefined ? {
+			operations: AllProviderOperations[TCDN];
 			src: string;
 		}
 		: {
-			operations: TOperations;
+			operations: AllProviderOperations[TCDN];
 			src: string;
-			options: TOptions;
+			options: AllProviderOptions[TCDN];
 		})
 	| null;
 
 export type ExtractedURL<
-	TOperations extends Operations = Operations,
-	TOptions = undefined,
-> = ReturnType<URLExtractor<TOperations, TOptions>>;
+	TCDN extends ImageCdn = ImageCdn,
+> = ReturnType<URLExtractor<TCDN>>;

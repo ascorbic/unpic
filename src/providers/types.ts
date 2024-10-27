@@ -1,5 +1,4 @@
 import type {
-	ExtractedURL,
 	ImageCdn,
 	URLExtractor,
 	URLGenerator,
@@ -93,37 +92,25 @@ export interface AllProviderOptions {
 	wordpress: undefined;
 }
 
-export type ProviderExtractor<TCDN extends ImageCdn> = URLExtractor<
-	AllProviderOperations[TCDN],
-	AllProviderOptions[TCDN]
->;
-
-export type ProviderExtractorMap = {
-	[K in ImageCdn]: ProviderExtractor<K>;
+export type URLExtractorMap = {
+	[K in ImageCdn]: URLExtractor<K>;
 };
 
-export type ProviderGenerator<TCDN extends ImageCdn> = URLGenerator<
-	AllProviderOperations[TCDN],
-	AllProviderOptions[TCDN]
->;
-
-export type ProviderGeneratorMap = {
-	[K in ImageCdn]: ProviderGenerator<K>;
+export type URLGeneratorMap = {
+	[K in ImageCdn]: URLGenerator<K>;
 };
-
-export type ProviderTransformer<TCDN extends ImageCdn> = URLTransformer<
-	AllProviderOperations[TCDN],
-	AllProviderOptions[TCDN]
->;
 
 export type ProviderTransformerMap = {
-	[K in ImageCdn]: ProviderTransformer<K>;
+	[K in ImageCdn]: URLTransformer<K>;
 };
 
 export type ProviderOptions = Partial<AllProviderOptions>;
 export type ProviderOperations = Partial<AllProviderOperations>;
 
-export type ExtractedURLForProvider<TCDN extends ImageCdn> = ExtractedURL<
-	AllProviderOperations[TCDN],
-	AllProviderOptions[TCDN]
->;
+export type ProviderModule<
+	TCDN extends ImageCdn,
+> = {
+	generate: URLGenerator<TCDN>;
+	extract: URLExtractor<TCDN>;
+	transform?: URLTransformer<TCDN>;
+};

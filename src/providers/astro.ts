@@ -23,34 +23,32 @@ export interface AstroOptions {
 	baseUrl?: string;
 }
 
-export const { operationsGenerator, operationsParser } =
-	createOperationsHandlers<
-		AstroOperations
-	>({
-		keyMap: {
-			format: "f",
-			width: "w",
-			height: "h",
-			quality: "q",
-		},
-	});
+const { operationsParser, operationsGenerator } = createOperationsHandlers<
+	AstroOperations
+>({
+	keyMap: {
+		format: "f",
+		width: "w",
+		height: "h",
+		quality: "q",
+	},
+});
 
-export const generate: URLGenerator<AstroOperations, AstroOptions | undefined> =
-	(
-		src,
-		modifiers,
-		options,
-	) => {
-		const url = toUrl(
-			`${stripTrailingSlash(options?.baseUrl ?? "")}/_image`,
-		);
-		const operations = operationsGenerator(modifiers);
-		url.search = operations;
-		url.searchParams.set("href", src.toString());
-		return toCanonicalUrlString(url);
-	};
+export const generate: URLGenerator<"astro"> = (
+	src,
+	modifiers,
+	options,
+) => {
+	const url = toUrl(
+		`${stripTrailingSlash(options?.baseUrl ?? "")}/_image`,
+	);
+	const operations = operationsGenerator(modifiers);
+	url.search = operations;
+	url.searchParams.set("href", src.toString());
+	return toCanonicalUrlString(url);
+};
 
-export const extract: URLExtractor<AstroOperations, AstroOptions> = (
+export const extract: URLExtractor<"astro"> = (
 	url,
 ) => {
 	const parsedUrl = toUrl(url);
@@ -67,10 +65,10 @@ export const extract: URLExtractor<AstroOperations, AstroOptions> = (
 	};
 };
 
-export const transform: URLTransformer<AstroOperations, AstroOptions> = (
+export const transform: URLTransformer<"astro"> = (
 	src,
 	operations,
-	options,
+	options = {},
 ) => {
 	const url = toUrl(src);
 	if (url.pathname !== "/_image") {

@@ -1,4 +1,9 @@
-import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import type {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	URLTransformer,
+} from "../types.ts";
 import { stripTrailingSlash } from "../utils.ts";
 import {
 	addTrailingSlash,
@@ -69,8 +74,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 });
 
 export const extract: URLExtractor<
-	UploadcareOperations,
-	UploadcareOptions
+	"uploadcare"
 > = (url) => {
 	const parsedUrl = toUrl(url);
 	const match = uploadcareRegex.exec(parsedUrl.toString());
@@ -96,7 +100,7 @@ export const extract: URLExtractor<
 	};
 };
 
-export const generate: URLGenerator<UploadcareOperations, UploadcareOptions> = (
+export const generate: URLGenerator<"uploadcare"> = (
 	src,
 	operations,
 	options = {},
@@ -124,4 +128,7 @@ export const generate: URLGenerator<UploadcareOperations, UploadcareOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"uploadcare"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

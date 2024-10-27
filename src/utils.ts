@@ -1,4 +1,9 @@
+import type {
+	AllProviderOperations,
+	AllProviderOptions,
+} from "./providers/types.ts";
 import {
+	type ImageCdn,
 	OperationFormatter,
 	OperationMap,
 	OperationParser,
@@ -168,7 +173,10 @@ export function clampDimensions(
 	operations: Operations,
 	maxWidth = 4000,
 	maxHeight = 4000,
-) {
+): {
+	width: number | undefined;
+	height: number | undefined;
+} {
 	let { width, height } = operations;
 	width = Number(width) || undefined;
 	height = Number(height) || undefined;
@@ -192,7 +200,10 @@ export function clampDimensions(
 
 export function extractFromURL<
 	T extends Operations = Operations,
->(url: string | URL) {
+>(url: string | URL): {
+	operations: T;
+	src: string;
+} {
 	const parsedUrl = toUrl(url);
 	const operations = Object.fromEntries(
 		parsedUrl.searchParams.entries(),
@@ -310,7 +321,7 @@ const queryParser: OperationParser = (url) => {
 export function createOperationsGenerator<T extends Operations = Operations>(
 	{ kvSeparator = "=", paramSeparator = "&", ...options }: ProviderConfig<T> =
 		{},
-) {
+): OperationFormatter<T> {
 	const formatter = createFormatter(kvSeparator, paramSeparator);
 	return (operations: T) => {
 		const normalisedOperations = normaliseOperations(options, operations);
@@ -321,7 +332,7 @@ export function createOperationsGenerator<T extends Operations = Operations>(
 export function createOperationsParser<T extends Operations = Operations>(
 	{ kvSeparator = "=", paramSeparator = "&", defaults: _, ...options }:
 		ProviderConfig<T> = {},
-) {
+): OperationParser<T> {
 	const parser = createParser<T>(kvSeparator, paramSeparator);
 	return (url: string | URL) => {
 		const operations = url ? parser(url) : {} as T;
@@ -334,7 +345,10 @@ export function createOperationsParser<T extends Operations = Operations>(
 
 export function createOperationsHandlers<T extends Operations = Operations>(
 	config: ProviderConfig<T>,
-) {
+): {
+	operationsGenerator: OperationFormatter<T>;
+	operationsParser: OperationParser<T>;
+} {
 	const operationsGenerator = createOperationsGenerator(config);
 	const operationsParser = createOperationsParser(config);
 	return { operationsGenerator, operationsParser };
@@ -354,16 +368,15 @@ export function paramToBoolean(
 }
 
 export function createExtractAndGenerate<
-	TOperations extends Operations = Operations,
-	TOptions = undefined,
+	TCDN extends ImageCdn,
 >(
-	extract: URLExtractor<TOperations, TOptions>,
-	generate: URLGenerator<TOperations, TOptions>,
-): URLTransformer<TOperations, TOptions> {
+	extract: URLExtractor<TCDN>,
+	generate: URLGenerator<TCDN>,
+): URLTransformer<TCDN> {
 	return ((
 		src: string | URL,
-		operations: TOperations,
-		options?: TOptions,
+		operations: AllProviderOperations[TCDN],
+		options?: AllProviderOptions[TCDN],
 	) => {
 		const base = extract(src, options);
 		if (!base) {
@@ -377,5 +390,5 @@ export function createExtractAndGenerate<
 			...(base as any).options,
 			...options,
 		});
-	}) as URLTransformer<TOperations, TOptions>;
+	}) as URLTransformer<TCDN>;
 }

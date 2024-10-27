@@ -59,7 +59,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
-export const generate: URLGenerator<IPXOperations, IPXOptions> = (
+export const generate: URLGenerator<"ipx"> = (
 	src,
 	operations,
 	options,
@@ -80,7 +80,7 @@ export const generate: URLGenerator<IPXOperations, IPXOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<IPXOperations, IPXOptions> = (url) => {
+export const extract: URLExtractor<"ipx"> = (url) => {
 	const parsedUrl = toUrl(url);
 	const [, baseUrlPart, modifiers, ...srcParts] = parsedUrl.pathname.split(
 		"/",
@@ -109,7 +109,7 @@ export const extract: URLExtractor<IPXOperations, IPXOptions> = (url) => {
 	};
 };
 
-export const transform: URLTransformer<IPXOperations, IPXOptions> = (
+export const transform: URLTransformer<"ipx"> = (
 	src,
 	operations,
 	options,

@@ -3,6 +3,7 @@ import {
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	type URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -142,8 +143,7 @@ const operationsGenerator = createOperationsGenerator<ContentstackOperations>({
 });
 
 export const generate: URLGenerator<
-	ContentstackOperations,
-	ContentstackOptions
+	"contentstack"
 > = (
 	src,
 	operations,
@@ -163,8 +163,7 @@ export const generate: URLGenerator<
 };
 
 export const extract: URLExtractor<
-	ContentstackOperations,
-	ContentstackOptions
+	"contentstack"
 > = (url) => {
 	const { src, operations } = extractFromURL(url) ?? {};
 
@@ -182,4 +181,6 @@ export const extract: URLExtractor<
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<
+	"contentstack"
+> = createExtractAndGenerate(extract, generate);

@@ -3,6 +3,7 @@ import type {
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -105,7 +106,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	},
 });
 
-export const generate: URLGenerator<KontentAiOperations> = (
+export const generate: URLGenerator<"kontent.ai"> = (
 	src,
 	operations,
 ) => {
@@ -123,7 +124,7 @@ export const generate: URLGenerator<KontentAiOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<KontentAiOperations> = (url) => {
+export const extract: URLExtractor<"kontent.ai"> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 
@@ -138,4 +139,7 @@ export const extract: URLExtractor<KontentAiOperations> = (url) => {
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"kontent.ai"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

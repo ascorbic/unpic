@@ -44,7 +44,7 @@ Deno.test("cloudflare transformer", async (t) => {
 		const result = transform(img, {
 			width: 100,
 			height: 200,
-		}, {});
+		});
 		assertEquals(
 			result?.toString(),
 			"https://assets.brevity.io/cdn-cgi/image/background=red,width=100,height=200,f=auto,fit=cover/uploads/generic/avatar-sample.jpeg",
@@ -73,7 +73,7 @@ Deno.test("cloudflare generator", async (t) => {
 			width: 200,
 			height: 100,
 			format: "webp",
-		}, {});
+		});
 		assertEquals(
 			result,
 			"/cdn-cgi/image/width=200,height=100,f=webp,fit=cover/uploads/generic/avatar-sample.jpeg",

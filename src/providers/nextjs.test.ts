@@ -81,7 +81,7 @@ Deno.test("Next.js Image CDN - transform", async (t) => {
 	});
 
 	await t.step("should transform a relative URL with new operations", () => {
-		const result = transform(relativeUrl, { width: 828 }, {});
+		const result = transform(relativeUrl, { width: 828 });
 		assertEqualIgnoringQueryOrder(
 			result,
 			"/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbunny.0e498116.jpg&w=828&q=75",

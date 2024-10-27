@@ -1,4 +1,9 @@
-import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import type {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	URLTransformer,
+} from "../types.ts";
 import {
 	createExtractAndGenerate,
 	toCanonicalUrlString,
@@ -44,7 +49,7 @@ const generateFilters = (filters?: Record<string, string>) => {
 	return `filters:${filterItems.join(":")}`;
 };
 
-export const extract: URLExtractor<StoryblokOperations> = (url) => {
+export const extract: URLExtractor<"storyblok"> = (url) => {
 	const parsedUrl = toUrl(url);
 
 	const regex = parsedUrl.hostname === "img2.storyblok.com"
@@ -83,7 +88,7 @@ export const extract: URLExtractor<StoryblokOperations> = (url) => {
 	};
 };
 
-export const generate: URLGenerator<StoryblokOperations> = (
+export const generate: URLGenerator<"storyblok"> = (
 	src,
 	operations,
 ) => {
@@ -117,4 +122,7 @@ export const generate: URLGenerator<StoryblokOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"storyblok"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

@@ -1,5 +1,10 @@
 import { getProviderForUrlByPath } from "../detect.ts";
-import { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	type URLTransformer,
+} from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -102,7 +107,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
-export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (
+export const generate: URLGenerator<"cloudflare"> = (
 	src,
 	operations,
 	options,
@@ -116,8 +121,7 @@ export const generate: URLGenerator<CloudflareOperations, CloudflareOptions> = (
 };
 
 export const extract: URLExtractor<
-	CloudflareOperations,
-	CloudflareOptions
+	"cloudflare"
 > = (url, options) => {
 	if (getProviderForUrlByPath(url) !== "cloudflare") {
 		return null;
@@ -136,4 +140,6 @@ export const extract: URLExtractor<
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<
+	"cloudflare"
+> = createExtractAndGenerate(extract, generate);

@@ -1,7 +1,12 @@
-import { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	type URLTransformer,
+} from "../types.ts";
 import {
 	createExtractAndGenerate,
-	createOperationsHandlers,
+	createOperationsGenerator,
 	extractFromURL,
 	toCanonicalUrlString,
 	toUrl,
@@ -25,15 +30,16 @@ export interface DirectusOperations extends Operations<"auto"> {
 		| string;
 }
 
-export const { operationsGenerator, operationsParser } =
-	createOperationsHandlers<DirectusOperations>({
-		defaults: {
-			withoutEnlargement: true,
-			fit: "cover",
-		},
-	});
+const operationsGenerator = createOperationsGenerator<
+	DirectusOperations
+>({
+	defaults: {
+		withoutEnlargement: true,
+		fit: "cover",
+	},
+});
 
-export const generate: URLGenerator<DirectusOperations> = (
+export const generate: URLGenerator<"directus"> = (
 	src,
 	operations,
 ) => {
@@ -46,7 +52,7 @@ export const generate: URLGenerator<DirectusOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<DirectusOperations> = (url) => {
+export const extract: URLExtractor<"directus"> = (url) => {
 	const base = extractFromURL<DirectusOperations>(
 		url,
 	);
@@ -63,4 +69,7 @@ export const extract: URLExtractor<DirectusOperations> = (url) => {
 	return base;
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"directus"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

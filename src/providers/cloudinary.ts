@@ -248,7 +248,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
-export const generate: URLGenerator<CloudinaryOperations, CloudinaryOptions> = (
+export const generate: URLGenerator<"cloudinary"> = (
 	src,
 	operations,
 ) => {
@@ -308,8 +308,7 @@ function parseCloudinaryUrl(url: string): CloudinaryParts | null {
 }
 
 export const extract: URLExtractor<
-	CloudinaryOperations,
-	CloudinaryOptions
+	"cloudinary"
 > = (url) => {
 	const group = parseCloudinaryUrl(url.toString());
 	if (!group) {
@@ -335,7 +334,7 @@ export const extract: URLExtractor<
 };
 
 export const transform: URLTransformer<
-	CloudinaryOperations
+	"cloudinary"
 > = (
 	src,
 	operations,

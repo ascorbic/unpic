@@ -92,7 +92,7 @@ Deno.test("Netlify Image CDN - transform", async (t) => {
 	});
 
 	await t.step("should transform a relative URL with new operations", () => {
-		const result = transform(relativeUrl, { width: 800, height: 600 }, {});
+		const result = transform(relativeUrl, { width: 800, height: 600 });
 		assertEqualIgnoringQueryOrder(
 			result,
 			"/.netlify/images?url=/cappadocia.jpg&w=800&h=600&fit=cover", // Short params: w, h

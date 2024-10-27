@@ -1,5 +1,10 @@
 import { getProviderForUrl } from "../detect.ts";
-import type { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import type {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	URLTransformer,
+} from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsHandlers,
@@ -201,7 +206,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 const BASE = "https://s7d1.scene7.com/is/image/";
 
 export const generate: URLGenerator<
-	Scene7Operations
+	"scene7"
 > = (
 	src,
 	operations,
@@ -213,7 +218,7 @@ export const generate: URLGenerator<
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<Scene7Operations> = (
+export const extract: URLExtractor<"scene7"> = (
 	url,
 ) => {
 	if (getProviderForUrl(url) !== "scene7") {
@@ -230,4 +235,7 @@ export const extract: URLExtractor<Scene7Operations> = (
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"scene7"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

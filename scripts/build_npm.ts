@@ -16,7 +16,10 @@ const entry = providers.map((t) => ({
 await build({
 	entryPoints: [
 		"./mod.ts",
-
+		{
+			path: "./src/async.ts",
+			name: "./async",
+		},
 		...entry,
 	],
 	outDir: "./npm",

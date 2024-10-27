@@ -13,16 +13,18 @@ export interface NextjsOptions {
 	baseUrl?: string;
 }
 
-export const generate: URLGenerator<NextjsOperations, NextjsOptions> = (
+export const generate: URLGenerator<"nextjs"> = (
 	src,
 	operations,
 	options = {},
 ) => vercelGenerate(src, operations, { ...options, prefix: "_next" });
 
-export const extract: URLExtractor<NextjsOperations, NextjsOptions> = (
+export const extract: URLExtractor<"nextjs"> = (
 	url,
 	options,
 ) => vercelExtract(url, options);
 
-export const transform: URLTransformer<NextjsOperations, NextjsOptions> =
-	createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"nextjs"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

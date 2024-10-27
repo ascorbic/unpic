@@ -58,7 +58,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	},
 });
 
-export const generate: URLGenerator<VercelOperations, VercelOptions> = (
+export const generate: URLGenerator<"vercel"> = (
 	src,
 	operations,
 	options = {},
@@ -73,7 +73,7 @@ export const generate: URLGenerator<VercelOperations, VercelOptions> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<VercelOperations, VercelOptions> = (
+export const extract: URLExtractor<"vercel"> = (
 	url,
 	options = {},
 ) => {
@@ -99,6 +99,5 @@ export const extract: URLExtractor<VercelOperations, VercelOptions> = (
 };
 
 export const transform: URLTransformer<
-	VercelOperations,
-	VercelOptions
+	"vercel"
 > = createExtractAndGenerate(extract, generate);

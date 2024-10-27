@@ -1,4 +1,4 @@
-import { Operations, URLExtractor } from "../types.ts";
+import { Operations, URLExtractor, type URLTransformer } from "../types.ts";
 import {
 	createExtractAndGenerate,
 	createOperationsGenerator,
@@ -55,9 +55,9 @@ const operationsGenerator = createOperationsGenerator<BuilderOperations>({
 	},
 });
 
-export const extract: URLExtractor<BuilderOperations> = extractFromURL;
+export const extract: URLExtractor<"builder.io"> = extractFromURL;
 
-export const generate: URLGenerator<BuilderOperations> = (
+export const generate: URLGenerator<"builder.io"> = (
 	src,
 	modifiers,
 ) => {
@@ -67,4 +67,7 @@ export const generate: URLGenerator<BuilderOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"builder.io"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

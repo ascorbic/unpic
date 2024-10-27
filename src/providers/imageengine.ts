@@ -1,4 +1,9 @@
-import { Operations, URLExtractor, URLGenerator } from "../types.ts";
+import {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	type URLTransformer,
+} from "../types.ts";
 import { ImageFormat } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -96,7 +101,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: "/",
 });
 
-export const generate: URLGenerator<ImageEngineOperations> = (
+export const generate: URLGenerator<"imageengine"> = (
 	src,
 	operations,
 ) => {
@@ -107,7 +112,7 @@ export const generate: URLGenerator<ImageEngineOperations> = (
 };
 
 export const extract: URLExtractor<
-	ImageEngineOperations
+	"imageengine"
 > = (url) => {
 	const parsedUrl = toUrl(url);
 	const imgeng = parsedUrl.searchParams.get("imgeng");
@@ -122,4 +127,5 @@ export const extract: URLExtractor<
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"imageengine"> =
+	createExtractAndGenerate(extract, generate);

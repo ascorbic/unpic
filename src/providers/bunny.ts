@@ -121,9 +121,9 @@ const operationsGenerator = createOperationsGenerator<BunnyOperations>({
 	},
 });
 
-export const extract: URLExtractor<BunnyOperations> = extractFromURL;
+export const extract: URLExtractor<"bunny"> = extractFromURL;
 
-export const generate: URLGenerator<BunnyOperations> = (
+export const generate: URLGenerator<"bunny"> = (
 	src,
 	modifiers,
 ) => {
@@ -135,7 +135,7 @@ export const generate: URLGenerator<BunnyOperations> = (
 
 const extractAndGenerate = createExtractAndGenerate(extract, generate);
 
-export const transform: URLTransformer<BunnyOperations> = (
+export const transform: URLTransformer<"bunny"> = (
 	src,
 	operations,
 ) => {

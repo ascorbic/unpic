@@ -13,8 +13,7 @@ Deno.test("Cloudflare Images CDN - extract", async (t) => {
 		() => {
 			const result = extract(sampleUrl);
 			assertEquals(result, {
-				src:
-					"https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+				src: "https://100francisco.com/cdn-cgi/imagedelivery/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
 				operations: {
 					width: 128,
 					height: 128,
@@ -35,8 +34,7 @@ Deno.test("Cloudflare Images CDN - extract", async (t) => {
 		() => {
 			const result = extract(urlWithoutDomain);
 			assertEquals(result, {
-				src:
-					"https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
+				src: "https://imagedelivery.net/1aS6NlIe-Sc1o3NhVvy8Qw/2ba36ba9-69f6-41b6-8ff0-2779b41df200",
 				operations: {
 					width: 128,
 					height: 128,

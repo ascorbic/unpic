@@ -106,7 +106,7 @@ Deno.test("Vercel Image CDN - transform", async (t) => {
 	});
 
 	await t.step("should transform a relative URL with new operations", () => {
-		const result = transform(relativeUrl, { w: 800 }, {});
+		const result = transform(relativeUrl, { w: 800 });
 		assertEqualIgnoringQueryOrder(
 			result,
 			"/_vercel/image?url=/image.jpg&w=800&q=75",

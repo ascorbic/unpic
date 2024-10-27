@@ -24,12 +24,16 @@ import { transform as supabase } from "./providers/supabase.ts";
 import { transform as uploadcare } from "./providers/uploadcare.ts";
 import { transform as vercel } from "./providers/vercel.ts";
 import { transform as wordpress } from "./providers/wordpress.ts";
-import { ImageCdn, type UrlTransformerOptions } from "./types.ts";
+import {
+	ImageCdn,
+	type URLTransformer,
+	type UrlTransformerOptions,
+} from "./types.ts";
 import type {
 	AllProviderOperations,
+	AllProviderOptions,
 	ProviderOperations,
 	ProviderOptions,
-	ProviderTransformer,
 	ProviderTransformerMap,
 } from "./providers/types.ts";
 
@@ -63,14 +67,14 @@ const transformerMap: ProviderTransformerMap = {
 
 export const getTransformer = <TCDN extends ImageCdn>(
 	cdn: TCDN,
-): ProviderTransformer<TCDN> => transformerMap[cdn];
+): URLTransformer<TCDN> => transformerMap[cdn];
 
 /**
  * Returns a transformer function if the given CDN is supported
  */
 export function getTransformerForCdn<TCDN extends ImageCdn>(
 	cdn: TCDN | false | undefined,
-): ProviderTransformer<TCDN> | undefined {
+): URLTransformer<TCDN> | undefined {
 	if (!cdn) {
 		return undefined;
 	}
@@ -83,12 +87,14 @@ export function getTransformerForCdn<TCDN extends ImageCdn>(
  */
 export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, ...operations }: UrlTransformerOptions<TCDN>,
+	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
+		TCDN
+	>,
 	providerOperations?: ProviderOperations,
 	providerOptions?: ProviderOptions,
 ): string | undefined {
 	const cdn = provider || cdnOption ||
-		getProviderForUrl(url) as TCDN;
+		getProviderForUrl(url) as TCDN || fallback;
 
 	if (!cdn) {
 		return undefined;
@@ -97,5 +103,5 @@ export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	return getTransformer(cdn)?.(url, {
 		...operations as AllProviderOperations[TCDN],
 		...providerOperations?.[cdn],
-	}, providerOptions?.[cdn] ?? {});
+	}, providerOptions?.[cdn] ?? {} as AllProviderOptions[TCDN]);
 }

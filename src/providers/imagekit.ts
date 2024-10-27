@@ -144,7 +144,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
-export const generate: URLGenerator<ImageKitOperations> = (
+export const generate: URLGenerator<"imagekit"> = (
 	src,
 	operations,
 ) => {
@@ -154,7 +154,7 @@ export const generate: URLGenerator<ImageKitOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<ImageKitOperations> = (url) => {
+export const extract: URLExtractor<"imagekit"> = (url) => {
 	const parsedUrl = toUrl(url);
 	let trPart: string | null = null;
 	let path = parsedUrl.pathname;

@@ -4,6 +4,7 @@ import {
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	type URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -125,7 +126,7 @@ export interface CloudimageOptions {
 	token?: string;
 }
 
-export const generate: URLGenerator<CloudimageOperations, CloudimageOptions> = (
+export const generate: URLGenerator<"cloudimage"> = (
 	src,
 	modifiers = {},
 	{ token } = {},
@@ -147,8 +148,7 @@ export const generate: URLGenerator<CloudimageOperations, CloudimageOptions> = (
 };
 
 export const extract: URLExtractor<
-	CloudimageOperations,
-	CloudimageOptions
+	"cloudimage"
 > = (src, options = {}) => {
 	const url = toUrl(src);
 	if (getProviderForUrl(url) !== "cloudimage") {
@@ -170,4 +170,6 @@ export const extract: URLExtractor<
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<
+	"cloudimage"
+> = createExtractAndGenerate(extract, generate);

@@ -80,8 +80,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 });
 
 export const generate: URLGenerator<
-	NetlifyOperations,
-	NetlifyOptions
+	"netlify"
 > = (
 	src,
 	operations,
@@ -96,8 +95,7 @@ export const generate: URLGenerator<
 };
 
 export const extract: URLExtractor<
-	NetlifyOperations,
-	NetlifyOptions
+	"netlify"
 > = (url) => {
 	if (getProviderForUrlByPath(url) !== "netlify") {
 		return null;
@@ -120,6 +118,5 @@ export const extract: URLExtractor<
 };
 
 export const transform: URLTransformer<
-	NetlifyOperations,
-	NetlifyOptions
+	"netlify"
 > = createExtractAndGenerate(extract, generate);

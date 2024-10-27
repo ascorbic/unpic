@@ -74,8 +74,7 @@ function formatUrl(
 }
 
 export const generate: URLGenerator<
-	CloudflareImagesOperations,
-	CloudflareImagesOptions
+	"cloudflare_images"
 > = (
 	_src,
 	operations,
@@ -87,8 +86,7 @@ export const generate: URLGenerator<
 };
 
 export const extract: URLExtractor<
-	CloudflareImagesOperations,
-	CloudflareImagesOptions
+	"cloudflare_images"
 > = (url) => {
 	const parsedUrl = toUrl(url);
 	const matches = [
@@ -112,8 +110,7 @@ export const extract: URLExtractor<
 };
 
 export const transform: URLTransformer<
-	CloudflareImagesOperations,
-	CloudflareImagesOptions
+	"cloudflare_images"
 > = (
 	src,
 	operations,

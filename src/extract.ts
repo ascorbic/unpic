@@ -1,11 +1,6 @@
 import { getProviderForUrl } from "./detect.ts";
-import type {
-	AllProviderOptions,
-	ExtractedURLForProvider,
-	ProviderExtractor,
-	ProviderExtractorMap,
-} from "./providers/types.ts";
-import type { ImageCdn } from "./types.ts";
+import type { AllProviderOptions, URLExtractorMap } from "./providers/types.ts";
+import type { ExtractedURL, ImageCdn, URLExtractor } from "./types.ts";
 
 import { extract as astro } from "./providers/astro.ts";
 import { extract as builder } from "./providers/builder.io.ts";
@@ -33,7 +28,7 @@ import { extract as uploadcare } from "./providers/uploadcare.ts";
 import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
 
-export const parsers: ProviderExtractorMap = {
+export const parsers: URLExtractorMap = {
 	astro,
 	"builder.io": builder,
 	bunny,
@@ -68,14 +63,14 @@ export const getExtractorForUrl = <
 	TCDN extends ImageCdn = ImageCdn,
 >(
 	url: string | URL,
-): ProviderExtractor<TCDN> | undefined =>
+): URLExtractor<TCDN> | undefined =>
 	getExtractorForProvider<TCDN>(getProviderForUrl(url) as TCDN);
 
 export const getExtractorForProvider = <
 	TCDN extends ImageCdn,
 >(
 	cdn: TCDN | false | undefined,
-): ProviderExtractor<TCDN> | undefined => {
+): URLExtractor<TCDN> | undefined => {
 	if (!cdn) {
 		return undefined;
 	}
@@ -93,7 +88,7 @@ export const parseUrl = <
 	cdn?: TCDN,
 	options?: AllProviderOptions[TCDN],
 ):
-	| ExtractedURLForProvider<TCDN>
+	| ExtractedURL<TCDN>
 	| undefined => {
 	if (cdn) {
 		return getExtractorForProvider(cdn)?.(url);
@@ -110,7 +105,7 @@ export const parseUrl = <
 			src: url.toString(),
 			operations: {},
 			options: {},
-		} as ExtractedURLForProvider<TCDN>;
+		} as ExtractedURL<TCDN>;
 	}
 
 	return parser(url, options);

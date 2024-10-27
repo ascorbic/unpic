@@ -109,8 +109,9 @@ export const getTransformerForProvider = async <
  */
 export async function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, fallback, ...operations }:
-		UrlTransformerOptions<TCDN>,
+	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
+		TCDN
+	>,
 	providerOperations?: ProviderOperations,
 	providerOptions?: ProviderOptions,
 ): Promise<string | undefined> {

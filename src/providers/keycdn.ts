@@ -3,6 +3,7 @@ import type {
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -264,7 +265,7 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	},
 });
 
-export const generate: URLGenerator<KeyCDNOperations> = (
+export const generate: URLGenerator<"keycdn"> = (
 	src,
 	operations,
 ) => {
@@ -281,7 +282,7 @@ export const generate: URLGenerator<KeyCDNOperations> = (
 	return toCanonicalUrlString(url);
 };
 
-export const extract: URLExtractor<KeyCDNOperations> = (url) => {
+export const extract: URLExtractor<"keycdn"> = (url) => {
 	const parsedUrl = toUrl(url);
 	const operations = operationsParser(parsedUrl);
 
@@ -298,4 +299,7 @@ export const extract: URLExtractor<KeyCDNOperations> = (url) => {
 	};
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"keycdn"> = createExtractAndGenerate(
+	extract,
+	generate,
+);

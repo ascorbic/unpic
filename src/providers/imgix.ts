@@ -3,6 +3,7 @@ import {
 	Operations,
 	URLExtractor,
 	URLGenerator,
+	type URLTransformer,
 } from "../types.ts";
 import {
 	createExtractAndGenerate,
@@ -207,28 +208,29 @@ export interface ImgixOperations extends Operations<ImixFormats> {
 	[key: string]: string | number | boolean | undefined;
 }
 
-export const { operationsGenerator, operationsParser } =
-	createOperationsHandlers<ImgixOperations>({
-		keyMap: {
-			format: "fm",
-			width: "w",
-			height: "h",
-			quality: "q",
-		},
-		defaults: {
-			fit: "min",
-			auto: "format",
-		},
-	});
+const { operationsGenerator, operationsParser } = createOperationsHandlers<
+	ImgixOperations
+>({
+	keyMap: {
+		format: "fm",
+		width: "w",
+		height: "h",
+		quality: "q",
+	},
+	defaults: {
+		fit: "min",
+		auto: "format",
+	},
+});
 
-export const extract: URLExtractor<ImgixOperations> = (url) => {
+export const extract: URLExtractor<"imgix"> = (url) => {
 	const src = toUrl(url);
 	const operations = operationsParser(url);
 	src.search = "";
 	return { src: toCanonicalUrlString(src), operations };
 };
 
-export const generate: URLGenerator<ImgixOperations> = (src, operations) => {
+export const generate: URLGenerator<"imgix"> = (src, operations) => {
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(src);
 	url.search = modifiers;
@@ -240,4 +242,7 @@ export const generate: URLGenerator<ImgixOperations> = (src, operations) => {
 	return toCanonicalUrlString(url);
 };
 
-export const transform = createExtractAndGenerate(extract, generate);
+export const transform: URLTransformer<"imgix"> = createExtractAndGenerate(
+	extract,
+	generate,
+);
