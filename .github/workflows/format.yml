@@ -15,11 +15,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: navikt/github-app-token-generator@v1
+        id: get-token
+        with:
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ steps.get-token.outputs.token }}
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
