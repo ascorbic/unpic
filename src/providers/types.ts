@@ -36,7 +36,7 @@ import type { UploadcareOperations, UploadcareOptions } from "./uploadcare.ts";
 import type { VercelOperations, VercelOptions } from "./vercel.ts";
 import type { WordPressOperations } from "./wordpress.ts";
 
-export interface AllProviderOperations {
+export interface ProviderOperations {
 	astro: AstroOperations;
 	"builder.io": BuilderOperations;
 	bunny: BunnyOperations;
@@ -64,7 +64,7 @@ export interface AllProviderOperations {
 	wordpress: WordPressOperations;
 }
 
-export interface AllProviderOptions {
+export interface ProviderOptions {
 	astro: AstroOptions;
 	"builder.io": undefined;
 	bunny: undefined;
@@ -100,12 +100,9 @@ export type URLGeneratorMap = {
 	[K in ImageCdn]: URLGenerator<K>;
 };
 
-export type ProviderTransformerMap = {
+export type URLTransformerMap = {
 	[K in ImageCdn]: URLTransformer<K>;
 };
-
-export type ProviderOptions = Partial<AllProviderOptions>;
-export type ProviderOperations = Partial<AllProviderOperations>;
 
 export type ProviderModule<
 	TCDN extends ImageCdn,

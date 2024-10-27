@@ -1,7 +1,4 @@
-import type {
-	AllProviderOperations,
-	AllProviderOptions,
-} from "./providers/types.ts";
+import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
 
 /**
  * Options to transform an image URL
@@ -9,7 +6,7 @@ import type {
 export interface UrlTransformerOptions<TCDN extends ImageCdn = ImageCdn>
 	extends
 		Pick<
-			AllProviderOperations[TCDN],
+			ProviderOperations[TCDN],
 			"width" | "height" | "format" | "quality"
 		> {
 	/** Specify a provider rather than auto-detecting */
@@ -122,38 +119,38 @@ export interface ProviderConfig<
 
 export type URLGenerator<
 	TCDN extends ImageCdn = ImageCdn,
-> = AllProviderOptions[TCDN] extends undefined
-	? (src: string | URL, operations: AllProviderOperations[TCDN]) => string
+> = ProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: ProviderOperations[TCDN]) => string
 	: (
 		src: string | URL,
-		operations: AllProviderOperations[TCDN],
-		options?: AllProviderOptions[TCDN],
+		operations: ProviderOperations[TCDN],
+		options?: ProviderOptions[TCDN],
 	) => string;
 
 export type URLTransformer<
 	TCDN extends ImageCdn = ImageCdn,
-> = AllProviderOptions[TCDN] extends undefined
-	? (src: string | URL, operations: AllProviderOperations[TCDN]) => string
+> = ProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: ProviderOperations[TCDN]) => string
 	: (
 		src: string | URL,
-		operations: AllProviderOperations[TCDN],
-		options?: AllProviderOptions[TCDN],
+		operations: ProviderOperations[TCDN],
+		options?: ProviderOptions[TCDN],
 	) => string;
 
 export type URLExtractor<
 	TCDN extends ImageCdn = ImageCdn,
 > = (
 	url: string | URL,
-	options?: AllProviderOptions[TCDN],
+	options?: ProviderOptions[TCDN],
 ) =>
-	| (AllProviderOptions[TCDN] extends undefined ? {
-			operations: AllProviderOperations[TCDN];
+	| (ProviderOptions[TCDN] extends undefined ? {
+			operations: ProviderOperations[TCDN];
 			src: string;
 		}
 		: {
-			operations: AllProviderOperations[TCDN];
+			operations: ProviderOperations[TCDN];
 			src: string;
-			options: AllProviderOptions[TCDN];
+			options: ProviderOptions[TCDN];
 		})
 	| null;
 

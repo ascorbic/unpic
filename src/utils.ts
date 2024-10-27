@@ -1,7 +1,4 @@
-import type {
-	AllProviderOperations,
-	AllProviderOptions,
-} from "./providers/types.ts";
+import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
 import {
 	type ImageCdn,
 	OperationFormatter,
@@ -378,8 +375,8 @@ export function createExtractAndGenerate<
 ): URLTransformer<TCDN> {
 	return ((
 		src: string | URL,
-		operations: AllProviderOperations[TCDN],
-		options?: AllProviderOptions[TCDN],
+		operations: ProviderOperations[TCDN],
+		options?: ProviderOptions[TCDN],
 	) => {
 		const base = extract(src, options);
 		if (!base) {

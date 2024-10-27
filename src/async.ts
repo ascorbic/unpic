@@ -1,10 +1,5 @@
 import { getProviderForUrl } from "./detect.ts";
-import type {
-	AllProviderOperations,
-	AllProviderOptions,
-	ProviderOperations,
-	ProviderOptions,
-} from "./providers/types.ts";
+import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
 import type { ProviderModule } from "./providers/types.ts";
 import type {
 	ImageCdn,
@@ -109,11 +104,12 @@ export const getTransformerForProvider = async <
  */
 export async function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
-		TCDN
-	>,
-	providerOperations?: ProviderOperations,
-	providerOptions?: ProviderOptions,
+	{ provider, cdn: cdnOption, fallback, ...operations }:
+		UrlTransformerOptions<
+			TCDN
+		>,
+	providerOperations?: Partial<ProviderOperations>,
+	providerOptions?: Partial<ProviderOptions>,
 ): Promise<string | undefined> {
 	const cdn = provider || cdnOption ||
 		getProviderForUrl(url) as TCDN || fallback;
@@ -125,7 +121,7 @@ export async function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	const transformer = await getTransformerForProvider(cdn);
 
 	return transformer?.(url, {
-		...operations as AllProviderOperations[TCDN],
+		...operations as ProviderOperations[TCDN],
 		...providerOperations?.[cdn],
-	}, providerOptions?.[cdn] ?? {} as AllProviderOptions[TCDN]);
+	}, providerOptions?.[cdn] ?? {} as ProviderOptions[TCDN]);
 }

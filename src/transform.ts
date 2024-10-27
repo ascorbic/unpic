@@ -3,7 +3,7 @@ import { transform as astro } from "./providers/astro.ts";
 import { transform as builderio } from "./providers/builder.io.ts";
 import { transform as bunny } from "./providers/bunny.ts";
 import { transform as cloudflare } from "./providers/cloudflare.ts";
-import { transform as cloudflareImages } from "./providers/cloudflare_images.ts";
+import { transform as cloudflare_images } from "./providers/cloudflare_images.ts";
 import { transform as cloudimage } from "./providers/cloudimage.ts";
 import { transform as cloudinary } from "./providers/cloudinary.ts";
 import { transform as contentful } from "./providers/contentful.ts";
@@ -30,19 +30,17 @@ import {
 	type UrlTransformerOptions,
 } from "./types.ts";
 import type {
-	AllProviderOperations,
-	AllProviderOptions,
 	ProviderOperations,
 	ProviderOptions,
-	ProviderTransformerMap,
+	URLTransformerMap,
 } from "./providers/types.ts";
 
-const transformerMap: ProviderTransformerMap = {
+const transformerMap: URLTransformerMap = {
 	astro,
 	"builder.io": builderio,
 	bunny,
 	cloudflare,
-	cloudflare_images: cloudflareImages,
+	cloudflare_images,
 	cloudimage,
 	cloudinary,
 	contentful,
@@ -83,11 +81,12 @@ export function getTransformerForCdn<TCDN extends ImageCdn>(
  */
 export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	url: string | URL,
-	{ provider, cdn: cdnOption, fallback, ...operations }: UrlTransformerOptions<
-		TCDN
-	>,
-	providerOperations?: ProviderOperations,
-	providerOptions?: ProviderOptions,
+	{ provider, cdn: cdnOption, fallback, ...operations }:
+		UrlTransformerOptions<
+			TCDN
+		>,
+	providerOperations?: Partial<ProviderOperations>,
+	providerOptions?: Partial<ProviderOptions>,
 ): string | undefined {
 	const cdn = provider || cdnOption ||
 		getProviderForUrl(url) as TCDN || fallback;
@@ -97,7 +96,7 @@ export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	}
 
 	return getTransformerForCdn(cdn)?.(url, {
-		...operations as AllProviderOperations[TCDN],
+		...operations as ProviderOperations[TCDN],
 		...providerOperations?.[cdn],
-	}, providerOptions?.[cdn] ?? {} as AllProviderOptions[TCDN]);
+	}, providerOptions?.[cdn] ?? {} as ProviderOptions[TCDN]);
 }

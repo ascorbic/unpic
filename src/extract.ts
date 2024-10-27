@@ -1,7 +1,7 @@
 import { getProviderForUrl } from "./detect.ts";
 import type {
-	AllProviderOperations,
-	AllProviderOptions,
+	ProviderOperations,
+	ProviderOptions,
 	URLExtractorMap,
 } from "./providers/types.ts";
 import type { ImageCdn, ParseURLResult, URLExtractor } from "./types.ts";
@@ -91,7 +91,7 @@ export const parseUrl = <
 >(
 	url: string | URL,
 	cdn?: TCDN,
-	options?: AllProviderOptions[TCDN],
+	options?: ProviderOptions[TCDN],
 ): ParseURLResult<TCDN> => {
 	const detectedCdn = cdn || getProviderForUrl(url) as TCDN;
 	if (!detectedCdn) {
@@ -103,8 +103,8 @@ export const parseUrl = <
 	if (!parser) {
 		return {
 			src: url.toString(),
-			operations: {} as AllProviderOperations[TCDN],
-			options: {} as AllProviderOptions[TCDN],
+			operations: {} as ProviderOperations[TCDN],
+			options: {} as ProviderOptions[TCDN],
 			cdn: detectedCdn,
 		};
 	}
