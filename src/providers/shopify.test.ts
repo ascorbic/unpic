@@ -105,6 +105,7 @@ Deno.test("Shopify Image CDN - extract", async (t) => {
 			);
 			assertEquals(src, base);
 
+			// deno-lint-ignore no-explicit-any
 			delete (operations as any).v;
 			assertEquals(operations, expected);
 		});

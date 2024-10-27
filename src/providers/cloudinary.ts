@@ -222,6 +222,7 @@ export interface CloudinaryOperations extends Operations<CloudinaryFormats> {
 	z?: number;
 
 	/** Defines custom variables for transformation. */
+	// deno-lint-ignore no-explicit-any
 	$?: Record<string, any>;
 }
 
