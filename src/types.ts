@@ -100,6 +100,7 @@ export type ImageCdn =
 	| "netlify"
 	| "imagekit"
 	| "uploadcare"
-	| "supabase";
+	| "supabase"
+	| "hygraph";
 
 export type SupportedImageCdn = ImageCdn;
