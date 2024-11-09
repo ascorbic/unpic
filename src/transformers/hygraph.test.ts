@@ -3,8 +3,8 @@ import { HygraphParams, parse, transform } from "./hygraph.ts";
 import { ParsedUrl } from "../types.ts";
 
 const imageBase = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/cm2tr64fx7gvu07n85chjmuno";
-const imageWithAutoFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=width:400,height:400/auto_image/cm2tr64fx7gvu07n85chjmuno";
-const imageWithExplicitFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=width:400,height:400/output=format:jpg/cm2tr64fx7gvu07n85chjmuno";
+const imageWithAutoFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/auto_image/cm2tr64fx7gvu07n85chjmuno";
+const imageWithExplicitFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/output=format:jpg/cm2tr64fx7gvu07n85chjmuno";
 
 Deno.test("hygraph", async (t) => {
   await t.step("parses a URL with auto format", () => {
@@ -19,7 +19,8 @@ Deno.test("hygraph", async (t) => {
         transformations: {
           resize: {
             width: 400,
-            height: 400
+            height: 400,
+            fit: "crop"
           },
           auto_image: {}
         },
@@ -44,7 +45,8 @@ Deno.test("hygraph", async (t) => {
         transformations: {
           resize: {
             width: 400,
-            height: 400
+            height: 400,
+            fit: "crop"
           },
           output: {
             format: "jpg"
@@ -55,7 +57,7 @@ Deno.test("hygraph", async (t) => {
         handle: "cm2tr64fx7gvu07n85chjmuno"
       }
     };
-    
+
     assertEquals(parsed, expected);
   });
 

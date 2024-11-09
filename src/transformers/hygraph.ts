@@ -5,12 +5,12 @@ import {
 	UrlTransformer,
 } from "../types.ts";
 
-const hygraphRegex = 
+const hygraphRegex =
 /https:\/\/(?<region>[a-z0-9-]+)\.graphassets\.com\/(?<envId>[a-z0-9]+)(?:\/(?<transformations>.*?))?\/(?<handle>[a-z0-9]+)$/;
 
 export interface HygraphParams {
   region?: string;
-  envId?: string;  
+  envId?: string;
   transformations: Record<string, Record<string, string | number>>;
   handle?: string;
 }
@@ -49,9 +49,8 @@ export const generate: UrlGenerator<HygraphParams> = (
 		...params,
 	};
 
-  if (width || height) {
-    props.transformations.resize ||= {};
-  }
+  props.transformations.resize ||= {};
+  props.transformations.resize.fit ||= "crop";
 
 	if (width) {
 		props.transformations.resize.width = width;
@@ -60,7 +59,7 @@ export const generate: UrlGenerator<HygraphParams> = (
 	if (height) {
 		props.transformations.resize.height = height;
 	}
-	
+
   if (format === "auto") {
     props.transformations.auto_image = {};
   } else if (format) {
@@ -109,7 +108,7 @@ const parseTransformations = (transformations: string): Record<string, Record<st
     } else {
       result[operation] = {};
     }
-    
+
     return result;
   }, {});
 }
