@@ -3,8 +3,12 @@ import { HygraphParams, parse, transform } from "./hygraph.ts";
 import { ParsedUrl } from "../types.ts";
 
 const imageBase = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/cm2tr64fx7gvu07n85chjmuno";
-const imageWithAutoFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/auto_image/cm2tr64fx7gvu07n85chjmuno";
-const imageWithExplicitFormat = "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/output=format:jpg/cm2tr64fx7gvu07n85chjmuno";
+
+const imageWithAutoFormat =
+  "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/auto_image/cm2tr64fx7gvu07n85chjmuno";
+
+  const imageWithExplicitFormat =
+  "https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/resize=fit:crop,width:400,height:400/output=format:jpg/cm2tr64fx7gvu07n85chjmuno";
 
 Deno.test("hygraph", async (t) => {
   await t.step("parses a URL with auto format", () => {
@@ -20,14 +24,14 @@ Deno.test("hygraph", async (t) => {
           resize: {
             width: 400,
             height: 400,
-            fit: "crop"
+            fit: "crop",
           },
-          auto_image: {}
+          auto_image: {},
         },
         region: "us-west-2",
         envId: "cm2apl1zp07l506n66dmd9xo8",
-        handle: "cm2tr64fx7gvu07n85chjmuno"
-      }
+        handle: "cm2tr64fx7gvu07n85chjmuno",
+      },
     };
 
     assertEquals(parsed, expected);
@@ -46,16 +50,16 @@ Deno.test("hygraph", async (t) => {
           resize: {
             width: 400,
             height: 400,
-            fit: "crop"
+            fit: "crop",
           },
           output: {
-            format: "jpg"
-          }
+            format: "jpg",
+          },
         },
         region: "us-west-2",
         envId: "cm2apl1zp07l506n66dmd9xo8",
-        handle: "cm2tr64fx7gvu07n85chjmuno"
-      }
+        handle: "cm2tr64fx7gvu07n85chjmuno",
+      },
     };
 
     assertEquals(parsed, expected);
@@ -67,6 +71,7 @@ Deno.test("hygraph", async (t) => {
       width: 400,
       height: 400,
     });
+
     assertEquals(result?.toString(), imageWithAutoFormat);
   });
 
@@ -77,6 +82,7 @@ Deno.test("hygraph", async (t) => {
       height: 400,
       format: "jpg",
     });
+    
     assertEquals(result?.toString(), imageWithExplicitFormat);
   });
 });
