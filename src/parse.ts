@@ -24,6 +24,7 @@ import { parse as netlify } from "./transformers/netlify.ts";
 import { parse as imagekit } from "./transformers/imagekit.ts";
 import { parse as uploadcare } from "./transformers/uploadcare.ts";
 import { parse as supabase } from "./transformers/supabase.ts";
+import { parse as hygraph } from "./transformers/hygraph.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -52,6 +53,7 @@ export const parsers = {
 	imagekit,
 	uploadcare,
 	supabase,
+	hygraph
 };
 
 export const cdnIsSupportedForParse = (

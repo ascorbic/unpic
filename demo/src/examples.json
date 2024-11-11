@@ -83,5 +83,9 @@
 	"supabase": [
 		"Supabase",
 		"https://enlyjtqaeutqbhqgkadn.supabase.co/storage/v1/object/public/sample-public-bucket/alexander-shatov-PHH_0uw9-Qw-unsplash.jpg"
+	],
+	"hygraph": [
+		"Hygraph",
+		"https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/cm2tr64fx7gvu07n85chjmuno"
 	]
 }
