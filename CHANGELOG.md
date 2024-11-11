@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # Changelog
 
+## [3.20.0](https://github.com/ascorbic/unpic/compare/v3.19.0...v3.20.0) (2024-11-11)
+
+
+### Features
+
+* add Hygraph support ([#142](https://github.com/ascorbic/unpic/issues/142)) ([71c8796](https://github.com/ascorbic/unpic/commit/71c879626abf3cc1181314b0683bfcfe3e2fec23))
+
 ## [3.19.0](https://github.com/ascorbic/unpic/compare/v3.18.1...v3.19.0) (2024-10-26)
 
 
