@@ -54,7 +54,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
 	imagekit,
 	uploadcare,
 	supabase,
-	hygraph
+	hygraph,
 }[cdn]);
 
 /**

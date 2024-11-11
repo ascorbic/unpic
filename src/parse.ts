@@ -53,7 +53,7 @@ export const parsers = {
 	imagekit,
 	uploadcare,
 	supabase,
-	hygraph
+	hygraph,
 };
 
 export const cdnIsSupportedForParse = (
