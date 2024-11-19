@@ -25,6 +25,7 @@ import { parse as imagekit } from "./transformers/imagekit.ts";
 import { parse as uploadcare } from "./transformers/uploadcare.ts";
 import { parse as supabase } from "./transformers/supabase.ts";
 import { parse as hygraph } from "./transformers/hygraph.ts";
+import { parse as basehub } from "./transformers/basehub.ts";
 import { ImageCdn, ParsedUrl, SupportedImageCdn, UrlParser } from "./types.ts";
 
 export const parsers = {
@@ -54,6 +55,7 @@ export const parsers = {
 	uploadcare,
 	supabase,
 	hygraph,
+	basehub,
 };
 
 export const cdnIsSupportedForParse = (
