@@ -21,7 +21,7 @@ export const parse: UrlParser<{ fit?: string }> = (url) => {
 		format,
 		base: parsedUrl.toString(),
 		params: { fit, quality },
-		cdn: "contentful",
+		cdn: "basehub",
 	};
 };
 
