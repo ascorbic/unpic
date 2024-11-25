@@ -14,7 +14,7 @@ Deno.test("basehub", async (t) => {
 		});
 		assertEquals(
 			result?.toString(),
-			"https://assets.basehub.com/fa068a12/qZeFxPJWNB7UQdwUzjX3e/features-streamlined-team-communication-real-time-messaging-(light-mode)3x.jpg?w=200&h=100",
+			"https://assets.basehub.com/fa068a12/qZeFxPJWNB7UQdwUzjX3e/features-streamlined-team-communication-real-time-messaging-(light-mode)3x.jpg?w=200&h=100&fit=cover",
 		);
 	});
 	await t.step("should not set height if not provided", () => {
@@ -44,7 +44,7 @@ Deno.test("basehub", async (t) => {
 		});
 		assertEquals(
 			result?.toString(),
-			"https://assets.basehub.com/fa068a12/qZeFxPJWNB7UQdwUzjX3e/features-streamlined-team-communication-real-time-messaging-(light-mode)3x.jpg?w=201&h=100&format=webp",
+			"https://assets.basehub.com/fa068a12/qZeFxPJWNB7UQdwUzjX3e/features-streamlined-team-communication-real-time-messaging-(light-mode)3x.jpg?w=201&h=100&format=webp&fit=cover",
 		);
 	});
 });
