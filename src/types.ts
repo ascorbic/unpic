@@ -9,6 +9,8 @@ export interface UrlTransformerOptions<TCDN extends ImageCdn = ImageCdn>
 			ProviderOperations[TCDN],
 			"width" | "height" | "format" | "quality"
 		> {
+	/** The image URL to transform */
+	url: string | URL;
 	/** Specify a provider rather than auto-detecting */
 	provider?: TCDN;
 	/** @deprecated Use `provider` */

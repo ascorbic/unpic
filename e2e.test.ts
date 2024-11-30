@@ -22,7 +22,8 @@ Deno.test("E2E tests", async (t) => {
 			name: `${name} resizes an image`,
 			fn: async () => {
 				const size = cdn === "vercel" ? 256 : 96;
-				const image = transformUrl(url, {
+				const image = transformUrl({
+					url,
 					width: size,
 					cdn: cdn as ImageCdn,
 					format: "jpg",
@@ -37,7 +38,8 @@ Deno.test("E2E tests", async (t) => {
 		await t.step({
 			name: `${name} returns requested aspect ratio`,
 			fn: async () => {
-				const image = transformUrl(url, {
+				const image = transformUrl({
+					url,
 					width: 100,
 					height: 50,
 					cdn: cdn as ImageCdn,
