@@ -57,30 +57,31 @@ const url = transformUrl(
 	},
 );
 
-console.log(url.toString());
-
+console.log(url);
 // https://cdn.shopify.com/static/sample-images/bath.jpeg?width=800&height=600&crop=center
 ```
 
-You can also use the `parseUrl` function to parse a URL and get the CDN and any
-params:
+You can also use the `parseUrl` function to parse a URL and get information
+about the image:
 
 ```ts
-const parsedUrl = parseUrl(
+const parsed = parseUrl(
 	"https://cdn.shopify.com/static/sample-images/bath_800x600_crop_center.jpeg",
 );
 
-console.log(parsedUrl);
+console.log(parsed);
 // {
-//   cdn: "shopify",
-//   width: 800,
-//   height: 600,
-//   base: "https://cdn.shopify.com/static/sample-images/bath.jpeg",
-//   crop: "center",
+//   provider: "shopify",
+//   src: "https://cdn.shopify.com/static/sample-images/bath.jpeg",
+//   operations: {
+//     width: 800,
+//     height: 600,
+//     crop: "center"
+//   }
 // }
 ```
 
-You can bypass auto-detection by specifying the CDN:
+You can bypass auto-detection by specifying the provider:
 
 ```ts
 const url = transformUrl(
@@ -88,7 +89,7 @@ const url = transformUrl(
 	{
 		width: 800,
 		height: 600,
-		cdn: "shopify",
+		provider: "shopify",
 	},
 );
 ```
@@ -96,12 +97,12 @@ const url = transformUrl(
 This is particularly useful if you are using the CDN with a custom domain which
 is not auto-detected.
 
-You can also specify a fallback CDN to use if the URL is not recognised as
+You can also specify a fallback provider to use if the URL is not recognised as
 coming from a known CDN:
 
 ```ts
 const url = transformUrl(
-	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
+	"https://example.com/image.jpg",
 	{
 		width: 800,
 		height: 600,
@@ -201,18 +202,6 @@ const url = transform(
 );
 ```
 
-```ts
-import { transformUrl } from "unpic/async";
-
-const url = await transformUrl(
-	"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg",
-	{
-		width: 800,
-		height: 600,
-	},
-);
-```
-
 ## Supported Providers
 
 - Adobe Dynamic Media (Scene7)
@@ -228,6 +217,7 @@ const url = await transformUrl(
 - Kontent.ai
 - Shopify
 - Storyblok
+- Supabase
 - Vercel / Next.js
 - WordPress.com and Jetpack Site Accelerator
 
@@ -243,6 +233,7 @@ const url = await transformUrl(
   CDN to provide the image API, most commonly Imgix. In most cases they support
   the same API, but in others they may proxy the image through their own CDN, or
   use a different API.
+
 - **Why would I use this instead of the CDN's own SDK?** If you you know that
   your images will all come from one CDN, then you probably should use the CDN's
   own SDK. This library is designed to work with images from multiple CDNs, and
@@ -250,32 +241,44 @@ const url = await transformUrl(
   useful for images that may come from an arbitrary source, such as a CMS. It is
   also useful for parsing URLs that may already have transforms applied, because
   most CDN SDKs will not parse these URLs correctly.
+
 - **Can you add support for CDN X?** If it supports a URL API and doesn't
   require signed URLs then yes, please open an issue or PR.
+
 - **Can you add my domain to CDN X?** If you provide a service where end-users
   use your URLs then probably. Examples may be image providers such as Unsplash,
   or CMSs. If it is just your own site then probably not. You can manually
-  specify the CDN in the arguments to `transformUrl` and `parseUrl`.
+  specify the provider in the arguments to `transformUrl` and `parseUrl`.
+
+- **What params can I use?** The library provides a standard set of operations
+  (`width`, `height`, `format`, `quality`) that work across all providers. You
+  can also use provider-specific operations by passing them as the third
+  argument to `transformUrl`. These are fully type-safe - your IDE will show you
+  which operations are available for each provider.
+
 - **Why do you set auto format?** If the CDN support is, and no format is
   specified in `transformUrl`, the library will remove any format set in the
   source image, changing it to auto-format. In most cases, this is what you
   want. Almost all browsers now support modern formats such as WebP, and setting
   auto-format will allow the CDN to serve the best format for the browser. If
   you want to force a specific format, you can set it in `transformUrl`.
-- **Why do you set fit=cover (or equivalent)** If the CDN supports it, and no
+
+- **Why do you set fit=cover (or equivalent)?** If the CDN supports it, and no
   fit is specified in `transformUrl`, the library will set fit to cover. This is
   because in most cases you want the image to fill the space, rather than be
   contained within it. Every CDN has its own syntax for this, so it's best if we
   set a default that applies to all images. If you want to force a specific fit,
   you can set it in `transformUrl`.
+
 - **Do you support SVG, animated GIF etc?** If the CDN supports it, then yes. We
   don't attempt to check if a format is valid - we will just pass it through to
   the CDN. If the CDN doesn't support it, then it will return an error or a
   default.
-- **Do you support video, etc** No, this library is only for images. If you pass
-  a video URL to `transformUrl`, it will return `undefined`, as it will for any
-  URL that is not recognised as an image CDN URL. It is up to you to handle this
-  case.
+
+- **Do you support video, etc?** No, this library is only for images. If you
+  pass a video URL to `transformUrl`, it will return `undefined`, as it will for
+  any URL that is not recognised as an image CDN URL. It is up to you to handle
+  this case.
 
 ## Contributing
 
