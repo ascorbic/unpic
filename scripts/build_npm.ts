@@ -4,21 +4,21 @@ import { walk } from "jsr:@std/fs";
 
 await emptyDir("./npm");
 
-const transformers = await Array.fromAsync(walk("./src/transformers", {
+const providers = await Array.fromAsync(walk("./src/providers", {
 	match: [/^(?!.*test\.ts$).*\.ts$/],
 }));
 
-const entry = transformers.map((entry) => ({
-	path: entry.path,
-	name: `./transformers/${basename(entry.path, ".ts")}`,
+const entry = providers.map((t) => ({
+	path: t.path,
+	name: `./providers/${basename(t.path, ".ts")}`,
 }));
 
 await build({
 	entryPoints: [
 		"./mod.ts",
 		{
-			path: "./src/detect.ts",
-			name: "./detect",
+			path: "./src/async.ts",
+			name: "./async",
 		},
 		...entry,
 	],
