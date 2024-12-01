@@ -11,5 +11,6 @@
 	"imagekit.io": "imagekit",
 	"cloudimg.io": "cloudimage",
 	"ucarecdn.com": "uploadcare",
-	"supabase.co": "supabase"
+	"supabase.co": "supabase",
+	"graphassets.com": "hygraph"
 }
