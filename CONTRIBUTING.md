@@ -1,67 +1,518 @@
-# Contributing
+# Contributing Guide
 
-:heart: We love contributions of new CDNs, bug fixes, and improvements to the
-code.
+This guide will help you add new image CDN providers to the library. We'll cover
+implementation details, utility functions, and best practices.
 
-To add new domains, subdomains or paths to an existing CDN, add them to one or
-more of the JSON files in `data`.
+## Overview
 
-To add a new CDN, add the following:
+Each provider consists of:
 
-- a new source file in `src/transformers`. This should export a `transform`
-  function that implements the `UrlTransformer` interface, a `parse` function
-  that implements the `UrlParser` interface and optionally a `generate` function
-  that implements the `UrlGenerator` interface.
-- if the CDN should delegate remote source images to a different CDN where
-  possible, implement `delegateUrl` and import it in `src/delegate.ts`. This is
-  likely to apply to all self-hosted image servers. See the `ipx` transformer
-  for an example.
-- a new test file in `src/transformers`. This should test all of the exported
-  API functions,
-- at least one entry in `domains.json`, `subdomains.json` or `paths.json` to
-  detect the CDN, unless it is not auto-detected. Do not include paths that are
-  likely to cause false positives. e.g. `/assets` is too generic, but `/_mycdn`
-  is ok.
-- add the new CDN to the types in `src/types.ts`
-- import the new source file in `src/transform.ts` and `src/parse.ts`
-- add a sample image to `examples.json` in the demo site. Run the site locally
-  to see that it works. This step is important! This is used for the e2e tests
-  to ensure that the transformer works as expected, so it needs a real image to
-  work with. Ideally this should be a public sample image used in the CDN's own
-  docs, but if that is not available then any image hosted on the CDN will do.
+1. A TypeScript file containing the implementation
+   (`src/providers/[provider].ts`) and types for provider-specific operations
+   and options.
+2. A test file (`src/providers/[provider].test.ts`)
+3. Types added to `src/providers/types.ts`
+4. Example URLs in `src/demo/examples.json`
+5. Detection domains or paths in `data`
 
-## Testing
+## Core Concepts and Utilities
 
-This project uses [Deno](https://deno.com/) for development, so there is no
-install or build step. To run the tests you need to install Deno, then run:
+### URL Manipulation
 
-```sh
-deno test src --allow-net
+The library provides several utilities for URL handling:
+
+```typescript
+// Convert strings or URLs to URL objects (handles relative URLs)
+const url = toUrl("https://example.com/image.jpg");
+
+// Convert back to string, preserving relativeness
+const urlString = toCanonicalUrlString(url);
+
+// Path manipulation
+const cleanPath = stripLeadingSlash("/path/to/image.jpg");
+const formattedPath = addTrailingSlash("path/to/image");
 ```
 
-This will run all of the unit tests and e2e tests.
+### Operations Handlers
 
-The playground site is in `demo`. To run it locally, run `yarn install` then
-`yarn dev` in the demo directory.
+The most important utility is `createOperationsHandlers`, which creates
+standardized parser and generator functions:
 
-## Image defaults
+```typescript
+const { operationsGenerator, operationsParser } = createOperationsHandlers<
+	ExampleCdnOperations
+>({
+	// Map standard operation names to provider-specific names
+	keyMap: {
+		width: "w",
+		height: "h",
+		quality: "q",
+		format: "fmt",
+	},
+	// Set default values
+	defaults: {
+		quality: 80,
+		format: "auto",
+	},
+	// Normalize format names
+	formatMap: {
+		jpg: "jpeg",
+	},
+	// Define parameter formatting
+	kvSeparator: "=", // key=value
+	paramSeparator: "&", // param1&param2
+});
+```
 
-When generating image URLs, we expect transformers to use the following defaults
-if supported, to ensure consistent behaviour across all CDNs:
+## Step-by-Step Implementation
 
-- Auto format. If the CDN supports it, then it should deliver the best format
-  for the browser using content negotiation. If supported, the priority order
-  should be AVIF, WebP, then the original format.
-- Fit = cover. The image should fill the requested dimensions, cropping if
-  necessary and without distortion. This is the equivalent of the CSS
-  `object-fit: cover` setting. There is an e2e test for this.
-- No upscaling. The image should not be upscaled if it is smaller than the
-  requested dimensions. Instead it should return the largest available size, but
-  maintain the requested aspect ratio.
+Let's create a complete example provider "example-cdn":
 
-## Publishing
+### 1. Define Operations Interface
 
-The module is published to both [deno.land](https://deno.land/x/unpic) and
-[npm](https://www.npmjs.com/package/unpic), with the npm version generated using
-[dnt](https://github.com/denoland/dnt). This is handled automatically by GitHub
-Actions.
+```typescript
+// example-cdn.ts
+import type {
+	Operations,
+	URLExtractor,
+	URLGenerator,
+	URLTransformer,
+} from "../types.ts";
+import {
+	createExtractAndGenerate,
+	createOperationsHandlers,
+	toCanonicalUrlString,
+	toUrl,
+} from "../utils.ts";
+
+// Only add NEW operations specific to your provider
+export interface ExampleCdnOperations extends Operations {
+	// Provider-specific operations
+	specialCrop?: "smart" | "center";
+	blur?: number;
+
+	// DON'T include these - they're in base Operations
+	// width?: number;      ❌
+	// height?: number;     ❌
+	// quality?: number;    ❌
+	// format?: string;     ❌
+}
+
+// Optional provider-specific options
+export interface ExampleCdnOptions {
+	baseUrl?: string;
+}
+```
+
+### 2. Configure Operations Handlers
+
+```typescript
+// Different parameter formatting styles:
+
+// Query parameters: ?width=100&height=200
+const queryStyle = createOperationsHandlers<ExampleCdnOperations>({
+	keyMap: {
+		width: "w",
+		height: "h",
+		quality: "q",
+		format: "fmt",
+	},
+	defaults: {
+		quality: 80,
+	},
+	kvSeparator: "=",
+	paramSeparator: "&",
+});
+
+// Path segments: /w_100/h_200/q_80
+const pathStyle = createOperationsHandlers<ExampleCdnOperations>({
+	keyMap: {
+		width: "w",
+		height: "h",
+		quality: "q",
+		format: "fmt",
+	},
+	defaults: {
+		quality: 80,
+	},
+	kvSeparator: "_",
+	paramSeparator: "/",
+});
+
+// You can also disable parameters:
+const noHeightStyle = createOperationsHandlers<ExampleCdnOperations>({
+	keyMap: {
+		width: "w",
+		height: false, // Height parameter will be removed
+		quality: "q",
+	},
+});
+```
+
+### 3. Implement Core Functions
+
+```typescript
+// Extract operations from existing URL
+export const extract: URLExtractor<"example-cdn"> = (url) => {
+	const parsedUrl = toUrl(url);
+	const operations = operationsParser(parsedUrl);
+	parsedUrl.search = "";
+
+	return {
+		src: toCanonicalUrlString(parsedUrl),
+		operations,
+		options: {
+			baseUrl: parsedUrl.origin,
+		},
+	};
+};
+
+// Generate new URL with operations
+export const generate: URLGenerator<"example-cdn"> = (
+	src,
+	operations,
+	options = {},
+) => {
+	const url = toUrl(src, options.baseUrl);
+	url.search = operationsGenerator(operations);
+	return toCanonicalUrlString(url);
+};
+
+// Transform existing URL with new operations
+export const transform: URLTransformer<"example-cdn"> =
+	createExtractAndGenerate(extract, generate);
+```
+
+### 4. Add Comprehensive Tests
+
+```typescript
+// example-cdn.test.ts
+import { assertEquals } from "jsr:@std/assert";
+import { extract, generate, transform } from "./example-cdn.ts";
+import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
+
+const img = "https://example-cdn.com/image.jpg";
+
+Deno.test("Example CDN", async (t) => {
+	// Test extraction
+	await t.step("should extract operations from URL", () => {
+		const url = `${img}?w=300&h=200&q=80&fmt=webp&specialCrop=smart`;
+		const result = extract(url);
+		assertEquals(result, {
+			src: img,
+			operations: {
+				width: 300,
+				height: 200,
+				quality: 80,
+				format: "webp",
+				specialCrop: "smart",
+			},
+			options: {
+				baseUrl: "https://example-cdn.com",
+			},
+		});
+	});
+
+	// Test URL generation
+	await t.step("should generate URL with operations", () => {
+		const result = generate(img, {
+			width: 400,
+			height: 300,
+			quality: 90,
+			specialCrop: "center",
+		});
+		assertEqualIgnoringQueryOrder(
+			result,
+			`${img}?w=400&h=300&q=90&specialCrop=center`,
+		);
+	});
+
+	// Test transformation
+	await t.step("should transform existing URL", () => {
+		const url = `${img}?w=300&h=200`;
+		const result = transform(url, {
+			width: 500,
+			blur: 5,
+		});
+		assertEqualIgnoringQueryOrder(
+			result,
+			`${img}?w=500&h=200&blur=5`,
+		);
+	});
+
+	// Test error cases
+	await t.step("should handle invalid URLs", () => {
+		const result = extract("invalid-url");
+		assertEquals(result, null);
+	});
+
+	// Test relative URLs
+	await t.step("should handle relative URLs", () => {
+		const result = generate("/image.jpg", { width: 300 });
+		assertEqualIgnoringQueryOrder(
+			result,
+			"/image.jpg?w=300",
+		);
+	});
+});
+```
+
+### 5. Update Types and Add Examples
+
+```typescript
+// types.ts
+export interface ProviderOperations {
+	"example-cdn": ExampleCdnOperations;
+	// ...
+}
+
+export interface ProviderOptions {
+	"example-cdn": ExampleCdnOptions;
+	// ...
+}
+```
+
+```json
+// examples.json
+{
+	"example-cdn": [
+		"Example CDN",
+		"https://example-cdn.com/demo-image.jpg"
+	]
+}
+```
+
+## Parameter Handling Patterns
+
+### Query Parameters vs Path Segments
+
+Providers use different URL patterns for operations:
+
+```typescript
+// Standard query parameters
+// https://example.com/image.jpg?width=100&height=200
+{
+  kvSeparator: "=",
+  paramSeparator: "&"
+}
+
+// Path segments
+// https://example.com/image/w_100/h_200/image.jpg
+{
+  kvSeparator: "_",
+  paramSeparator: "/"
+}
+
+// Custom separators
+// https://example.com/image:w=100,h=200/image.jpg
+{
+  kvSeparator: "=",
+  paramSeparator: ","
+}
+```
+
+## Best Practices
+
+### When to Use Utilities
+
+Use the provided utilities when:
+
+- You need standard parameter mapping
+- Your provider follows common URL patterns
+- You want automatic parameter normalization
+
+### When to Create Custom Solutions
+
+Create custom handlers when:
+
+- Your provider has unique URL structures
+- Parameters have complex interdependencies
+- You need special encoding or encryption
+- The provider requires custom protocols
+
+### Error Handling
+
+Always handle:
+
+- Invalid URLs
+- Missing parameters
+- Malformed parameters
+- Unsupported formats
+- Edge cases
+
+### Type Safety
+
+- Define clear interfaces extending `Operations`
+- Only add provider-specific operations
+- Use proper TypeScript generics
+- Document supported operations
+
+## Testing Requirements
+
+1. Basic Operations
+   - Width/height resizing
+   - Format conversion
+   - Quality settings
+   - Provider-specific features
+
+2. URL Handling
+   - Absolute URLs
+   - Relative URLs
+   - URL with existing parameters
+   - Invalid URLs
+
+3. Parameter Edge Cases
+   - Missing parameters
+   - Invalid values
+   - Parameter combinations
+   - Default values
+
+4. Common Scenarios
+   - Standard transformations
+   - Format conversion
+   - Quality adjustment
+   - Size constraints
+
+## Final Checklist
+
+Before submitting:
+
+- [ ] Implementation complete with proper types
+- [ ] Comprehensive tests covering all features
+- [ ] Types updated in types.ts
+- [ ] Example added to examples.json
+- [ ] Documentation complete
+- [ ] Code formatted
+- [ ] No console.log statements
+- [ ] Edge cases handled
+- [ ] E2E tests passing
+
+## Development Environment
+
+### Deno Setup
+
+This project uses Deno for development. If you haven't already, install Deno
+from https://deno.com.
+
+Basic commands:
+
+```bash
+# Run tests
+deno test
+
+# Run tests with watch mode
+deno test --watch
+
+# Type checking
+deno check
+
+# Format code
+deno fmt
+```
+
+### Running Tests
+
+Tests are written using Deno's built-in test framework. Run them from the
+project root:
+
+```bash
+# Run all tests
+deno test
+
+# Run tests for a specific provider
+deno test src/providers/example-cdn.test.ts
+
+# Run tests with coverage
+deno test --coverage
+```
+
+## Image Defaults
+
+When implementing a provider, follow these default behaviors for consistency
+across CDNs. If the provider does not support a feature then it can be omitted,
+but these are the defaults to aim for so that users have a consistent
+experience.
+
+### Format Handling
+
+- Enable auto format detection/content negotiation when supported
+- When supported, priority order for formats should be. For services that
+  generate images locally, it is ok to prefer WebP over AVIF for performance
+  reasons.
+  1. AVIF
+  2. WebP
+  3. Original format
+
+### Image Fitting
+
+Default to `fit=cover` behavior (equivalent to CSS `object-fit: cover`). This
+means:
+
+- Image should fill requested dimensions
+- Maintain aspect ratio
+- Crop if necessary
+- Avoid distortion
+
+### Size Handling
+
+- _Never_ upscale images beyond their original dimensions
+- Return largest available size when requested size is too large
+- Maintain requested aspect ratio even when size is constrained
+
+### Local Development Server
+
+The project includes a playground application in the `demo` directory for
+testing providers visually:
+
+1. Start the development server:
+
+```bash
+cd demo
+pnpm install
+pnpm dev
+```
+
+2. Open http://localhost:1234
+
+The playground is crucial for testing as it:
+
+- Provides real-world testing with actual CDN endpoints
+- Allows visual verification of image operations
+- Tests responsive image behavior
+- Verifies URL generation patterns
+
+When adding a new provider:
+
+1. Add an example URL to `demo/src/examples.json`
+   - Ideally use a public sample image from the CDN's documentation
+   - If unavailable, use any publicly-accessible image on that CDN
+2. Test comprehensively:
+   - Verify resizing behavior
+   - Check that defaults are properly applied
+   - Test format conversion
+   - Verify responsive behavior
+   - Ensure upscaling limits work
+   - Check aspect ratio handling
+
+### End-to-End Testing
+
+The E2E tests in `e2e.test.ts` verify that providers work with real CDN
+endpoints. They use the images from `examples.json` to test real operations:
+
+```bash
+deno test --allow-net e2e.test.ts
+```
+
+Note: Some CDNs may have rate limits or require authentication.
+
+## Getting Help
+
+If you need help:
+
+1. Review existing provider implementations
+2. Check test files for patterns
+3. Open an issue for discussion
+4. Ask questions in pull requests
+
+Remember that clear, well-tested code is more important than clever solutions.
+Take time to write comprehensive tests and documentation.
