@@ -9,6 +9,7 @@ import { transform as cloudinary } from "./providers/cloudinary.ts";
 import { transform as contentful } from "./providers/contentful.ts";
 import { transform as contentstack } from "./providers/contentstack.ts";
 import { transform as directus } from "./providers/directus.ts";
+import { transform as hygraph } from "./providers/hygraph.ts";
 import { transform as imageengine } from "./providers/imageengine.ts";
 import { transform as imagekit } from "./providers/imagekit.ts";
 import { transform as imgix } from "./providers/imgix.ts";
@@ -46,6 +47,7 @@ const transformerMap: URLTransformerMap = {
 	contentful,
 	contentstack,
 	directus,
+	hygraph,
 	imageengine,
 	imagekit,
 	imgix,

@@ -87,5 +87,9 @@
 	"vercel": [
 		"Vercel",
 		"https://build-output-api-image-optimization.vercel.sh/_vercel/image?url=%2Fimages%2Frio.jpeg"
+	],
+	"hygraph": [
+		"Hygraph",
+		"https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/cm2tr64fx7gvu07n85chjmuno"
 	]
 }

@@ -1,4 +1,4 @@
-import { assertAlmostEquals, assertExists } from "jsr:@std/assert";
+import { assert, assertAlmostEquals, assertExists } from "jsr:@std/assert";
 import examples from "./demo/src/examples.json" with { type: "json" };
 import { getPixels } from "jsr:@unpic/pixels";
 import { transformUrl } from "./src/transform.ts";
@@ -49,7 +49,6 @@ Deno.test("E2E tests", async (t) => {
 				assertExists(image, `Failed to resize ${name} with ${cdn}`);
 
 				const { width, height } = await getPixels(image);
-
 				assertAlmostEquals(width, 100, 1);
 				assertAlmostEquals(height, 50, 1);
 			},

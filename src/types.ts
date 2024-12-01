@@ -55,7 +55,8 @@ export type ImageCdn =
 	| "netlify"
 	| "imagekit"
 	| "uploadcare"
-	| "supabase";
+	| "supabase"
+	| "hygraph";
 
 export type OperationFormatter<T extends Operations = Operations> = (
 	operations: T,
