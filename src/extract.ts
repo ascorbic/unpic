@@ -16,6 +16,7 @@ import { extract as cloudinary } from "./providers/cloudinary.ts";
 import { extract as contentful } from "./providers/contentful.ts";
 import { extract as contentstack } from "./providers/contentstack.ts";
 import { extract as directus } from "./providers/directus.ts";
+import { extract as hygraph } from "./providers/hygraph.ts";
 import { extract as imageengine } from "./providers/imageengine.ts";
 import { extract as imagekit } from "./providers/imagekit.ts";
 import { extract as imgix } from "./providers/imgix.ts";
@@ -43,6 +44,7 @@ export const parsers: URLExtractorMap = {
 	contentful,
 	contentstack,
 	directus,
+	hygraph,
 	imageengine,
 	imagekit,
 	imgix,
