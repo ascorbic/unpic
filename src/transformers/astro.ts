@@ -2,6 +2,7 @@ import { ShouldDelegateUrl, UrlParser, UrlTransformer } from "../types.ts";
 import {
 	getNumericParam,
 	setParamIfDefined,
+	setParamIfUndefined,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -70,6 +71,7 @@ export const transform: UrlTransformer = (
 	setParamIfDefined(url, "w", width, true, true);
 	setParamIfDefined(url, "h", height, true, true);
 	setParamIfDefined(url, "f", format);
+	setParamIfUndefined(url, "fit", "cover");
 
 	const endpoint = cdnOptions?.astro?.endpoint ?? "/_image";
 
