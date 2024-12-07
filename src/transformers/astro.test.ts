@@ -48,6 +48,20 @@ Deno.test("astro", async (t) => {
 			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100",
 		);
 	});
+
+	await t.step("should format a URL with custom endpoint", () => {
+		const result = transform({
+			url: img,
+			width: 200,
+			height: 100,
+			cdnOptions: { astro: { endpoint: "/_image/" } },
+		});
+		assertEquals(
+			result?.toString(),
+			"/_image/?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100",
+		);
+	});
+
 	await t.step("should not set height if not provided", () => {
 		const result = transform({ url: img, width: 200 });
 		assertEquals(
