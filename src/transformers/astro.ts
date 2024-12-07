@@ -58,7 +58,7 @@ export const parse: UrlParser<AstroParams> = (url) => {
 };
 
 export const transform: UrlTransformer = (
-	{ url: originalUrl, width, height, format },
+	{ url: originalUrl, width, height, format, cdnOptions },
 ) => {
 	const parsedUrl = toUrl(originalUrl);
 	const href = toCanonicalUrlString(
@@ -71,5 +71,7 @@ export const transform: UrlTransformer = (
 	setParamIfDefined(url, "h", height, true, true);
 	setParamIfDefined(url, "f", format);
 
-	return `/_image?${url.searchParams.toString()}`;
+	const endpoint = cdnOptions?.astro?.endpoint ?? "/_image";
+
+	return `${endpoint}?${url.searchParams.toString()}`;
 };
