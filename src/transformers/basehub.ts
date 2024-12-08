@@ -9,7 +9,7 @@ import {
 export const parse: UrlParser<{ fit?: string }> = (url) => {
 	const parsedUrl = toUrl(url);
 
-	const fit = parsedUrl.searchParams.get("fit") || 'cover';
+	const fit = parsedUrl.searchParams.get("fit") || "cover";
 	const width = getNumericParam(parsedUrl, "w");
 	const height = getNumericParam(parsedUrl, "h");
 	const quality = getNumericParam(parsedUrl, "q");
@@ -32,7 +32,7 @@ export const transform: UrlTransformer = (
 
 	setParamIfDefined(url, "w", width, true, true);
 	setParamIfDefined(url, "h", height, true, true);
-	setParamIfDefined(url, "format", format);
+	setParamIfDefined(url, "format", format === "jpg" ? "jpeg" : format);
 
 	if (width && height) {
 		setParamIfUndefined(url, "fit", "cover");
