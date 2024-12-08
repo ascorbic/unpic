@@ -45,23 +45,37 @@ Deno.test("astro", async (t) => {
 		});
 		assertEquals(
 			result?.toString(),
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=cover",
 		);
 	});
+
+	await t.step("should format a URL with custom endpoint", () => {
+		const result = transform({
+			url: img,
+			width: 200,
+			height: 100,
+			cdnOptions: { astro: { endpoint: "/_image/" } },
+		});
+		assertEquals(
+			result?.toString(),
+			"/_image/?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=cover",
+		);
+	});
+
 	await t.step("should not set height if not provided", () => {
 		const result = transform({ url: img, width: 200 });
 		assertEquals(
 			result?.toString(),
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&fit=cover",
 		);
 	});
 	await t.step("should delete height if not set", () => {
 		const url = new URL(img);
-		url.searchParams.set("h", "100");
+		url.searchParams.set("h", "100&fit=cover");
 		const result = transform({ url, width: 200 });
 		assertEquals(
 			result?.toString(),
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&fit=cover",
 		);
 	});
 
@@ -73,7 +87,7 @@ Deno.test("astro", async (t) => {
 		});
 		assertEquals(
 			result?.toString(),
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=201&h=100",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=201&h=100&fit=cover",
 		);
 	});
 
@@ -86,7 +100,7 @@ Deno.test("astro", async (t) => {
 		});
 		assertEquals(
 			result?.toString(),
-			"/_image?href=%2Fstatic%2Fmoose.png&w=100&h=200&f=webp",
+			"/_image?href=%2Fstatic%2Fmoose.png&w=100&h=200&f=webp&fit=cover",
 		);
 	});
 });

@@ -2,6 +2,7 @@ import { ShouldDelegateUrl, UrlParser, UrlTransformer } from "../types.ts";
 import {
 	getNumericParam,
 	setParamIfDefined,
+	setParamIfUndefined,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -58,7 +59,7 @@ export const parse: UrlParser<AstroParams> = (url) => {
 };
 
 export const transform: UrlTransformer = (
-	{ url: originalUrl, width, height, format },
+	{ url: originalUrl, width, height, format, cdnOptions },
 ) => {
 	const parsedUrl = toUrl(originalUrl);
 	const href = toCanonicalUrlString(
@@ -70,6 +71,9 @@ export const transform: UrlTransformer = (
 	setParamIfDefined(url, "w", width, true, true);
 	setParamIfDefined(url, "h", height, true, true);
 	setParamIfDefined(url, "f", format);
+	setParamIfUndefined(url, "fit", "cover");
 
-	return `/_image?${url.searchParams.toString()}`;
+	const endpoint = cdnOptions?.astro?.endpoint ?? "/_image";
+
+	return `${endpoint}?${url.searchParams.toString()}`;
 };

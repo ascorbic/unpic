@@ -1,6 +1,6 @@
 {
 	"name": "@unpic/lib",
-	"version": "3.20.0",
+	"version": "3.22.0",
 	"exports": "./mod.ts",
 	"tasks": {
 		"build:npm": "deno run --allow-all scripts/build_npm.ts"
