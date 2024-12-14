@@ -20,6 +20,22 @@ await build({
 			path: "./src/async.ts",
 			name: "./async",
 		},
+		{
+			path: "./src/detect.ts",
+			name: "./detect",
+		},
+		{
+			path: "./src/extract.ts",
+			name: "./extract",
+		},
+		{
+			path: "./src/types.ts",
+			name: "./types",
+		},
+		{
+			path: "./src/transform.ts",
+			name: "./transform",
+		},
 		...entry,
 	],
 	outDir: "./npm",

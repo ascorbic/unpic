@@ -1,7 +1,7 @@
 import domains from "../data/domains.json" with { type: "json" };
 import subdomains from "../data/subdomains.json" with { type: "json" };
 import paths from "../data/paths.json" with { type: "json" };
-import { ImageCdn } from "./types.ts";
+import type { ImageCdn } from "./types.ts";
 import { toUrl } from "./utils.ts";
 
 const cdnDomains = new Map(Object.entries(domains)) as Map<string, ImageCdn>;

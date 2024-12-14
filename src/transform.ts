@@ -25,10 +25,10 @@ import { transform as supabase } from "./providers/supabase.ts";
 import { transform as uploadcare } from "./providers/uploadcare.ts";
 import { transform as vercel } from "./providers/vercel.ts";
 import { transform as wordpress } from "./providers/wordpress.ts";
-import {
+import type {
 	ImageCdn,
-	type URLTransformer,
-	type UrlTransformerOptions,
+	URLTransformer,
+	UrlTransformerOptions,
 } from "./types.ts";
 import type {
 	ProviderOperations,

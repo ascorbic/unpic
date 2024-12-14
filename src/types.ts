@@ -1,5 +1,5 @@
 import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
-
+export type { ProviderOperations, ProviderOptions };
 /**
  * Options to transform an image URL
  */
