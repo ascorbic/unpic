@@ -139,7 +139,12 @@ export type URLTransformer<
 		operations: ProviderOperations[TCDN],
 		options?: ProviderOptions[TCDN],
 	) => string;
-
+export type TransformerFunction<
+	TOperations extends Operations,
+	TOptions,
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (src: string | URL, operations: TOperations, options?: TOptions) => string;
 export type URLExtractor<
 	TCDN extends ImageCdn = ImageCdn,
 > = (
