@@ -35,4 +35,4 @@ jobs:
       - name: Build package
         run: deno task build:npm
 
-      - run: npx pkg-pr-new publish --compact './packages/*'
+      - run: npx pkg-pr-new publish --compact ./npm
