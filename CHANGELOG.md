@@ -46,6 +46,20 @@ This is a major release with several breaking changes. See
     - `ProviderConfig`
 # Changelog
 
+## [3.22.0](https://github.com/ascorbic/unpic/compare/v3.21.0...v3.22.0) (2024-12-07)
+
+
+### Features
+
+* **astro:** support cropping ([#150](https://github.com/ascorbic/unpic/issues/150)) ([7a7fba6](https://github.com/ascorbic/unpic/commit/7a7fba698507dfa394e4f24b880210854604731f))
+
+## [3.21.0](https://github.com/ascorbic/unpic/compare/v3.20.0...v3.21.0) (2024-12-07)
+
+
+### Features
+
+* **astro:** support custom endpoint ([#148](https://github.com/ascorbic/unpic/issues/148)) ([a976f89](https://github.com/ascorbic/unpic/commit/a976f891b5a5d79365e089d46424cc805cd79d24))
+
 ## [3.20.0](https://github.com/ascorbic/unpic/compare/v3.19.0...v3.20.0) (2024-11-11)
 
 
