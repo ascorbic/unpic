@@ -2,26 +2,25 @@ name: Publish Approved Pull Requests
 on:
   pull_request_review:
     types: [submitted]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   check:
-    # First, trigger a permissions check on the user approving the pull request.
-    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     outputs:
-      has-permissions: ${{ steps.checkPermissions.outputs.require-result }}
+      has-permissions: ${{ steps.checkPermissions.outputs.require-result || github.event.pull_request.user.login == github.repository_owner }}
     steps:
       - name: Check permissions
         id: checkPermissions
+        # Only run permissions check if this is triggered by a review
+        if: github.event_name == 'pull_request_review'
         uses: actions-cool/check-user-permission@v2
         with:
-          # In this example, the approver must have the write access
-          # to the repository to trigger the package preview.
           require: "write"
 
   publish:
     needs: check
-    # Publish the preview package only if the permissions check passed.
     if: needs.check.outputs.has-permissions == 'true'
     runs-on: ubuntu-latest
     steps:
