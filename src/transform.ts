@@ -25,6 +25,7 @@ import { transform as imagekit } from "./transformers/imagekit.ts";
 import { transform as uploadcare } from "./transformers/uploadcare.ts";
 import { transform as supabase } from "./transformers/supabase.ts";
 import { transform as hygraph } from "./transformers/hygraph.ts";
+import { transform as basehub } from "./transformers/basehub.ts";
 import { ImageCdn, UrlTransformer } from "./types.ts";
 import { getCanonicalCdnForUrl } from "./canonical.ts";
 
@@ -55,6 +56,7 @@ export const getTransformer = (cdn: ImageCdn) => ({
 	uploadcare,
 	supabase,
 	hygraph,
+	basehub,
 }[cdn]);
 
 /**
