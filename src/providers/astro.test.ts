@@ -40,16 +40,55 @@ Deno.test("astro generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=cover",
 		);
 	});
+
+	await t.step("should format a URL with a custom endpoint", () => {
+		const result = generate(img, {
+			width: 200,
+			height: 100,
+		}, {
+			endpoint: "/custom",
+		});
+		assertEqualIgnoringQueryOrder(
+			result,
+			"/custom?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=cover",
+		);
+	});
+
+	await t.step("should format a URL with a baseURL", () => {
+		const result = generate(img, {
+			width: 200,
+			height: 100,
+		}, {
+			baseUrl: "http://example.com",
+		});
+		assertEqualIgnoringQueryOrder(
+			result,
+			"http://example.com/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=cover",
+		);
+	});
+
 	await t.step("should not set height if not provided", () => {
 		const result = generate(img, { width: 200 }, {
 			baseUrl: "http://example.com",
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"http://example.com/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200",
+			"http://example.com/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&fit=cover",
+		);
+	});
+
+	await t.step("should override the default fit", () => {
+		const result = generate(img, {
+			width: 200,
+			height: 100,
+			fit: "contain",
+		});
+		assertEqualIgnoringQueryOrder(
+			result,
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=200&h=100&fit=contain",
 		);
 	});
 
@@ -60,7 +99,7 @@ Deno.test("astro generate", async (t) => {
 		}, {});
 		assertEqualIgnoringQueryOrder(
 			result?.toString(),
-			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=201&h=100",
+			"/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=201&h=100&fit=cover",
 		);
 	});
 
@@ -72,7 +111,7 @@ Deno.test("astro generate", async (t) => {
 		}, {});
 		assertEqualIgnoringQueryOrder(
 			result?.toString(),
-			"/_image?href=%2Fstatic%2Fmoose.png&w=100&h=200&f=webp",
+			"/_image?href=%2Fstatic%2Fmoose.png&w=100&h=200&f=webp&fit=cover",
 		);
 	});
 });
@@ -85,7 +124,7 @@ Deno.test("astro transform", async (t) => {
 		}, {});
 		assertEqualIgnoringQueryOrder(
 			transformed,
-			"http://example.com/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=400&h=300&q=80&f=webp",
+			"http://example.com/_image?href=https%3A%2F%2Fimages.ctfassets.net%2Faaaa%2Fxxxx%2Fyyyy%2Fhow-to-wow-a-customer.jpg&w=400&h=300&q=80&f=webp&fit=cover",
 		);
 	});
 });

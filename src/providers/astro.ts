@@ -1,4 +1,4 @@
-import {
+import type {
 	ImageFormat,
 	Operations,
 	URLExtractor,
@@ -12,15 +12,19 @@ import {
 	toUrl,
 } from "../utils.ts";
 
+const DEFAULT_ENDPOINT = "/_image";
+
 export interface AstroOperations extends Operations {
 	w?: number;
 	h?: number;
 	f?: ImageFormat;
 	q?: number;
+	fit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 }
 
 export interface AstroOptions {
 	baseUrl?: string;
+	endpoint?: string;
 }
 
 const { operationsParser, operationsGenerator } = createOperationsHandlers<
@@ -32,6 +36,9 @@ const { operationsParser, operationsGenerator } = createOperationsHandlers<
 		height: "h",
 		quality: "q",
 	},
+	defaults: {
+		fit: "cover",
+	},
 });
 
 export const generate: URLGenerator<"astro"> = (
@@ -40,7 +47,9 @@ export const generate: URLGenerator<"astro"> = (
 	options,
 ) => {
 	const url = toUrl(
-		`${stripTrailingSlash(options?.baseUrl ?? "")}/_image`,
+		`${stripTrailingSlash(options?.baseUrl ?? "")}${
+			options?.endpoint ?? DEFAULT_ENDPOINT
+		}`,
 	);
 	const operations = operationsGenerator(modifiers);
 	url.search = operations;
@@ -71,7 +80,7 @@ export const transform: URLTransformer<"astro"> = (
 	options = {},
 ) => {
 	const url = toUrl(src);
-	if (url.pathname !== "/_image") {
+	if (url.pathname !== (options?.endpoint ?? DEFAULT_ENDPOINT)) {
 		return generate(src, operations, options);
 	}
 	const base = extract(src);
