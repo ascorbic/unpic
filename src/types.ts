@@ -19,9 +19,11 @@ export interface UrlTransformerOptions<TCDN extends ImageCdn = ImageCdn>
 	fallback?: TCDN;
 }
 
-export type CdnOptions = {
-	[key in ImageCdn]?: Record<string, unknown>;
-};
+/**
+ * @deprecated Use `ProviderOptions` instead
+ */
+export type CdnOptions = ProviderOptions;
+
 export interface UrlGeneratorOptions<TParams = Record<string, string>> {
 	base: string | URL;
 	width?: number;
