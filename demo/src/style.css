@@ -1,129 +1,129 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 html,
 body {
-	font: 16px/1.21 "Helvetica Neue", arial, sans-serif;
-	font-weight: 400;
+  font: 16px/1.21 "Helvetica Neue", arial, sans-serif;
+  font-weight: 400;
 }
 
 body {
-	background: linear-gradient(180deg, white 0%, rgba(216, 216, 237, 1) 81%)
-		no-repeat center center fixed;
-	background-size: cover;
+  background: linear-gradient(180deg, white 0%, rgba(216, 216, 237, 1) 81%)
+    no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1,
 .instructions {
-	text-align: center;
+  text-align: center;
 }
 
 .example {
-	grid-area: 1 / 1 / 1 / 3;
+  grid-area: 1 / 1 / 1 / 3;
 }
 
 .result {
-	grid-area: 3 / 1 / 4 / 5;
+  grid-area: 3 / 1 / 4 / 5;
 }
 
 .result input {
-	font-size: 14px;
-	color: #666;
+  font-size: 14px;
+  color: #666;
 }
 
 details {
-	grid-area: 4 / 1 / 4 / 4;
+  grid-area: 4 / 1 / 4 / 4;
 }
 
 .tools {
-	background-color: white;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-column-gap: 10px;
-	grid-row-gap: 15px;
-	max-width: 800px;
-	margin: 2em auto;
-	padding: 1.5em;
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 1.5em;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 .tools > div,
 details {
-	justify-content: stretch;
-	display: grid;
+  justify-content: stretch;
+  display: grid;
 }
 
 label {
-	display: block;
+  display: block;
 }
 
 label,
 summary {
-	text-transform: uppercase;
-	font-size: 12px;
-	font-weight: 700;
-	margin-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 5px;
 }
 
 .url {
-	grid-area: 1 / 3 / 2 / 5;
+  grid-area: 1 / 3 / 2 / 5;
 }
 
 .imagePanel {
-	display: grid;
-	place-items: center;
+  display: grid;
+  place-items: center;
 }
 
 .imagePanel img {
-	object-fit: cover;
+  object-fit: cover;
 }
 
 .code {
-	overflow: auto;
+  overflow: auto;
 }
 
 input,
 select {
-	font-size: 18px;
-	padding: 5px 10px;
-	border: 2px #898 solid;
-	border-radius: 2px;
-	justify-self: stretch;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: 2px #898 solid;
+  border-radius: 2px;
+  justify-self: stretch;
 }
 
 summary {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 details {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 @media (max-width: 850px) {
-	.tools {
-		grid-template-columns: 2fr;
-		margin: 0;
-		box-shadow: none;
-		padding: 5px;
-	}
+  .tools {
+    grid-template-columns: 2fr;
+    margin: 0;
+    box-shadow: none;
+    padding: 5px;
+  }
 
-	.tools > * {
-		grid-area: auto;
-	}
+  .tools > * {
+    grid-area: auto;
+  }
 
-	.tools > div,
-	details {
-		padding: 0;
-	}
+  .tools > div,
+  details {
+    padding: 0;
+  }
 
-	details {
-		grid-area: auto;
-		overflow: auto;
-		font-size: 12px;
-	}
+  details {
+    grid-area: auto;
+    overflow: auto;
+    font-size: 12px;
+  }
 }
 
 img {
-	border: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
