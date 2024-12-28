@@ -367,6 +367,13 @@ export function paramToBoolean(
 	}
 }
 
+const removeUndefined = <T extends object>(
+	obj: T,
+): Partial<T> =>
+	Object.fromEntries(
+		Object.entries(obj).filter(([, value]) => value !== undefined),
+	) as Partial<T>;
+
 export function createExtractAndGenerate<
 	TCDN extends ImageCdn,
 >(
@@ -384,7 +391,7 @@ export function createExtractAndGenerate<
 		}
 		return generate(base.src, {
 			...base.operations,
-			...operations,
+			...removeUndefined(operations),
 		}, {
 			// deno-lint-ignore no-explicit-any
 			...(base as any).options,

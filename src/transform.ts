@@ -82,8 +82,16 @@ export function getTransformerForCdn<TCDN extends ImageCdn>(
  * If the URL is not from a known image CDN it returns undefined.
  */
 export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
-	{ url, provider, cdn: cdnOption, fallback, width, height, format, quality }:
-		UrlTransformerOptions<TCDN>,
+	{
+		url,
+		provider,
+		cdn: cdnOption,
+		fallback,
+		width,
+		height,
+		format,
+		quality,
+	}: UrlTransformerOptions<TCDN>,
 	providerOperations?: Partial<ProviderOperations>,
 	providerOptions?: Partial<ProviderOptions>,
 ): string | undefined {
@@ -93,7 +101,6 @@ export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
 	if (!cdn) {
 		return undefined;
 	}
-
 	return getTransformerForCdn(cdn)?.(url, {
 		...{ width, height, format, quality } as ProviderOperations[TCDN],
 		...providerOperations?.[cdn],
