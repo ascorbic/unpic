@@ -6,7 +6,7 @@ import {
 } from "../types.ts";
 
 const hygraphRegex =
-	/https:\/\/(?<region>[a-z0-9-]+)\.graphassets\.com\/(?<envId>[a-z0-9]+)(?:\/(?<transformations>.*?))?\/(?<handle>[a-z0-9]+)$/;
+	/https:\/\/(?<region>[a-z0-9-]+)\.graphassets\.com\/(?<envId>[a-zA-Z0-9]+)(?:\/(?<transformations>.*?))?\/(?<handle>[a-zA-Z0-9]+)$/;
 
 export interface HygraphParams {
 	region?: string;
