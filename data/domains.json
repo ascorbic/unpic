@@ -11,5 +11,6 @@
 	"assets.caisy.io": "bunny",
 	"images.contentstack.io": "contentstack",
 	"ucarecdn.com": "uploadcare",
-	"imagedelivery.net": "cloudflare_images"
+	"imagedelivery.net": "cloudflare_images",
+	"assets.basehub.com": "basehub"
 }

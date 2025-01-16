@@ -117,6 +117,7 @@ is not auto-detected.
 - Storyblok
 - Vercel / Next.js
 - WordPress.com and Jetpack Site Accelerator
+- BaseHub
 
 ## Delegated URLs
 

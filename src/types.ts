@@ -101,6 +101,7 @@ export type ImageCdn =
 	| "imagekit"
 	| "uploadcare"
 	| "supabase"
-	| "hygraph";
+	| "hygraph"
+	| "basehub";
 
 export type SupportedImageCdn = ImageCdn;
