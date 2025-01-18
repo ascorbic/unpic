@@ -61,7 +61,7 @@ export type ImageCdn =
 	| "hygraph";
 
 export const SupportedProviders = {
-	astro: "Astro",
+	astro: "Astro image service",
 	"builder.io": "Builder.io",
 	bunny: "Bunny.net",
 	cloudflare: "Cloudflare",
@@ -78,8 +78,8 @@ export const SupportedProviders = {
 	ipx: "IPX",
 	keycdn: "KeyCDN",
 	"kontent.ai": "Kontent.ai",
-	netlify: "Netlify",
-	nextjs: "Next.js",
+	netlify: "Netlify Image CDN",
+	nextjs: "Next.js image service",
 	scene7: "Adobe Dynamic Media / Scene7",
 	shopify: "Shopify",
 	storyblok: "Storyblok",
