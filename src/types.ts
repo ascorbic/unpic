@@ -60,6 +60,35 @@ export type ImageCdn =
 	| "supabase"
 	| "hygraph";
 
+export const SupportedProviders = {
+	astro: "Astro",
+	"builder.io": "Builder.io",
+	bunny: "Bunny.net",
+	cloudflare: "Cloudflare",
+	cloudflare_images: "Cloudflare Images",
+	cloudimage: "Cloudimage",
+	cloudinary: "Cloudinary",
+	contentful: "Contentful",
+	contentstack: "Contentstack",
+	directus: "Directus",
+	hygraph: "Hygraph",
+	imageengine: "ImageEngine",
+	imagekit: "ImageKit",
+	imgix: "Imgix",
+	ipx: "IPX",
+	keycdn: "KeyCDN",
+	"kontent.ai": "Kontent.ai",
+	netlify: "Netlify",
+	nextjs: "Next.js",
+	scene7: "Adobe Dynamic Media / Scene7",
+	shopify: "Shopify",
+	storyblok: "Storyblok",
+	supabase: "Supabase",
+	uploadcare: "Uploadcare",
+	vercel: "Vercel",
+	wordpress: "WordPress",
+} satisfies Record<ImageCdn, string>;
+
 export type OperationFormatter<T extends Operations = Operations> = (
 	operations: T,
 ) => string;

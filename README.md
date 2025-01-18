@@ -204,22 +204,31 @@ const url = transform(
 
 ## Supported Providers
 
-- Adobe Dynamic Media (Scene7)
-- Builder.io
-- Bunny.net, including caisy
-- Cloudflare
-- Contentful
-- Contentstack
-- Cloudinary
-- Directus
-- ImageEngine
-- Imgix, including Unsplash, DatoCMS, Sanity and Prismic
-- Kontent.ai
-- Shopify
-- Storyblok
-- Supabase
-- Vercel / Next.js
-- WordPress.com and Jetpack Site Accelerator
+- Adobe Dynamic Media (Scene7) `scene7`
+- Astro image service `astro`
+- Builder.io `builder.io`
+- Bunny.net, including caisy `bunny`
+- Cloudflare `cloudflare` and `cloudflare_images`
+- Cloudimage `cloudimage`
+- Cloudinary `cloudinary`
+- Contentful `contentful`
+- Contentstack `contentstack`
+- Directus `directus`
+- Hygraph `hygraph`
+- ImageEngine `imageengine`
+- ImageKit `imagekit`
+- Imgix, including Unsplash, DatoCMS, Sanity and Prismic `imgix`
+- IPX `ipx`
+- KeyCDN `keycdn`
+- Kontent.ai `kontent.ai`
+- Netlify `netlify`
+- Next.js image service `nextjs`
+- Shopify `shopify`
+- Storyblok `storyblok`
+- Supabase `supabase`
+- Uploadcare `uploadcare`
+- Vercel `vercel`
+- WordPress.com and Jetpack Site Accelerator `wordpress`
 
 ## FAQs
 
