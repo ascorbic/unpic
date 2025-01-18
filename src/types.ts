@@ -87,7 +87,7 @@ export const SupportedProviders = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
-} satisfies Record<ImageCdn, string>;
+} as const satisfies Record<ImageCdn, string>;
 
 export type OperationFormatter<T extends Operations = Operations> = (
 	operations: T,
