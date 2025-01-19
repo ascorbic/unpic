@@ -1,7 +1,9 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
-## 4.0.0
+## [4.0.0](https://github.com/ascorbic/unpic/compare/v3.22.0...v4.0.0) (2025-01-19)
+
+### ⚠ BREAKING CHANGES
 
 This is a major release with several breaking changes. See
 [UPGRADING.md](UPGRADING.md) for a detailed migration guide.
@@ -44,7 +46,6 @@ This is a major release with several breaking changes. See
     - `FormatMap`
     - `ImageFormat`
     - `ProviderConfig`
-# Changelog
 
 ## [3.22.0](https://github.com/ascorbic/unpic/compare/v3.21.0...v3.22.0) (2024-12-07)
 

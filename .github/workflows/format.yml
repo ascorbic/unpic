@@ -20,7 +20,7 @@ jobs:
         with:
           deno-version: vx.x.x
       - name: Typecheck
-        run: deno fmt
+        run: deno fmt src
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
