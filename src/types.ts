@@ -60,7 +60,7 @@ export type ImageCdn =
 	| "supabase"
 	| "hygraph";
 
-export const SupportedProviders = {
+export const SupportedProviders: Record<ImageCdn, string> = {
 	astro: "Astro image service",
 	"builder.io": "Builder.io",
 	bunny: "Bunny.net",
@@ -87,7 +87,7 @@ export const SupportedProviders = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
-} as const satisfies Record<ImageCdn, string>;
+} as const;
 
 export type OperationFormatter<T extends Operations = Operations> = (
 	operations: T,
