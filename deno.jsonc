@@ -1,6 +1,6 @@
 {
 	"name": "@unpic/lib",
-	"version": "3.20.0",
+	"version": "4.0.0",
 	"exports": {
 		".": "./mod.ts",
 		"./async": "./src/async.ts",
