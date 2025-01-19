@@ -29,6 +29,7 @@
 	"[javascriptreact]": {
 		"editor.defaultFormatter": "denoland.vscode-deno"
 	},
+	"deno.config": "deno.jsonc",
 	"prettier.enable": false,
 	"editor.defaultFormatter": "denoland.vscode-deno"
 }

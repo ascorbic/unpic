@@ -1,102 +1,108 @@
-import { getImageCdnForUrl } from "./detect.ts";
-import { transform as contentful } from "./transformers/contentful.ts";
-import { transform as builderio } from "./transformers/builder.io.ts";
-import { transform as imgix } from "./transformers/imgix.ts";
-import { transform as shopify } from "./transformers/shopify.ts";
-import { transform as wordpress } from "./transformers/wordpress.ts";
-import { transform as cloudimage } from "./transformers/cloudimage.ts";
-import { transform as cloudinary } from "./transformers/cloudinary.ts";
-import { transform as cloudflare } from "./transformers/cloudflare.ts";
-import { transform as bunny } from "./transformers/bunny.ts";
-import { transform as storyblok } from "./transformers/storyblok.ts";
-import { transform as kontentai } from "./transformers/kontent.ai.ts";
-import { transform as vercel } from "./transformers/vercel.ts";
-import { transform as nextjs } from "./transformers/nextjs.ts";
-import { transform as scene7 } from "./transformers/scene7.ts";
-import { transform as keycdn } from "./transformers/keycdn.ts";
-import { transform as directus } from "./transformers/directus.ts";
-import { transform as imageengine } from "./transformers/imageengine.ts";
-import { transform as contentstack } from "./transformers/contentstack.ts";
-import { transform as cloudflareImages } from "./transformers/cloudflare_images.ts";
-import { transform as ipx } from "./transformers/ipx.ts";
-import { transform as astro } from "./transformers/astro.ts";
-import { transform as netlify } from "./transformers/netlify.ts";
-import { transform as imagekit } from "./transformers/imagekit.ts";
-import { transform as uploadcare } from "./transformers/uploadcare.ts";
-import { transform as supabase } from "./transformers/supabase.ts";
-import { transform as hygraph } from "./transformers/hygraph.ts";
-import { ImageCdn, UrlTransformer } from "./types.ts";
-import { getCanonicalCdnForUrl } from "./canonical.ts";
+import { getProviderForUrl } from "./detect.ts";
+import { transform as astro } from "./providers/astro.ts";
+import { transform as builderio } from "./providers/builder.io.ts";
+import { transform as bunny } from "./providers/bunny.ts";
+import { transform as cloudflare } from "./providers/cloudflare.ts";
+import { transform as cloudflare_images } from "./providers/cloudflare_images.ts";
+import { transform as cloudimage } from "./providers/cloudimage.ts";
+import { transform as cloudinary } from "./providers/cloudinary.ts";
+import { transform as contentful } from "./providers/contentful.ts";
+import { transform as contentstack } from "./providers/contentstack.ts";
+import { transform as directus } from "./providers/directus.ts";
+import { transform as hygraph } from "./providers/hygraph.ts";
+import { transform as imageengine } from "./providers/imageengine.ts";
+import { transform as imagekit } from "./providers/imagekit.ts";
+import { transform as imgix } from "./providers/imgix.ts";
+import { transform as ipx } from "./providers/ipx.ts";
+import { transform as keycdn } from "./providers/keycdn.ts";
+import { transform as kontentai } from "./providers/kontent.ai.ts";
+import { transform as netlify } from "./providers/netlify.ts";
+import { transform as nextjs } from "./providers/nextjs.ts";
+import { transform as scene7 } from "./providers/scene7.ts";
+import { transform as shopify } from "./providers/shopify.ts";
+import { transform as storyblok } from "./providers/storyblok.ts";
+import { transform as supabase } from "./providers/supabase.ts";
+import { transform as uploadcare } from "./providers/uploadcare.ts";
+import { transform as vercel } from "./providers/vercel.ts";
+import { transform as wordpress } from "./providers/wordpress.ts";
+import type {
+	ImageCdn,
+	URLTransformer,
+	UrlTransformerOptions,
+} from "./types.ts";
+import type {
+	ProviderOperations,
+	ProviderOptions,
+	URLTransformerMap,
+} from "./providers/types.ts";
 
-export const getTransformer = (cdn: ImageCdn) => ({
-	imgix,
-	contentful,
+const transformerMap: URLTransformerMap = {
+	astro,
 	"builder.io": builderio,
-	shopify,
-	wordpress,
+	bunny,
+	cloudflare,
+	cloudflare_images,
 	cloudimage,
 	cloudinary,
-	bunny,
-	storyblok,
-	cloudflare,
-	vercel,
+	contentful,
+	contentstack,
+	directus,
+	hygraph,
+	imageengine,
+	imagekit,
+	imgix,
+	ipx,
+	keycdn,
+	"kontent.ai": kontentai,
+	netlify,
 	nextjs,
 	scene7,
-	"kontent.ai": kontentai,
-	keycdn,
-	directus,
-	imageengine,
-	contentstack,
-	"cloudflare_images": cloudflareImages,
-	ipx,
-	astro,
-	netlify,
-	imagekit,
-	uploadcare,
+	shopify,
+	storyblok,
 	supabase,
-	hygraph,
-}[cdn]);
-
+	uploadcare,
+	vercel,
+	wordpress,
+} as const;
 /**
  * Returns a transformer function if the given CDN is supported
  */
-export const getTransformerForCdn = (
-	cdn: ImageCdn | false | undefined,
-): UrlTransformer | undefined => {
+
+export function getTransformerForCdn<TCDN extends ImageCdn>(
+	cdn: TCDN | false | undefined,
+): URLTransformer<TCDN> | undefined {
 	if (!cdn) {
 		return undefined;
 	}
-	return getTransformer(cdn);
-};
+	return transformerMap[cdn];
+}
 
 /**
  * Transforms an image URL to a new URL with the given options.
  * If the URL is not from a known image CDN it returns undefined.
  */
-export const transformUrl: UrlTransformer = (options) => {
-	const cdn = options?.cdn ?? getImageCdnForUrl(options.url);
-	// Default to recursive
-	if (!(options.recursive ?? true)) {
-		return getTransformerForCdn(cdn)?.(options);
-	}
-	const canonical = getCanonicalCdnForUrl(
-		options.url,
-		cdn,
-	);
-	if (!canonical || !canonical.cdn) {
+export function transformUrl<TCDN extends ImageCdn = ImageCdn>(
+	{
+		url,
+		provider,
+		cdn: cdnOption,
+		fallback,
+		width,
+		height,
+		format,
+		quality,
+	}: UrlTransformerOptions<TCDN>,
+	providerOperations?: Partial<ProviderOperations>,
+	providerOptions?: Partial<ProviderOptions>,
+): string | undefined {
+	const cdn = provider || cdnOption ||
+		getProviderForUrl(url) as TCDN || fallback;
+
+	if (!cdn) {
 		return undefined;
 	}
-	return getTransformer(canonical.cdn)?.({
-		...options,
-		url: canonical.url,
-	});
-};
-
-/**
- * Returns a transformer function if the given URL is from a known image CDN
- *
- * @deprecated Use `getCanonicalCdnForUrl` and `getTransformerForCdn` instead
- */
-export const getTransformerForUrl = (
-	url: string | URL,
-): UrlTransformer | undefined => getTransformerForCdn(getImageCdnForUrl(url));
+	return getTransformerForCdn(cdn)?.(url, {
+		...{ width, height, format, quality } as ProviderOperations[TCDN],
+		...providerOperations?.[cdn],
+	}, providerOptions?.[cdn] ?? {} as ProviderOptions[TCDN]);
+}

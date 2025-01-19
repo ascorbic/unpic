@@ -1,78 +1,35 @@
+import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
+export type { ProviderOperations, ProviderOptions };
 /**
  * Options to transform an image URL
  */
-export interface UrlTransformerOptions {
-	/** The original URL of the image */
+export interface UrlTransformerOptions<TCDN extends ImageCdn = ImageCdn>
+	extends
+		Pick<
+			ProviderOperations[TCDN],
+			"width" | "height" | "format" | "quality"
+		> {
+	/** The image URL to transform */
 	url: string | URL;
-	/** The desired width of the image */
-	width?: number;
-	/** The desired height of the image */
-	height?: number;
-	/** The desired format of the image. Default is auto-detect */
-	format?: string;
-	/** Recursively find the the canonical CDN for a source image. Default is true */
-	recursive?: boolean;
-	/** Specify a CDN rather than auto-detecting */
-	cdn?: ImageCdn;
-	/** CDN-specific options. */
-	cdnOptions?: CdnOptions;
-}
-
-export interface CanonicalCdnUrl {
-	/** The source image URL */
-	url: string | URL;
-	/** The CDN to use */
-	cdn: ImageCdn;
+	/** Specify a provider rather than auto-detecting */
+	provider?: TCDN;
+	/** @deprecated Use `provider` */
+	cdn?: TCDN;
+	/** Provider to use if none matches */
+	fallback?: TCDN;
 }
 
 /**
- * Asks a CDN if there is a different canonical CDN for the given URL
- * @param url The URL to check
- * @returns The canonical CDN URL, or false if the given CDN will handle it itself
+ * @deprecated Use `ProviderOptions` instead
  */
-export interface ShouldDelegateUrl {
-	(url: string | URL): CanonicalCdnUrl | false;
-}
+export type CdnOptions = ProviderOptions;
 
-export type CdnOptions = {
-	[key in ImageCdn]?: Record<string, unknown>;
-};
 export interface UrlGeneratorOptions<TParams = Record<string, string>> {
 	base: string | URL;
 	width?: number;
 	height?: number;
 	format?: string;
 	params?: TParams;
-}
-
-export interface UrlGenerator<TParams = Record<string, string>> {
-	(options: UrlGeneratorOptions<TParams>): URL | string;
-}
-
-export interface ParsedUrl<TParams = Record<string, string>> {
-	/** The URL of the image with no transforms */
-	base: string;
-	/** The width of the image */
-	width?: number;
-	/** The height of the image */
-	height?: number;
-	/** The format of the image */
-	format?: string;
-	/** Other CDN-specific parameters */
-	params?: TParams;
-	cdn: ImageCdn;
-}
-/**
- * Parse an image URL into its components
- */
-export interface UrlTransformer {
-	(options: UrlTransformerOptions): string | URL | undefined;
-}
-
-export interface UrlParser<
-	TParams = Record<string, unknown>,
-> {
-	(url: string | URL): ParsedUrl<TParams>;
 }
 
 export type ImageCdn =
@@ -103,4 +60,145 @@ export type ImageCdn =
 	| "supabase"
 	| "hygraph";
 
-export type SupportedImageCdn = ImageCdn;
+export const SupportedProviders = {
+	astro: "Astro image service",
+	"builder.io": "Builder.io",
+	bunny: "Bunny.net",
+	cloudflare: "Cloudflare",
+	cloudflare_images: "Cloudflare Images",
+	cloudimage: "Cloudimage",
+	cloudinary: "Cloudinary",
+	contentful: "Contentful",
+	contentstack: "Contentstack",
+	directus: "Directus",
+	hygraph: "Hygraph",
+	imageengine: "ImageEngine",
+	imagekit: "ImageKit",
+	imgix: "Imgix",
+	ipx: "IPX",
+	keycdn: "KeyCDN",
+	"kontent.ai": "Kontent.ai",
+	netlify: "Netlify Image CDN",
+	nextjs: "Next.js image service",
+	scene7: "Adobe Dynamic Media / Scene7",
+	shopify: "Shopify",
+	storyblok: "Storyblok",
+	supabase: "Supabase",
+	uploadcare: "Uploadcare",
+	vercel: "Vercel",
+	wordpress: "WordPress",
+} as const satisfies Record<ImageCdn, string>;
+
+export type OperationFormatter<T extends Operations = Operations> = (
+	operations: T,
+) => string;
+
+export type OperationParser<T extends Operations = Operations> = (
+	url: string | URL,
+) => T;
+
+export interface OperationMap<TOperations extends Operations = Operations> {
+	width?: keyof TOperations | false;
+	height?: keyof TOperations | false;
+	format?: keyof TOperations | false;
+	quality?: keyof TOperations | false;
+}
+
+export interface FormatMap {
+	// deno-lint-ignore ban-types
+	[key: string]: ImageFormat | (string & {});
+}
+
+export type ImageFormat = "jpeg" | "jpg" | "png" | "webp" | "avif";
+
+// deno-lint-ignore ban-types
+export interface Operations<TImageFormat = (string & {})> {
+	width?: number | string;
+	height?: number | string;
+	format?: ImageFormat | TImageFormat;
+	quality?: number | string;
+}
+
+export interface ProviderConfig<
+	TOperations extends Operations = Operations,
+> {
+	/**
+	 * Maps standard operation names to their equivalent with this provider.
+	 * Keys are any of width, height, format, quality. Only include those
+	 * that are different from the standard.
+	 */
+	keyMap?: OperationMap<TOperations>;
+	/**
+	 * Defaults that should always be applied to operations unless overridden.
+	 */
+	defaults?: Partial<TOperations>;
+	/**
+	 * Maps standard format names to their equivalent with this provider.
+	 * Only include those that are different from the standard.
+	 */
+	formatMap?: FormatMap;
+	/**
+	 * Separator between keys and values in the URL. Defaults to "=".
+	 */
+	kvSeparator?: string;
+	/**
+	 * Parameter separator in the URL. Defaults to "&".
+	 */
+	paramSeparator?: string;
+	/**
+	 * If provided, the src URL will be extracted from this parameter.
+	 */
+	srcParam?: string;
+}
+
+export type URLGenerator<
+	TCDN extends ImageCdn = ImageCdn,
+> = ProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: ProviderOperations[TCDN]) => string
+	: (
+		src: string | URL,
+		operations: ProviderOperations[TCDN],
+		options?: ProviderOptions[TCDN],
+	) => string;
+
+export type URLTransformer<
+	TCDN extends ImageCdn = ImageCdn,
+> = ProviderOptions[TCDN] extends undefined
+	? (src: string | URL, operations: ProviderOperations[TCDN]) => string
+	: (
+		src: string | URL,
+		operations: ProviderOperations[TCDN],
+		options?: ProviderOptions[TCDN],
+	) => string;
+export type TransformerFunction<
+	TOperations extends Operations,
+	TOptions,
+> = TOptions extends undefined
+	? (src: string | URL, operations: TOperations) => string
+	: (src: string | URL, operations: TOperations, options?: TOptions) => string;
+export type URLExtractor<
+	TCDN extends ImageCdn = ImageCdn,
+> = (
+	url: string | URL,
+	options?: ProviderOptions[TCDN],
+) =>
+	| (ProviderOptions[TCDN] extends undefined ? {
+			operations: ProviderOperations[TCDN];
+			src: string;
+		}
+		: {
+			operations: ProviderOperations[TCDN];
+			src: string;
+			options: ProviderOptions[TCDN];
+		})
+	| null;
+
+export type ExtractedURL<
+	TCDN extends ImageCdn = ImageCdn,
+> = ReturnType<URLExtractor<TCDN>>;
+
+export type ParseURLResult<TCDN extends ImageCdn = ImageCdn> =
+	| (ExtractedURL<TCDN> & {
+		cdn?: TCDN;
+	})
+	| undefined;
