@@ -71,3 +71,4 @@ await build({
 
 // post build steps
 Deno.copyFileSync("README.md", "npm/README.md");
+Deno.copyFileSync("CONTRIBUTING.md", "npm/CONTRIBUTING.md");

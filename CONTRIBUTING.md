@@ -1,6 +1,6 @@
 # Contributing Guide
 
-This guide will help you add new image CDN providers to the library. We'll cover
+This guide will help you add new image CDN providers to the library. It covers
 implementation details, utility functions, and best practices.
 
 ## Overview
@@ -11,9 +11,13 @@ Each provider consists of:
    (`src/providers/[provider].ts`) and types for provider-specific operations
    and options.
 2. A test file (`src/providers/[provider].test.ts`)
-3. Types added to `src/providers/types.ts`
-4. Example URLs in `src/demo/examples.json`
-5. Detection domains or paths in `data`
+3. Example URLs in `src/demo/examples.json`
+4. Detection domains or paths in `data` if appropriate
+5. Adding to the types and exports in:
+   - `src/providers/types.ts`
+   - `src/types.ts`
+   - `src/extract.ts`
+   - `src/transform.ts`
 
 ## Core Concepts and Utilities
 
@@ -379,13 +383,10 @@ Before submitting:
 
 - [ ] Implementation complete with proper types
 - [ ] Comprehensive tests covering all features
-- [ ] Types updated in types.ts
+- [ ] Types updated in all files listed above
 - [ ] Example added to examples.json
-- [ ] Documentation complete
-- [ ] Code formatted
-- [ ] No console.log statements
-- [ ] Edge cases handled
-- [ ] E2E tests passing
+- [ ] Detection domains or paths added if needed
+- [ ] All tests passing, including unit tests and E2E tests
 
 ## Development Environment
 
@@ -422,8 +423,8 @@ deno test
 # Run tests for a specific provider
 deno test src/providers/example-cdn.test.ts
 
-# Run tests with coverage
-deno test --coverage
+# Run E2E tests. These need network access.
+deno test --allow-net e2e.test.ts
 ```
 
 ## Image Defaults
@@ -486,6 +487,8 @@ When adding a new provider:
 1. Add an example URL to `demo/src/examples.json`
    - Ideally use a public sample image from the CDN's documentation
    - If unavailable, use any publicly-accessible image on that CDN
+   - **Do not skip this** - no provider can be added without an example URL,
+     because otherwise it cannot be tested
 2. Test comprehensively:
    - Verify resizing behavior
    - Check that defaults are properly applied
@@ -502,8 +505,6 @@ endpoints. They use the images from `examples.json` to test real operations:
 ```bash
 deno test --allow-net e2e.test.ts
 ```
-
-Note: Some CDNs may have rate limits or require authentication.
 
 ## Getting Help
 
