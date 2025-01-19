@@ -3,71 +3,7 @@
 
 ## [4.0.0](https://github.com/ascorbic/unpic/compare/v3.22.0...v4.0.0) (2025-01-19)
 
-
 ### ⚠ BREAKING CHANGES
-
-* new syntax for providers ([#133](https://github.com/ascorbic/unpic/issues/133))
-* transformers may return URLs as strings ([#30](https://github.com/ascorbic/unpic/issues/30))
-
-### Features
-
-* add caisy ([39ec49b](https://github.com/ascorbic/unpic/commit/39ec49b6fae6dfa2f08db5737594dfe2c54e8489))
-* add Cloudimage support ([#107](https://github.com/ascorbic/unpic/issues/107)) ([e8df456](https://github.com/ascorbic/unpic/commit/e8df456f80c6c5acfee23579382bf7334b4f67e5))
-* add Contentstack support ([#77](https://github.com/ascorbic/unpic/issues/77)) ([eaf33b7](https://github.com/ascorbic/unpic/commit/eaf33b7662a408c38aa311a3e917295f306f8c07))
-* add Directus support ([#46](https://github.com/ascorbic/unpic/issues/46)) ([3be1fe3](https://github.com/ascorbic/unpic/commit/3be1fe33861b7980ba333fc63b9fd47e4e4cf314))
-* add Hygraph support ([#142](https://github.com/ascorbic/unpic/issues/142)) ([71c8796](https://github.com/ascorbic/unpic/commit/71c879626abf3cc1181314b0683bfcfe3e2fec23))
-* add imagekit support ([#91](https://github.com/ascorbic/unpic/issues/91)) ([cb03686](https://github.com/ascorbic/unpic/commit/cb03686afc998cbd106163098397813a114e1cff))
-* add KeyCDN support ([#43](https://github.com/ascorbic/unpic/issues/43)) ([0cfde2e](https://github.com/ascorbic/unpic/commit/0cfde2edf76af9e3825c695d68dc113832d4ad89))
-* add kontent.ai CDN ([#19](https://github.com/ascorbic/unpic/issues/19)) ([7475b58](https://github.com/ascorbic/unpic/commit/7475b58a258878faf2c9f15c094de477294992b1))
-* add Netlify support ([#88](https://github.com/ascorbic/unpic/issues/88)) ([4dd047f](https://github.com/ascorbic/unpic/commit/4dd047fe034f61d99432f687c219cb2329628865))
-* add Next.js and Vercel support ([#32](https://github.com/ascorbic/unpic/issues/32)) ([4cff46d](https://github.com/ascorbic/unpic/commit/4cff46d48988a9e9e8b11a2741109f452acdd334))
-* add Scene7 transformer ([#39](https://github.com/ascorbic/unpic/issues/39)) ([ad6edf2](https://github.com/ascorbic/unpic/commit/ad6edf2b5a119cf6d6a26db0f569c5305d66e911))
-* add subpath exports ([#99](https://github.com/ascorbic/unpic/issues/99)) ([7c9da42](https://github.com/ascorbic/unpic/commit/7c9da427ab3449b2b1c270ad49071ace1cc5ccb1))
-* add Supabase support ([#123](https://github.com/ascorbic/unpic/issues/123)) ([0aa185a](https://github.com/ascorbic/unpic/commit/0aa185ac71263e4d487d5ece19f316f65a6c0403))
-* add support for Cloudflare Images ([#79](https://github.com/ascorbic/unpic/issues/79)) ([50f5d59](https://github.com/ascorbic/unpic/commit/50f5d5943de15e301d4ccf5afde70988f6c065be))
-* add support for cloudflare images without custom domain ([#131](https://github.com/ascorbic/unpic/issues/131)) ([320784b](https://github.com/ascorbic/unpic/commit/320784bcbe8ce91c0c58723cb4446d6f8e535d99))
-* add support for delegated URLs ([#47](https://github.com/ascorbic/unpic/issues/47)) ([3f29447](https://github.com/ascorbic/unpic/commit/3f294470e012d535e4aeec31c642b6202e0db177))
-* add support for imageengine cdn ([#66](https://github.com/ascorbic/unpic/issues/66)) ([788633e](https://github.com/ascorbic/unpic/commit/788633ed57f658b1e79f1140ffac67b2bd09f21e))
-* add support for ipx ([#85](https://github.com/ascorbic/unpic/issues/85)) ([0ef9eed](https://github.com/ascorbic/unpic/commit/0ef9eedfe59892e2ad96e129d3f52632dc12c52c))
-* add Uploadcare support ([#120](https://github.com/ascorbic/unpic/issues/120)) ([68307a4](https://github.com/ascorbic/unpic/commit/68307a492a52b9db1d93f063b6b28b5e30db5c30))
-* astro _image endpoint ([#94](https://github.com/ascorbic/unpic/issues/94)) ([b015190](https://github.com/ascorbic/unpic/commit/b015190d39855232d415c2c101cef2c1d4161ab9))
-* **astro:** support cropping ([#150](https://github.com/ascorbic/unpic/issues/150)) ([7a7fba6](https://github.com/ascorbic/unpic/commit/7a7fba698507dfa394e4f24b880210854604731f))
-* **astro:** support custom endpoint ([#148](https://github.com/ascorbic/unpic/issues/148)) ([a976f89](https://github.com/ascorbic/unpic/commit/a976f891b5a5d79365e089d46424cc805cd79d24))
-* **builder:** add Builder.io ([#13](https://github.com/ascorbic/unpic/issues/13)) ([fb31a94](https://github.com/ascorbic/unpic/commit/fb31a94edf9e08a00f8f72258b38123b9c4d27ad))
-* **cloudflare:** add support for cloudflare's image cdn ([#2](https://github.com/ascorbic/unpic/issues/2)) ([0ad2543](https://github.com/ascorbic/unpic/commit/0ad2543eddf33892551339be9ae6424d6383dce1))
-* improve compatibility of URLs in Node ([#72](https://github.com/ascorbic/unpic/issues/72)) ([b91f194](https://github.com/ascorbic/unpic/commit/b91f1948844a1bc96b8aa94014f85046d93fb725))
-* new syntax for providers ([#133](https://github.com/ascorbic/unpic/issues/133)) ([295d23d](https://github.com/ascorbic/unpic/commit/295d23d935b0413a8a3b37d25083be4234edaafe))
-* support relative URLs when detecting by path ([#61](https://github.com/ascorbic/unpic/issues/61)) ([a28ffa9](https://github.com/ascorbic/unpic/commit/a28ffa913340b0419a9f755dd2835e716250903c))
-* transformers may return URLs as strings ([#30](https://github.com/ascorbic/unpic/issues/30)) ([ce95cfe](https://github.com/ascorbic/unpic/commit/ce95cfe9470fdee43c056f4d861b3477572808df))
-
-
-### Bug Fixes
-
-* **builder.io:** force sharp to ensure correct fit behaviour ([#75](https://github.com/ascorbic/unpic/issues/75)) ([0146f0c](https://github.com/ascorbic/unpic/commit/0146f0c7c6eddab0f7a7a6f46f38b8eba9827ecc))
-* **cloudflare:** use optional regex for transformation group [#60](https://github.com/ascorbic/unpic/issues/60) ([2800f41](https://github.com/ascorbic/unpic/commit/2800f41e6226868dd63091881d8750a532932da8))
-* **cloudinary:** default to fill without upscale ([#27](https://github.com/ascorbic/unpic/issues/27)) ([e7a3de5](https://github.com/ascorbic/unpic/commit/e7a3de584b6e4acefd6ce9259319a24ce617ce1c))
-* **contentful:** limit dimensions to 4000px ([#101](https://github.com/ascorbic/unpic/issues/101)) ([8d84f4d](https://github.com/ascorbic/unpic/commit/8d84f4d9987f020e09a705209686f21bf0c7806b))
-* correct npm publish test ([b54d6cd](https://github.com/ascorbic/unpic/commit/b54d6cdd28e301177f945c61a6331d675ead8cf6))
-* correct path detection ([#7](https://github.com/ascorbic/unpic/issues/7)) ([b5db312](https://github.com/ascorbic/unpic/commit/b5db312aebfcb09d02083236194daaae6c011e89))
-* correctly detect relative next.js URLs ([#64](https://github.com/ascorbic/unpic/issues/64)) ([e2eb2ae](https://github.com/ascorbic/unpic/commit/e2eb2aef43d04c979c8b9041fa12e7b4829cd292))
-* correctly handle fit mode in Bunny.net, Cloudflare and Kontent.ai ([#68](https://github.com/ascorbic/unpic/issues/68)) ([4b2bf38](https://github.com/ascorbic/unpic/commit/4b2bf38e8621fecd18ff2e6dc5ced3d24bf5b7e5))
-* don't include node type refs in declaration ([#83](https://github.com/ascorbic/unpic/issues/83)) ([b960e77](https://github.com/ascorbic/unpic/commit/b960e779b70508ed4b11cce84cd2e3fc2d529213))
-* export kontent parse function ([#24](https://github.com/ascorbic/unpic/issues/24)) ([9e49772](https://github.com/ascorbic/unpic/commit/9e49772be926fb56991183d3add85f1a35a38d73))
-* fix npm publish test ([aa927c8](https://github.com/ascorbic/unpic/commit/aa927c83d7662cca554ad6659714cd1a64b8d2ff))
-* fix publishing ([#138](https://github.com/ascorbic/unpic/issues/138)) ([ae9de25](https://github.com/ascorbic/unpic/commit/ae9de2532b0f3c3fc7e47b69b260c16b106d6f3c))
-* handle custom cloudinary domains ([ce2d1e6](https://github.com/ascorbic/unpic/commit/ce2d1e615c6fc3ac3d3a0dff78ace317b572ad4f))
-* handle workflow ([#10](https://github.com/ascorbic/unpic/issues/10)) ([d59485f](https://github.com/ascorbic/unpic/commit/d59485f22decb0cd7146d5443c438d41f247747e))
-* hygraph assets urls can have capital letters ([6b0ba37](https://github.com/ascorbic/unpic/commit/6b0ba3733dc3a084e99260307fcc56df21bf7a24))
-* **imagekit:** set format param to "f" ([#116](https://github.com/ascorbic/unpic/issues/116)) ([d06651e](https://github.com/ascorbic/unpic/commit/d06651ed2d74e0c6123855d7129e1abab15c023a))
-* **netlify:** correct "fit" param ([#97](https://github.com/ascorbic/unpic/issues/97)) ([66a48d4](https://github.com/ascorbic/unpic/commit/66a48d46f87f0938ae0a159dad070c715d7297b6))
-* **nextjs:** default q to 75 ([#34](https://github.com/ascorbic/unpic/issues/34)) ([0948a17](https://github.com/ascorbic/unpic/commit/0948a171537e335afd5502bd6a31652f68d0c976))
-* not delete existing format ([#54](https://github.com/ascorbic/unpic/issues/54)) ([9d656a8](https://github.com/ascorbic/unpic/commit/9d656a87876c061892679068dd3aaec5b39ec164))
-* permissions on rp workflow ([6e1dcdf](https://github.com/ascorbic/unpic/commit/6e1dcdfc1bf490738f5bab292ed48e096f8504a2))
-* publish via JSR ([#136](https://github.com/ascorbic/unpic/issues/136)) ([6674473](https://github.com/ascorbic/unpic/commit/66744733a58a1e3d1ffed25eff8fe196cf8f6681))
-* round numeric props ([#4](https://github.com/ascorbic/unpic/issues/4)) ([c1e65f6](https://github.com/ascorbic/unpic/commit/c1e65f6bd7c7003a98dbb7e90e36ddccb2a5d89c))
-* setup releasing ([#9](https://github.com/ascorbic/unpic/issues/9)) ([2a609a7](https://github.com/ascorbic/unpic/commit/2a609a7b7f09ed887c0ca2bd8e90dc82b05a787b))
-
-## 4.0.0
 
 This is a major release with several breaking changes. See
 [UPGRADING.md](UPGRADING.md) for a detailed migration guide.
@@ -110,7 +46,6 @@ This is a major release with several breaking changes. See
     - `FormatMap`
     - `ImageFormat`
     - `ProviderConfig`
-# Changelog
 
 ## [3.22.0](https://github.com/ascorbic/unpic/compare/v3.21.0...v3.22.0) (2024-12-07)
 
