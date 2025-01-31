@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.0.1](https://github.com/ascorbic/unpic/compare/v4.0.0...v4.0.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* update imagekit crop options and add crop mode ([#158](https://github.com/ascorbic/unpic/issues/158)) ([537ee24](https://github.com/ascorbic/unpic/commit/537ee245e23ec11f5e4c4f2fc83c9ac318dbe33f))
+
 ## [4.0.0](https://github.com/ascorbic/unpic/compare/v3.22.0...v4.0.0) (2025-01-19)
 
 ### ⚠ BREAKING CHANGES
