@@ -12,7 +12,7 @@ Deno.test("Appwrite - generate", async (t) => {
 		const result = generate(imageUrl, { width: 800, height: 600 });
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=800&height=600", // Short params: w, h
+			"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=800&height=600",
 		);
 	});
 
@@ -24,7 +24,7 @@ Deno.test("Appwrite - generate", async (t) => {
 		});
 		assertEqualIgnoringQueryOrder(
 			result,
-			"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=800&quality=75&output=webp", // Short params: w, q, fm
+			"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=800&quality=75&output=webp",
 		);
 	});
 });
