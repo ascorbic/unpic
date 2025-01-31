@@ -32,15 +32,23 @@ export interface ImageKitOperations extends Operations {
 
 	/**
 	 * Crop strategy for the image.
-	 * Options: 'maintain_ratio', 'extract', 'pad_resize', 'force', 'at_max', 'at_least'
+	 * Options: 'maintain_ratio', 'force', 'at_max', 'at_max_enlarge', 'at_least'
 	 */
 	c?:
 		| "maintain_ratio"
-		| "extract"
-		| "pad_resize"
 		| "force"
 		| "at_max"
+		| "at_max_enlarge"
 		| "at_least";
+
+	/**
+	 * Crop mode for the image.
+	 * Options: 'extract', 'pad_resize', 'pad_extract'
+	 */
+	cm?:
+		| "extract"
+		| "pad_resize"
+		| "pad_extract";
 
 	/**
 	 * Focal point for cropping. Can also pass object types for smart cropping.

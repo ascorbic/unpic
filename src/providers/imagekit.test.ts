@@ -130,7 +130,8 @@ Deno.test("imagekit generate", async (t) => {
 			const result = generate(img, {
 				w: 400,
 				h: 300,
-				c: "pad_resize",
+				cm: "pad_resize",
+				c: "at_max_enlarge",
 				fo: "bottom",
 				bg: "FFFFFF",
 				r: 90,
@@ -138,7 +139,7 @@ Deno.test("imagekit generate", async (t) => {
 			});
 			assertEqualIgnoringQueryOrder(
 				result,
-				`${img}?tr=w-400,h-300,c-pad_resize,fo-bottom,bg-FFFFFF,r-90,q-85`,
+				`${img}?tr=w-400,h-300,cm-pad_resize,c-at_max_enlarge,fo-bottom,bg-FFFFFF,r-90,q-85`,
 			);
 		},
 	);
