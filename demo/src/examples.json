@@ -91,5 +91,9 @@
 	"hygraph": [
 		"Hygraph",
 		"https://us-west-2.graphassets.com/cm2apl1zp07l506n66dmd9xo8/cm2tr64fx7gvu07n85chjmuno"
+	],
+	"appwrite": [
+		"Appwrite",
+		"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/view?project=unpic-test"
 	]
 }

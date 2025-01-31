@@ -8,5 +8,6 @@
 	"/_image": "astro",
 	"/.netlify/images": "netlify",
 	"/storage/v1/object/public/": "supabase",
-	"/storage/v1/render/image/public/": "supabase"
+	"/storage/v1/render/image/public/": "supabase",
+	"/v1/storage/buckets/": "appwrite"
 }
