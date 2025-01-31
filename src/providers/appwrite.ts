@@ -13,9 +13,9 @@ import {
 	toUrl,
 } from "../utils.ts";
 
-type AppwriteOutputFormats = 
- | ImageFormat
- | "gif";
+type AppwriteOutputFormats =
+	| ImageFormat
+	| "gif";
 
 const VIEW_URL_SUFFIX = "/view?";
 const PREVIEW_URL_SUFFIX = "/preview?";
@@ -41,7 +41,16 @@ export interface AppwriteOperations extends Operations<AppwriteOutputFormats> {
 	/**
 	 * Set the gravity while cropping the output image, providing either width, height, or both.
 	 */
-	gravity?: "center" | "top-left" | "top" | "top-right" | "left" | "right" | "bottom-left" | "bottom" | "bottom-right";
+	gravity?:
+		| "center"
+		| "top-left"
+		| "top"
+		| "top-right"
+		| "left"
+		| "right"
+		| "bottom-left"
+		| "bottom"
+		| "bottom-right";
 
 	/**
 	 * Set the quality of the output image
@@ -94,22 +103,26 @@ export interface AppwriteOperations extends Operations<AppwriteOutputFormats> {
 	output?: AppwriteOutputFormats;
 }
 
-const { operationsGenerator, operationsParser } = createOperationsHandlers<AppwriteOperations>({
+const { operationsGenerator, operationsParser } = createOperationsHandlers<
+	AppwriteOperations
+>({
 	keyMap: {
 		format: "output",
 	},
 	kvSeparator: "=",
-	paramSeparator: "&"
+	paramSeparator: "&",
 });
 
-export const generate: URLGenerator<"appwrite"> = (src,	modifiers) => {
-	const url = toUrl(src.toString().replace(VIEW_URL_SUFFIX, PREVIEW_URL_SUFFIX));
-	const projectParam = url.searchParams.get("project") ?? '';
+export const generate: URLGenerator<"appwrite"> = (src, modifiers) => {
+	const url = toUrl(
+		src.toString().replace(VIEW_URL_SUFFIX, PREVIEW_URL_SUFFIX),
+	);
+	const projectParam = url.searchParams.get("project") ?? "";
 
 	const operations = operationsGenerator(modifiers);
 	url.search = operations;
 	url.searchParams.append("project", projectParam);
-	
+
 	return toCanonicalUrlString(url);
 };
 
@@ -122,9 +135,7 @@ export const extract: URLExtractor<"appwrite"> = (url) => {
 	// deno-lint-ignore no-explicit-any
 	delete (operations as any).project;
 
-	
-
-	const projectParam = parsedUrl.searchParams.get("project") ?? '';
+	const projectParam = parsedUrl.searchParams.get("project") ?? "";
 	parsedUrl.search = "";
 	parsedUrl.searchParams.append("project", projectParam);
 
@@ -132,7 +143,7 @@ export const extract: URLExtractor<"appwrite"> = (url) => {
 
 	return {
 		src: sourceUrl,
-		operations
+		operations,
 	};
 };
 

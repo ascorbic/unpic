@@ -2,7 +2,8 @@ import { extract, generate, transform } from "./appwrite.ts";
 import { assertEqualIgnoringQueryOrder } from "../test-utils.ts";
 import { assertEquals } from "jsr:@std/assert";
 
-const imageUrl = "https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/view?project=unpic-test";
+const imageUrl =
+	"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/view?project=unpic-test";
 
 // Tests for generate, extract, and transform
 
@@ -36,13 +37,14 @@ Deno.test("Appwrite - extract", async (t) => {
 				"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=800&height=600&quality=75&output=webp",
 			);
 			assertEquals(parsed, {
-				src: "https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test",
+				src:
+					"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test",
 				operations: {
 					width: 800,
 					height: 600,
 					format: "webp",
 					quality: 75,
-				}
+				},
 			});
 		},
 	);
@@ -52,7 +54,7 @@ Deno.test("Appwrite - transform", async (t) => {
 	await t.step("should transform a URL with new operations", () => {
 		const result = transform(
 			"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/preview?project=unpic-test&width=300&height=400",
-			{ width: 800, height: 600, quality: 80, format: "webp" }
+			{ width: 800, height: 600, quality: 80, format: "webp" },
 		);
 		assertEqualIgnoringQueryOrder(
 			result,

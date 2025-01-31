@@ -88,7 +88,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
-	appwrite: "Appwrite"
+	appwrite: "Appwrite",
 } as const;
 
 export type OperationFormatter<T extends Operations = Operations> = (
