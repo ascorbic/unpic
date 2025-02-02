@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.1.0](https://github.com/ascorbic/unpic/compare/v4.0.1...v4.1.0) (2025-02-02)
+
+
+### Features
+
+* add Appwrite support ([#160](https://github.com/ascorbic/unpic/issues/160)) ([574af67](https://github.com/ascorbic/unpic/commit/574af67bbb4b7b0243ada72e5214847b5feac1ee))
+
 ## [4.0.1](https://github.com/ascorbic/unpic/compare/v4.0.0...v4.0.1) (2025-01-31)
 
 
