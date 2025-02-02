@@ -58,7 +58,8 @@ export type ImageCdn =
 	| "imagekit"
 	| "uploadcare"
 	| "supabase"
-	| "hygraph";
+	| "hygraph"
+	| "appwrite";
 
 export const SupportedProviders: Record<ImageCdn, string> = {
 	astro: "Astro image service",
@@ -87,6 +88,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
+	appwrite: "Appwrite",
 } as const;
 
 export type OperationFormatter<T extends Operations = Operations> = (

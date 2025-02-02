@@ -1,4 +1,5 @@
 import { getProviderForUrl } from "./detect.ts";
+import { transform as appwrite } from "./providers/appwrite.ts";
 import { transform as astro } from "./providers/astro.ts";
 import { transform as builderio } from "./providers/builder.io.ts";
 import { transform as bunny } from "./providers/bunny.ts";
@@ -37,6 +38,7 @@ import type {
 } from "./providers/types.ts";
 
 const transformerMap: URLTransformerMap = {
+	appwrite,
 	astro,
 	"builder.io": builderio,
 	bunny,

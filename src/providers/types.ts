@@ -4,6 +4,7 @@ import type {
 	URLGenerator,
 	URLTransformer,
 } from "../types.ts";
+import type { AppwriteOperations } from "./appwrite.ts";
 import type { AstroOperations, AstroOptions } from "./astro.ts";
 import type { BuilderOperations } from "./builder.io.ts";
 import type { BunnyOperations } from "./bunny.ts";
@@ -38,6 +39,7 @@ import type { VercelOperations, VercelOptions } from "./vercel.ts";
 import type { WordPressOperations } from "./wordpress.ts";
 
 export interface ProviderOperations {
+	appwrite: AppwriteOperations;
 	astro: AstroOperations;
 	"builder.io": BuilderOperations;
 	bunny: BunnyOperations;
@@ -67,6 +69,7 @@ export interface ProviderOperations {
 }
 
 export interface ProviderOptions {
+	appwrite: undefined;
 	astro: AstroOptions;
 	"builder.io": undefined;
 	bunny: undefined;

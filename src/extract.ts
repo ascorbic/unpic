@@ -6,6 +6,7 @@ import type {
 } from "./providers/types.ts";
 import type { ImageCdn, ParseURLResult, URLExtractor } from "./types.ts";
 
+import { extract as appwrite } from "./providers/appwrite.ts";
 import { extract as astro } from "./providers/astro.ts";
 import { extract as builder } from "./providers/builder.io.ts";
 import { extract as bunny } from "./providers/bunny.ts";
@@ -34,6 +35,7 @@ import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
 
 export const parsers: URLExtractorMap = {
+	appwrite,
 	astro,
 	"builder.io": builder,
 	bunny,
