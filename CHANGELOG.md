@@ -1,6 +1,14 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.1.1](https://github.com/ascorbic/unpic/compare/v4.1.0...v4.1.1) (2025-02-03)
+
+
+### Bug Fixes
+
+* correct exports ([#163](https://github.com/ascorbic/unpic/issues/163)) ([74ce895](https://github.com/ascorbic/unpic/commit/74ce895d8f0d2c7a97ea27639b2cd7755783bd32))
+* export utility functions ([#165](https://github.com/ascorbic/unpic/issues/165)) ([98c7c75](https://github.com/ascorbic/unpic/commit/98c7c75b9bfee98fe3ee2f9d569f41aeaab44ac3))
+
 ## [4.1.0](https://github.com/ascorbic/unpic/compare/v4.0.1...v4.1.0) (2025-02-02)
 
 
