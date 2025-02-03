@@ -13,6 +13,7 @@ type AsyncProviderMap = {
 	[T in ImageCdn]: () => Promise<ProviderModule<T>>;
 };
 const asyncProviderMap: AsyncProviderMap = {
+	appwrite: () => import("./providers/appwrite.ts"),
 	astro: () => import("./providers/astro.ts"),
 	"builder.io": () => import("./providers/builder.io.ts"),
 	bunny: () => import("./providers/bunny.ts"),
