@@ -36,6 +36,10 @@ await build({
 			path: "./src/transform.ts",
 			name: "./transform",
 		},
+		{
+			path: "./src/utils.ts",
+			name: "./utils",
+		},
 		...entry,
 	],
 	outDir: "./npm",
