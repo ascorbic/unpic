@@ -14,7 +14,7 @@ jobs:
         with:
           deno-version: vx.x.x
       - name: Typecheck
-        run: deno check mod.ts
+        run: deno check src/
       - name: Unit Test
         run: deno test src/
       - name: e2e Test

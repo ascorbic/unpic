@@ -18,6 +18,8 @@ Each provider consists of:
    - `src/types.ts`
    - `src/extract.ts`
    - `src/transform.ts`
+   - `src/async.ts`
+   - `deno.jsonc`
 
 ## Core Concepts and Utilities
 

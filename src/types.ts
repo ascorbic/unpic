@@ -62,6 +62,7 @@ export type ImageCdn =
 	| "appwrite";
 
 export const SupportedProviders: Record<ImageCdn, string> = {
+	appwrite: "Appwrite",
 	astro: "Astro image service",
 	"builder.io": "Builder.io",
 	bunny: "Bunny.net",
@@ -88,7 +89,6 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
-	appwrite: "Appwrite",
 } as const;
 
 export type OperationFormatter<T extends Operations = Operations> = (
