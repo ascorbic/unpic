@@ -13,7 +13,7 @@ import {
 	toUrl,
 } from "../utils.ts";
 
-type AppwriteOutputFormats =
+export type AppwriteOutputFormats =
 	| ImageFormat
 	| "gif";
 
@@ -99,6 +99,7 @@ export interface AppwriteOperations extends Operations<AppwriteOutputFormats> {
 	/**
 	 * Set the output image format.
 	 * If not provided, will use the original image's format.
+	 * Acceptable values include: "jpeg", "jpg", "png", "webp", "avif", "gif"
 	 */
 	output?: AppwriteOutputFormats;
 }
