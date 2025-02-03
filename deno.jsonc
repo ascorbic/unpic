@@ -4,6 +4,7 @@
 	"exports": {
 		".": "./mod.ts",
 		"./async": "./src/async.ts",
+		"./utils": "./src/utils.ts",
 		"./providers/appwrite": "./src/providers/appwrite.ts",
 		"./providers/astro": "./src/providers/astro.ts",
 		"./providers/builder.io": "./src/providers/builder.io.ts",

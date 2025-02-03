@@ -1,6 +1,6 @@
 import type { ProviderOperations, ProviderOptions } from "./providers/types.ts";
-import {
-	type ImageCdn,
+import type {
+	ImageCdn,
 	OperationFormatter,
 	OperationMap,
 	OperationParser,
