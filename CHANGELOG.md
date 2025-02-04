@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.1.2](https://github.com/ascorbic/unpic/compare/v4.1.1...v4.1.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **appwrite:** export and document format types ([e0cb492](https://github.com/ascorbic/unpic/commit/e0cb492fb1c591da1741dd5736523e860af9b4f3))
+
 ## [4.1.1](https://github.com/ascorbic/unpic/compare/v4.1.0...v4.1.1) (2025-02-03)
 
 
