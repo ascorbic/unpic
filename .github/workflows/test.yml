@@ -15,6 +15,7 @@ jobs:
           deno-version: vx.x.x
       - name: Typecheck
         run: deno check src/
+      - run: deno publish --dry-run
       - name: Unit Test
         run: deno test src/
       - name: e2e Test
