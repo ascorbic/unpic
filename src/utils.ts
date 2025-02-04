@@ -29,42 +29,11 @@ export function roundIfNumeric<T extends string | number | undefined>(
 	// deno-lint-ignore no-explicit-any
 	return Math.round(num) as any;
 }
-export const setParamIfDefined = (
-	url: URL,
-	key: string,
-	value?: string | number,
-	deleteExisting?: boolean,
-	roundValue?: boolean,
-) => {
-	if (value) {
-		if (roundValue) {
-			value = roundIfNumeric(value);
-		}
-		url.searchParams.set(key, value.toString());
-	} else if (deleteExisting) {
-		url.searchParams.delete(key);
-	}
-};
-
-export const setParamIfUndefined = (
-	url: URL,
-	key: string,
-	value: string | number,
-) => {
-	if (!url.searchParams.has(key)) {
-		url.searchParams.set(key, value.toString());
-	}
-};
-
-export const getNumericParam = (url: URL, key: string) => {
-	const value = Number(url.searchParams.get(key));
-	return isNaN(value) ? undefined : value;
-};
 
 /**
  * Given a URL object, returns path and query params
  */
-export const toRelativeUrl = (url: URL) => {
+export const toRelativeUrl = (url: URL): string => {
 	const { pathname, search } = url;
 	return `${pathname}${search}`;
 };
@@ -73,34 +42,37 @@ export const toRelativeUrl = (url: URL) => {
  * Returns a URL string that may be relative or absolute
  */
 
-export const toCanonicalUrlString = (url: URL) => {
+export const toCanonicalUrlString = (url: URL): string => {
 	return url.hostname === "n" ? toRelativeUrl(url) : url.toString();
 };
 
 /**
  * Normalises a URL object or string URL to a URL object.
  */
-export const toUrl = (url: string | URL, base?: string | URL | undefined) => {
+export const toUrl = (
+	url: string | URL,
+	base?: string | URL | undefined,
+): URL => {
 	return typeof url === "string" ? new URL(url, base ?? "http://n/") : url;
 };
 
 /**
  * Escapes a string, even if it's URL-safe
  */
-export const escapeChar = (text: string) =>
+export const escapeChar = (text: string): string =>
 	text === " " ? "+" : ("%" +
 		text.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0"));
 
-export const stripLeadingSlash = (str?: string) =>
+export const stripLeadingSlash = (str?: string): string | undefined =>
 	str?.startsWith("/") ? str.slice(1) : str;
 
-export const stripTrailingSlash = (str?: string) =>
+export const stripTrailingSlash = (str?: string): string | undefined =>
 	str?.endsWith("/") ? str.slice(0, -1) : str;
 
-export const addLeadingSlash = (str?: string) =>
+export const addLeadingSlash = (str?: string): string =>
 	str?.startsWith("/") ? str : `/${str}`;
 
-export const addTrailingSlash = (str?: string) =>
+export const addTrailingSlash = (str?: string): string =>
 	str?.endsWith("/") ? str : `${str}/`;
 
 /**
