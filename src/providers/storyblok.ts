@@ -27,8 +27,15 @@ const splitFilters = (filters: string): Record<string, string> => {
 	if (!filters) {
 		return {};
 	}
+
+	/*
+	 this regex selects every colon(:) that is not inside parentheses.
+	 So that focal(150x150:250x250) is not split into two filters.
+	 */
+	const filterSplitterRegex = /:(?![^(]*\))/;
+
 	return Object.fromEntries(
-		filters.split(":").map((filter) => {
+		filters.split(filterSplitterRegex).map((filter) => {
 			if (!filter) return [];
 			const [key, value] = filter.split("(");
 			return [key, value.replace(")", "")];
