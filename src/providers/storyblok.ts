@@ -31,8 +31,6 @@ const splitFilters = (filters: string): Record<string, string> => {
 		return {};
 	}
 
-
-
 	return Object.fromEntries(
 		filters.split(filterSplitterRegex).map((filter) => {
 			if (!filter) return [];
