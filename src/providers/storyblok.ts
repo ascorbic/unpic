@@ -16,6 +16,9 @@ const storyBlokAssets =
 const storyBlokImg2 =
 	/^(?<modifiers>\/(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?\/?)?(?<id>\/f\/.+)$/;
 
+// This regex selects every colon(:) that is not inside parentheses. So that focal(150x150:250x250) is not split into two filters.
+const filterSplitterRegex = /:(?![^(]*\))/;
+
 export interface StoryblokOperations extends Operations {
 	crop?: string;
 	filters?: Record<string, string>;
@@ -28,11 +31,7 @@ const splitFilters = (filters: string): Record<string, string> => {
 		return {};
 	}
 
-	/*
-	 this regex selects every colon(:) that is not inside parentheses.
-	 So that focal(150x150:250x250) is not split into two filters.
-	 */
-	const filterSplitterRegex = /:(?![^(]*\))/;
+
 
 	return Object.fromEntries(
 		filters.split(filterSplitterRegex).map((filter) => {
