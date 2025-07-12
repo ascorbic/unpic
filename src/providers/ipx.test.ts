@@ -5,6 +5,8 @@ import { assertEquals } from "jsr:@std/assert";
 const absoluteImg = "https://example.com/images/test.jpg";
 const img = "/images/test.jpg";
 const baseURL = "https://example.com/_ipx";
+const remoteBaseUrl = "https://ipx.example.com";
+
 
 Deno.test("ipx extract", async (t) => {
 	await t.step("should extract operations from a URL", () => {
@@ -120,6 +122,21 @@ Deno.test("ipx transform", async (t) => {
 		assertEqualIgnoringQueryOrder(
 			result,
 			`/_ipx/s_300x200,f_auto/https://example.com/images/test.jpg`,
+		);
+	});
+
+	await t.step("should work with ipx as a remote service baseURL", () => {
+		const result = transform(
+			absoluteImg,
+			{
+				width: 300,
+				height: 200,
+			},
+			{ baseURL: remoteBaseUrl },
+		);
+		assertEqualIgnoringQueryOrder(
+			result,
+			`${remoteBaseUrl}/s_300x200,f_auto/https://example.com/images/test.jpg`,
 		);
 	});
 });

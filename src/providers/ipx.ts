@@ -74,7 +74,7 @@ export const generate: URLGenerator<"ipx"> = (
 	const baseURL = options?.baseURL ?? "/_ipx";
 	const url = toUrl(baseURL);
 
-	url.pathname = `${url.pathname}/${modifiers}/${
+	url.pathname = `${url.pathname === '/' ? '' : url.pathname}/${modifiers}/${
 		stripLeadingSlash(src.toString())
 	}`;
 	return toCanonicalUrlString(url);
