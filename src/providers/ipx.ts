@@ -8,6 +8,7 @@ import {
 import {
 	createOperationsHandlers,
 	stripLeadingSlash,
+	stripTrailingSlash,
 	toCanonicalUrlString,
 	toUrl,
 } from "../utils.ts";
@@ -74,7 +75,7 @@ export const generate: URLGenerator<"ipx"> = (
 	const baseURL = options?.baseURL ?? "/_ipx";
 	const url = toUrl(baseURL);
 
-	url.pathname = `${url.pathname === '/' ? '' : url.pathname}/${modifiers}/${
+	url.pathname = `${stripTrailingSlash(url.pathname)}/${modifiers}/${
 		stripLeadingSlash(src.toString())
 	}`;
 	return toCanonicalUrlString(url);
