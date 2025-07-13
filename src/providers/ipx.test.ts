@@ -7,7 +7,6 @@ const img = "/images/test.jpg";
 const baseURL = "https://example.com/_ipx";
 const remoteBaseUrl = "https://ipx.example.com";
 
-
 Deno.test("ipx extract", async (t) => {
 	await t.step("should extract operations from a URL", () => {
 		const url = `${baseURL}/w_300,h_200,q_75,f_webp/images/test.jpg`;
