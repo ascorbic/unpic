@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.1.3](https://github.com/ascorbic/unpic/compare/v4.1.2...v4.1.3) (2025-07-13)
+
+
+### Bug Fixes
+
+* **ipx:** make ipx transform work with a remote base url ([#173](https://github.com/ascorbic/unpic/issues/173)) ([1a3c669](https://github.com/ascorbic/unpic/commit/1a3c669d68487797e3f433785afa0ca412a97b4f))
+
 ## [4.1.2](https://github.com/ascorbic/unpic/compare/v4.1.1...v4.1.2) (2025-02-04)
 
 
