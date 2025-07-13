@@ -8,7 +8,7 @@ const OLD_BASE_URL =
 
 Deno.test("Storyblok Image CDN - extract", async (t) => {
 	await t.step("should extract operations from new URL format", () => {
-		const url = `${NEW_BASE_URL}/m/400x300/filters:format(webp)`;
+		const url = `${NEW_BASE_URL}/m/400x300/filters:format(webp):focal(150x100:250x200)`;
 		const result = extract(url);
 		assertEquals(result, {
 			src: NEW_BASE_URL,
@@ -16,7 +16,9 @@ Deno.test("Storyblok Image CDN - extract", async (t) => {
 				width: 400,
 				height: 300,
 				format: "webp",
-				filters: {},
+				filters: {
+					focal: "150x100:250x200",
+				},
 			},
 		});
 	});
@@ -47,6 +49,8 @@ Deno.test("Storyblok Image CDN - extract", async (t) => {
 			},
 		});
 	});
+
+
 });
 
 Deno.test("Storyblok Image CDN - generate", async (t) => {
@@ -88,6 +92,17 @@ Deno.test("Storyblok Image CDN - generate", async (t) => {
 		});
 		assertEquals(result, `${NEW_BASE_URL}/m/-400x-300`);
 	});
+
+	await t.step("should generate URL with focal point", () => {
+		const result = generate(NEW_BASE_URL, {
+			width: 400,
+			height: 300,
+			filters:{
+				focal: "150x150:250x250"
+			}
+		});
+		assertEquals(result, `${NEW_BASE_URL}/m/400x300/filters:focal(150x150:250x250)`);
+	});
 });
 
 Deno.test("Storyblok Image CDN - transform", async (t) => {
@@ -96,10 +111,13 @@ Deno.test("Storyblok Image CDN - transform", async (t) => {
 			width: 500,
 			height: 400,
 			format: "webp",
+			filters:{
+				focal: "150x150:250x250"
+			}
 		});
 		assertEquals(
 			result,
-			`${NEW_BASE_URL}/m/500x400/filters:format(webp)`,
+			`${NEW_BASE_URL}/m/500x400/filters:focal(150x150:250x250):format(webp)`,
 		);
 	});
 
@@ -124,3 +142,5 @@ Deno.test("Storyblok Image CDN - transform", async (t) => {
 		);
 	});
 });
+
+
