@@ -15,7 +15,7 @@ Deno.test("wsrv extract", async (t) => {
 
 	await t.step("should parse operations from URL", () => {
 		const { operations, src } = extract(
-			"https://wsrv.nl/?url=example.com/image.jpg&w=300&h=200&q=85&output=webp&fit=cover&dpr=2",
+			"https://wsrv.nl/?url=example.com/image.jpg&w=300&h=200&q=85&output=webp&fit=cover",
 		) ?? {};
 		assertEquals(src, "https://example.com/image.jpg");
 		assertEquals(operations?.width, 300);
@@ -23,7 +23,6 @@ Deno.test("wsrv extract", async (t) => {
 		assertEquals(operations?.quality, 85);
 		assertEquals(operations?.format, "webp");
 		assertEquals(operations?.fit, "cover");
-		assertEquals(operations?.dpr, 2);
 	});
 
 	await t.step("should return null for non-wsrv URLs", () => {

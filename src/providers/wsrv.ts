@@ -22,9 +22,20 @@ export type WsrvFormats =
 
 /**
  * Image transform options for wsrv.nl image processing.
- * Note: width, height, format, and quality are inherited from Operations.
  */
 export interface WsrvOperations extends Operations<WsrvFormats> {
+	/** Sets the width of the image in pixels. Alias for width. */
+	w?: number;
+
+	/** Sets the height of the image in pixels. Alias for height. */
+	h?: number;
+
+	/** Output format. Alias for format. */
+	output?: WsrvFormats;
+
+	/** Quality level (0-100). Alias for quality. */
+	q?: number;
+
 	/** Sets the output density of the image (1-8). */
 	dpr?: number;
 
@@ -128,23 +139,22 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	defaults: {
 		fit: "cover",
 	},
-	srcParam: "url",
 });
 
 export const extract: URLExtractor<"wsrv"> = (url) => {
 	const urlObj = toUrl(url);
 
-	// wsrv.nl URLs have the source image in the 'url' parameter
 	const srcParam = urlObj.searchParams.get("url");
 	if (!srcParam) {
 		return null;
 	}
 
-	// The source URL might need protocol added
 	let src = srcParam;
 	if (!src.startsWith("http://") && !src.startsWith("https://")) {
 		src = "https://" + src;
 	}
+
+	urlObj.searchParams.delete("url");
 
 	const operations = operationsParser(urlObj);
 
@@ -157,12 +167,10 @@ export const extract: URLExtractor<"wsrv"> = (url) => {
 export const generate: URLGenerator<"wsrv"> = (src, operations) => {
 	const url = new URL("https://wsrv.nl/");
 
-	// Add the source URL (remove protocol for cleaner URLs)
 	const srcUrl = typeof src === "string" ? src : src.toString();
 	const cleanSrc = srcUrl.replace(/^https?:\/\//, "");
 	url.searchParams.set("url", cleanSrc);
 
-	// Add operations as query parameters
 	const params = operationsGenerator(operations);
 	const searchParams = new URLSearchParams(params);
 	for (const [key, value] of searchParams) {
