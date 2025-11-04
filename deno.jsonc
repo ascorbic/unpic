@@ -29,7 +29,8 @@
 		"./providers/supabase": "./src/providers/supabase.ts",
 		"./providers/uploadcare": "./src/providers/uploadcare.ts",
 		"./providers/vercel": "./src/providers/vercel.ts",
-		"./providers/wordpress": "./src/providers/wordpress.ts"
+		"./providers/wordpress": "./src/providers/wordpress.ts",
+		"./providers/wsrv": "./src/providers/wsrv.ts"
 	},
 	"tasks": {
 		"build:npm": "deno run --allow-all scripts/build_npm.ts"

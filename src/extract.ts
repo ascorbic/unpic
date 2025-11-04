@@ -33,6 +33,7 @@ import { extract as supabase } from "./providers/supabase.ts";
 import { extract as uploadcare } from "./providers/uploadcare.ts";
 import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
+import { extract as wsrv } from "./providers/wsrv.ts";
 
 export const parsers: URLExtractorMap = {
 	appwrite,
@@ -62,6 +63,7 @@ export const parsers: URLExtractorMap = {
 	uploadcare,
 	vercel,
 	wordpress,
+	wsrv,
 } as const;
 
 /**
