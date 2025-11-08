@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.2.0](https://github.com/ascorbic/unpic/compare/v4.1.3...v4.2.0) (2025-11-08)
+
+
+### Features
+
+* add wsrv.nl provider ([#176](https://github.com/ascorbic/unpic/issues/176)) ([e9656f8](https://github.com/ascorbic/unpic/commit/e9656f838656c6cc4ea3f9982ccc4e09a7a95a33))
+
 ## [4.1.3](https://github.com/ascorbic/unpic/compare/v4.1.2...v4.1.3) (2025-07-13)
 
 
