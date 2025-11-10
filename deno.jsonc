@@ -1,6 +1,6 @@
 {
 	"name": "@unpic/lib",
-	"version": "4.0.0",
+	"version": "4.2.1",
 	"exports": {
 		".": "./mod.ts",
 		"./async": "./src/async.ts",
@@ -43,10 +43,10 @@
 		"useTabs": true
 	},
 	"imports": {
-		"@deno/dnt": "jsr:@deno/dnt@0.37.0",
+		"@deno/dnt": "jsr:@deno/dnt@^0.42.3",
 		"@std/path": "jsr:@std/path@0.206.0",
 		"@std/fs": "jsr:@std/fs@0.206.0",
-		"@std/testing": "jsr:@std/testing@0.172.0"
+		"@std/testing": "jsr:@std/testing@^1.0.16"
 	},
 	"publish": {
 		"include": [

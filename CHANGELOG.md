@@ -1,6 +1,13 @@
 <!-- deno-fmt-ignore-file -->
 # CHANGELOG
 
+## [4.2.1](https://github.com/ascorbic/unpic/compare/v4.2.0...v4.2.1) (2025-11-10)
+
+
+### Bug Fixes
+
+* **imgix:** types for combined 'auto' operations ([#178](https://github.com/ascorbic/unpic/issues/178)) ([405bbc4](https://github.com/ascorbic/unpic/commit/405bbc45a00c43c71b892be31faede661969c18e))
+
 ## [4.2.0](https://github.com/ascorbic/unpic/compare/v4.1.3...v4.2.0) (2025-11-08)
 
 

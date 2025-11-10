@@ -1,0 +1,19 @@
+{
+	"name": "unpic",
+	"version": "4.2.1",
+	"private": true,
+	"description": "Universal image CDN translator",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ascorbic/unpic.git"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@changesets/cli": "^2.27.1"
+	},
+	"scripts": {
+		"changeset": "changeset",
+		"version": "changeset version && deno run --allow-read --allow-write scripts/sync_version.ts",
+		"release": "deno test -A src/ && deno run -A scripts/build_npm.ts && cd npm && npm publish --provenance --access public && cd .. && npx jsr publish --allow-dirty"
+	}
+}

@@ -4,6 +4,10 @@ import { walk } from "jsr:@std/fs";
 
 await emptyDir("./npm");
 
+// Read version from package.json
+const packageJson = JSON.parse(await Deno.readTextFile("package.json"));
+const version = packageJson.version;
+
 const providers = await Array.fromAsync(walk("./src/providers", {
 	match: [/^(?!.*test\.ts$).*\.ts$/],
 }));
@@ -55,7 +59,7 @@ await build({
 	package: {
 		// package.json properties
 		name: "unpic",
-		version: Deno.args[0]?.replace(/^v/, ""),
+		version,
 		description: "Universal image CDN translator",
 		license: "MIT",
 		homepage: "https://unpic.pics/lib",
