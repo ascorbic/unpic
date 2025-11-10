@@ -12,6 +12,8 @@ import {
 	toUrl,
 } from "../utils.ts";
 
+type Auto = "true" | "format" | "compress" | "enhance" | "redeye";
+
 export type ImixFormats =
 	| ImageFormat
 	| "gif"
@@ -76,10 +78,15 @@ export interface ImgixOperations extends Operations<ImixFormats> {
 
 	/**
 	 * Automatic optimizations to apply.
-	 * Can be a combination of "format", "compress", "enhance", "redeye".
+	 * Can be a combination of "format", "compress", "enhance", "redeye", "true".
 	 * @example "format,compress"
 	 */
-	auto?: "format" | "compress" | "enhance" | "redeye";
+	auto?:
+		| Auto
+		| `${Auto},${Auto}`
+		| `${Auto},${Auto},${Auto}`
+		| `${Auto},${Auto},${Auto},${Auto}`
+		| `${Auto},${Auto},${Auto},${Auto},${Auto}`;
 
 	/**
 	 * Contrast adjustment (-100 to 100).
