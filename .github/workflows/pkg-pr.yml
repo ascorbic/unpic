@@ -33,6 +33,6 @@ jobs:
           deno-version: vx.x.x
 
       - name: Build package
-        run: xargs deno task build:npm < version.txt
+        run: deno task build:npm
 
       - run: npx pkg-pr-new publish --compact ./npm
