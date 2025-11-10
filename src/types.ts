@@ -59,7 +59,8 @@ export type ImageCdn =
 	| "uploadcare"
 	| "supabase"
 	| "hygraph"
-	| "appwrite";
+	| "appwrite"
+	| "wsrv";
 
 export const SupportedProviders: Record<ImageCdn, string> = {
 	appwrite: "Appwrite",
@@ -89,6 +90,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",
+	wsrv: "wsrv.nl",
 } as const;
 
 export type OperationFormatter<T extends Operations = Operations> = (

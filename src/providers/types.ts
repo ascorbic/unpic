@@ -37,6 +37,7 @@ import type { SupabaseOperations } from "./supabase.ts";
 import type { UploadcareOperations, UploadcareOptions } from "./uploadcare.ts";
 import type { VercelOperations, VercelOptions } from "./vercel.ts";
 import type { WordPressOperations } from "./wordpress.ts";
+import type { WsrvOperations } from "./wsrv.ts";
 
 export interface ProviderOperations {
 	appwrite: AppwriteOperations;
@@ -66,6 +67,7 @@ export interface ProviderOperations {
 	uploadcare: UploadcareOperations;
 	vercel: VercelOperations;
 	wordpress: WordPressOperations;
+	wsrv: WsrvOperations;
 }
 
 export interface ProviderOptions {
@@ -96,6 +98,7 @@ export interface ProviderOptions {
 	uploadcare: UploadcareOptions;
 	vercel: VercelOptions;
 	wordpress: undefined;
+	wsrv: undefined;
 }
 
 export type URLExtractorMap = {

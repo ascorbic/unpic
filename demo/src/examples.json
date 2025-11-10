@@ -95,5 +95,9 @@
 	"appwrite": [
 		"Appwrite",
 		"https://cloud.appwrite.io/v1/storage/buckets/unpic/files/679d127100131f67b6d8/view?project=unpic-test"
+	],
+	"wsrv": [
+		"wsrv.nl",
+		"https://wsrv.nl/?url=images.unsplash.com/photo-1560807707-8cc77767d783"
 	]
 }

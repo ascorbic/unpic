@@ -40,6 +40,7 @@ const asyncProviderMap: AsyncProviderMap = {
 	uploadcare: () => import("./providers/uploadcare.ts"),
 	vercel: () => import("./providers/vercel.ts"),
 	wordpress: () => import("./providers/wordpress.ts"),
+	wsrv: () => import("./providers/wsrv.ts"),
 };
 
 /**

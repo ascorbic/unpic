@@ -26,6 +26,7 @@ import { transform as supabase } from "./providers/supabase.ts";
 import { transform as uploadcare } from "./providers/uploadcare.ts";
 import { transform as vercel } from "./providers/vercel.ts";
 import { transform as wordpress } from "./providers/wordpress.ts";
+import { transform as wsrv } from "./providers/wsrv.ts";
 import type {
 	ImageCdn,
 	URLTransformer,
@@ -65,6 +66,7 @@ const transformerMap: URLTransformerMap = {
 	uploadcare,
 	vercel,
 	wordpress,
+	wsrv,
 } as const;
 /**
  * Returns a transformer function if the given CDN is supported
