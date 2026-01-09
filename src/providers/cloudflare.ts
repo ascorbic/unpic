@@ -114,9 +114,15 @@ export const generate: URLGenerator<"cloudflare"> = (
 ) => {
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(options?.domain ? `https://${options.domain}` : "/");
-	url.pathname = `/cdn-cgi/image/${modifiers}/${
-		stripLeadingSlash(src.toString())
-	}`;
+	
+	const srcStr = src.toString();
+	let pathSuffix = stripLeadingSlash(srcStr);
+
+	if (srcStr.startsWith("http") && srcStr.includes("?")) {
+		pathSuffix = encodeURIComponent(srcStr);
+	}
+
+	url.pathname = `/cdn-cgi/image/${modifiers}/${pathSuffix}`;
 	return toCanonicalUrlString(url);
 };
 
