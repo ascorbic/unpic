@@ -32,6 +32,21 @@ Deno.test("ipx extract", async (t) => {
 			format: "webp",
 		});
 	});
+
+	await t.step("should extract crop with URL-encoded underscores", () => {
+		const url = `${baseURL}/crop_100%5F50%5F300%5F200,f_auto/images/test.jpg`;
+		const result = extract(url);
+		assertEquals(result?.src, "/images/test.jpg");
+		assertEquals(result?.operations.crop, "100_50_300_200");
+	});
+
+	await t.step("should extract fit and position", () => {
+		const url =
+			`${baseURL}/s_800x600,fit_cover,position_top,f_auto/images/test.jpg`;
+		const result = extract(url);
+		assertEquals(result?.operations.fit, "cover");
+		assertEquals(result?.operations.position, "top");
+	});
 });
 
 Deno.test("ipx generate", async (t) => {
@@ -137,5 +152,38 @@ Deno.test("ipx transform", async (t) => {
 			result,
 			`${remoteBaseUrl}/s_300x200,f_auto/https://example.com/images/test.jpg`,
 		);
+	});
+});
+
+Deno.test("ipx generate with extended operations", async (t) => {
+	await t.step("should generate URL with crop", () => {
+		const result = generate(
+			img,
+			{ width: 800, height: 600, crop: "100_50_300_200" },
+			{ baseURL },
+		);
+		assertEquals(result.includes("crop_100%5F50%5F300%5F200"), true);
+		assertEquals(result.includes("s_800x600"), true);
+	});
+
+	await t.step("should generate URL with fit and position", () => {
+		const result = generate(
+			img,
+			{ width: 800, height: 600, fit: "cover", position: "top" },
+			{ baseURL },
+		);
+		assertEquals(result.includes("fit_cover"), true);
+		assertEquals(result.includes("position_top"), true);
+	});
+
+	await t.step("should generate URL with effects", () => {
+		const result = generate(
+			img,
+			{ width: 300, rotate: 90, blur: 5, grayscale: true },
+			{ baseURL },
+		);
+		assertEquals(result.includes("rotate_90"), true);
+		assertEquals(result.includes("blur_5"), true);
+		assertEquals(result.includes("grayscale_true"), true);
 	});
 });

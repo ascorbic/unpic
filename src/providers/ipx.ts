@@ -38,6 +38,78 @@ export interface IPXOperations extends Operations {
 	 * Output format of the image.
 	 */
 	f?: ImageFormat | "auto";
+
+	/**
+	 * Resize fit mode. Only applies when both width and height are specified.
+	 */
+	fit?: "contain" | "cover" | "fill" | "inside" | "outside";
+
+	/**
+	 * Position/gravity for resize. Only applies when both width and height are specified.
+	 * @example "top"
+	 */
+	position?: string;
+
+	/**
+	 * Alias for position.
+	 */
+	pos?: string;
+
+	/**
+	 * Extract/crop a region of the image.
+	 * Format: "left_top_width_height"
+	 * @example "100_50_300_200"
+	 */
+	extract?: string;
+
+	/**
+	 * Alias for extract.
+	 */
+	crop?: string;
+
+	/**
+	 * Rotation angle in degrees.
+	 * @example 90
+	 */
+	rotate?: number;
+
+	/**
+	 * Flip image vertically.
+	 */
+	flip?: boolean;
+
+	/**
+	 * Flip image horizontally.
+	 */
+	flop?: boolean;
+
+	/**
+	 * Blur sigma value.
+	 * @example 5
+	 */
+	blur?: number;
+
+	/**
+	 * Sharpen sigma value.
+	 * @example 30
+	 */
+	sharpen?: number;
+
+	/**
+	 * Convert to grayscale.
+	 */
+	grayscale?: boolean;
+
+	/**
+	 * Background color (hex without #).
+	 * @example "ff0000"
+	 */
+	background?: string;
+
+	/**
+	 * Alias for background.
+	 */
+	b?: string;
 }
 
 export interface IPXOptions {
