@@ -1,5 +1,15 @@
 <!-- deno-fmt-ignore-file -->
 
+## 4.3.0
+
+### Minor Changes
+
+- b46f693: feat(ipx): improve ipx provider typing and test coverage
+
+### Patch Changes
+
+- d60ab8f: fix(cloudflare): handle URL encoding for src with query parameters correctly
+
 ## 4.2.2
 
 ### Patch Changes
