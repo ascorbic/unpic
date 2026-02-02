@@ -98,7 +98,9 @@ export const extract: URLExtractor<
 	}
 
 	const { host, accountHash, imageId, transformations } = matches[0].groups;
-	const operations = operationsParser(transformations || "");
+	// Named variants (like "public") don't contain "=", only actual transformations do
+	const hasTransformations = transformations?.includes("=");
+	const operations = operationsParser(hasTransformations ? transformations : "");
 
 	const options = { host, accountHash, imageId };
 
