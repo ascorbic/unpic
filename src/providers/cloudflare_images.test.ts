@@ -56,6 +56,42 @@ Deno.test("Cloudflare Images CDN - extract", async (t) => {
 		const result = extract("https://example.com/image.jpg");
 		assertEquals(result, null);
 	});
+
+	await t.step(
+		"should handle URL with named variant (no transformations)",
+		() => {
+			const result = extract(
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123/public",
+			);
+			assertEquals(result, {
+				src: "https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123",
+				operations: {},
+				options: {
+					host: "imagedelivery.net",
+					accountHash: "5LGXGUnHU18h6ehN_xjpXQ",
+					imageId: "abc123",
+				},
+			});
+		},
+	);
+
+	await t.step(
+		"should handle URL without any transformations or variant",
+		() => {
+			const result = extract(
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123",
+			);
+			assertEquals(result, {
+				src: "https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123",
+				operations: {},
+				options: {
+					host: "imagedelivery.net",
+					accountHash: "5LGXGUnHU18h6ehN_xjpXQ",
+					imageId: "abc123",
+				},
+			});
+		},
+	);
 });
 
 Deno.test("Cloudflare Images CDN - generate", async (t) => {
@@ -154,4 +190,40 @@ Deno.test("Cloudflare Images CDN - transform", async (t) => {
 			);
 		}
 	});
+
+	await t.step(
+		"should transform URL with named variant without =undefined issue",
+		() => {
+			const result = transform(
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123/public",
+				{
+					width: 640,
+					height: 480,
+				},
+				{},
+			);
+			assertEqualIgnoringQueryOrder(
+				result,
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123/w=640,h=480,fit=cover",
+			);
+		},
+	);
+
+	await t.step(
+		"should transform URL without variant",
+		() => {
+			const result = transform(
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123",
+				{
+					width: 640,
+					height: 480,
+				},
+				{},
+			);
+			assertEqualIgnoringQueryOrder(
+				result,
+				"https://imagedelivery.net/5LGXGUnHU18h6ehN_xjpXQ/abc123/w=640,h=480,fit=cover",
+			);
+		},
+	);
 });
