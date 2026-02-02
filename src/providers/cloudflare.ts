@@ -114,7 +114,7 @@ export const generate: URLGenerator<"cloudflare"> = (
 ) => {
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(options?.domain ? `https://${options.domain}` : "/");
-	
+
 	const srcStr = src.toString();
 	let pathSuffix = stripLeadingSlash(srcStr);
 
