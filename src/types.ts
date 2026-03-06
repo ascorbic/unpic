@@ -60,7 +60,8 @@ export type ImageCdn =
 	| "supabase"
 	| "hygraph"
 	| "appwrite"
-	| "wsrv";
+	| "wsrv"
+	| "umbraco";
 
 export const SupportedProviders: Record<ImageCdn, string> = {
 	appwrite: "Appwrite",
@@ -87,6 +88,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	shopify: "Shopify",
 	storyblok: "Storyblok",
 	supabase: "Supabase",
+	umbraco: "Umbraco",
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",

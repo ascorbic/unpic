@@ -99,5 +99,9 @@
 	"wsrv": [
 		"wsrv.nl",
 		"https://wsrv.nl/?url=images.unsplash.com/photo-1560807707-8cc77767d783"
+	],
+	"umbraco": [
+		"Umbraco",
+		"https://umbraco.com/media/z2ef0fnx/umbraco_250314_1169.jpg"
 	]
 }

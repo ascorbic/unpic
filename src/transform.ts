@@ -27,6 +27,7 @@ import { transform as uploadcare } from "./providers/uploadcare.ts";
 import { transform as vercel } from "./providers/vercel.ts";
 import { transform as wordpress } from "./providers/wordpress.ts";
 import { transform as wsrv } from "./providers/wsrv.ts";
+import { transform as umbraco } from "./providers/umbraco.ts";
 import type {
 	ImageCdn,
 	URLTransformer,
@@ -63,6 +64,7 @@ const transformerMap: URLTransformerMap = {
 	shopify,
 	storyblok,
 	supabase,
+	umbraco,
 	uploadcare,
 	vercel,
 	wordpress,
