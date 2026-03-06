@@ -38,6 +38,7 @@ import type { UploadcareOperations, UploadcareOptions } from "./uploadcare.ts";
 import type { VercelOperations, VercelOptions } from "./vercel.ts";
 import type { WordPressOperations } from "./wordpress.ts";
 import type { WsrvOperations } from "./wsrv.ts";
+import type { UmbracoOperations, UmbracoOptions } from "./umbraco.ts";
 
 export interface ProviderOperations {
 	appwrite: AppwriteOperations;
@@ -64,6 +65,7 @@ export interface ProviderOperations {
 	shopify: ShopifyOperations;
 	storyblok: StoryblokOperations;
 	supabase: SupabaseOperations;
+	umbraco: UmbracoOperations;
 	uploadcare: UploadcareOperations;
 	vercel: VercelOperations;
 	wordpress: WordPressOperations;
@@ -95,6 +97,7 @@ export interface ProviderOptions {
 	shopify: undefined;
 	storyblok: undefined;
 	supabase: undefined;
+	umbraco: UmbracoOptions;
 	uploadcare: UploadcareOptions;
 	vercel: VercelOptions;
 	wordpress: undefined;
