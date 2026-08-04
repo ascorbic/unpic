@@ -58,6 +58,7 @@ export type ImageCdn =
 	| "imagekit"
 	| "uploadcare"
 	| "supabase"
+	| "truocloud"
 	| "hygraph"
 	| "appwrite"
 	| "wsrv";
@@ -87,6 +88,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	shopify: "Shopify",
 	storyblok: "Storyblok",
 	supabase: "Supabase",
+	truocloud: "TruoCloud",
 	uploadcare: "Uploadcare",
 	vercel: "Vercel",
 	wordpress: "WordPress",

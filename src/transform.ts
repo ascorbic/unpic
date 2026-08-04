@@ -23,6 +23,7 @@ import { transform as scene7 } from "./providers/scene7.ts";
 import { transform as shopify } from "./providers/shopify.ts";
 import { transform as storyblok } from "./providers/storyblok.ts";
 import { transform as supabase } from "./providers/supabase.ts";
+import { transform as truocloud } from "./providers/truocloud.ts";
 import { transform as uploadcare } from "./providers/uploadcare.ts";
 import { transform as vercel } from "./providers/vercel.ts";
 import { transform as wordpress } from "./providers/wordpress.ts";
@@ -63,6 +64,7 @@ const transformerMap: URLTransformerMap = {
 	shopify,
 	storyblok,
 	supabase,
+	truocloud,
 	uploadcare,
 	vercel,
 	wordpress,
