@@ -30,6 +30,7 @@ import { extract as scene7 } from "./providers/scene7.ts";
 import { extract as shopify } from "./providers/shopify.ts";
 import { extract as storyblok } from "./providers/storyblok.ts";
 import { extract as supabase } from "./providers/supabase.ts";
+import { extract as truocloud } from "./providers/truocloud.ts";
 import { extract as uploadcare } from "./providers/uploadcare.ts";
 import { extract as vercel } from "./providers/vercel.ts";
 import { extract as wordpress } from "./providers/wordpress.ts";
@@ -60,6 +61,7 @@ export const parsers: URLExtractorMap = {
 	shopify,
 	storyblok,
 	supabase,
+	truocloud,
 	uploadcare,
 	vercel,
 	wordpress,

@@ -37,6 +37,7 @@ const asyncProviderMap: AsyncProviderMap = {
 	shopify: () => import("./providers/shopify.ts"),
 	storyblok: () => import("./providers/storyblok.ts"),
 	supabase: () => import("./providers/supabase.ts"),
+	truocloud: () => import("./providers/truocloud.ts"),
 	uploadcare: () => import("./providers/uploadcare.ts"),
 	vercel: () => import("./providers/vercel.ts"),
 	wordpress: () => import("./providers/wordpress.ts"),

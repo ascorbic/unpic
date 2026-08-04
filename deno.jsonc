@@ -27,6 +27,7 @@
 		"./providers/shopify": "./src/providers/shopify.ts",
 		"./providers/storyblok": "./src/providers/storyblok.ts",
 		"./providers/supabase": "./src/providers/supabase.ts",
+		"./providers/truocloud": "./src/providers/truocloud.ts",
 		"./providers/uploadcare": "./src/providers/uploadcare.ts",
 		"./providers/vercel": "./src/providers/vercel.ts",
 		"./providers/wordpress": "./src/providers/wordpress.ts",

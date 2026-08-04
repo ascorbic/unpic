@@ -34,6 +34,7 @@ import type { Scene7Operations } from "./scene7.ts";
 import type { ShopifyOperations } from "./shopify.ts";
 import type { StoryblokOperations } from "./storyblok.ts";
 import type { SupabaseOperations } from "./supabase.ts";
+import type { TruoCloudOperations } from "./truocloud.ts";
 import type { UploadcareOperations, UploadcareOptions } from "./uploadcare.ts";
 import type { VercelOperations, VercelOptions } from "./vercel.ts";
 import type { WordPressOperations } from "./wordpress.ts";
@@ -64,6 +65,7 @@ export interface ProviderOperations {
 	shopify: ShopifyOperations;
 	storyblok: StoryblokOperations;
 	supabase: SupabaseOperations;
+	truocloud: TruoCloudOperations;
 	uploadcare: UploadcareOperations;
 	vercel: VercelOperations;
 	wordpress: WordPressOperations;
@@ -95,6 +97,7 @@ export interface ProviderOptions {
 	shopify: undefined;
 	storyblok: undefined;
 	supabase: undefined;
+	truocloud: undefined;
 	uploadcare: UploadcareOptions;
 	vercel: VercelOptions;
 	wordpress: undefined;

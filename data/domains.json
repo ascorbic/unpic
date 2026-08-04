@@ -2,6 +2,7 @@
 	"images.ctfassets.net": "contentful",
 	"cdn.builder.io": "builder.io",
 	"images.prismic.io": "imgix",
+	"img.truo.cloud": "truocloud",
 	"www.datocms-assets.com": "imgix",
 	"cdn.sanity.io": "imgix",
 	"images.unsplash.com": "imgix",
