@@ -1,6 +1,7 @@
 import { getProviderForUrl } from "./detect.ts";
 import { transform as appwrite } from "./providers/appwrite.ts";
 import { transform as astro } from "./providers/astro.ts";
+import { transform as autorender } from "./providers/autorender.ts";
 import { transform as builderio } from "./providers/builder.io.ts";
 import { transform as bunny } from "./providers/bunny.ts";
 import { transform as cloudflare } from "./providers/cloudflare.ts";
@@ -41,6 +42,7 @@ import type {
 const transformerMap: URLTransformerMap = {
 	appwrite,
 	astro,
+	autorender,
 	"builder.io": builderio,
 	bunny,
 	cloudflare,

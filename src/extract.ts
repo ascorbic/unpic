@@ -8,6 +8,7 @@ import type { ImageCdn, ParseURLResult, URLExtractor } from "./types.ts";
 
 import { extract as appwrite } from "./providers/appwrite.ts";
 import { extract as astro } from "./providers/astro.ts";
+import { extract as autorender } from "./providers/autorender.ts";
 import { extract as builder } from "./providers/builder.io.ts";
 import { extract as bunny } from "./providers/bunny.ts";
 import { extract as cloudflare } from "./providers/cloudflare.ts";
@@ -38,6 +39,7 @@ import { extract as wsrv } from "./providers/wsrv.ts";
 export const parsers: URLExtractorMap = {
 	appwrite,
 	astro,
+	autorender,
 	"builder.io": builder,
 	bunny,
 	cloudflare,

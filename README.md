@@ -206,6 +206,7 @@ const url = transform(
 
 - Adobe Dynamic Media (Scene7) `scene7`
 - Astro image service `astro`
+- Autorender `autorender`
 - Builder.io `builder.io`
 - Bunny.net, including caisy `bunny`
 - Cloudflare `cloudflare` and `cloudflare_images`
