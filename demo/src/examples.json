@@ -1,4 +1,8 @@
 {
+	"autorender": [
+		"Autorender",
+		"https://assets.autorender.io/cQQ9C4UxSb/w_720/ar-juice.jpg"
+	],
 	"shopify": [
 		"Shopify",
 		"https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg"

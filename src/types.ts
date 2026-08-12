@@ -33,6 +33,7 @@ export interface UrlGeneratorOptions<TParams = Record<string, string>> {
 }
 
 export type ImageCdn =
+	| "autorender"
 	| "contentful"
 	| "builder.io"
 	| "cloudimage"
@@ -65,6 +66,7 @@ export type ImageCdn =
 export const SupportedProviders: Record<ImageCdn, string> = {
 	appwrite: "Appwrite",
 	astro: "Astro image service",
+	autorender: "Autorender",
 	"builder.io": "Builder.io",
 	bunny: "Bunny.net",
 	cloudflare: "Cloudflare",

@@ -6,6 +6,7 @@ import type {
 } from "../types.ts";
 import type { AppwriteOperations } from "./appwrite.ts";
 import type { AstroOperations, AstroOptions } from "./astro.ts";
+import type { AutorenderOperations, AutorenderOptions } from "./autorender.ts";
 import type { BuilderOperations } from "./builder.io.ts";
 import type { BunnyOperations } from "./bunny.ts";
 import type { CloudflareOperations, CloudflareOptions } from "./cloudflare.ts";
@@ -42,6 +43,7 @@ import type { WsrvOperations } from "./wsrv.ts";
 export interface ProviderOperations {
 	appwrite: AppwriteOperations;
 	astro: AstroOperations;
+	autorender: AutorenderOperations;
 	"builder.io": BuilderOperations;
 	bunny: BunnyOperations;
 	cloudflare: CloudflareOperations;
@@ -73,6 +75,7 @@ export interface ProviderOperations {
 export interface ProviderOptions {
 	appwrite: undefined;
 	astro: AstroOptions;
+	autorender: AutorenderOptions;
 	"builder.io": undefined;
 	bunny: undefined;
 	cloudflare: CloudflareOptions;

@@ -15,6 +15,7 @@ type AsyncProviderMap = {
 const asyncProviderMap: AsyncProviderMap = {
 	appwrite: () => import("./providers/appwrite.ts"),
 	astro: () => import("./providers/astro.ts"),
+	autorender: () => import("./providers/autorender.ts"),
 	"builder.io": () => import("./providers/builder.io.ts"),
 	bunny: () => import("./providers/bunny.ts"),
 	cloudflare: () => import("./providers/cloudflare.ts"),
