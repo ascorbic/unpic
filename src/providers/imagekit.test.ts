@@ -29,6 +29,33 @@ Deno.test("imagekit extract", async (t) => {
 			height: 300,
 		});
 	});
+
+	await t.step("should extract a dashed aspect ratio from a query URL", () => {
+		const url = `${img}?tr=ar-9-16,w-640`;
+		const result = extract(url);
+		assertEquals(result?.src, img);
+		assertEquals(result?.operations, {
+			ar: "9-16",
+			width: 640,
+		});
+	});
+
+	await t.step(
+		"should extract a dashed aspect ratio from a path-based URL",
+		() => {
+			const url =
+				`https://ik.imagekit.io/ikmedia/tr:ar-4-3,w-400/docs_images/examples/example_food_3.jpg`;
+			const result = extract(url);
+			assertEquals(
+				result?.src,
+				"https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg",
+			);
+			assertEquals(result?.operations, {
+				ar: "4-3",
+				width: 400,
+			});
+		},
+	);
 });
 
 Deno.test("imagekit transform", async (t) => {
@@ -90,6 +117,19 @@ Deno.test("imagekit transform", async (t) => {
 			assertEqualIgnoringQueryOrder(
 				result,
 				`https://ik.imagekit.io/ikmedia/docs_images/examples/example_food_3.jpg?tr=q-75%2Cblur-5%2Cw-300%2Ch-200%2Cc-maintain_ratio%2Cfo-auto`,
+			);
+		},
+	);
+
+	await t.step(
+		"should preserve a dashed aspect ratio when transforming an existing URL",
+		() => {
+			const result = transform(`${img}?tr=ar-9-16,w-640`, {
+				quality: 80,
+			});
+			assertEquals(
+				new URL(result).searchParams.get("tr"),
+				"ar-9-16,w-640,q-80,c-maintain_ratio,fo-auto",
 			);
 		},
 	);
@@ -157,6 +197,23 @@ Deno.test("imagekit generate", async (t) => {
 				result,
 				`${img}?tr=w-300,h-200,c-force,fo-center`,
 			);
+		},
+	);
+
+	await t.step(
+		"should not double-encode hyphens in aspect ratio values",
+		() => {
+			const result = generate(`${img}?updatedAt=1778956861259`, {
+				ar: "9-16",
+				width: 640,
+			});
+			const url = new URL(result);
+			assertEquals(
+				url.searchParams.get("tr"),
+				"ar-9-16,w-640,c-maintain_ratio,fo-auto",
+			);
+			assertEquals(url.searchParams.get("updatedAt"), "1778956861259");
+			assertEquals(result.includes("%252D"), false);
 		},
 	);
 });

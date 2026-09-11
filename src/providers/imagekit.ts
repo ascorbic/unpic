@@ -26,7 +26,7 @@ export interface ImageKitOperations extends Operations {
 
 	/**
 	 * Aspect ratio of the output image.
-	 * Example: `ar=16:9`
+	 * Example: `ar-4-3` or `ar-9-16`
 	 */
 	ar?: string;
 
@@ -152,13 +152,32 @@ const { operationsGenerator, operationsParser } = createOperationsHandlers<
 	paramSeparator: ",",
 });
 
+/**
+ * ImageKit values such as aspect ratio `9-16` contain the same `-` used as
+ * the key/value separator. Encode extra hyphens so the shared parser keeps
+ * the full value instead of truncating at the second dash.
+ */
+function encodeHyphensInTrValues(trPart: string): string {
+	return trPart.split(",").map((pair) => {
+		const separatorIndex = pair.indexOf("-");
+		if (separatorIndex === -1) {
+			return pair;
+		}
+		const key = pair.slice(0, separatorIndex);
+		const value = pair.slice(separatorIndex + 1).replaceAll("-", "%2D");
+		return `${key}-${value}`;
+	}).join(",");
+}
+
 export const generate: URLGenerator<"imagekit"> = (
 	src,
 	operations,
 ) => {
 	const modifiers = operationsGenerator(operations);
 	const url = toUrl(src);
-	url.searchParams.set("tr", modifiers);
+	// Decode formatter output so URLSearchParams does not double-encode
+	// hyphens in values such as aspect ratio `ar-9-16` (#195).
+	url.searchParams.set("tr", decodeURIComponent(modifiers));
 	return toCanonicalUrlString(url);
 };
 
@@ -190,7 +209,7 @@ export const extract: URLExtractor<"imagekit"> = (url) => {
 
 	parsedUrl.pathname = path;
 
-	const operations = operationsParser(trPart);
+	const operations = operationsParser(encodeHyphensInTrValues(trPart));
 
 	return {
 		src: toCanonicalUrlString(parsedUrl),
