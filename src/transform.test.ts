@@ -103,6 +103,36 @@ Deno.test("transformer", async (t) => {
 			"/_ipx/s_200x100,f_auto/image.png",
 		);
 	});
+
+	await t.step("should transform an absolute imagor URL", () => {
+		const result = transformUrl({
+			url: "https://img.example.com/unsafe/450x0/https://unpic.pics/tree.png",
+			width: 96,
+			format: "jpg",
+			cdn: "imagor",
+		});
+		assertEquals(
+			result,
+			"https://img.example.com/unsafe/96x0/filters:format(jpg)/https://unpic.pics/tree.png",
+		);
+	});
+
+	await t.step("should pass imagor options through", () => {
+		const result = transformUrl(
+			{
+				url: "https://img.example.com/unsafe/450x0/https://unpic.pics/tree.png",
+				width: 100,
+				height: 50,
+				cdn: "imagor",
+			},
+			undefined,
+			{ imagor: { unsafe: false } },
+		);
+		assertEquals(
+			result,
+			"https://img.example.com/100x50/https://unpic.pics/tree.png",
+		);
+	});
 });
 
 Deno.test("fallback", async (t) => {

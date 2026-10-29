@@ -20,6 +20,7 @@ import { extract as directus } from "./providers/directus.ts";
 import { extract as hygraph } from "./providers/hygraph.ts";
 import { extract as imageengine } from "./providers/imageengine.ts";
 import { extract as imagekit } from "./providers/imagekit.ts";
+import { extract as imagor } from "./providers/imagor.ts";
 import { extract as imgix } from "./providers/imgix.ts";
 import { extract as ipx } from "./providers/ipx.ts";
 import { extract as keycdn } from "./providers/keycdn.ts";
@@ -50,6 +51,7 @@ export const parsers: URLExtractorMap = {
 	hygraph,
 	imageengine,
 	imagekit,
+	imagor,
 	imgix,
 	ipx,
 	keycdn,

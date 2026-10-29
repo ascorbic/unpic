@@ -64,6 +64,10 @@
 		"IPX",
 		"https://deploy-preview-125--unpic-playground.netlify.app/_ipx/w_450/https://unpic.pics/tree.png"
 	],
+	"imagor": [
+		"Imagor",
+		"https://imagor.unpic.pics/unsafe/450x0/https://unpic.pics/tree.png"
+	],
 	"netlify": [
 		"Netlify",
 		"https://unpic-playground.netlify.app/.netlify/images?url=/cappadocia.jpg"

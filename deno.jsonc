@@ -18,6 +18,7 @@
 		"./providers/directus": "./src/providers/directus.ts",
 		"./providers/imageengine": "./src/providers/imageengine.ts",
 		"./providers/imagekit": "./src/providers/keycdn.ts",
+		"./providers/imagor": "./src/providers/imagor.ts",
 		"./providers/imgix": "./src/providers/imgix.ts",
 		"./providers/keycdn": "./src/providers/keycdn.ts",
 		"./providers/kontent.ai": "./src/providers/kontent.ai.ts",

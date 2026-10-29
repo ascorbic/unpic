@@ -53,6 +53,7 @@ export type ImageCdn =
 	| "contentstack"
 	| "cloudflare_images"
 	| "ipx"
+	| "imagor"
 	| "astro"
 	| "netlify"
 	| "imagekit"
@@ -77,6 +78,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	hygraph: "Hygraph",
 	imageengine: "ImageEngine",
 	imagekit: "ImageKit",
+	imagor: "Imagor",
 	imgix: "Imgix",
 	ipx: "IPX",
 	keycdn: "KeyCDN",

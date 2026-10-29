@@ -24,6 +24,7 @@ import type { DirectusOperations } from "./directus.ts";
 import type { HygraphOperations, HygraphOptions } from "./hygraph.ts";
 import type { ImageEngineOperations } from "./imageengine.ts";
 import type { ImageKitOperations } from "./imagekit.ts";
+import type { ImagorOperations, ImagorOptions } from "./imagor.ts";
 import type { ImgixOperations } from "./imgix.ts";
 import type { IPXOperations, IPXOptions } from "./ipx.ts";
 import type { KeyCDNOperations } from "./keycdn.ts";
@@ -54,6 +55,7 @@ export interface ProviderOperations {
 	hygraph: HygraphOperations;
 	imageengine: ImageEngineOperations;
 	imagekit: ImageKitOperations;
+	imagor: ImagorOperations;
 	imgix: ImgixOperations;
 	ipx: IPXOperations;
 	keycdn: KeyCDNOperations;
@@ -85,6 +87,7 @@ export interface ProviderOptions {
 	hygraph: HygraphOptions;
 	imageengine: undefined;
 	imagekit: undefined;
+	imagor: ImagorOptions;
 	imgix: undefined;
 	ipx: IPXOptions;
 	keycdn: undefined;

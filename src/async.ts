@@ -27,6 +27,7 @@ const asyncProviderMap: AsyncProviderMap = {
 	hygraph: () => import("./providers/hygraph.ts"),
 	imageengine: () => import("./providers/imageengine.ts"),
 	imagekit: () => import("./providers/imagekit.ts"),
+	imagor: () => import("./providers/imagor.ts"),
 	imgix: () => import("./providers/imgix.ts"),
 	ipx: () => import("./providers/ipx.ts"),
 	keycdn: () => import("./providers/keycdn.ts"),

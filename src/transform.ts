@@ -13,6 +13,7 @@ import { transform as directus } from "./providers/directus.ts";
 import { transform as hygraph } from "./providers/hygraph.ts";
 import { transform as imageengine } from "./providers/imageengine.ts";
 import { transform as imagekit } from "./providers/imagekit.ts";
+import { transform as imagor } from "./providers/imagor.ts";
 import { transform as imgix } from "./providers/imgix.ts";
 import { transform as ipx } from "./providers/ipx.ts";
 import { transform as keycdn } from "./providers/keycdn.ts";
@@ -53,6 +54,7 @@ const transformerMap: URLTransformerMap = {
 	hygraph,
 	imageengine,
 	imagekit,
+	imagor,
 	imgix,
 	ipx,
 	keycdn,

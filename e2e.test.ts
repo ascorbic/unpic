@@ -9,10 +9,11 @@ Deno.test("E2E tests", async (t) => {
 		const [name, url] = example;
 		// ImageEngine is really flaky, so ignore it, and the supabase example is
 		// broken
-		const ignore = ["imageengine", "supabase"].includes(cdn);
+		const ignore = ["imageengine", "supabase", "imagor"].includes(cdn);
 		const ignoreAspectRatio = [
 			"imageengine",
 			"supabase",
+			"imagor",
 			"vercel",
 			"nextjs",
 		]
