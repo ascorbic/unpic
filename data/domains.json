@@ -1,4 +1,5 @@
 {
+	"cdn.dynjandi.dev": "dynjandi",
 	"images.ctfassets.net": "contentful",
 	"cdn.builder.io": "builder.io",
 	"images.prismic.io": "imgix",

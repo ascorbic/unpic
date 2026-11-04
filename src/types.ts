@@ -60,7 +60,8 @@ export type ImageCdn =
 	| "supabase"
 	| "hygraph"
 	| "appwrite"
-	| "wsrv";
+	| "wsrv"
+	| "dynjandi";
 
 export const SupportedProviders: Record<ImageCdn, string> = {
 	appwrite: "Appwrite",
@@ -74,6 +75,7 @@ export const SupportedProviders: Record<ImageCdn, string> = {
 	contentful: "Contentful",
 	contentstack: "Contentstack",
 	directus: "Directus",
+	dynjandi: "Dynjandi",
 	hygraph: "Hygraph",
 	imageengine: "ImageEngine",
 	imagekit: "ImageKit",

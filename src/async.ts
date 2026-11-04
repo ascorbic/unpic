@@ -24,6 +24,7 @@ const asyncProviderMap: AsyncProviderMap = {
 	contentful: () => import("./providers/contentful.ts"),
 	contentstack: () => import("./providers/contentstack.ts"),
 	directus: () => import("./providers/directus.ts"),
+	dynjandi: () => import("./providers/dynjandi.ts"),
 	hygraph: () => import("./providers/hygraph.ts"),
 	imageengine: () => import("./providers/imageengine.ts"),
 	imagekit: () => import("./providers/imagekit.ts"),

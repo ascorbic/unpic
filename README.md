@@ -214,6 +214,7 @@ const url = transform(
 - Contentful `contentful`
 - Contentstack `contentstack`
 - Directus `directus`
+- Dynjandi `dynjandi`
 - Hygraph `hygraph`
 - ImageEngine `imageengine`
 - ImageKit `imagekit`

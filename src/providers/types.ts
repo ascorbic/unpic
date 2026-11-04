@@ -21,6 +21,7 @@ import type {
 	ContentstackOptions,
 } from "./contentstack.ts";
 import type { DirectusOperations } from "./directus.ts";
+import type { DynjandiOperations } from "./dynjandi.ts";
 import type { HygraphOperations, HygraphOptions } from "./hygraph.ts";
 import type { ImageEngineOperations } from "./imageengine.ts";
 import type { ImageKitOperations } from "./imagekit.ts";
@@ -51,6 +52,7 @@ export interface ProviderOperations {
 	contentful: ContentfulOperations;
 	contentstack: ContentstackOperations;
 	directus: DirectusOperations;
+	dynjandi: DynjandiOperations;
 	hygraph: HygraphOperations;
 	imageengine: ImageEngineOperations;
 	imagekit: ImageKitOperations;
@@ -82,6 +84,7 @@ export interface ProviderOptions {
 	contentful: undefined;
 	contentstack: ContentstackOptions;
 	directus: undefined;
+	dynjandi: undefined;
 	hygraph: HygraphOptions;
 	imageengine: undefined;
 	imagekit: undefined;

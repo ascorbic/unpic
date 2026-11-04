@@ -16,6 +16,7 @@
 		"./providers/contentful": "./src/providers/contentful.ts",
 		"./providers/contentstack": "./src/providers/contentstack.ts",
 		"./providers/directus": "./src/providers/directus.ts",
+		"./providers/dynjandi": "./src/providers/dynjandi.ts",
 		"./providers/imageengine": "./src/providers/imageengine.ts",
 		"./providers/imagekit": "./src/providers/keycdn.ts",
 		"./providers/imgix": "./src/providers/imgix.ts",
